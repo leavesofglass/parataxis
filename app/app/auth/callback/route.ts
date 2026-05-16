@@ -22,16 +22,27 @@ export async function GET(request: Request) {
                 cookieStore.set(name, value, options)
               )
             } catch {
-              // Route handlers can set cookies; this try/catch guards
-              // against unexpected read-only contexts during SSG.
+              // Guards against unexpected read-only contexts during SSG.
             }
           },
         },
       }
     )
 
-    const { error } = await supabase.auth.exchangeCodeForSession(code)
-    if (!error) {
+    const { error: sessionError } = await supabase.auth.exchangeCodeForSession(code)
+
+    if (!sessionError) {
+      // If the user now has an email (magic-link sign-in OR email confirmation
+      // from updateUser), mark their profile as no longer anonymous.
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user?.email) {
+        await supabase
+          .from('profiles')
+          .update({ is_anonymous: false })
+          .eq('id', user.id)
+        // Ignore update errors — best-effort; doesn't affect the user flow.
+      }
+
       return NextResponse.redirect(`${origin}/`)
     }
   }
