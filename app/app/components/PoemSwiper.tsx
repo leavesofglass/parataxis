@@ -277,10 +277,12 @@ export function PoemSwiper() {
           className="flex flex-col items-stretch gap-5 shrink-0"
           style={{
             // Shared width for the card and the action row beneath it.
-            // The third arg in min() is the height-bound branch (engages only on
-            // tall narrow viewports); aspect-ratio of the card is 5:8 (W:H), so
+            // 90vw on mobile (≈19px of breathing room per side at 390px wide)
+            // keeps sonnet titles to 2 lines without crowding the edge. 360px
+            // cap holds the desktop layout. The third arg is the height-bound
+            // branch (engages only on tall narrow viewports); at aspect 5:8,
             // available_height × 5/8 = max width that fits vertically.
-            width: 'min(80vw, 360px, calc((100dvh - 220px) * 5 / 8))',
+            width: 'min(90vw, 360px, calc((100dvh - 220px) * 5 / 8))',
           }}
         >
           <div className="relative w-full" style={{ aspectRatio: '5 / 8' }}>
