@@ -1,6 +1,6 @@
 export function Masthead() {
   return (
-    <span className="font-masthead text-[15px] tracking-[0.08em] text-white">
+    <span className="font-masthead text-[15px] tracking-[0.15em] text-black/35">
       parataxis
     </span>
   )
