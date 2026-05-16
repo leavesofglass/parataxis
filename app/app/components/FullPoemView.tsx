@@ -112,7 +112,7 @@ export function FullPoemView(props: Props) {
                 ? 'bg-[#111] border-[#111] text-white'
                 : 'border-[#111] text-[#111] hover:bg-[#111] hover:text-white'}`}
           >
-            Save
+            Like
           </button>
 
           <button
@@ -122,7 +122,7 @@ export function FullPoemView(props: Props) {
                 ? 'bg-neutral-500 text-white'
                 : 'bg-[#111] text-white hover:bg-neutral-700'}`}
           >
-            Super-like
+            Love
           </button>
         </div>
       )}
