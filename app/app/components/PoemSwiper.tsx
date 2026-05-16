@@ -23,14 +23,16 @@ export function getPreview(body: string): string {
   const lines = body.split('\n').filter((l) => l.trim() !== '')
   const text = lines.slice(0, 4).join('\n')
   if (text.length <= 240) return text
-  // trim to 240 chars at a word boundary
   return text.slice(0, 240).replace(/\s+\S*$/, '') + '…'
 }
+
+type FullPoemAction = 'skip' | 'save' | 'super_like'
 
 export function PoemSwiper() {
   const poolRef = useRef<string[]>([])
   const poolPosRef = useRef(0)
   const fetchingRef = useRef(false)
+  const userIdRef = useRef<string | null>(null)
 
   const [poems, setPoems] = useState<Poem[]>([])
   const [cardIdx, setCardIdx] = useState(0)
@@ -38,11 +40,24 @@ export function PoemSwiper() {
   const [ready, setReady] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  // ── Interaction logging ────────────────────────────────────────────────────
+  // Fire-and-forget: never blocks the UI, never surfaces errors to the user.
+  const logInteraction = useCallback((poemId: string, action: string) => {
+    const userId = userIdRef.current
+    if (!userId) return
+    void getSupabase()
+      .from('interactions')
+      .insert({ user_id: userId, poem_id: poemId, action })
+      .then((res: { error: unknown }) => {
+        if (res.error) console.error('interaction insert failed:', action, poemId, res.error)
+      })
+  }, [])
+
+  // ── Poem loading ──────────────────────────────────────────────────────────
   const loadBatch = useCallback(async () => {
     if (fetchingRef.current || poolRef.current.length === 0) return
     fetchingRef.current = true
 
-    // Wrap around and reshuffle when pool is exhausted
     if (poolPosRef.current >= poolRef.current.length) {
       poolRef.current = shuffle(poolRef.current)
       poolPosRef.current = 0
@@ -64,7 +79,6 @@ export function PoemSwiper() {
       return
     }
 
-    // Preserve the shuffle order of the batch
     const ordered = batch
       .map((id) => data.find((p: Poem) => p.id === id))
       .filter(Boolean) as Poem[]
@@ -72,22 +86,24 @@ export function PoemSwiper() {
     setPoems((prev) => [...prev, ...ordered])
   }, [])
 
-  // Init: anon auth + fetch all IDs + load first batch
+  // ── Init: anon auth + fetch all IDs + first batch ─────────────────────────
   useEffect(() => {
     async function init() {
       const supabase = getSupabase()
 
-      // Silent anonymous auth
       const { data: { session } } = await supabase.auth.getSession()
       if (!session) {
         const { data, error } = await supabase.auth.signInAnonymously()
         if (error) console.error('Auth error:', error)
-        else console.log('user_id:', data.user?.id)
+        else {
+          userIdRef.current = data.user?.id ?? null
+          console.log('user_id:', userIdRef.current)
+        }
       } else {
-        console.log('user_id:', session.user.id)
+        userIdRef.current = session.user.id
+        console.log('user_id:', userIdRef.current)
       }
 
-      // Fetch all poem IDs (599 rows × ~10 bytes ≈ 6 KB)
       const { data: idRows, error: idError } = await supabase
         .from('poems')
         .select('id')
@@ -107,22 +123,33 @@ export function PoemSwiper() {
     init()
   }, [loadBatch])
 
-  // Prefetch next batch when approaching the end of loaded cards
+  // ── Prefetch next batch when approaching end of deck ──────────────────────
   useEffect(() => {
     if (ready && poems.length - cardIdx <= PREFETCH_AT) {
       loadBatch()
     }
   }, [cardIdx, poems.length, ready, loadBatch])
 
-  const advance = useCallback(() => {
+  // ── Action handlers ────────────────────────────────────────────────────────
+  const handlePreviewSkip = useCallback((poem: Poem) => {
+    logInteraction(poem.id, 'preview_skip')
+    setCardIdx((i) => i + 1)
+  }, [logInteraction])
+
+  const handlePreviewOpen = useCallback((poem: Poem) => {
+    logInteraction(poem.id, 'preview_open')
+    setOpenPoem(poem)
+  }, [logInteraction])
+
+  const handleFullPoemAction = useCallback((poem: Poem, action: FullPoemAction) => {
+    // Map UI action names to DB enum values
+    const dbAction = action === 'skip' ? 'preview_skip' : action
+    logInteraction(poem.id, dbAction)
     setOpenPoem(null)
     setCardIdx((i) => i + 1)
-  }, [])
+  }, [logInteraction])
 
-  const handleOpen = useCallback((poem: Poem) => {
-    setOpenPoem(poem)
-  }, [])
-
+  // ── Render ─────────────────────────────────────────────────────────────────
   if (error) {
     return (
       <div className="h-dvh flex items-center justify-center bg-[#faf9f7]">
@@ -146,7 +173,6 @@ export function PoemSwiper() {
     <main className="h-dvh flex flex-col items-center justify-center select-none overflow-hidden bg-[#faf9f7]">
       {/* Card stack */}
       <div className="relative w-4/5 max-w-sm" style={{ aspectRatio: '2 / 3' }}>
-        {/* Background card (next poem) */}
         {nextPoem && (
           <div
             key={nextPoem.id + '-bg'}
@@ -154,28 +180,28 @@ export function PoemSwiper() {
             style={{ transform: 'scale(0.96) translateY(8px)', opacity: 0.6, zIndex: 1 }}
           />
         )}
-
-        {/* Top card (current poem) */}
         {topPoem && (
           <SwipeCard
             key={topPoem.id}
             poem={topPoem}
             preview={getPreview(topPoem.body)}
-            onSkip={advance}
-            onOpen={() => handleOpen(topPoem)}
+            onSkip={() => handlePreviewSkip(topPoem)}
+            onOpen={() => handlePreviewOpen(topPoem)}
           />
         )}
       </div>
 
-      {/* Hint */}
       <p className="mt-8 text-[10px] font-sans tracking-[0.2em] text-neutral-300 uppercase">
         ← skip · read →
       </p>
 
-      {/* Full poem overlay */}
       <AnimatePresence>
         {openPoem && (
-          <FullPoemView key={openPoem.id + '-full'} poem={openPoem} onAction={advance} />
+          <FullPoemView
+            key={openPoem.id + '-full'}
+            poem={openPoem}
+            onAction={(action) => handleFullPoemAction(openPoem, action)}
+          />
         )}
       </AnimatePresence>
     </main>
