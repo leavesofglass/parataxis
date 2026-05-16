@@ -231,59 +231,72 @@ export function PoemSwiper() {
   const nextPoem = poems[cardIdx + 1]
 
   return (
-    <main className="relative h-dvh flex flex-col items-center justify-center select-none overflow-hidden bg-[#FAF6E9]">
-      {/* Masthead */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2">
+    <main className="relative h-dvh flex flex-col items-center overflow-hidden select-none bg-[#FAF6E9]">
+
+      {/* ── Row 1: sign-in (left) · library (right) ── */}
+      <div className="w-full flex items-center justify-between px-6 pt-8 shrink-0">
+        <Link
+          href="/account"
+          className="text-[10px] font-sans tracking-[0.18em] text-neutral-300 uppercase hover:text-neutral-500 transition-colors max-w-[120px] truncate"
+        >
+          {userEmail
+            ? userEmail.length > 20
+              ? 'Account'
+              : userEmail
+            : 'Sign in'}
+        </Link>
+        <Link
+          href="/library"
+          aria-label="Library"
+          className="flex items-center gap-1 hover:opacity-70 transition-opacity"
+        >
+          <span className="text-[1.25rem] leading-none">📚</span>
+          {savedCount > 0 && (
+            <span className="text-[10px] font-sans tracking-wide tabular-nums text-neutral-400">
+              {savedCount}
+            </span>
+          )}
+        </Link>
+      </div>
+
+      {/* ── Row 2: masthead ── */}
+      <div className="pt-4 pb-3 shrink-0">
         <Masthead />
       </div>
 
-      {/* Account link */}
-      <Link
-        href="/account"
-        className="absolute top-10 left-6 text-[10px] font-sans tracking-[0.18em] text-neutral-300 uppercase hover:text-neutral-500 transition-colors max-w-[120px] truncate"
-      >
-        {userEmail
-          ? userEmail.length > 20
-            ? 'Account'
-            : userEmail
-          : 'Sign in'}
-      </Link>
-
-      {/* Library badge */}
-      <Link
-        href="/library"
-        aria-label="Library"
-        className="absolute top-10 right-6 flex items-center gap-1 hover:opacity-70 transition-opacity"
-      >
-        <span className="text-[1.25rem] leading-none">📚</span>
-        {savedCount > 0 && (
-          <span className="text-[10px] font-sans tracking-wide tabular-nums text-neutral-400">
-            {savedCount}
-          </span>
-        )}
-      </Link>
-
-      {/* Card stack */}
-      <div className="relative w-4/5 max-w-sm" style={{ aspectRatio: '2 / 3' }}>
-        {nextPoem && (
-          <div
-            key={nextPoem.id + '-bg'}
-            className="absolute inset-0 rounded-2xl bg-[#F4ECC8] shadow-sm"
-            style={{ transform: 'scale(0.96) translateY(8px)', opacity: 0.6, zIndex: 1 }}
-          />
-        )}
-        {topPoem && (
-          <SwipeCard
-            key={topPoem.id}
-            poem={topPoem}
-            preview={getPreview(topPoem.body)}
-            onSkip={() => handlePreviewSkip(topPoem)}
-            onOpen={() => handlePreviewOpen(topPoem)}
-          />
-        )}
+      {/* ── Card area: fills remaining space, card centered within ── */}
+      <div className="flex-1 flex items-center justify-center w-full min-h-0">
+        <div
+          className="relative shrink-0"
+          style={{
+            aspectRatio: '2 / 3',
+            // Width is the min of: 80% viewport width, 360px absolute cap,
+            // and (viewport height − 200px) × ⅔ so the card never crowds
+            // the header/hint rows at typical desktop window sizes.
+            width: 'min(80vw, 360px, calc((100dvh - 200px) * 2 / 3))',
+          }}
+        >
+          {nextPoem && (
+            <div
+              key={nextPoem.id + '-bg'}
+              className="absolute inset-0 rounded-2xl bg-[#F4ECC8] shadow-sm"
+              style={{ transform: 'scale(0.96) translateY(8px)', opacity: 0.6, zIndex: 1 }}
+            />
+          )}
+          {topPoem && (
+            <SwipeCard
+              key={topPoem.id}
+              poem={topPoem}
+              preview={getPreview(topPoem.body)}
+              onSkip={() => handlePreviewSkip(topPoem)}
+              onOpen={() => handlePreviewOpen(topPoem)}
+            />
+          )}
+        </div>
       </div>
 
-      <p className="mt-8 text-[12px] font-sans tracking-[0.18em] text-neutral-300 uppercase">
+      {/* ── Hint ── */}
+      <p className="py-5 shrink-0 text-[14px] font-sans tracking-[0.18em] text-neutral-400 uppercase">
         ← skip · tap to read
       </p>
 

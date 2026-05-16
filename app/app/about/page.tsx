@@ -18,8 +18,8 @@ export default function AboutPage() {
         <span className="w-10" />
       </div>
 
-      {/* Content */}
-      <div className="px-8 pt-10">
+      {/* Content — padding-top places paragraph ~⅓ down the page */}
+      <div className="px-8" style={{ paddingTop: 'calc(33dvh - 80px)' }}>
         <p className="font-serif text-[1rem] leading-[1.85] text-neutral-600 max-w-sm">
           <strong className="font-semibold text-[#111]">parataxis</strong>
           {' '}(n.) the placing of clauses, images, or lines side by side, without making
