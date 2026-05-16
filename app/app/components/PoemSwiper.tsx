@@ -42,6 +42,7 @@ export function PoemSwiper() {
   const [ready, setReady] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [savedCount, setSavedCount] = useState(0)
+  const [userEmail, setUserEmail] = useState<string | null>(null)
 
   // ── Interaction logging ────────────────────────────────────────────────────
   // Fire-and-forget: never blocks the UI, never surfaces errors to the user.
@@ -104,6 +105,7 @@ export function PoemSwiper() {
         }
       } else {
         userIdRef.current = session.user.id
+        setUserEmail(session.user.email ?? null)
         console.log('user_id:', userIdRef.current)
       }
 
@@ -182,6 +184,18 @@ export function PoemSwiper() {
 
   return (
     <main className="h-dvh flex flex-col items-center justify-center select-none overflow-hidden bg-[#faf9f7]">
+      {/* Account link */}
+      <Link
+        href="/account"
+        className="absolute top-10 left-6 text-[10px] font-sans tracking-[0.18em] text-neutral-300 uppercase hover:text-neutral-500 transition-colors max-w-[120px] truncate"
+      >
+        {userEmail
+          ? userEmail.length > 20
+            ? 'Account'
+            : userEmail
+          : 'Sign in'}
+      </Link>
+
       {/* Library badge */}
       <Link
         href="/library"
