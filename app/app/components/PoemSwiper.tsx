@@ -185,24 +185,12 @@ export function PoemSwiper() {
       {/* Library badge */}
       <Link
         href="/library"
-        className="absolute top-10 right-6 flex items-center gap-1.5 text-neutral-300 hover:text-neutral-500 transition-colors"
+        aria-label="Library"
+        className="absolute top-10 right-6 flex items-center gap-1 hover:opacity-70 transition-opacity"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-        </svg>
+        <span className="text-[1.25rem] leading-none">📚</span>
         {savedCount > 0 && (
-          <span className="text-[10px] font-sans tracking-wide tabular-nums">
+          <span className="text-[10px] font-sans tracking-wide tabular-nums text-neutral-400">
             {savedCount}
           </span>
         )}

@@ -62,7 +62,7 @@ export function FullPoemView(props: Props) {
         <h1 className="font-serif text-[1.5rem] leading-[1.35] font-normal text-[#111] mb-10">
           {poem.title}
           {isLibrary && props.isSuperLiked && (
-            <span className="ml-2 text-[1.1rem] text-neutral-400">★</span>
+            <span className="ml-2 text-[1rem]" aria-label="Loved">💖</span>
           )}
         </h1>
 
@@ -99,30 +99,36 @@ export function FullPoemView(props: Props) {
         <div className="flex gap-2.5 px-6 py-5 border-t border-neutral-100 bg-[#faf9f7]">
           <button
             onClick={() => handleSwipeAction('skip')}
-            className={`flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide transition-colors rounded-full
-              ${tapped === 'skip' ? 'text-neutral-300' : 'text-neutral-400 hover:text-neutral-600'}`}
+            title="Skip"
+            aria-label="Skip"
+            className={`flex-1 py-3 text-[1.5rem] leading-none transition-opacity rounded-full min-h-[44px]
+              ${tapped === 'skip' ? 'opacity-30' : 'opacity-70 hover:opacity-100'}`}
           >
-            Skip
+            🤷
           </button>
 
           <button
             onClick={() => handleSwipeAction('save')}
-            className={`flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide border rounded-full transition-colors
+            title="Like"
+            aria-label="Like"
+            className={`flex-1 py-3 text-[1.5rem] leading-none border rounded-full transition-all min-h-[44px]
               ${tapped === 'save'
-                ? 'bg-[#111] border-[#111] text-white'
-                : 'border-[#111] text-[#111] hover:bg-[#111] hover:text-white'}`}
+                ? 'bg-[#111] border-[#111] opacity-50'
+                : 'border-[#111] opacity-80 hover:opacity-100 hover:bg-[#111]'}`}
           >
-            Like
+            👍
           </button>
 
           <button
             onClick={() => handleSwipeAction('super_like')}
-            className={`flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide rounded-full transition-colors
+            title="Love"
+            aria-label="Love"
+            className={`flex-1 py-3 text-[1.5rem] leading-none rounded-full transition-all min-h-[44px]
               ${tapped === 'super_like'
-                ? 'bg-neutral-500 text-white'
-                : 'bg-[#111] text-white hover:bg-neutral-700'}`}
+                ? 'bg-neutral-500 opacity-50'
+                : 'bg-[#111] opacity-90 hover:opacity-100 hover:bg-neutral-700'}`}
           >
-            Love
+            💖
           </button>
         </div>
       )}

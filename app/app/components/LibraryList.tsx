@@ -108,7 +108,7 @@ export function LibraryList() {
                 <p className="font-sans text-[0.7rem] font-medium tracking-[0.14em] text-neutral-400 uppercase mb-1.5">
                   {poem.title}
                   {poem.isSuperLiked && (
-                    <span className="ml-1.5 text-neutral-300">★</span>
+                    <span className="ml-1.5 text-[0.85rem]" aria-label="Loved">💖</span>
                   )}
                 </p>
                 <p className="font-sans text-[0.7rem] italic text-neutral-300 mb-2.5">
