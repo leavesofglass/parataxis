@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { getSupabase } from '@/lib/supabase'
 import { sendSignInLink } from '@/lib/authActions'
 import { Masthead } from '@/app/components/Masthead'
+import { LibraryBadge } from '@/app/components/LibraryBadge'
 import type { User } from '@supabase/supabase-js'
 
 type SentMode = 'confirm' | 'magic' | null
@@ -82,7 +83,7 @@ export default function AccountPage() {
           ← Back
         </Link>
         <Masthead />
-        <span className="w-10" />
+        <LibraryBadge />
       </div>
 
       <div className="flex-1 flex flex-col px-8 pt-10">
