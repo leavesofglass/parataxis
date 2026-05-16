@@ -73,7 +73,7 @@ export function SwipeCard({ poem, preview, onSkip, onOpen }: Props) {
       </motion.span>
 
       {/* Title */}
-      <p className="font-sans text-[11px] font-medium tracking-[0.14em] text-neutral-400 uppercase mb-6">
+      <p className="font-serif text-[1.05rem] leading-[1.3] font-normal text-neutral-500 mb-5">
         {poem.title}
       </p>
 

@@ -277,8 +277,8 @@ export function PoemSwiper() {
         )}
       </div>
 
-      <p className="mt-8 text-[10px] font-sans tracking-[0.2em] text-neutral-300 uppercase">
-        tap to read · ← skip
+      <p className="mt-8 text-[12px] font-sans tracking-[0.18em] text-neutral-300 uppercase">
+        ← skip · tap to read
       </p>
 
       <AnimatePresence>
