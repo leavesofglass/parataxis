@@ -26,6 +26,14 @@ interface LibraryProps {
 
 type Props = SwipeProps | LibraryProps
 
+// Shared class string — all three swipe action buttons are visually identical.
+// Using border-neutral-900 (standard scale) instead of arbitrary border-[#111]
+// to ensure Tailwind v4 reliably generates the CSS.
+function actionBtnClass(action: string, tapped: string | null) {
+  const base = 'flex-1 py-3 text-[1.5rem] leading-none border border-neutral-900 rounded-full transition-opacity min-h-[44px]'
+  return tapped === action ? `${base} opacity-30` : `${base} opacity-80 hover:opacity-100`
+}
+
 export function FullPoemView(props: Props) {
   const { poem } = props
   const isLibrary = props.variant === 'library'
@@ -108,35 +116,9 @@ export function FullPoemView(props: Props) {
         </div>
       ) : (
         <div className="flex gap-2.5 px-6 py-5 border-t border-neutral-100 bg-[#F4ECC8]">
-          <button
-            onClick={() => handleSwipeAction('skip')}
-            title="Skip"
-            aria-label="Skip"
-            className={`flex-1 py-3 text-[1.5rem] leading-none border border-[#111] rounded-full transition-opacity min-h-[44px]
-              ${tapped === 'skip' ? 'opacity-30' : 'opacity-80 hover:opacity-100'}`}
-          >
-            🤷
-          </button>
-
-          <button
-            onClick={() => handleSwipeAction('save')}
-            title="Like"
-            aria-label="Like"
-            className={`flex-1 py-3 text-[1.5rem] leading-none border border-[#111] rounded-full transition-opacity min-h-[44px]
-              ${tapped === 'save' ? 'opacity-30' : 'opacity-80 hover:opacity-100'}`}
-          >
-            👍
-          </button>
-
-          <button
-            onClick={() => handleSwipeAction('super_like')}
-            title="Love"
-            aria-label="Love"
-            className={`flex-1 py-3 text-[1.5rem] leading-none border border-[#111] rounded-full transition-opacity min-h-[44px]
-              ${tapped === 'super_like' ? 'opacity-30' : 'opacity-80 hover:opacity-100'}`}
-          >
-            💖
-          </button>
+          <button onClick={() => handleSwipeAction('skip')} title="Skip" aria-label="Skip" className={actionBtnClass('skip', tapped)}>🤷</button>
+          <button onClick={() => handleSwipeAction('save')} title="Like" aria-label="Like" className={actionBtnClass('save', tapped)}>👍</button>
+          <button onClick={() => handleSwipeAction('super_like')} title="Love" aria-label="Love" className={actionBtnClass('super_like', tapped)}>💖</button>
         </div>
       )}
     </motion.div>
