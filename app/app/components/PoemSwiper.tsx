@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { AnimatePresence } from 'framer-motion'
 import { getSupabase } from '@/lib/supabase'
+import type { AuthChangeEvent, Session } from '@supabase/supabase-js'
 import { fetchSavedCount } from '@/lib/library'
 import type { Poem } from '../types'
 import { SwipeCard } from './SwipeCard'
@@ -90,23 +91,38 @@ export function PoemSwiper() {
     setPoems((prev) => [...prev, ...ordered])
   }, [])
 
+  // ── Auth state subscription — keeps email label in sync ──────────────────
+  // onAuthStateChange fires INITIAL_SESSION immediately on subscribe (with the
+  // current live session), then SIGNED_IN / TOKEN_REFRESHED on changes.
+  // This is more reliable than reading email from the decoded JWT in getSession()
+  // which can be stale if the token was issued before the email was attached.
+  useEffect(() => {
+    const { data: { subscription } } = getSupabase().auth.onAuthStateChange(
+      (_event: AuthChangeEvent, session: Session | null) => {
+        setUserEmail(session?.user?.email ?? null)
+      }
+    )
+    return () => subscription.unsubscribe()
+  }, [])
+
   // ── Init: anon auth + fetch all IDs + first batch ─────────────────────────
   useEffect(() => {
     async function init() {
       const supabase = getSupabase()
 
-      const { data: { session } } = await supabase.auth.getSession()
-      if (!session) {
+      // getUser() makes a server-validated request — always returns the live
+      // user object including email, unlike getSession() which decodes the
+      // cached JWT and may miss an email that was attached after token issuance.
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) {
         const { data, error } = await supabase.auth.signInAnonymously()
         if (error) console.error('Auth error:', error)
         else {
           userIdRef.current = data.user?.id ?? null
-          console.log('user_id:', userIdRef.current)
         }
       } else {
-        userIdRef.current = session.user.id
-        setUserEmail(session.user.email ?? null)
-        console.log('user_id:', userIdRef.current)
+        userIdRef.current = user.id
+        setUserEmail(user.email ?? null)
       }
 
       const { data: idRows, error: idError } = await supabase
