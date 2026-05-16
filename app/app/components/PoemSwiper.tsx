@@ -297,11 +297,6 @@ export function PoemSwiper() {
         </div>
       </div>
 
-      {/* ── Hint ── */}
-      <p className="py-5 shrink-0 text-[14px] font-sans tracking-[0.18em] text-neutral-400 uppercase">
-        ← skip · tap to read
-      </p>
-
       <AnimatePresence>
         {openPoem && (
           <FullPoemView
