@@ -1,8 +1,10 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 import { AnimatePresence } from 'framer-motion'
 import { getSupabase } from '@/lib/supabase'
+import { fetchSavedCount } from '@/lib/library'
 import type { Poem } from '../types'
 import { SwipeCard } from './SwipeCard'
 import { FullPoemView } from './FullPoemView'
@@ -39,6 +41,7 @@ export function PoemSwiper() {
   const [openPoem, setOpenPoem] = useState<Poem | null>(null)
   const [ready, setReady] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [savedCount, setSavedCount] = useState(0)
 
   // ── Interaction logging ────────────────────────────────────────────────────
   // Fire-and-forget: never blocks the UI, never surfaces errors to the user.
@@ -118,6 +121,11 @@ export function PoemSwiper() {
       poolPosRef.current = 0
 
       await loadBatch()
+
+      if (userIdRef.current) {
+        fetchSavedCount(userIdRef.current).then(setSavedCount)
+      }
+
       setReady(true)
     }
     init()
@@ -145,6 +153,9 @@ export function PoemSwiper() {
     // Map UI action names to DB enum values
     const dbAction = action === 'skip' ? 'preview_skip' : action
     logInteraction(poem.id, dbAction)
+    if (action === 'save' || action === 'super_like') {
+      setSavedCount((n) => n + 1)
+    }
     setOpenPoem(null)
     setCardIdx((i) => i + 1)
   }, [logInteraction])
@@ -171,6 +182,32 @@ export function PoemSwiper() {
 
   return (
     <main className="h-dvh flex flex-col items-center justify-center select-none overflow-hidden bg-[#faf9f7]">
+      {/* Library badge */}
+      <Link
+        href="/library"
+        className="absolute top-10 right-6 flex items-center gap-1.5 text-neutral-300 hover:text-neutral-500 transition-colors"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+        </svg>
+        {savedCount > 0 && (
+          <span className="text-[10px] font-sans tracking-wide tabular-nums">
+            {savedCount}
+          </span>
+        )}
+      </Link>
+
       {/* Card stack */}
       <div className="relative w-4/5 max-w-sm" style={{ aspectRatio: '2 / 3' }}>
         {nextPoem && (
