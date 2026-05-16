@@ -86,9 +86,14 @@ export default function AccountPage() {
   }
 
   // Called from the "Send sign-in link" fallback when email is already in use.
+  // Sign out the anonymous session first so the PKCE challenge is initiated
+  // without an active user — otherwise the exchange binds to the anonymous
+  // user_id instead of signing into the existing email-linked account.
   async function handleSignInFallback() {
     setSending(true)
     setSendError(null)
+
+    await getSupabase().auth.signOut()
 
     const { error } = await getSupabase().auth.signInWithOtp({
       email,
