@@ -112,8 +112,8 @@ export function FullPoemView(props: Props) {
             onClick={() => handleSwipeAction('skip')}
             title="Skip"
             aria-label="Skip"
-            className={`flex-1 py-3 text-[1.5rem] leading-none transition-opacity rounded-full min-h-[44px]
-              ${tapped === 'skip' ? 'opacity-30' : 'opacity-70 hover:opacity-100'}`}
+            className={`flex-1 py-3 text-[1.5rem] leading-none border border-[#111] rounded-full transition-opacity min-h-[44px]
+              ${tapped === 'skip' ? 'opacity-30' : 'opacity-80 hover:opacity-100'}`}
           >
             🤷
           </button>
@@ -122,10 +122,8 @@ export function FullPoemView(props: Props) {
             onClick={() => handleSwipeAction('save')}
             title="Like"
             aria-label="Like"
-            className={`flex-1 py-3 text-[1.5rem] leading-none border rounded-full transition-all min-h-[44px]
-              ${tapped === 'save'
-                ? 'bg-[#111] border-[#111] opacity-50'
-                : 'border-[#111] opacity-80 hover:opacity-100 hover:bg-[#111]'}`}
+            className={`flex-1 py-3 text-[1.5rem] leading-none border border-[#111] rounded-full transition-opacity min-h-[44px]
+              ${tapped === 'save' ? 'opacity-30' : 'opacity-80 hover:opacity-100'}`}
           >
             👍
           </button>
@@ -134,10 +132,8 @@ export function FullPoemView(props: Props) {
             onClick={() => handleSwipeAction('super_like')}
             title="Love"
             aria-label="Love"
-            className={`flex-1 py-3 text-[1.5rem] leading-none rounded-full transition-all min-h-[44px]
-              ${tapped === 'super_like'
-                ? 'bg-neutral-500 opacity-50'
-                : 'bg-[#111] opacity-90 hover:opacity-100 hover:bg-neutral-700'}`}
+            className={`flex-1 py-3 text-[1.5rem] leading-none border border-[#111] rounded-full transition-opacity min-h-[44px]
+              ${tapped === 'super_like' ? 'opacity-30' : 'opacity-80 hover:opacity-100'}`}
           >
             💖
           </button>

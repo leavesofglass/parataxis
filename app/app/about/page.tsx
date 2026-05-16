@@ -1,21 +1,26 @@
 import Link from 'next/link'
 import { Masthead } from '../components/Masthead'
+import { LibraryBadge } from '../components/LibraryBadge'
 
 export const metadata = { title: 'About · parataxis' }
 
 export default function AboutPage() {
   return (
     <main className="h-dvh flex flex-col bg-[#FAF6E9]">
-      {/* Header */}
-      <div className="flex items-center justify-between px-6 pt-12 pb-4 shrink-0">
+      {/* Row 1: back (left) · library (right) — matches home page */}
+      <div className="w-full flex items-center justify-between px-6 pt-8 shrink-0">
         <Link
           href="/"
           className="text-[10px] font-sans tracking-[0.18em] text-neutral-300 uppercase hover:text-neutral-500 transition-colors"
         >
           ← Back
         </Link>
+        <LibraryBadge />
+      </div>
+
+      {/* Row 2: masthead — same size/position as home page */}
+      <div className="flex justify-center pt-4 pb-3 shrink-0">
         <Masthead />
-        <span className="w-10" />
       </div>
 
       {/* Content — padding-top places paragraph ~⅓ down the page */}
