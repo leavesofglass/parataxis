@@ -34,13 +34,16 @@ export async function fetchLibrary(userId: string): Promise<LibraryPoem[]> {
     }
   }
 
-  // Keep only saved / super-liked entries, preserving newest-first order
-  const saved: Array<{ poem_id: string; action: string }> = []
+  // Group: super-likes first (newest-first), then regular saves (newest-first).
+  // latestByPoem's iteration order matches the input rows (already newest-first),
+  // so each group preserves chronological order on its own.
+  const superLikes: Array<{ poem_id: string; action: string }> = []
+  const regularSaves: Array<{ poem_id: string; action: string }> = []
   for (const [poem_id, { action }] of latestByPoem) {
-    if (action === 'save' || action === 'super_like') {
-      saved.push({ poem_id, action })
-    }
+    if (action === 'super_like') superLikes.push({ poem_id, action })
+    else if (action === 'save') regularSaves.push({ poem_id, action })
   }
+  const saved = [...superLikes, ...regularSaves]
 
   if (saved.length === 0) return []
 

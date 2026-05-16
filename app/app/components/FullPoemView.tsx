@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import type { Poem } from '../types'
+import { ShareButton } from './ShareButton'
 
 type SwipeAction = 'skip' | 'save' | 'super_like'
 
@@ -65,16 +66,25 @@ export function FullPoemView(props: Props) {
       transition={{ type: 'spring', damping: 34, stiffness: 290 }}
       className="fixed inset-0 z-50 flex flex-col bg-[#F4ECC8]"
     >
-      {/* Back button — swipe variant only; dismisses without logging an interaction */}
+      {/* Back button — swipe variant only; dismisses without logging an interaction.
+          Wrapped in a 1.4rem-tall flex frame so its glyph centre is at the same y
+          as the share icon on the right. */}
       {!isLibrary && (
-        <button
-          onClick={handleClose}
-          aria-label="Back"
-          className="absolute top-4 left-5 text-[1.4rem] leading-none text-neutral-300 hover:text-neutral-500 transition-colors"
-        >
-          ×
-        </button>
+        <div className="absolute top-4 left-5 h-[1.4rem] inline-flex items-center z-10">
+          <button
+            onClick={handleClose}
+            aria-label="Back"
+            className="text-[1.4rem] leading-none text-neutral-300 hover:text-neutral-500 transition-colors"
+          >
+            ×
+          </button>
+        </div>
       )}
+
+      {/* Share button — both variants; same vertical centre as the X close glyph. */}
+      <div className="absolute top-4 right-5 h-[1.4rem] inline-flex items-center z-10">
+        <ShareButton poemId={poem.id} title={poem.title} author={poem.author} />
+      </div>
 
       {/* Scrollable poem */}
       <div className="flex-1 overflow-y-auto overscroll-contain px-8 pt-14 pb-6">

@@ -233,28 +233,33 @@ export function PoemSwiper() {
   return (
     <main className="relative h-dvh flex flex-col items-center overflow-hidden select-none bg-[#FAF6E9]">
 
-      {/* ── Row 1: sign-in (left) · library (right) ── */}
-      <div className="w-full flex items-center justify-between px-6 pt-8 shrink-0">
-        <Link
-          href="/account"
-          className="text-[10px] font-sans tracking-[0.18em] text-neutral-300 uppercase hover:text-neutral-500 transition-colors max-w-[120px] truncate"
-        >
-          {userEmail
-            ? userEmail.length > 20
-              ? 'Account'
-              : userEmail
-            : 'Sign in'}
-        </Link>
+      {/* ── Row 1: sign-in (left) · library (right) ──
+          Both sides use the same 40px-tall flex frame so the 10px texts on
+          left and right are anchored to the same vertical center as each
+          other, regardless of the logo's mass on the right. */}
+      <div className="w-full flex items-center justify-between px-6 pt-3 shrink-0">
+        <div className="flex items-center h-10">
+          <Link
+            href="/account"
+            className="text-[10px] leading-none font-sans tracking-[0.18em] text-neutral-300 uppercase hover:text-neutral-500 transition-colors max-w-[120px] truncate"
+          >
+            {userEmail
+              ? userEmail.length > 20
+                ? 'Account'
+                : userEmail
+              : 'Sign in'}
+          </Link>
+        </div>
         <Link
           href="/library"
           aria-label="Library"
-          className="flex items-center gap-1 hover:opacity-70 transition-opacity"
+          className="flex items-center gap-1 h-10 hover:opacity-70 transition-opacity"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/parataxis-logo.png" alt="parataxis" width={40} height={40}
                style={{ objectFit: 'contain' }} className="block" />
           {savedCount > 0 && (
-            <span className="text-[10px] font-sans tracking-wide tabular-nums text-neutral-400">
+            <span className="text-[10px] leading-none font-sans tracking-wide tabular-nums text-neutral-400">
               {savedCount}
             </span>
           )}
@@ -262,7 +267,7 @@ export function PoemSwiper() {
       </div>
 
       {/* ── Row 2: masthead ── */}
-      <div className="pt-4 pb-3 shrink-0">
+      <div className="pt-1 pb-2 shrink-0">
         <Masthead />
       </div>
 
@@ -272,12 +277,13 @@ export function PoemSwiper() {
           className="flex flex-col items-stretch gap-5 shrink-0"
           style={{
             // Shared width for the card and the action row beneath it.
-            // min of: 80% viewport width, 360px cap, and (viewport height − 260px) × ⅔
-            // so the card + button row never crowd the header at typical desktop sizes.
-            width: 'min(80vw, 360px, calc((100dvh - 260px) * 2 / 3))',
+            // The third arg in min() is the height-bound branch (engages only on
+            // tall narrow viewports); aspect-ratio of the card is 5:8 (W:H), so
+            // available_height × 5/8 = max width that fits vertically.
+            width: 'min(80vw, 360px, calc((100dvh - 220px) * 5 / 8))',
           }}
         >
-          <div className="relative w-full" style={{ aspectRatio: '2 / 3' }}>
+          <div className="relative w-full" style={{ aspectRatio: '5 / 8' }}>
             {nextPoem && (
               <div
                 key={nextPoem.id + '-bg'}
