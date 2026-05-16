@@ -9,6 +9,31 @@ import { fetchSavedCount } from '@/lib/library'
 import type { Poem } from '../types'
 import { SwipeCard } from './SwipeCard'
 import { FullPoemView } from './FullPoemView'
+import { SignupNudgeModal } from './SignupNudgeModal'
+
+// ── Nudge threshold helpers ────────────────────────────────────────────────
+const NUDGE_THRESHOLDS = [1, 5, 10] as const
+type NudgeThreshold = (typeof NUDGE_THRESHOLDS)[number]
+const LS_KEY = 'parataxis_signup_nudge_shown'
+
+function getNextNudgeThreshold(count: number): NudgeThreshold | null {
+  try {
+    const shown = JSON.parse(localStorage.getItem(LS_KEY) ?? '[]') as number[]
+    for (const t of NUDGE_THRESHOLDS) {
+      if (count >= t && !shown.includes(t)) return t
+    }
+  } catch {}
+  return null
+}
+
+function markNudgeShown(threshold: NudgeThreshold) {
+  try {
+    const shown = JSON.parse(localStorage.getItem(LS_KEY) ?? '[]') as number[]
+    if (!shown.includes(threshold)) {
+      localStorage.setItem(LS_KEY, JSON.stringify([...shown, threshold]))
+    }
+  } catch {}
+}
 
 const BATCH = 20
 const PREFETCH_AT = 5
@@ -44,6 +69,7 @@ export function PoemSwiper() {
   const [error, setError] = useState<string | null>(null)
   const [savedCount, setSavedCount] = useState(0)
   const [userEmail, setUserEmail] = useState<string | null>(null)
+  const [nudgeThreshold, setNudgeThreshold] = useState<NudgeThreshold | null>(null)
 
   // ── Interaction logging ────────────────────────────────────────────────────
   // Fire-and-forget: never blocks the UI, never surfaces errors to the user.
@@ -168,15 +194,20 @@ export function PoemSwiper() {
   }, [logInteraction])
 
   const handleFullPoemAction = useCallback((poem: Poem, action: FullPoemAction) => {
-    // Map UI action names to DB enum values
     const dbAction = action === 'skip' ? 'preview_skip' : action
     logInteraction(poem.id, dbAction)
     if (action === 'save' || action === 'super_like') {
-      setSavedCount((n) => n + 1)
+      const newCount = savedCount + 1
+      setSavedCount(newCount)
+      // Only nudge anonymous users; only one modal at a time
+      if (!userEmail && nudgeThreshold === null) {
+        const threshold = getNextNudgeThreshold(newCount)
+        if (threshold !== null) setNudgeThreshold(threshold)
+      }
     }
     setOpenPoem(null)
     setCardIdx((i) => i + 1)
-  }, [logInteraction])
+  }, [logInteraction, savedCount, userEmail, nudgeThreshold])
 
   // ── Render ─────────────────────────────────────────────────────────────────
   if (error) {
@@ -256,6 +287,19 @@ export function PoemSwiper() {
             key={openPoem.id + '-full'}
             poem={openPoem}
             onAction={(action) => handleFullPoemAction(openPoem, action)}
+          />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {nudgeThreshold && (
+          <SignupNudgeModal
+            key={nudgeThreshold}
+            threshold={nudgeThreshold}
+            onDismiss={() => {
+              markNudgeShown(nudgeThreshold)
+              setNudgeThreshold(null)
+            }}
           />
         )}
       </AnimatePresence>

@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { getSupabase } from '@/lib/supabase'
+import { sendSignInLink } from '@/lib/authActions'
 import type { User } from '@supabase/supabase-js'
 
-// Sent mode distinguishes "confirm your new email" from "here's a magic link"
 type SentMode = 'confirm' | 'magic' | null
 
 export default function AccountPage() {
@@ -19,8 +19,6 @@ export default function AccountPage() {
   const [sending, setSending] = useState(false)
   const [sentMode, setSentMode] = useState<SentMode>(null)
   const [sendError, setSendError] = useState<string | null>(null)
-  // True when updateUser returned email_exists — offer signInWithOtp instead
-  const [emailInUse, setEmailInUse] = useState(false)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -40,72 +38,18 @@ export default function AccountPage() {
     ? `${window.location.origin}/auth/callback`
     : '/auth/callback'
 
-  // Called when anonymous user submits the email form.
-  // Tries to attach the email to their existing user_id via updateUser.
-  // Falls back to signInWithOtp on email_exists (returning user, different device).
-  async function handleAttachOrSignIn(e: React.FormEvent) {
+  async function handleSendLink(e: React.FormEvent) {
     e.preventDefault()
     setSending(true)
     setSendError(null)
-    setEmailInUse(false)
 
-    const supabase = getSupabase()
-
-    if (user?.is_anonymous === true) {
-      // Attach email to current anonymous user_id
-      const { error } = await supabase.auth.updateUser(
-        { email },
-        { emailRedirectTo: redirectTo }
-      )
-
-      setSending(false)
-
-      if (!error) {
-        setSentMode('confirm')
-        return
-      }
-
-      if (error.code === 'email_exists') {
-        // Email belongs to a different account — offer magic-link sign-in
-        setEmailInUse(true)
-        return
-      }
-
-      setSendError(error.message)
-      return
-    }
-
-    // No anonymous session (edge case) — just send a magic link
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: redirectTo },
-    })
-    setSending(false)
-    if (error) setSendError(error.message)
-    else setSentMode('magic')
-  }
-
-  // Called from the "Send sign-in link" fallback when email is already in use.
-  // Sign out the anonymous session first so the PKCE challenge is initiated
-  // without an active user — otherwise the exchange binds to the anonymous
-  // user_id instead of signing into the existing email-linked account.
-  async function handleSignInFallback() {
-    setSending(true)
-    setSendError(null)
-
-    await getSupabase().auth.signOut()
-
-    const { error } = await getSupabase().auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: redirectTo },
-    })
+    const result = await sendSignInLink(email, redirectTo)
     setSending(false)
 
-    if (error) {
-      setSendError(error.message)
+    if (result.ok) {
+      setSentMode(result.mode)
     } else {
-      setEmailInUse(false)
-      setSentMode('magic')
+      setSendError(result.error)
     }
   }
 
@@ -153,7 +97,6 @@ export default function AccountPage() {
               You&apos;re browsing anonymously.
             </p>
 
-            {/* ── Sent states ───────────────────────────────── */}
             {sentMode === 'confirm' && (
               <p className="font-sans text-[0.85rem] leading-[1.6] text-neutral-500">
                 Check your email — click the link to confirm{' '}
@@ -167,34 +110,8 @@ export default function AccountPage() {
               </p>
             )}
 
-            {/* ── Email already in use ──────────────────────── */}
-            {!sentMode && emailInUse && (
-              <div className="flex flex-col gap-3">
-                <p className="font-sans text-[0.85rem] leading-[1.6] text-neutral-500">
-                  That email is already linked to an account.
-                </p>
-                <button
-                  onClick={handleSignInFallback}
-                  disabled={sending}
-                  className="w-full py-3 bg-[#111] text-white rounded-xl font-sans text-[0.8rem] font-medium tracking-wide disabled:opacity-40 hover:bg-neutral-700 transition-colors"
-                >
-                  {sending ? '…' : 'Send sign-in link'}
-                </button>
-                <button
-                  onClick={() => { setEmailInUse(false); setEmail('') }}
-                  className="font-sans text-[0.75rem] text-neutral-300 hover:text-neutral-500 transition-colors text-center"
-                >
-                  Use a different email
-                </button>
-                {sendError && (
-                  <p className="font-sans text-[0.75rem] text-red-400">{sendError}</p>
-                )}
-              </div>
-            )}
-
-            {/* ── Email form ────────────────────────────────── */}
-            {!sentMode && !emailInUse && (
-              <form onSubmit={handleAttachOrSignIn} className="flex flex-col gap-3">
+            {!sentMode && (
+              <form onSubmit={handleSendLink} className="flex flex-col gap-3">
                 <input
                   type="email"
                   required
