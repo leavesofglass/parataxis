@@ -66,7 +66,7 @@ export function PoemSwiper() {
 
     // Preserve the shuffle order of the batch
     const ordered = batch
-      .map((id) => data.find((p) => p.id === id))
+      .map((id) => data.find((p: Poem) => p.id === id))
       .filter(Boolean) as Poem[]
 
     setPoems((prev) => [...prev, ...ordered])
@@ -98,7 +98,7 @@ export function PoemSwiper() {
         return
       }
 
-      poolRef.current = shuffle(idRows.map((r) => r.id as string))
+      poolRef.current = shuffle(idRows.map((r: { id: string }) => r.id))
       poolPosRef.current = 0
 
       await loadBatch()
