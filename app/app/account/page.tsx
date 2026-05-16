@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { getSupabase } from '@/lib/supabase'
 import { sendSignInLink } from '@/lib/authActions'
+import { Masthead } from '@/app/components/Masthead'
 import type { User } from '@supabase/supabase-js'
 
 type SentMode = 'confirm' | 'magic' | null
@@ -62,7 +63,7 @@ export default function AccountPage() {
 
   if (!ready) {
     return (
-      <main className="h-dvh flex items-center justify-center bg-[#faf9f7]">
+      <main className="h-dvh flex items-center justify-center bg-[#F4ECC8]">
         <span className="text-sm font-sans text-neutral-300 tracking-widest">·  ·  ·</span>
       </main>
     )
@@ -71,7 +72,7 @@ export default function AccountPage() {
   const isAnonymous = !user?.email
 
   return (
-    <main className="h-dvh flex flex-col bg-[#faf9f7]">
+    <main className="h-dvh flex flex-col bg-[#F4ECC8]">
       {/* Header */}
       <div className="flex items-center justify-between px-6 pt-12 pb-4 shrink-0">
         <Link
@@ -80,9 +81,7 @@ export default function AccountPage() {
         >
           ← Back
         </Link>
-        <span className="text-[10px] font-sans tracking-[0.2em] text-neutral-400 uppercase">
-          Account
-        </span>
+        <Masthead />
         <span className="w-10" />
       </div>
 

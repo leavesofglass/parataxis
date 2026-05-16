@@ -12,7 +12,7 @@ interface SwipeProps {
   isSuperLiked?: never
   onAction: (action: SwipeAction) => void
   onUnsave?: never
-  onClose?: never
+  onClose: () => void
 }
 
 interface LibraryProps {
@@ -55,8 +55,19 @@ export function FullPoemView(props: Props) {
       animate={{ y: 0 }}
       exit={{ y: '100%' }}
       transition={{ type: 'spring', damping: 34, stiffness: 290 }}
-      className="fixed inset-0 z-50 flex flex-col bg-[#faf9f7]"
+      className="fixed inset-0 z-50 flex flex-col bg-[#F4ECC8]"
     >
+      {/* Back button — swipe variant only; dismisses without logging an interaction */}
+      {!isLibrary && (
+        <button
+          onClick={handleClose}
+          aria-label="Back"
+          className="absolute top-4 left-5 text-[1.4rem] leading-none text-neutral-300 hover:text-neutral-500 transition-colors"
+        >
+          ×
+        </button>
+      )}
+
       {/* Scrollable poem */}
       <div className="flex-1 overflow-y-auto overscroll-contain px-8 pt-14 pb-6">
         <h1 className="font-serif text-[1.5rem] leading-[1.35] font-normal text-[#111] mb-10">
@@ -77,7 +88,7 @@ export function FullPoemView(props: Props) {
 
       {/* Action buttons */}
       {isLibrary ? (
-        <div className="flex gap-2.5 px-6 py-5 border-t border-neutral-100 bg-[#faf9f7]">
+        <div className="flex gap-2.5 px-6 py-5 border-t border-neutral-100 bg-[#F4ECC8]">
           <button
             onClick={handleUnsave}
             className={`flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide border rounded-full transition-colors
@@ -96,7 +107,7 @@ export function FullPoemView(props: Props) {
           </button>
         </div>
       ) : (
-        <div className="flex gap-2.5 px-6 py-5 border-t border-neutral-100 bg-[#faf9f7]">
+        <div className="flex gap-2.5 px-6 py-5 border-t border-neutral-100 bg-[#F4ECC8]">
           <button
             onClick={() => handleSwipeAction('skip')}
             title="Skip"

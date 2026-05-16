@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #faf9f7;
+  --background: #F4ECC8;
   --foreground: #111111;
 }
 
@@ -10,7 +10,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-serif: var(--font-lora), Georgia, 'Times New Roman', serif;
-  --font-masthead: var(--font-jost), Avenir, 'Avenir Next', -apple-system, system-ui, sans-serif;
+  --font-masthead: Avenir, 'Avenir Next', -apple-system, system-ui, sans-serif;
 }
 
 html,

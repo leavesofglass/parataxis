@@ -213,7 +213,7 @@ export function PoemSwiper() {
   // ── Render ─────────────────────────────────────────────────────────────────
   if (error) {
     return (
-      <div className="h-dvh flex items-center justify-center bg-[#E8F0DC]">
+      <div className="h-dvh flex items-center justify-center bg-[#F4ECC8]">
         <p className="text-sm font-sans text-neutral-400">{error}</p>
       </div>
     )
@@ -221,7 +221,7 @@ export function PoemSwiper() {
 
   if (!ready) {
     return (
-      <div className="h-dvh flex items-center justify-center bg-[#E8F0DC]">
+      <div className="h-dvh flex items-center justify-center bg-[#F4ECC8]">
         <span className="text-sm font-sans text-neutral-300 tracking-widest">·  ·  ·</span>
       </div>
     )
@@ -231,7 +231,7 @@ export function PoemSwiper() {
   const nextPoem = poems[cardIdx + 1]
 
   return (
-    <main className="h-dvh flex flex-col items-center justify-center select-none overflow-hidden bg-[#E8F0DC]">
+    <main className="h-dvh flex flex-col items-center justify-center select-none overflow-hidden bg-[#F4ECC8]">
       {/* Masthead */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2">
         <Masthead />
@@ -268,7 +268,7 @@ export function PoemSwiper() {
         {nextPoem && (
           <div
             key={nextPoem.id + '-bg'}
-            className="absolute inset-0 rounded-2xl bg-[#F7F4EC] shadow-sm"
+            className="absolute inset-0 rounded-2xl bg-[#FAF6E9] shadow-sm"
             style={{ transform: 'scale(0.96) translateY(8px)', opacity: 0.6, zIndex: 1 }}
           />
         )}
@@ -293,6 +293,7 @@ export function PoemSwiper() {
             key={openPoem.id + '-full'}
             poem={openPoem}
             onAction={(action) => handleFullPoemAction(openPoem, action)}
+            onClose={() => setOpenPoem(null)}
           />
         )}
       </AnimatePresence>
