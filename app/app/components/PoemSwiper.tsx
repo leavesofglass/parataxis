@@ -229,7 +229,7 @@ export function PoemSwiper() {
       </div>
 
       <p className="mt-8 text-[10px] font-sans tracking-[0.2em] text-neutral-300 uppercase">
-        ← skip · read →
+        tap to read · ← skip
       </p>
 
       <AnimatePresence>
