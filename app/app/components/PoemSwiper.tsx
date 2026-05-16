@@ -10,6 +10,7 @@ import type { Poem } from '../types'
 import { SwipeCard } from './SwipeCard'
 import { FullPoemView } from './FullPoemView'
 import { SignupNudgeModal } from './SignupNudgeModal'
+import { Masthead } from './Masthead'
 
 // ── Nudge threshold helpers ────────────────────────────────────────────────
 const NUDGE_THRESHOLDS = [1, 5, 10] as const
@@ -231,6 +232,11 @@ export function PoemSwiper() {
 
   return (
     <main className="h-dvh flex flex-col items-center justify-center select-none overflow-hidden bg-[#E8F0DC]">
+      {/* Masthead */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2">
+        <Masthead />
+      </div>
+
       {/* Account link */}
       <Link
         href="/account"

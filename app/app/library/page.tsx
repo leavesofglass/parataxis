@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { LibraryList } from '../components/LibraryList'
+import { Masthead } from '../components/Masthead'
 
 export const metadata = { title: 'Library · parataxis' }
 
@@ -14,9 +15,7 @@ export default function LibraryPage() {
         >
           ← Back
         </Link>
-        <span className="text-[10px] font-sans tracking-[0.2em] text-neutral-400 uppercase">
-          Library
-        </span>
+        <Masthead />
         <span className="w-10" /> {/* spacer to centre the title */}
       </div>
 

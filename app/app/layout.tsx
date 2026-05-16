@@ -1,10 +1,17 @@
 import type { Metadata } from 'next'
-import { Inter, Lora } from 'next/font/google'
+import { Inter, Jost, Lora } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap',
+})
+
+const jost = Jost({
+  subsets: ['latin'],
+  variable: '--font-jost',
+  weight: ['400'],
   display: 'swap',
 })
 
@@ -23,7 +30,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${lora.variable} h-full`}>
+    <html lang="en" className={`${inter.variable} ${jost.variable} ${lora.variable} h-full`}>
       <body className="h-full antialiased">{children}</body>
     </html>
   )
