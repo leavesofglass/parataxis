@@ -62,7 +62,7 @@ export function SwipeCard({ poem, preview, onSkip, onOpen }: Props) {
       onTap={onOpen}
       animate={controls}
       style={{ x, rotate, zIndex: 2 }}
-      className="absolute inset-0 rounded-2xl bg-[#FAF6E9] shadow-md cursor-grab active:cursor-grabbing flex flex-col px-8 pt-9 pb-8 overflow-hidden"
+      className="absolute inset-0 rounded-2xl bg-[#F4ECC8] shadow-md cursor-grab active:cursor-grabbing flex flex-col px-8 pt-9 pb-8 overflow-hidden"
     >
       {/* Skip hint — fades in as card is dragged left */}
       <motion.span

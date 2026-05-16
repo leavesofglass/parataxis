@@ -6,7 +6,7 @@ export const metadata = { title: 'Library · parataxis' }
 
 export default function LibraryPage() {
   return (
-    <main className="h-dvh flex flex-col bg-[#F4ECC8]">
+    <main className="h-dvh flex flex-col bg-[#FAF6E9]">
       {/* Header */}
       <div className="flex items-center justify-between px-6 pt-12 pb-4 shrink-0">
         <Link

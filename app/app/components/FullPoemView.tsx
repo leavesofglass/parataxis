@@ -55,7 +55,7 @@ export function FullPoemView(props: Props) {
       animate={{ y: 0 }}
       exit={{ y: '100%' }}
       transition={{ type: 'spring', damping: 34, stiffness: 290 }}
-      className="fixed inset-0 z-50 flex flex-col bg-[#FAF6E9]"
+      className="fixed inset-0 z-50 flex flex-col bg-[#F4ECC8]"
     >
       {/* Back button — swipe variant only; dismisses without logging an interaction */}
       {!isLibrary && (
@@ -88,7 +88,7 @@ export function FullPoemView(props: Props) {
 
       {/* Action buttons */}
       {isLibrary ? (
-        <div className="flex gap-2.5 px-6 py-5 border-t border-neutral-100 bg-[#FAF6E9]">
+        <div className="flex gap-2.5 px-6 py-5 border-t border-neutral-100 bg-[#F4ECC8]">
           <button
             onClick={handleUnsave}
             className={`flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide border rounded-full transition-colors
@@ -107,7 +107,7 @@ export function FullPoemView(props: Props) {
           </button>
         </div>
       ) : (
-        <div className="flex gap-2.5 px-6 py-5 border-t border-neutral-100 bg-[#FAF6E9]">
+        <div className="flex gap-2.5 px-6 py-5 border-t border-neutral-100 bg-[#F4ECC8]">
           <button
             onClick={() => handleSwipeAction('skip')}
             title="Skip"

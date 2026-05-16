@@ -63,7 +63,7 @@ export default function AccountPage() {
 
   if (!ready) {
     return (
-      <main className="h-dvh flex items-center justify-center bg-[#F4ECC8]">
+      <main className="h-dvh flex items-center justify-center bg-[#FAF6E9]">
         <span className="text-sm font-sans text-neutral-300 tracking-widest">·  ·  ·</span>
       </main>
     )
@@ -72,7 +72,7 @@ export default function AccountPage() {
   const isAnonymous = !user?.email
 
   return (
-    <main className="h-dvh flex flex-col bg-[#F4ECC8]">
+    <main className="h-dvh flex flex-col bg-[#FAF6E9]">
       {/* Header */}
       <div className="flex items-center justify-between px-6 pt-12 pb-4 shrink-0">
         <Link
