@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Data files — corpus is in Supabase, raw data is large and not needed in repo
+data/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Secrets / env
+.env
+.env.local
+.env*.local
+*.key
+
+# Next.js
+app/.next/
+app/node_modules/
+app/.env.local
+
+# Claude Code local settings
+.claude/
+
+# Supabase CLI temp files (project ref, org ID, version cache)
+app/supabase/.temp/
+
+# Misc
+*.log
