@@ -49,7 +49,7 @@ export function ShareButton({ poemId, title, author, className = '' }: Props) {
       type="button"
       onClick={handleShare}
       aria-label="Share poem"
-      className={`relative inline-flex items-center justify-center text-neutral-300 hover:text-neutral-500 transition-colors ${className}`}
+      className={`relative inline-flex items-center justify-center text-neutral-500 hover:text-neutral-700 transition-colors ${className}`}
     >
       {/* Three-node share glyph (Lucide Share2 geometry, inlined to avoid a deps add) */}
       <svg

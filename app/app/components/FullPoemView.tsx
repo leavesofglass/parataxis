@@ -74,7 +74,7 @@ export function FullPoemView(props: Props) {
           <button
             onClick={handleClose}
             aria-label="Back"
-            className="text-[1.4rem] leading-none text-neutral-300 hover:text-neutral-500 transition-colors"
+            className="text-[1.4rem] leading-none text-neutral-500 hover:text-neutral-700 transition-colors"
           >
             ×
           </button>
@@ -99,7 +99,7 @@ export function FullPoemView(props: Props) {
           {poem.body}
         </div>
 
-        <p className="font-sans text-[0.8rem] italic text-neutral-400 mt-10 mb-2">
+        <p className="font-sans text-[0.9rem] italic text-neutral-400 mt-10 mb-2">
           {poem.author}
         </p>
       </div>

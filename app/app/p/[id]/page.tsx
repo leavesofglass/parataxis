@@ -105,7 +105,7 @@ export default async function PoemPage({
           <div className="font-serif text-[1.05rem] leading-[1.95] text-[#111] whitespace-pre-wrap">
             {poem.body}
           </div>
-          <p className="font-sans text-[0.8rem] italic text-neutral-400 mt-10 mb-2">
+          <p className="font-sans text-[0.9rem] italic text-neutral-400 mt-10 mb-2">
             {poem.author}
           </p>
         </article>
