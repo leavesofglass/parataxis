@@ -76,7 +76,7 @@ export function LibraryList() {
         <p className="font-serif text-[1rem] leading-[1.7] text-neutral-400">
           Nothing saved yet.
           <br />
-          Swipe and save poems to build your library.
+          Tap a poem to read, then save the ones you want to keep.
         </p>
         <a
           href="/"

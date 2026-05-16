@@ -35,7 +35,7 @@ export default function AboutPage() {
           <p className="font-serif text-[1rem] leading-[1.85] text-neutral-600">
             <strong className="font-semibold text-[#111]">parataxis</strong>
             {' '}(n.) the placing of clauses, images, or lines side by side, without making
-            one subordinate to another. A poetry discovery app. Made by{' '}
+            one subordinate to another. A poetry discovery app made in Brooklyn, New York by{' '}
             <a
               href="https://instagram.com/matthewsiegel"
               target="_blank"
@@ -44,7 +44,7 @@ export default function AboutPage() {
             >
               Matthew Siegel
             </a>
-            {' '}in Brooklyn.
+            .
           </p>
         </div>
       </div>
