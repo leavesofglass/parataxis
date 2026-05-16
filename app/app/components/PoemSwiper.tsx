@@ -273,18 +273,13 @@ export function PoemSwiper() {
 
       {/* ── Card area: fills remaining space; card + action-row stacked, centered ── */}
       <div className="flex-1 flex items-center justify-center w-full min-h-0">
-        <div
-          className="flex flex-col items-stretch gap-5 shrink-0"
-          style={{
-            // Shared width for the card and the action row beneath it.
-            // 90vw on mobile (≈19px of breathing room per side at 390px wide)
-            // keeps sonnet titles to 2 lines without crowding the edge. 360px
-            // cap holds the desktop layout. The third arg is the height-bound
-            // branch (engages only on tall narrow viewports); at aspect 5:8,
-            // available_height × 5/8 = max width that fits vertically.
-            width: 'min(90vw, 360px, calc((100dvh - 220px) * 5 / 8))',
-          }}
-        >
+        {/* Card-area width. Mobile (<400px viewport) drops the 360px cap and
+            uses a fixed 13px margin per side (100vw − 26px), which keeps
+            sonnet titles to two lines at 390px wide. From 400px up, the 360px
+            cap reapplies so the desktop reading column is unchanged. Both
+            branches keep the height-bound term: at aspect 5:8, the card width
+            cannot exceed (available_height × 5/8). */}
+        <div className="flex flex-col items-stretch gap-5 shrink-0 w-[min(calc(100vw-26px),calc((100dvh-220px)*5/8))] min-[400px]:w-[min(360px,calc((100dvh-220px)*5/8))]">
           <div className="relative w-full" style={{ aspectRatio: '5 / 8' }}>
             {nextPoem && (
               <div
