@@ -212,7 +212,7 @@ export function PoemSwiper() {
   // ── Render ─────────────────────────────────────────────────────────────────
   if (error) {
     return (
-      <div className="h-dvh flex items-center justify-center bg-[#faf9f7]">
+      <div className="h-dvh flex items-center justify-center bg-[#E8F0DC]">
         <p className="text-sm font-sans text-neutral-400">{error}</p>
       </div>
     )
@@ -220,7 +220,7 @@ export function PoemSwiper() {
 
   if (!ready) {
     return (
-      <div className="h-dvh flex items-center justify-center bg-[#faf9f7]">
+      <div className="h-dvh flex items-center justify-center bg-[#E8F0DC]">
         <span className="text-sm font-sans text-neutral-300 tracking-widest">·  ·  ·</span>
       </div>
     )
@@ -230,7 +230,7 @@ export function PoemSwiper() {
   const nextPoem = poems[cardIdx + 1]
 
   return (
-    <main className="h-dvh flex flex-col items-center justify-center select-none overflow-hidden bg-[#faf9f7]">
+    <main className="h-dvh flex flex-col items-center justify-center select-none overflow-hidden bg-[#E8F0DC]">
       {/* Account link */}
       <Link
         href="/account"
@@ -262,7 +262,7 @@ export function PoemSwiper() {
         {nextPoem && (
           <div
             key={nextPoem.id + '-bg'}
-            className="absolute inset-0 rounded-2xl bg-white shadow-sm"
+            className="absolute inset-0 rounded-2xl bg-[#F7F4EC] shadow-sm"
             style={{ transform: 'scale(0.96) translateY(8px)', opacity: 0.6, zIndex: 1 }}
           />
         )}

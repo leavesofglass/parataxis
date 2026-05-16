@@ -62,7 +62,7 @@ export function SwipeCard({ poem, preview, onSkip, onOpen }: Props) {
       onTap={onOpen}
       animate={controls}
       style={{ x, rotate, zIndex: 2 }}
-      className="absolute inset-0 rounded-2xl bg-white shadow-md cursor-grab active:cursor-grabbing flex flex-col px-8 pt-9 pb-8 overflow-hidden"
+      className="absolute inset-0 rounded-2xl bg-[#F7F4EC] shadow-md cursor-grab active:cursor-grabbing flex flex-col px-8 pt-9 pb-8 overflow-hidden"
     >
       {/* Skip hint — fades in as card is dragged left */}
       <motion.span
@@ -72,13 +72,11 @@ export function SwipeCard({ poem, preview, onSkip, onOpen }: Props) {
         Skip
       </motion.span>
 
-      {/* Title */}
-      <p className="font-serif text-[1.05rem] leading-[1.3] font-normal text-neutral-500 mb-5">
-        {poem.title}
-      </p>
-
-      {/* Preview */}
+      {/* Title + Preview grouped at bottom */}
       <div className="mt-auto">
+        <p className="font-serif text-[1.125rem] leading-[1.3] font-normal text-[#555] mb-5">
+          {poem.title}
+        </p>
         <p className="font-serif text-[1.125rem] leading-[1.85] text-[#111] whitespace-pre-wrap">
           {preview}
         </p>
