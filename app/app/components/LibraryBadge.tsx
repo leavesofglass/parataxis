@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { getSupabase } from '@/lib/supabase'
 import { fetchSavedCount } from '@/lib/library'
+import type { User } from '@supabase/supabase-js'
 
 export function LibraryBadge() {
   const [count, setCount] = useState(0)
@@ -11,8 +12,8 @@ export function LibraryBadge() {
   useEffect(() => {
     getSupabase()
       .auth.getUser()
-      .then(({ data: { user } }) => {
-        if (user) fetchSavedCount(user.id).then(setCount)
+      .then(({ data }: { data: { user: User | null } }) => {
+        if (data.user) fetchSavedCount(data.user.id).then(setCount)
       })
   }, [])
 
