@@ -266,33 +266,54 @@ export function PoemSwiper() {
         <Masthead />
       </div>
 
-      {/* ── Card area: fills remaining space, card centered within ── */}
+      {/* ── Card area: fills remaining space; card + action-row stacked, centered ── */}
       <div className="flex-1 flex items-center justify-center w-full min-h-0">
         <div
-          className="relative shrink-0"
+          className="flex flex-col items-stretch gap-5 shrink-0"
           style={{
-            aspectRatio: '2 / 3',
-            // Width is the min of: 80% viewport width, 360px absolute cap,
-            // and (viewport height − 200px) × ⅔ so the card never crowds
-            // the header/hint rows at typical desktop window sizes.
-            width: 'min(80vw, 360px, calc((100dvh - 200px) * 2 / 3))',
+            // Shared width for the card and the action row beneath it.
+            // min of: 80% viewport width, 360px cap, and (viewport height − 260px) × ⅔
+            // so the card + button row never crowd the header at typical desktop sizes.
+            width: 'min(80vw, 360px, calc((100dvh - 260px) * 2 / 3))',
           }}
         >
-          {nextPoem && (
-            <div
-              key={nextPoem.id + '-bg'}
-              className="absolute inset-0 rounded-2xl bg-[#F4ECC8] shadow-sm"
-              style={{ transform: 'scale(0.96) translateY(8px)', opacity: 0.6, zIndex: 1 }}
-            />
-          )}
+          <div className="relative w-full" style={{ aspectRatio: '2 / 3' }}>
+            {nextPoem && (
+              <div
+                key={nextPoem.id + '-bg'}
+                className="absolute inset-0 rounded-2xl bg-[#F4ECC8] shadow-sm"
+                style={{ transform: 'scale(0.96) translateY(8px)', opacity: 0.6, zIndex: 1 }}
+              />
+            )}
+            {topPoem && (
+              <SwipeCard
+                key={topPoem.id}
+                poem={topPoem}
+                preview={getPreview(topPoem.body)}
+                onOpen={() => handlePreviewOpen(topPoem)}
+              />
+            )}
+          </div>
+
           {topPoem && (
-            <SwipeCard
-              key={topPoem.id}
-              poem={topPoem}
-              preview={getPreview(topPoem.body)}
-              onSkip={() => handlePreviewSkip(topPoem)}
-              onOpen={() => handlePreviewOpen(topPoem)}
-            />
+            <div className="flex gap-2.5 w-full">
+              <button
+                type="button"
+                onClick={() => handlePreviewSkip(topPoem)}
+                aria-label="Skip"
+                className="flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-[0.14em] uppercase border border-neutral-300 rounded-full text-neutral-500 hover:border-neutral-500 hover:text-neutral-700 transition-colors min-h-[44px]"
+              >
+                skip
+              </button>
+              <button
+                type="button"
+                onClick={() => handlePreviewOpen(topPoem)}
+                aria-label="Read"
+                className="flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-[0.14em] uppercase border border-neutral-300 rounded-full text-neutral-500 hover:border-neutral-500 hover:text-neutral-700 transition-colors min-h-[44px]"
+              >
+                read
+              </button>
+            </div>
           )}
         </div>
       </div>
