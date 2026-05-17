@@ -30,10 +30,18 @@ export async function sendSignInLink(
     if (!error) return { ok: true, mode: 'confirm' }
 
     if (error.code === 'email_exists') {
+      // Capture before signOut(): the migration handler needs this id to move
+      // the anon user's interactions onto the existing account once the magic
+      // link completes.
+      const anonUserId = user.id
       await supabase.auth.signOut()
+
+      const callbackUrl = new URL(redirectTo)
+      callbackUrl.searchParams.set('migrate_from', anonUserId)
+
       const { error: otpErr } = await supabase.auth.signInWithOtp({
         email,
-        options: { emailRedirectTo: redirectTo },
+        options: { emailRedirectTo: callbackUrl.toString() },
       })
       if (otpErr) return { ok: false, error: otpErr.message }
       return { ok: true, mode: 'magic' }
