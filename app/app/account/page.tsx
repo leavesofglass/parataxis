@@ -11,6 +11,15 @@ import type { User } from '@supabase/supabase-js'
 
 type SentMode = 'confirm' | 'magic' | null
 
+const LINE_MAX_KEY = 'parataxis_line_max'
+type LengthOption = { label: string; value: number | null }
+const LENGTH_OPTIONS: LengthOption[] = [
+  { label: 'No limit (any length)', value: null },
+  { label: 'Long (≤40 lines)',     value: 40 },
+  { label: 'Medium (≤20 lines)',   value: 20 },
+  { label: 'Short (≤10 lines)',    value: 10 },
+]
+
 export default function AccountPage() {
   const router = useRouter()
   const [user, setUser] = useState<User | null>(null)
@@ -22,11 +31,21 @@ export default function AccountPage() {
   const [sentMode, setSentMode] = useState<SentMode>(null)
   const [sendError, setSendError] = useState<string | null>(null)
 
+  const [lineMax, setLineMax] = useState<number | null>(null)
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     if (params.get('error')) {
       setAuthError('Sign-in link expired or invalid. Please request a new one.')
     }
+
+    try {
+      const v = localStorage.getItem(LINE_MAX_KEY)
+      if (v) {
+        const n = Number(v)
+        if (Number.isFinite(n) && n > 0) setLineMax(n)
+      }
+    } catch {}
 
     getSupabase()
       .auth.getUser()
@@ -35,6 +54,14 @@ export default function AccountPage() {
         setReady(true)
       })
   }, [])
+
+  function selectLineMax(v: number | null) {
+    setLineMax(v)
+    try {
+      if (v === null) localStorage.removeItem(LINE_MAX_KEY)
+      else localStorage.setItem(LINE_MAX_KEY, String(v))
+    } catch {}
+  }
 
   const redirectTo = typeof window !== 'undefined'
     ? `${window.location.origin}/auth/callback`
@@ -149,6 +176,33 @@ export default function AccountPage() {
             </button>
           </>
         )}
+
+        <section className="mt-12 border-t border-neutral-200 pt-8">
+          <p className="font-sans text-[0.7rem] tracking-[0.14em] text-neutral-400 uppercase mb-4">
+            Reading preferences
+          </p>
+          <p className="font-sans text-[0.75rem] text-neutral-400 mb-3">Poem length</p>
+          <div className="flex flex-col gap-2">
+            {LENGTH_OPTIONS.map((opt) => {
+              const selected = opt.value === lineMax
+              return (
+                <button
+                  key={String(opt.value)}
+                  type="button"
+                  onClick={() => selectLineMax(opt.value)}
+                  aria-pressed={selected}
+                  className={`text-left py-2.5 px-5 border rounded-full font-sans text-[0.8rem] transition-colors ${
+                    selected
+                      ? 'border-[#111] text-[#111]'
+                      : 'border-neutral-200 text-neutral-400 hover:border-neutral-400 hover:text-neutral-600'
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              )
+            })}
+          </div>
+        </section>
       </div>
     </main>
   )

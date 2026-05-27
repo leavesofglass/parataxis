@@ -39,6 +39,20 @@ function markNudgeShown(threshold: NudgeThreshold) {
 const BATCH = 5
 const PREFETCH_AT = 2
 
+const LINE_MAX_KEY = 'parataxis_line_max'
+
+function readLineMax(): number | null {
+  if (typeof window === 'undefined') return null
+  try {
+    const v = localStorage.getItem(LINE_MAX_KEY)
+    if (!v) return null
+    const n = Number(v)
+    return Number.isFinite(n) && n > 0 ? n : null
+  } catch {
+    return null
+  }
+}
+
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
   for (let i = a.length - 1; i > 0; i--) {
@@ -63,6 +77,7 @@ export function PoemSwiper() {
   const fetchingRef = useRef(false)
   const userIdRef = useRef<string | null>(null)
   const isSignedInRef = useRef(false)
+  const lineMaxRef = useRef<number | null>(null)
 
   const [poems, setPoems] = useState<Poem[]>([])
   const [cardIdx, setCardIdx] = useState(0)
@@ -92,6 +107,7 @@ export function PoemSwiper() {
 
     const supabase = getSupabase()
     const uid = userIdRef.current
+    const lineMax = lineMaxRef.current
 
     // Signed-in: recommend_poems returns the next batch ranked against the
     // user's current taste vector. Dedup against poems already in the deck —
@@ -102,6 +118,7 @@ export function PoemSwiper() {
       const { data, error } = await supabase.rpc('recommend_poems', {
         user_id_in: uid,
         limit_in: BATCH,
+        line_max_in: lineMax,
       })
       fetchingRef.current = false
       if (error || !data) {
@@ -128,10 +145,12 @@ export function PoemSwiper() {
     const batch = poolRef.current.slice(poolPosRef.current, poolPosRef.current + BATCH)
     poolPosRef.current += batch.length
 
-    const { data, error } = await supabase
+    let query = supabase
       .from('poems')
       .select('id, title, author, body, line_count')
       .in('id', batch)
+    if (lineMax !== null) query = query.lte('line_count', lineMax)
+    const { data, error } = await query
 
     fetchingRef.current = false
 
@@ -167,6 +186,11 @@ export function PoemSwiper() {
     async function init() {
       const supabase = getSupabase()
 
+      // Read the length preference once on mount. The swiper page remounts on
+      // route changes (Next App Router), so picking it up here naturally
+      // refreshes after a visit to /account.
+      lineMaxRef.current = readLineMax()
+
       // getUser() makes a server-validated request — always returns the live
       // user object including email, unlike getSession() which decodes the
       // cached JWT and may miss an email that was attached after token issuance.
@@ -185,9 +209,11 @@ export function PoemSwiper() {
 
       // Signed-in users get batches from recommend_poems and skip the pool.
       if (!isSignedInRef.current) {
-        const { data: idRows, error: idError } = await supabase
-          .from('poems')
-          .select('id')
+        let idQuery = supabase.from('poems').select('id')
+        if (lineMaxRef.current !== null) {
+          idQuery = idQuery.lte('line_count', lineMaxRef.current)
+        }
+        const { data: idRows, error: idError } = await idQuery
 
         if (idError || !idRows) {
           console.error('poems select failed:', JSON.stringify(idError))
