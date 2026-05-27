@@ -46,3 +46,6 @@ app/supabase/.temp/
 
 # Misc
 *.log
+
+# Pipeline runtime state (resumable batch job IDs)
+scripts/.enrich_state.json
