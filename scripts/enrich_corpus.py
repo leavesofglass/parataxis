@@ -196,6 +196,18 @@ def with_one_retry(fn, *, label: str):
 
 # ── Phase 1: build & submit batch ────────────────────────────────────────────
 
+def count_enriched_poems() -> int:
+    """Return the count of poems where enriched_at IS NOT NULL."""
+    resp = (
+        supabase.table("poems")
+        .select("id", count="exact")
+        .filter("enriched_at", "not.is", "null")
+        .limit(1)
+        .execute()
+    )
+    return resp.count or 0
+
+
 def fetch_unenriched_poems() -> list[dict]:
     """Pull all poems where enriched_at IS NULL, paging through 1000-row chunks."""
     rows: list[dict] = []
@@ -412,59 +424,69 @@ def main() -> int:
     print(" enrich_corpus — parataxis")
     print("=" * 64)
 
+    skipped = count_enriched_poems()
+    enriched_this_run = 0
+    exit_code = 0
+
     state = load_state()
 
     if state is None:
         poems = fetch_unenriched_poems()
         if not poems:
             print("Nothing to enrich (all poems have enriched_at). Done.")
-            return 0
-        print(f"  Found {len(poems)} unenriched poems.")
-        state = submit_batch(poems)
+        else:
+            print(f"  Found {len(poems)} unenriched poems.")
+            state = submit_batch(poems)
     else:
         print(f"  Resuming from state: batch={state['batch_id']}"
               f" submitted={state['submitted_at']}")
 
-    batch = poll_batch(state["batch_id"])
+    if state is not None:
+        batch = poll_batch(state["batch_id"])
 
-    if batch.status != "completed":
-        print(f"\n  Batch ended with status={batch.status}. Aborting.")
-        if batch.errors:
-            for err in (batch.errors.data or [])[:10]:
-                print(f"    error: {err}")
-        return 1
+        if batch.status != "completed":
+            print(f"\n  Batch ended with status={batch.status}. Aborting.")
+            if batch.errors:
+                for err in (batch.errors.data or [])[:10]:
+                    print(f"    error: {err}")
+            exit_code = 1
+        else:
+            state["output_file_id"] = batch.output_file_id
+            save_state(state)
 
-    state["output_file_id"] = batch.output_file_id
-    save_state(state)
+            # Map poem_id → row (re-fetch in case the DB changed between submit + now).
+            print("  Loading current poem rows for embedding stage …")
+            poems_by_id = {p["id"]: p for p in fetch_unenriched_poems()}
 
-    # Map poem_id → row (re-fetch in case the DB changed between submit + now).
-    print("  Loading current poem rows for embedding stage …")
-    poems_by_id = {p["id"]: p for p in fetch_unenriched_poems()}
+            result_lines = download_output(batch.output_file_id)
+            stats = process_results(result_lines, poems_by_id)
+            enriched_this_run = stats["enriched"]
 
-    result_lines = download_output(batch.output_file_id)
-    stats = process_results(result_lines, poems_by_id)
+            print()
+            print("=" * 64)
+            print(" final report")
+            print("=" * 64)
+            print(f"  Enriched : {stats['enriched']}")
+            print(f"  Failed   : {len(stats['failed'])}")
+            if stats["failed"]:
+                for poem_id, err in stats["failed"]:
+                    print(f"    {poem_id}: {err}")
+            print(f"  Tokens   : batch_in={stats['batch_input_tokens']:,}"
+                  f" batch_out={stats['batch_output_tokens']:,}"
+                  f" embed={stats['embed_tokens']:,}")
+            print(f"  Cost     : ${stats['cost_usd']:.4f} USD (actual, from usage data)")
+            print("=" * 64)
 
-    print()
-    print("=" * 64)
-    print(" final report")
-    print("=" * 64)
-    print(f"  Enriched : {stats['enriched']}")
-    print(f"  Failed   : {len(stats['failed'])}")
-    if stats["failed"]:
-        for poem_id, err in stats["failed"]:
-            print(f"    {poem_id}: {err}")
-    print(f"  Tokens   : batch_in={stats['batch_input_tokens']:,}"
-          f" batch_out={stats['batch_output_tokens']:,}"
-          f" embed={stats['embed_tokens']:,}")
-    print(f"  Cost     : ${stats['cost_usd']:.4f} USD (actual, from usage data)")
-    print("=" * 64)
+            if not stats["failed"]:
+                clear_state()
+                print("  state file cleared.")
+            else:
+                print("  state file retained — re-run to retry remaining unenriched poems.")
+                exit_code = 1
 
-    if not stats["failed"]:
-        clear_state()
-        print("  state file cleared.")
-        return 0
-    print("  state file retained — re-run to retry remaining unenriched poems.")
-    return 1
+    total_now = skipped + enriched_this_run
+    print(f"  Skipped {skipped} already-enriched, processed {enriched_this_run} new, total now {total_now}.")
+    return exit_code
 
 
 if __name__ == "__main__":
