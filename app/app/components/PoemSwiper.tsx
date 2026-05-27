@@ -62,6 +62,7 @@ export function PoemSwiper() {
   const poolPosRef = useRef(0)
   const fetchingRef = useRef(false)
   const userIdRef = useRef<string | null>(null)
+  const isSignedInRef = useRef(false)
 
   const [poems, setPoems] = useState<Poem[]>([])
   const [cardIdx, setCardIdx] = useState(0)
@@ -87,7 +88,36 @@ export function PoemSwiper() {
 
   // ── Poem loading ──────────────────────────────────────────────────────────
   const loadBatch = useCallback(async () => {
-    if (fetchingRef.current || poolRef.current.length === 0) return
+    if (fetchingRef.current) return
+
+    const supabase = getSupabase()
+    const uid = userIdRef.current
+
+    // Signed-in: recommend_poems returns the next batch ranked against the
+    // user's current taste vector. Dedup against poems already in the deck —
+    // until the user interacts with the tail of the current batch, those
+    // poems remain candidates and can come back in a prefetched batch.
+    if (isSignedInRef.current && uid) {
+      fetchingRef.current = true
+      const { data, error } = await supabase.rpc('recommend_poems', {
+        user_id_in: uid,
+        limit_in: BATCH,
+      })
+      fetchingRef.current = false
+      if (error || !data) {
+        console.error('recommend_poems error:', error)
+        return
+      }
+      setPoems((prev) => {
+        const seen = new Set(prev.map((p) => p.id))
+        const fresh = (data as Poem[]).filter((p) => !seen.has(p.id))
+        return [...prev, ...fresh]
+      })
+      return
+    }
+
+    // Anon: random shuffled pool of all poem IDs.
+    if (poolRef.current.length === 0) return
     fetchingRef.current = true
 
     if (poolPosRef.current >= poolRef.current.length) {
@@ -98,7 +128,6 @@ export function PoemSwiper() {
     const batch = poolRef.current.slice(poolPosRef.current, poolPosRef.current + BATCH)
     poolPosRef.current += batch.length
 
-    const supabase = getSupabase()
     const { data, error } = await supabase
       .from('poems')
       .select('id, title, author, body, line_count')
@@ -127,6 +156,7 @@ export function PoemSwiper() {
     const { data: { subscription } } = getSupabase().auth.onAuthStateChange(
       (_event: AuthChangeEvent, session: Session | null) => {
         setUserEmail(session?.user?.email ?? null)
+        isSignedInRef.current = session?.user?.is_anonymous === false
       }
     )
     return () => subscription.unsubscribe()
@@ -150,20 +180,24 @@ export function PoemSwiper() {
       } else {
         userIdRef.current = user.id
         setUserEmail(user.email ?? null)
+        isSignedInRef.current = user.is_anonymous === false
       }
 
-      const { data: idRows, error: idError } = await supabase
-        .from('poems')
-        .select('id')
+      // Signed-in users get batches from recommend_poems and skip the pool.
+      if (!isSignedInRef.current) {
+        const { data: idRows, error: idError } = await supabase
+          .from('poems')
+          .select('id')
 
-      if (idError || !idRows) {
-        console.error('poems select failed:', JSON.stringify(idError))
-        setError(`Could not load poems. (${idError?.code ?? 'unknown'}: ${idError?.message ?? 'no data'})`)
-        return
+        if (idError || !idRows) {
+          console.error('poems select failed:', JSON.stringify(idError))
+          setError(`Could not load poems. (${idError?.code ?? 'unknown'}: ${idError?.message ?? 'no data'})`)
+          return
+        }
+
+        poolRef.current = shuffle(idRows.map((r: { id: string }) => r.id))
+        poolPosRef.current = 0
       }
-
-      poolRef.current = shuffle(idRows.map((r: { id: string }) => r.id))
-      poolPosRef.current = 0
 
       await loadBatch()
 
