@@ -219,7 +219,7 @@ export function PoemSwiper() {
 
   // ── Action handlers ────────────────────────────────────────────────────────
   const handlePreviewSkip = useCallback((poem: Poem) => {
-    logInteraction(poem.id, 'preview_skip')
+    logInteraction(poem.id, 'dislike')
     setCardIdx((i) => i + 1)
   }, [logInteraction])
 
@@ -229,7 +229,7 @@ export function PoemSwiper() {
   }, [logInteraction])
 
   const handleFullPoemAction = useCallback((poem: Poem, action: FullPoemAction) => {
-    const dbAction = action === 'skip' ? 'preview_skip' : action
+    const dbAction = action === 'skip' ? 'dislike' : action
     logInteraction(poem.id, dbAction)
     if (action === 'save' || action === 'super_like') {
       const newCount = savedCount + 1
