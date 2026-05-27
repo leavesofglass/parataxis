@@ -36,8 +36,8 @@ function markNudgeShown(threshold: NudgeThreshold) {
   } catch {}
 }
 
-const BATCH = 20
-const PREFETCH_AT = 5
+const BATCH = 5
+const PREFETCH_AT = 2
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
