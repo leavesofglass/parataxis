@@ -3,9 +3,11 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
 export async function GET(request: Request) {
+  console.log('[auth/callback] request URL:', request.url)
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
   const migrateFrom = searchParams.get('migrate_from')
+  console.log('[auth/callback] migrate_from param:', migrateFrom === null ? 'absent' : `present="${migrateFrom}"`)
 
   if (code) {
     const cookieStore = await cookies()
@@ -48,13 +50,18 @@ export async function GET(request: Request) {
         // TODO: interactions orphaned by sign-ins before this fix shipped are
         // not recoverable here — their anon user_ids aren't in any future
         // magic-link URL.
-        const { error: migrateError } = await supabase.rpc(
+        console.log('[auth/callback] calling migrate_anon_interactions for anon_user_id:', migrateFrom)
+        const { data: migrateData, error: migrateError } = await supabase.rpc(
           'migrate_anon_interactions',
           { anon_user_id: migrateFrom },
         )
         if (migrateError) {
-          console.error('migrate_anon_interactions failed:', migrateError)
+          console.error('[auth/callback] migrate_anon_interactions failed:', migrateError)
+        } else {
+          console.log('[auth/callback] migrate_anon_interactions result:', migrateData)
         }
+      } else {
+        console.log('[auth/callback] no migrate_from param — skipping migrate_anon_interactions')
       }
 
       return NextResponse.redirect(`${origin}/`)
