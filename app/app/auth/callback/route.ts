@@ -2,15 +2,21 @@ import { NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
+const MIGRATE_COOKIE = 'anon_user_id_for_migration'
+
 export async function GET(request: Request) {
   console.log('[auth/callback] request URL:', request.url)
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
-  const migrateFrom = searchParams.get('migrate_from')
-  console.log('[auth/callback] migrate_from param:', migrateFrom === null ? 'absent' : `present="${migrateFrom}"`)
 
   if (code) {
     const cookieStore = await cookies()
+    const migrateFrom = cookieStore.get(MIGRATE_COOKIE)?.value ?? null
+    console.log(
+      `[auth/callback] ${MIGRATE_COOKIE} cookie:`,
+      migrateFrom === null ? 'absent' : `present="${migrateFrom}"`,
+    )
+
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -47,9 +53,6 @@ export async function GET(request: Request) {
       }
 
       if (migrateFrom) {
-        // TODO: interactions orphaned by sign-ins before this fix shipped are
-        // not recoverable here — their anon user_ids aren't in any future
-        // magic-link URL.
         console.log('[auth/callback] calling migrate_anon_interactions for anon_user_id:', migrateFrom)
         const { data: migrateData, error: migrateError } = await supabase.rpc(
           'migrate_anon_interactions',
@@ -60,8 +63,10 @@ export async function GET(request: Request) {
         } else {
           console.log('[auth/callback] migrate_anon_interactions result:', migrateData)
         }
+        cookieStore.delete(MIGRATE_COOKIE)
+        console.log(`[auth/callback] ${MIGRATE_COOKIE} cookie deleted`)
       } else {
-        console.log('[auth/callback] no migrate_from param — skipping migrate_anon_interactions')
+        console.log(`[auth/callback] no ${MIGRATE_COOKIE} cookie — skipping migrate_anon_interactions`)
       }
 
       return NextResponse.redirect(`${origin}/`)
