@@ -13,6 +13,7 @@ interface SwipeProps {
   isSuperLiked?: never
   onAction: (action: SwipeAction) => void
   onUnsave?: never
+  onUnskip?: never
   onClose: () => void
 }
 
@@ -22,10 +23,21 @@ interface LibraryProps {
   isSuperLiked?: boolean
   onAction?: never
   onUnsave: () => void
+  onUnskip?: never
   onClose: () => void
 }
 
-type Props = SwipeProps | LibraryProps
+interface SkippedProps {
+  variant: 'skipped'
+  poem: Poem
+  isSuperLiked?: never
+  onAction?: never
+  onUnsave?: never
+  onUnskip: () => void
+  onClose: () => void
+}
+
+type Props = SwipeProps | LibraryProps | SkippedProps
 
 // Shared class string — all three swipe action buttons are visually identical.
 // Using border-neutral-900 (standard scale) instead of arbitrary border-[#111]
@@ -38,6 +50,7 @@ function actionBtnClass(action: string, tapped: string | null) {
 export function FullPoemView(props: Props) {
   const { poem } = props
   const isLibrary = props.variant === 'library'
+  const isSkipped = props.variant === 'skipped'
 
   const [tapped, setTapped] = useState<string | null>(null)
 
@@ -51,6 +64,12 @@ export function FullPoemView(props: Props) {
     if (!props.onUnsave) return
     setTapped('unsave')
     setTimeout(() => props.onUnsave!(), 180)
+  }
+
+  function handleUnskip() {
+    if (!props.onUnskip) return
+    setTapped('unskip')
+    setTimeout(() => props.onUnskip!(), 180)
   }
 
   function handleClose() {
@@ -69,7 +88,7 @@ export function FullPoemView(props: Props) {
       {/* Back button — swipe variant only; dismisses without logging an interaction.
           Wrapped in a 1.4rem-tall flex frame so its glyph centre is at the same y
           as the share icon on the right. */}
-      {!isLibrary && (
+      {!isLibrary && !isSkipped && (
         <div className="absolute top-4 left-5 h-[1.4rem] inline-flex items-center z-10">
           <button
             onClick={handleClose}
@@ -90,7 +109,7 @@ export function FullPoemView(props: Props) {
       <div className="flex-1 overflow-y-auto overscroll-contain px-8 pt-14 pb-6">
         <h1 className="font-serif text-[1.5rem] leading-[1.35] font-normal text-[#111] mb-10">
           {poem.title}
-          {isLibrary && props.isSuperLiked && (
+          {isLibrary && 'isSuperLiked' in props && props.isSuperLiked && (
             <span className="ml-2 text-[1rem]" aria-label="Loved">💖</span>
           )}
         </h1>
@@ -115,6 +134,25 @@ export function FullPoemView(props: Props) {
                 : 'border-neutral-300 text-neutral-400 hover:border-neutral-500 hover:text-neutral-600'}`}
           >
             Unsave
+          </button>
+
+          <button
+            onClick={handleClose}
+            className="flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide rounded-full transition-colors bg-[#111] text-white hover:bg-neutral-700"
+          >
+            Close
+          </button>
+        </div>
+      ) : isSkipped ? (
+        <div className="flex gap-2.5 px-6 py-5 border-t border-neutral-100 bg-[#F4ECC8]">
+          <button
+            onClick={handleUnskip}
+            className={`flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide border rounded-full transition-colors
+              ${tapped === 'unskip'
+                ? 'border-neutral-300 text-neutral-300'
+                : 'border-neutral-300 text-neutral-400 hover:border-neutral-500 hover:text-neutral-600'}`}
+          >
+            Un-skip
           </button>
 
           <button
