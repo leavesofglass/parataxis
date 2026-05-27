@@ -53,6 +53,41 @@ function readLineMax(): number | null {
   }
 }
 
+const DECK_STATE_KEY = 'parataxis_deck_state'
+const DECK_STATE_TTL_MS = 60 * 60 * 1000
+
+interface SavedDeckState {
+  poemIds: string[]
+  currentIndex: number
+  timestamp: number
+}
+
+function readSavedDeckState(): SavedDeckState | null {
+  if (typeof window === 'undefined') return null
+  try {
+    const raw = localStorage.getItem(DECK_STATE_KEY)
+    if (!raw) return null
+    const parsed = JSON.parse(raw) as Partial<SavedDeckState>
+    if (
+      typeof parsed?.currentIndex !== 'number' ||
+      typeof parsed?.timestamp !== 'number' ||
+      !Array.isArray(parsed?.poemIds)
+    ) {
+      return null
+    }
+    return parsed as SavedDeckState
+  } catch {
+    return null
+  }
+}
+
+function clearSavedDeckState() {
+  if (typeof window === 'undefined') return
+  try {
+    localStorage.removeItem(DECK_STATE_KEY)
+  } catch {}
+}
+
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
   for (let i = a.length - 1; i > 0; i--) {
@@ -207,7 +242,19 @@ export function PoemSwiper() {
         isSignedInRef.current = user.is_anonymous === false
       }
 
+      // If the user just signed in (came back from /auth/callback), the
+      // migration RPC has already run, so any pre-sign-in anon deck state is
+      // stale — drop it. Otherwise consider restoring it below.
+      const saved = readSavedDeckState()
+      const savedIsFresh =
+        saved !== null && Date.now() - saved.timestamp <= DECK_STATE_TTL_MS
+      if (saved && isSignedInRef.current) {
+        clearSavedDeckState()
+      }
+
       // Signed-in users get batches from recommend_poems and skip the pool.
+      // For anon users build the pool unconditionally — even on a successful
+      // restore the next prefetch will need it.
       if (!isSignedInRef.current) {
         let idQuery = supabase.from('poems').select('id')
         if (lineMaxRef.current !== null) {
@@ -225,7 +272,33 @@ export function PoemSwiper() {
         poolPosRef.current = 0
       }
 
-      await loadBatch()
+      let restored = false
+      if (
+        saved &&
+        !isSignedInRef.current &&
+        savedIsFresh &&
+        saved.poemIds.length > 0
+      ) {
+        const { data, error: fetchErr } = await supabase
+          .from('poems')
+          .select('id, title, author, body, line_count')
+          .in('id', saved.poemIds)
+        if (!fetchErr && data) {
+          const byId = new Map((data as Poem[]).map((p) => [p.id, p]))
+          const ordered = saved.poemIds
+            .map((id) => byId.get(id))
+            .filter(Boolean) as Poem[]
+          if (ordered.length > 0) {
+            setPoems(ordered)
+            setCardIdx(Math.min(saved.currentIndex, ordered.length - 1))
+            restored = true
+          }
+        }
+      }
+
+      if (!restored) {
+        await loadBatch()
+      }
 
       if (userIdRef.current) {
         fetchSavedCount(userIdRef.current).then(setSavedCount)
@@ -242,6 +315,27 @@ export function PoemSwiper() {
       loadBatch()
     }
   }, [cardIdx, poems.length, ready, loadBatch])
+
+  // ── Persist deck state so a /account detour can be resumed ────────────────
+  // Saves on every batch load and every swipe. Clears when the deck has been
+  // fully consumed (cardIdx past the last loaded card) so the next session
+  // doesn't resume into an empty pile. Sign-in clearing happens in init().
+  useEffect(() => {
+    if (!ready) return
+    if (poems.length === 0) return
+    if (cardIdx >= poems.length) {
+      clearSavedDeckState()
+      return
+    }
+    const state: SavedDeckState = {
+      poemIds: poems.map((p) => p.id),
+      currentIndex: cardIdx,
+      timestamp: Date.now(),
+    }
+    try {
+      localStorage.setItem(DECK_STATE_KEY, JSON.stringify(state))
+    } catch {}
+  }, [poems, cardIdx, ready])
 
   // ── Action handlers ────────────────────────────────────────────────────────
   const handlePreviewSkip = useCallback((poem: Poem) => {
