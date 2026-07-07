@@ -107,26 +107,57 @@ export function getPreview(body: string): string {
 type FullPoemAction = 'skip' | 'save' | 'super_like'
 
 // ── DraggableCard ─────────────────────────────────────────────────────────────
-// Wraps FullPoemView (asCard) with horizontal swipe gestures.
-// drag="x" sets touch-action: pan-y on the element, so vertical touches fall
-// through to the poem body's native overflow-y scroll.
-// Right swipe → save  |  Left swipe → skip/dislike
-// Up gesture is available via the 💖 button inside FullPoemView.
+// Wraps FullPoemView (asCard) with swipe gestures.
+// drag="x" sets touch-action: pan-y, so vertical touches fall through to the
+// poem body's native overflow-y scroll.
+// Right swipe → save  |  Left swipe → skip/dislike  |  Up throw → super_like
+//
+// exitRef is a synchronous guard so that onDragEnd (horizontal) and onPanEnd
+// (upward throw detection) cannot both fire an action for the same gesture,
+// even though setState is async and 'exiting' state may not yet be updated
+// when the second handler runs.
 function DraggableCard({ poem, onAction }: { poem: Poem; onAction: (a: FullPoemAction) => void }) {
   const x = useMotionValue(0)
   const rotate = useTransform(x, [-300, 300], [-12, 12])
-  const [exiting, setExiting] = useState<'left' | 'right' | null>(null)
+  const exitRef = useRef<'left' | 'right' | 'up' | null>(null)
+  const [exiting, setExiting] = useState<'left' | 'right' | 'up' | null>(null)
+
+  function triggerExit(dir: 'left' | 'right' | 'up') {
+    if (exitRef.current) return
+    exitRef.current = dir
+    setExiting(dir)
+  }
 
   function handleDragEnd(_: unknown, info: PanInfo) {
-    if (exiting) return
-    if (info.offset.x > 80 || info.velocity.x > 500) setExiting('right')
-    else if (info.offset.x < -80 || info.velocity.x < -500) setExiting('left')
+    if (info.offset.x > 80 || info.velocity.x > 500) triggerExit('right')
+    else if (info.offset.x < -80 || info.velocity.x < -500) triggerExit('left')
+  }
+
+  function handlePanEnd(_: unknown, info: PanInfo) {
+    // Deliberate upward throw: fast, primarily vertical, upward.
+    // The velocity threshold keeps slow scrolls from accidentally firing.
+    if (
+      info.velocity.y < -800 &&
+      info.offset.y < -60 &&
+      Math.abs(info.velocity.y) > Math.abs(info.velocity.x) * 1.5
+    ) {
+      triggerExit('up')
+    }
   }
 
   function handleAnimationComplete() {
-    if (!exiting) return
-    onAction(exiting === 'right' ? 'save' : 'skip')
+    const dir = exitRef.current
+    if (!dir) return
+    if (dir === 'right') onAction('save')
+    else if (dir === 'left') onAction('skip')
+    else if (dir === 'up') onAction('super_like')
   }
+
+  const exitAnimate =
+    exiting === 'right' ? { x: '160%', opacity: 0 } :
+    exiting === 'left'  ? { x: '-160%', opacity: 0 } :
+    exiting === 'up'    ? { y: '-160%', opacity: 0 } :
+    undefined
 
   return (
     <motion.div
@@ -135,9 +166,10 @@ function DraggableCard({ poem, onAction }: { poem: Poem; onAction: (a: FullPoemA
       dragElastic={0.7}
       className="absolute inset-0"
       style={{ x, rotate, zIndex: 2 }}
-      animate={exiting ? { x: exiting === 'right' ? '160%' : '-160%', opacity: 0 } : undefined}
+      animate={exitAnimate}
       transition={exiting ? { duration: 0.25, ease: 'easeOut' } : undefined}
       onDragEnd={handleDragEnd}
+      onPanEnd={handlePanEnd}
       onAnimationComplete={handleAnimationComplete}
     >
       <FullPoemView poem={poem} onAction={onAction} onClose={() => {}} asCard />
@@ -414,12 +446,9 @@ export function PoemSwiper() {
   return (
     <main className="relative h-dvh flex flex-col items-center overflow-hidden select-none bg-[#FAF6E9]">
 
-      {/* ── Row 1: sign-in (left) · library (right) ──
-          Both sides use the same 40px-tall flex frame so the 10px texts on
-          left and right are anchored to the same vertical center as each
-          other, regardless of the logo's mass on the right. */}
-      <div className="w-full flex items-center justify-between px-6 pt-3 shrink-0">
-        <div className="flex items-center h-10">
+      {/* ── Header: sign-in (left) · wordmark (center) · library (right) ── */}
+      <div className="w-full flex items-center px-6 pt-3 pb-1 shrink-0">
+        <div className="flex-1 flex items-center h-10">
           <Link
             href="/account"
             className="text-[10px] leading-none font-sans tracking-[0.18em] text-neutral-300 uppercase hover:text-neutral-500 transition-colors max-w-[120px] truncate"
@@ -431,25 +460,23 @@ export function PoemSwiper() {
               : 'Sign in'}
           </Link>
         </div>
-        <Link
-          href="/library"
-          aria-label="Library"
-          className="flex items-center gap-1 h-10 hover:opacity-70 transition-opacity"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/sheaf-logo.png" alt="sheaf" width={40} height={40}
-               style={{ objectFit: 'contain' }} className="block" />
-          {savedCount > 0 && (
-            <span className="text-[10px] leading-none font-sans tracking-wide tabular-nums text-neutral-400">
-              {savedCount}
-            </span>
-          )}
-        </Link>
-      </div>
-
-      {/* ── Row 2: masthead ── */}
-      <div className="pt-1 pb-2 shrink-0">
         <Masthead />
+        <div className="flex-1 flex items-center justify-end h-10">
+          <Link
+            href="/library"
+            aria-label="Library"
+            className="flex items-center gap-1 hover:opacity-70 transition-opacity"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/sheaf-logo.png" alt="sheaf" width={40} height={40}
+                 style={{ objectFit: 'contain' }} className="block" />
+            {savedCount > 0 && (
+              <span className="text-[10px] leading-none font-sans tracking-wide tabular-nums text-neutral-400">
+                {savedCount}
+              </span>
+            )}
+          </Link>
+        </div>
       </div>
 
       {/* ── Card area: fills remaining space ── */}
