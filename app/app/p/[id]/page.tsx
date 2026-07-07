@@ -45,9 +45,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params
   const poem = await fetchPoem(id)
-  if (!poem) return { title: 'Poem not found · Sheaf' }
+  if (!poem) return { title: 'Poem not found · sheaf' }
 
-  const title = `${poem.title} — ${poem.author} · Sheaf`
+  const title = `${poem.title} — ${poem.author} · sheaf`
   const description = makeDescription(poem.body)
   const url = `${SITE_URL}/p/${poem.id}`
   const image = `${SITE_URL}/sheaf-logo.png`
@@ -90,7 +90,7 @@ export default async function PoemPage({
             href="/"
             className="text-[10px] leading-none font-sans tracking-[0.18em] text-neutral-400 uppercase hover:text-neutral-600 transition-colors"
           >
-            ← Sheaf
+            ← sheaf
           </Link>
           <div className="h-[1.4rem] inline-flex items-center">
             <ShareButton poemId={poem.id} title={poem.title} author={poem.author} />

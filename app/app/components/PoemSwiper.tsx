@@ -410,7 +410,7 @@ export function PoemSwiper() {
           className="flex items-center gap-1 h-10 hover:opacity-70 transition-opacity"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/sheaf-logo.png" alt="Sheaf" width={40} height={40}
+          <img src="/sheaf-logo.png" alt="sheaf" width={40} height={40}
                style={{ objectFit: 'contain' }} className="block" />
           {savedCount > 0 && (
             <span className="text-[10px] leading-none font-sans tracking-wide tabular-nums text-neutral-400">

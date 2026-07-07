@@ -3,7 +3,7 @@ import { LibraryList } from '../components/LibraryList'
 import { Masthead } from '../components/Masthead'
 import { LibraryBadge } from '../components/LibraryBadge'
 
-export const metadata = { title: 'Library · Sheaf' }
+export const metadata = { title: 'Library · sheaf' }
 
 export default function LibraryPage() {
   return (
