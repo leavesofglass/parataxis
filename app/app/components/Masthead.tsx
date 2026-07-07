@@ -8,7 +8,7 @@ export function Masthead({ href: _href }: Props) {
     <span
       className="font-masthead text-[22px] sm:text-[15px] tracking-[0.15em] text-black/35"
     >
-      Sheaf
+      sheaf
     </span>
   )
 }
