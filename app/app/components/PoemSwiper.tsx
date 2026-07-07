@@ -2,12 +2,12 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion, useMotionValue, useTransform } from 'framer-motion'
+import type { PanInfo } from 'framer-motion'
 import { getSupabase } from '@/lib/supabase'
 import type { AuthChangeEvent, Session } from '@supabase/supabase-js'
 import { fetchSavedCount } from '@/lib/library'
 import type { Poem } from '../types'
-import { SwipeCard } from './SwipeCard'
 import { FullPoemView } from './FullPoemView'
 import { SignupNudgeModal } from './SignupNudgeModal'
 import { Masthead } from './Masthead'
@@ -106,6 +106,45 @@ export function getPreview(body: string): string {
 
 type FullPoemAction = 'skip' | 'save' | 'super_like'
 
+// ── DraggableCard ─────────────────────────────────────────────────────────────
+// Wraps FullPoemView (asCard) with horizontal swipe gestures.
+// drag="x" sets touch-action: pan-y on the element, so vertical touches fall
+// through to the poem body's native overflow-y scroll.
+// Right swipe → save  |  Left swipe → skip/dislike
+// Up gesture is available via the 💖 button inside FullPoemView.
+function DraggableCard({ poem, onAction }: { poem: Poem; onAction: (a: FullPoemAction) => void }) {
+  const x = useMotionValue(0)
+  const rotate = useTransform(x, [-300, 300], [-12, 12])
+  const [exiting, setExiting] = useState<'left' | 'right' | null>(null)
+
+  function handleDragEnd(_: unknown, info: PanInfo) {
+    if (exiting) return
+    if (info.offset.x > 80 || info.velocity.x > 500) setExiting('right')
+    else if (info.offset.x < -80 || info.velocity.x < -500) setExiting('left')
+  }
+
+  function handleAnimationComplete() {
+    if (!exiting) return
+    onAction(exiting === 'right' ? 'save' : 'skip')
+  }
+
+  return (
+    <motion.div
+      drag={exiting ? false : 'x'}
+      dragConstraints={{ left: 0, right: 0 }}
+      dragElastic={0.7}
+      className="absolute inset-0"
+      style={{ x, rotate, zIndex: 2 }}
+      animate={exiting ? { x: exiting === 'right' ? '160%' : '-160%', opacity: 0 } : undefined}
+      transition={exiting ? { duration: 0.25, ease: 'easeOut' } : undefined}
+      onDragEnd={handleDragEnd}
+      onAnimationComplete={handleAnimationComplete}
+    >
+      <FullPoemView poem={poem} onAction={onAction} onClose={() => {}} asCard />
+    </motion.div>
+  )
+}
+
 export function PoemSwiper() {
   const poolRef = useRef<string[]>([])
   const poolPosRef = useRef(0)
@@ -116,7 +155,6 @@ export function PoemSwiper() {
 
   const [poems, setPoems] = useState<Poem[]>([])
   const [cardIdx, setCardIdx] = useState(0)
-  const [openPoem, setOpenPoem] = useState<Poem | null>(null)
   const [ready, setReady] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [savedCount, setSavedCount] = useState(0)
@@ -337,17 +375,7 @@ export function PoemSwiper() {
     } catch {}
   }, [poems, cardIdx, ready])
 
-  // ── Action handlers ────────────────────────────────────────────────────────
-  const handlePreviewSkip = useCallback((poem: Poem) => {
-    logInteraction(poem.id, 'dislike')
-    setCardIdx((i) => i + 1)
-  }, [logInteraction])
-
-  const handlePreviewOpen = useCallback((poem: Poem) => {
-    logInteraction(poem.id, 'preview_open')
-    setOpenPoem(poem)
-  }, [logInteraction])
-
+  // ── Action handler ─────────────────────────────────────────────────────────
   const handleFullPoemAction = useCallback((poem: Poem, action: FullPoemAction) => {
     const dbAction = action === 'skip' ? 'dislike' : action
     logInteraction(poem.id, dbAction)
@@ -360,7 +388,6 @@ export function PoemSwiper() {
         if (threshold !== null) setNudgeThreshold(threshold)
       }
     }
-    setOpenPoem(null)
     setCardIdx((i) => i + 1)
   }, [logInteraction, savedCount, userEmail, nudgeThreshold])
 
@@ -425,7 +452,7 @@ export function PoemSwiper() {
         <Masthead />
       </div>
 
-      {/* ── Card area: fills remaining space; card + action-row stacked, centered ── */}
+      {/* ── Card area: fills remaining space ── */}
       <div className="flex-1 flex items-center justify-center w-full min-h-0">
         {/* Card-area width. Mobile (<400px viewport) drops the 360px cap and
             uses a fixed 13px margin per side (100vw − 26px), which keeps
@@ -433,7 +460,7 @@ export function PoemSwiper() {
             cap reapplies so the desktop reading column is unchanged. Both
             branches keep the height-bound term: at aspect 5:8, the card width
             cannot exceed (available_height × 5/8). */}
-        <div className="flex flex-col items-stretch gap-5 shrink-0 w-[min(calc(100vw-26px),calc((100dvh-220px)*5/8))] min-[400px]:w-[min(360px,calc((100dvh-220px)*5/8))]">
+        <div className="flex flex-col items-stretch shrink-0 w-[min(calc(100vw-26px),calc((100dvh-220px)*5/8))] min-[400px]:w-[min(360px,calc((100dvh-220px)*5/8))]">
           <div className="relative w-full" style={{ aspectRatio: '5 / 8' }}>
             {nextPoem && (
               <div
@@ -443,48 +470,15 @@ export function PoemSwiper() {
               />
             )}
             {topPoem && (
-              <SwipeCard
+              <DraggableCard
                 key={topPoem.id}
                 poem={topPoem}
-                preview={getPreview(topPoem.body)}
-                onOpen={() => handlePreviewOpen(topPoem)}
+                onAction={(action) => handleFullPoemAction(topPoem, action)}
               />
             )}
           </div>
-
-          {topPoem && (
-            <div className="flex gap-2.5 w-full">
-              <button
-                type="button"
-                onClick={() => handlePreviewSkip(topPoem)}
-                aria-label="Skip"
-                className="flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-[0.14em] uppercase border border-neutral-300 rounded-full text-neutral-500 hover:border-neutral-500 hover:text-neutral-700 transition-colors min-h-[44px]"
-              >
-                skip
-              </button>
-              <button
-                type="button"
-                onClick={() => handlePreviewOpen(topPoem)}
-                aria-label="Read"
-                className="flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-[0.14em] uppercase border border-neutral-300 rounded-full text-neutral-500 hover:border-neutral-500 hover:text-neutral-700 transition-colors min-h-[44px]"
-              >
-                read
-              </button>
-            </div>
-          )}
         </div>
       </div>
-
-      <AnimatePresence>
-        {openPoem && (
-          <FullPoemView
-            key={openPoem.id + '-full'}
-            poem={openPoem}
-            onAction={(action) => handleFullPoemAction(openPoem, action)}
-            onClose={() => setOpenPoem(null)}
-          />
-        )}
-      </AnimatePresence>
 
       <AnimatePresence>
         {nudgeThreshold && (

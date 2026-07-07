@@ -15,6 +15,9 @@ interface SwipeProps {
   onUnsave?: never
   onUnskip?: never
   onClose: () => void
+  // Renders inside the swipe deck card slot instead of as a full-screen overlay.
+  // Suppresses the slide-up animation and the × close button.
+  asCard?: boolean
 }
 
 interface LibraryProps {
@@ -51,6 +54,7 @@ export function FullPoemView(props: Props) {
   const { poem } = props
   const isLibrary = props.variant === 'library'
   const isSkipped = props.variant === 'skipped'
+  const asCard = !isLibrary && !isSkipped && !!(props as SwipeProps).asCard
 
   const [tapped, setTapped] = useState<string | null>(null)
 
@@ -77,18 +81,11 @@ export function FullPoemView(props: Props) {
     props.onClose()
   }
 
-  return (
-    <motion.div
-      initial={{ y: '100%' }}
-      animate={{ y: 0 }}
-      exit={{ y: '100%' }}
-      transition={{ type: 'spring', damping: 34, stiffness: 290 }}
-      className="fixed inset-0 z-50 flex flex-col bg-[#F4ECC8]"
-    >
-      {/* Back button — swipe variant only; dismisses without logging an interaction.
-          Wrapped in a 1.4rem-tall flex frame so its glyph centre is at the same y
-          as the share icon on the right. */}
-      {!isLibrary && !isSkipped && (
+  const inner = (
+    <>
+      {/* Back button — swipe overlay only; hidden in asCard mode (nothing to go back to)
+          and in library/skipped variants. */}
+      {!isLibrary && !isSkipped && !asCard && (
         <div className="absolute top-4 left-5 h-[1.4rem] inline-flex items-center z-10">
           <button
             onClick={handleClose}
@@ -100,7 +97,7 @@ export function FullPoemView(props: Props) {
         </div>
       )}
 
-      {/* Share button — both variants; same vertical centre as the X close glyph. */}
+      {/* Share button — all variants; same vertical centre as the X close glyph. */}
       <div className="absolute top-4 right-5 h-[1.4rem] inline-flex items-center z-10">
         <ShareButton poemId={poem.id} title={poem.title} author={poem.author} />
       </div>
@@ -169,6 +166,26 @@ export function FullPoemView(props: Props) {
           <button onClick={() => handleSwipeAction('super_like')} title="Love" aria-label="Love" className={actionBtnClass('super_like', tapped)}>💖</button>
         </div>
       )}
+    </>
+  )
+
+  if (asCard) {
+    return (
+      <div className="absolute inset-0 rounded-2xl overflow-hidden flex flex-col bg-[#F4ECC8]">
+        {inner}
+      </div>
+    )
+  }
+
+  return (
+    <motion.div
+      initial={{ y: '100%' }}
+      animate={{ y: 0 }}
+      exit={{ y: '100%' }}
+      transition={{ type: 'spring', damping: 34, stiffness: 290 }}
+      className="fixed inset-0 z-50 flex flex-col bg-[#F4ECC8]"
+    >
+      {inner}
     </motion.div>
   )
 }
