@@ -1,6 +1,6 @@
-# parataxis
+# Sheaf
 
-Parataxis is a mobile web app for poetry discovery. Poems are presented one at a time in a swipe-based interface — swipe past to skip, save to your library, or super-like to signal strong resonance. The app learns your taste over time through these interactions and surfaces poems you're more likely to connect with. v1 ships with a curated corpus of ~600 public-domain poems drawn from 68 authors, selected and cleaned from the DanFosing/public-domain-poetry dataset.
+Sheaf is a mobile web app for poetry discovery. Poems are presented one at a time in a swipe-based interface — swipe past to skip, save to your library, or super-like to signal strong resonance. The app learns your taste over time through these interactions and surfaces poems you're more likely to connect with. v1 ships with a curated corpus of ~600 public-domain poems drawn from 68 authors, selected and cleaned from the DanFosing/public-domain-poetry dataset.
 
 ## Data pipeline
 

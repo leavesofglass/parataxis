@@ -17,7 +17,7 @@ const lora = Lora({
 })
 
 export const metadata: Metadata = {
-  title: 'parataxis',
+  title: 'Sheaf',
   description: 'A poetry discovery app',
 }
 

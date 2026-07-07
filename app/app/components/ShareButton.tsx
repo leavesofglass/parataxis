@@ -21,7 +21,7 @@ export function ShareButton({ poemId, title, author, className = '' }: Props) {
 
   async function handleShare() {
     const url = `${window.location.origin}/p/${poemId}`
-    const shareTitle = `${title} by ${author} — parataxis`
+    const shareTitle = `${title} by ${author} — Sheaf`
 
     if (typeof navigator !== 'undefined' && navigator.share) {
       try {
