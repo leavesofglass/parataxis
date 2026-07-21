@@ -103,7 +103,7 @@ export function FullPoemView(props: Props) {
       </div>
 
       {/* Scrollable poem */}
-      <div className="flex-1 overflow-y-auto overscroll-contain px-8 pt-14 pb-6">
+      <div className="flex-1 overflow-y-auto overscroll-contain px-6 sm:px-10 pt-14 pb-6 sm:pb-12">
         <h1 className="font-serif text-[1.5rem] leading-[1.35] font-normal text-[#111] mb-10">
           {poem.title}
           {isLibrary && 'isSuperLiked' in props && props.isSuperLiked && (

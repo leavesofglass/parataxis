@@ -479,31 +479,25 @@ export function PoemSwiper() {
         </div>
       </div>
 
-      {/* ── Card area: fills remaining space ── */}
-      <div className="flex-1 flex items-center justify-center w-full min-h-0">
-        {/* Card-area width. Mobile (<400px viewport) drops the 360px cap and
-            uses a fixed 13px margin per side (100vw − 26px), which keeps
-            sonnet titles to two lines at 390px wide. From 400px up, the 360px
-            cap reapplies so the desktop reading column is unchanged. Both
-            branches keep the height-bound term: at aspect 5:8, the card width
-            cannot exceed (available_height × 5/8). */}
-        <div className="flex flex-col items-stretch shrink-0 w-[min(calc(100vw-26px),calc((100dvh-220px)*5/8))] min-[400px]:w-[min(360px,calc((100dvh-220px)*5/8))]">
-          <div className="relative w-full" style={{ aspectRatio: '5 / 8' }}>
-            {nextPoem && (
-              <div
-                key={nextPoem.id + '-bg'}
-                className="absolute inset-0 rounded-2xl bg-[#F4ECC8] shadow-sm"
-                style={{ transform: 'scale(0.96) translateY(8px)', opacity: 0.6, zIndex: 1 }}
-              />
-            )}
-            {topPoem && (
-              <DraggableCard
-                key={topPoem.id}
-                poem={topPoem}
-                onAction={(action) => handleFullPoemAction(topPoem, action)}
-              />
-            )}
-          </div>
+      {/* ── Card area: fills remaining space, 16px breathing room top/bottom ──
+          Mobile: 95vw (2.5vw margin per side via px-[2.5vw]).
+          Desktop: capped at 760px, centered by justify-center. */}
+      <div className="flex-1 flex items-center justify-center w-full min-h-0 py-4 px-[2.5vw] sm:px-0">
+        <div className="relative h-full w-full max-w-[760px]">
+          {nextPoem && (
+            <div
+              key={nextPoem.id + '-bg'}
+              className="absolute inset-0 rounded-2xl bg-[#F4ECC8] shadow-sm"
+              style={{ transform: 'scale(0.96) translateY(8px)', opacity: 0.6, zIndex: 1 }}
+            />
+          )}
+          {topPoem && (
+            <DraggableCard
+              key={topPoem.id}
+              poem={topPoem}
+              onAction={(action) => handleFullPoemAction(topPoem, action)}
+            />
+          )}
         </div>
       </div>
 
