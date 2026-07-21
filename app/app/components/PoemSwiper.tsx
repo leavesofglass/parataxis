@@ -2,8 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { AnimatePresence, motion, useMotionValue, useTransform } from 'framer-motion'
-import type { PanInfo } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { getSupabase } from '@/lib/supabase'
 import type { AuthChangeEvent, Session } from '@supabase/supabase-js'
 import { fetchSavedCount } from '@/lib/library'
@@ -106,73 +105,68 @@ export function getPreview(body: string): string {
 
 type FullPoemAction = 'skip' | 'save' | 'super_like'
 
-// ── DraggableCard ─────────────────────────────────────────────────────────────
-// Wraps FullPoemView (asCard) with swipe gestures.
-// drag="x" sets touch-action: pan-y, so vertical touches fall through to the
-// poem body's native overflow-y scroll.
-// Right swipe → save  |  Left swipe → skip/dislike  |  Up throw → super_like
+interface LastAction {
+  poem: Poem
+  action: FullPoemAction
+  dbAction: string
+}
+
+// ── PoemCard ──────────────────────────────────────────────────────────────────
+// Non-draggable card wrapper. Drives entry and exit animations via the animate
+// prop rather than drag gestures. Entry animation fires only on undo (enterDir
+// set); normal forward navigation uses initial=false (instant appear). Exit
+// animation fires when exitingAction is set by a button press in PoemSwiper.
 //
-// exitRef is a synchronous guard so that onDragEnd (horizontal) and onPanEnd
-// (upward throw detection) cannot both fire an action for the same gesture,
-// even though setState is async and 'exiting' state may not yet be updated
-// when the second handler runs.
-function DraggableCard({ poem, onAction }: { poem: Poem; onAction: (a: FullPoemAction) => void }) {
-  const x = useMotionValue(0)
-  const rotate = useTransform(x, [-300, 300], [-12, 12])
-  const exitRef = useRef<'left' | 'right' | 'up' | null>(null)
-  const [exiting, setExiting] = useState<'left' | 'right' | 'up' | null>(null)
+// onExited is guarded by exitingAction so it only fires on actual exit, not on
+// the completion of an undo entry animation.
+function PoemCard({
+  poem,
+  onAction,
+  exitingAction,
+  enterDir,
+  onExited,
+  canUndo,
+  onUndo,
+}: {
+  poem: Poem
+  onAction: (a: FullPoemAction) => void
+  exitingAction: FullPoemAction | null
+  enterDir: 'left' | 'right' | 'up' | null
+  onExited: () => void
+  canUndo: boolean
+  onUndo: () => void
+}) {
+  const exitTarget =
+    exitingAction === 'skip'       ? { x: '-160%', opacity: 0 } :
+    exitingAction === 'save'       ? { x: '160%',  opacity: 0 } :
+    exitingAction === 'super_like' ? { y: '-160%', opacity: 0 } :
+    { x: 0, y: 0, opacity: 1 }
 
-  function triggerExit(dir: 'left' | 'right' | 'up') {
-    if (exitRef.current) return
-    exitRef.current = dir
-    setExiting(dir)
-  }
-
-  function handleDragEnd(_: unknown, info: PanInfo) {
-    if (info.offset.x > 80 || info.velocity.x > 500) triggerExit('right')
-    else if (info.offset.x < -80 || info.velocity.x < -500) triggerExit('left')
-  }
-
-  function handlePanEnd(_: unknown, info: PanInfo) {
-    // Deliberate upward throw: fast, primarily vertical, upward.
-    // The velocity threshold keeps slow scrolls from accidentally firing.
-    if (
-      info.velocity.y < -800 &&
-      info.offset.y < -60 &&
-      Math.abs(info.velocity.y) > Math.abs(info.velocity.x) * 1.5
-    ) {
-      triggerExit('up')
-    }
-  }
-
-  function handleAnimationComplete() {
-    const dir = exitRef.current
-    if (!dir) return
-    if (dir === 'right') onAction('save')
-    else if (dir === 'left') onAction('skip')
-    else if (dir === 'up') onAction('super_like')
-  }
-
-  const exitAnimate =
-    exiting === 'right' ? { x: '160%', opacity: 0 } :
-    exiting === 'left'  ? { x: '-160%', opacity: 0 } :
-    exiting === 'up'    ? { y: '-160%', opacity: 0 } :
-    undefined
+  // On normal forward navigation: appear instantly (no entry animation).
+  // On undo: slide in from the direction the previous card exited.
+  const initial: Record<string, unknown> | false =
+    enterDir === 'left'  ? { x: '-100%', opacity: 0 } :
+    enterDir === 'right' ? { x: '100%',  opacity: 0 } :
+    enterDir === 'up'    ? { y: '100%',  opacity: 0 } :
+    false
 
   return (
     <motion.div
-      drag={exiting ? false : 'x'}
-      dragConstraints={{ left: 0, right: 0 }}
-      dragElastic={0.7}
       className="absolute inset-0"
-      style={{ x, rotate, zIndex: 2 }}
-      animate={exitAnimate}
-      transition={exiting ? { duration: 0.25, ease: 'easeOut' } : undefined}
-      onDragEnd={handleDragEnd}
-      onPanEnd={handlePanEnd}
-      onAnimationComplete={handleAnimationComplete}
+      style={{ zIndex: 2 }}
+      initial={initial}
+      animate={exitTarget}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
+      onAnimationComplete={() => { if (exitingAction) onExited() }}
     >
-      <FullPoemView poem={poem} onAction={onAction} onClose={() => {}} asCard />
+      <FullPoemView
+        poem={poem}
+        onAction={onAction}
+        onClose={() => {}}
+        asCard
+        canUndo={canUndo}
+        onUndo={onUndo}
+      />
     </motion.div>
   )
 }
@@ -185,6 +179,10 @@ export function PoemSwiper() {
   const isSignedInRef = useRef(false)
   const lineMaxRef = useRef<number | null>(null)
 
+  // Holds the poem+action for the card currently mid-exit-animation, so
+  // handleCardExited can read them without stale-closure risk.
+  const pendingRef = useRef<{ poem: Poem; action: FullPoemAction } | null>(null)
+
   const [poems, setPoems] = useState<Poem[]>([])
   const [cardIdx, setCardIdx] = useState(0)
   const [ready, setReady] = useState(false)
@@ -193,8 +191,18 @@ export function PoemSwiper() {
   const [userEmail, setUserEmail] = useState<string | null>(null)
   const [nudgeThreshold, setNudgeThreshold] = useState<NudgeThreshold | null>(null)
 
+  // exitingAction drives the card's exit animation via PoemCard's animate prop.
+  const [exitingAction, setExitingAction] = useState<FullPoemAction | null>(null)
+  // enterDir drives the entry animation for the card that appears after undo.
+  const [enterDir, setEnterDir] = useState<'left' | 'right' | 'up' | null>(null)
+  // lastAction holds the most recently completed action for single-level undo.
+  const [lastAction, setLastAction] = useState<LastAction | null>(null)
+
+  // Undo button is visible only when there's something to undo AND the deck
+  // isn't mid-animation (prevents undo during an exit).
+  const canUndo = lastAction !== null && exitingAction === null
+
   // ── Interaction logging ────────────────────────────────────────────────────
-  // Fire-and-forget: never blocks the UI, never surfaces errors to the user.
   const logInteraction = useCallback((poemId: string, action: string) => {
     const userId = userIdRef.current
     if (!userId) return
@@ -214,10 +222,6 @@ export function PoemSwiper() {
     const uid = userIdRef.current
     const lineMax = lineMaxRef.current
 
-    // Signed-in: recommend_poems returns the next batch ranked against the
-    // user's current taste vector. Dedup against poems already in the deck —
-    // until the user interacts with the tail of the current batch, those
-    // poems remain candidates and can come back in a prefetched batch.
     if (isSignedInRef.current && uid) {
       fetchingRef.current = true
       const { data, error } = await supabase.rpc('recommend_poems', {
@@ -238,7 +242,6 @@ export function PoemSwiper() {
       return
     }
 
-    // Anon: random shuffled pool of all poem IDs.
     if (poolRef.current.length === 0) return
     fetchingRef.current = true
 
@@ -271,11 +274,7 @@ export function PoemSwiper() {
     setPoems((prev) => [...prev, ...ordered])
   }, [])
 
-  // ── Auth state subscription — keeps email label in sync ──────────────────
-  // onAuthStateChange fires INITIAL_SESSION immediately on subscribe (with the
-  // current live session), then SIGNED_IN / TOKEN_REFRESHED on changes.
-  // This is more reliable than reading email from the decoded JWT in getSession()
-  // which can be stale if the token was issued before the email was attached.
+  // ── Auth state subscription ───────────────────────────────────────────────
   useEffect(() => {
     const { data: { subscription } } = getSupabase().auth.onAuthStateChange(
       (_event: AuthChangeEvent, session: Session | null) => {
@@ -286,50 +285,30 @@ export function PoemSwiper() {
     return () => subscription.unsubscribe()
   }, [])
 
-  // ── Init: anon auth + fetch all IDs + first batch ─────────────────────────
+  // ── Init ──────────────────────────────────────────────────────────────────
   useEffect(() => {
     async function init() {
       const supabase = getSupabase()
-
-      // Read the length preference once on mount. The swiper page remounts on
-      // route changes (Next App Router), so picking it up here naturally
-      // refreshes after a visit to /account.
       lineMaxRef.current = readLineMax()
 
-      // getUser() makes a server-validated request — always returns the live
-      // user object including email, unlike getSession() which decodes the
-      // cached JWT and may miss an email that was attached after token issuance.
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) {
         const { data, error } = await supabase.auth.signInAnonymously()
         if (error) console.error('Auth error:', error)
-        else {
-          userIdRef.current = data.user?.id ?? null
-        }
+        else { userIdRef.current = data.user?.id ?? null }
       } else {
         userIdRef.current = user.id
         setUserEmail(user.email ?? null)
         isSignedInRef.current = user.is_anonymous === false
       }
 
-      // If the user just signed in (came back from /auth/callback), the
-      // migration RPC has already run, so any pre-sign-in anon deck state is
-      // stale — drop it. Otherwise consider restoring it below.
       const saved = readSavedDeckState()
-      const savedIsFresh =
-        saved !== null && Date.now() - saved.timestamp <= DECK_STATE_TTL_MS
-      if (saved && isSignedInRef.current) {
-        clearSavedDeckState()
-      }
+      const savedIsFresh = saved !== null && Date.now() - saved.timestamp <= DECK_STATE_TTL_MS
+      if (saved && isSignedInRef.current) clearSavedDeckState()
 
-      // Signed-in users get batches from recommend_poems and skip the pool.
-      // For anon users build the pool unconditionally — even on a successful
-      // restore the next prefetch will need it.
       if (!isSignedInRef.current) {
         let idQuery = supabase.from('poems').select('id')
-        if (lineMaxRef.current !== null) {
-          idQuery = idQuery.lte('line_count', lineMaxRef.current)
-        }
+        if (lineMaxRef.current !== null) idQuery = idQuery.lte('line_count', lineMaxRef.current)
         const { data: idRows, error: idError } = await idQuery
 
         if (idError || !idRows) {
@@ -343,21 +322,14 @@ export function PoemSwiper() {
       }
 
       let restored = false
-      if (
-        saved &&
-        !isSignedInRef.current &&
-        savedIsFresh &&
-        saved.poemIds.length > 0
-      ) {
+      if (saved && !isSignedInRef.current && savedIsFresh && saved.poemIds.length > 0) {
         const { data, error: fetchErr } = await supabase
           .from('poems')
           .select('id, title, author, body, line_count')
           .in('id', saved.poemIds)
         if (!fetchErr && data) {
           const byId = new Map((data as Poem[]).map((p) => [p.id, p]))
-          const ordered = saved.poemIds
-            .map((id) => byId.get(id))
-            .filter(Boolean) as Poem[]
+          const ordered = saved.poemIds.map((id) => byId.get(id)).filter(Boolean) as Poem[]
           if (ordered.length > 0) {
             setPoems(ordered)
             setCardIdx(Math.min(saved.currentIndex, ordered.length - 1))
@@ -366,64 +338,114 @@ export function PoemSwiper() {
         }
       }
 
-      if (!restored) {
-        await loadBatch()
-      }
-
-      if (userIdRef.current) {
-        fetchSavedCount(userIdRef.current).then(setSavedCount)
-      }
-
+      if (!restored) await loadBatch()
+      if (userIdRef.current) fetchSavedCount(userIdRef.current).then(setSavedCount)
       setReady(true)
     }
     init()
   }, [loadBatch])
 
-  // ── Prefetch next batch when approaching end of deck ──────────────────────
+  // ── Prefetch ──────────────────────────────────────────────────────────────
   useEffect(() => {
-    if (ready && poems.length - cardIdx <= PREFETCH_AT) {
-      loadBatch()
-    }
+    if (ready && poems.length - cardIdx <= PREFETCH_AT) loadBatch()
   }, [cardIdx, poems.length, ready, loadBatch])
 
-  // ── Persist deck state so a /account detour can be resumed ────────────────
-  // Saves on every batch load and every swipe. Clears when the deck has been
-  // fully consumed (cardIdx past the last loaded card) so the next session
-  // doesn't resume into an empty pile. Sign-in clearing happens in init().
+  // ── Persist deck state ────────────────────────────────────────────────────
   useEffect(() => {
     if (!ready) return
     if (poems.length === 0) return
-    if (cardIdx >= poems.length) {
-      clearSavedDeckState()
-      return
-    }
+    if (cardIdx >= poems.length) { clearSavedDeckState(); return }
     const state: SavedDeckState = {
       poemIds: poems.map((p) => p.id),
       currentIndex: cardIdx,
       timestamp: Date.now(),
     }
-    try {
-      localStorage.setItem(DECK_STATE_KEY, JSON.stringify(state))
-    } catch {}
+    try { localStorage.setItem(DECK_STATE_KEY, JSON.stringify(state)) } catch {}
   }, [poems, cardIdx, ready])
 
-  // ── Action handler ─────────────────────────────────────────────────────────
-  const handleFullPoemAction = useCallback((poem: Poem, action: FullPoemAction) => {
+  // ── Action handlers ───────────────────────────────────────────────────────
+
+  // Called immediately when a button is pressed. Sets the exit animation and
+  // captures the pending poem+action in a ref for handleCardExited to read.
+  const handleButtonPress = useCallback((poem: Poem, action: FullPoemAction) => {
+    if (pendingRef.current) return
+    pendingRef.current = { poem, action }
+    setEnterDir(null)
+    setExitingAction(action)
+  }, [])
+
+  // Called by PoemCard's onAnimationComplete when the exit animation finishes.
+  // Logs the interaction, updates counts, advances the deck, stores lastAction.
+  const handleCardExited = useCallback(() => {
+    const pending = pendingRef.current
+    if (!pending) return
+    pendingRef.current = null
+
+    const { poem, action } = pending
     const dbAction = action === 'skip' ? 'dislike' : action
     logInteraction(poem.id, dbAction)
+
+    setLastAction({ poem, action, dbAction })
+    setExitingAction(null)
+
     if (action === 'save' || action === 'super_like') {
       const newCount = savedCount + 1
       setSavedCount(newCount)
-      // Only nudge anonymous users; only one modal at a time
       if (!userEmail && nudgeThreshold === null) {
         const threshold = getNextNudgeThreshold(newCount)
         if (threshold !== null) setNudgeThreshold(threshold)
       }
     }
+
     setCardIdx((i) => i + 1)
   }, [logInteraction, savedCount, userEmail, nudgeThreshold])
 
-  // ── Render ─────────────────────────────────────────────────────────────────
+  // Single-level undo: deletes the most recent interaction row from Supabase
+  // (SELECT id first, then DELETE by id), reverses savedCount if needed, and
+  // returns the previous poem with a reversed entry animation.
+  const handleUndo = useCallback(() => {
+    if (!lastAction) return
+    const { poem, action, dbAction } = lastAction
+
+    const userId = userIdRef.current
+    if (userId) {
+      void getSupabase()
+        .from('interactions')
+        .select('id')
+        .eq('user_id', userId)
+        .eq('poem_id', poem.id)
+        .eq('action', dbAction)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .maybeSingle()
+        .then(({ data }: { data: { id: string } | null }) => {
+          if (data?.id) {
+            void getSupabase()
+              .from('interactions')
+              .delete()
+              .eq('id', data.id)
+          }
+        })
+    }
+
+    if (action === 'save' || action === 'super_like') {
+      setSavedCount((c) => Math.max(0, c - 1))
+    }
+
+    // Slide the returning card in from the same direction the previous card exited.
+    const reverse: 'left' | 'right' | 'up' =
+      action === 'skip' ? 'left' :
+      action === 'save' ? 'right' :
+      'up'
+
+    setEnterDir(reverse)
+    setLastAction(null)
+    pendingRef.current = null
+    setExitingAction(null)
+    setCardIdx((i) => i - 1)
+  }, [lastAction])
+
+  // ── Render ────────────────────────────────────────────────────────────────
   if (error) {
     return (
       <div className="h-dvh flex items-center justify-center bg-[#FAF6E9]">
@@ -479,9 +501,7 @@ export function PoemSwiper() {
         </div>
       </div>
 
-      {/* ── Card area: fills remaining space, 16px breathing room top/bottom ──
-          Mobile: 95vw (2.5vw margin per side via px-[2.5vw]).
-          Desktop: capped at 760px, centered by justify-center. */}
+      {/* ── Card area ── */}
       <div className="flex-1 flex items-center justify-center w-full min-h-0 py-4 px-[2.5vw] sm:px-0">
         <div className="relative h-full w-full max-w-[760px]">
           {nextPoem && (
@@ -492,10 +512,15 @@ export function PoemSwiper() {
             />
           )}
           {topPoem && (
-            <DraggableCard
+            <PoemCard
               key={topPoem.id}
               poem={topPoem}
-              onAction={(action) => handleFullPoemAction(topPoem, action)}
+              onAction={(action) => handleButtonPress(topPoem, action)}
+              exitingAction={exitingAction}
+              enterDir={enterDir}
+              onExited={handleCardExited}
+              canUndo={canUndo}
+              onUndo={handleUndo}
             />
           )}
         </div>

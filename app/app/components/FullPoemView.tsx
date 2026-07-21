@@ -18,6 +18,8 @@ interface SwipeProps {
   // Renders inside the swipe deck card slot instead of as a full-screen overlay.
   // Suppresses the slide-up animation and the × close button.
   asCard?: boolean
+  canUndo?: boolean
+  onUndo?: () => void
 }
 
 interface LibraryProps {
@@ -61,7 +63,7 @@ export function FullPoemView(props: Props) {
   function handleSwipeAction(action: SwipeAction) {
     if (!props.onAction) return
     setTapped(action)
-    setTimeout(() => props.onAction!(action), 180)
+    props.onAction(action)
   }
 
   function handleUnsave() {
@@ -160,7 +162,15 @@ export function FullPoemView(props: Props) {
           </button>
         </div>
       ) : (
-        <div className="flex gap-2.5 px-6 py-5 border-t border-neutral-100 bg-[#F4ECC8]">
+        <div className="flex items-center gap-2.5 px-6 py-5 border-t border-neutral-100 bg-[#F4ECC8]">
+          <button
+            onClick={(props as SwipeProps).onUndo}
+            title="Undo"
+            aria-label="Undo last action"
+            className={`w-10 h-10 min-w-[40px] rounded-full bg-yellow-400 flex items-center justify-center shrink-0 transition-opacity ${(props as SwipeProps).canUndo ? 'opacity-80 hover:opacity-100' : 'opacity-0 pointer-events-none'}`}
+          >
+            <span className="text-white text-[1.1rem] leading-none select-none">↩</span>
+          </button>
           <button onClick={() => handleSwipeAction('skip')} title="Skip" aria-label="Skip" className={actionBtnClass('skip', tapped)}>🤷</button>
           <button onClick={() => handleSwipeAction('save')} title="Like" aria-label="Like" className={actionBtnClass('save', tapped)}>👍</button>
           <button onClick={() => handleSwipeAction('super_like')} title="Love" aria-label="Love" className={actionBtnClass('super_like', tapped)}>💖</button>
