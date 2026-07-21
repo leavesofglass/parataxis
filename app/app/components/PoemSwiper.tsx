@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { AnimatePresence, motion } from 'framer-motion'
+import type { TargetAndTransition } from 'framer-motion'
 import { getSupabase } from '@/lib/supabase'
 import type { AuthChangeEvent, Session } from '@supabase/supabase-js'
 import { fetchSavedCount } from '@/lib/library'
@@ -136,7 +137,7 @@ function PoemCard({
   canUndo: boolean
   onUndo: () => void
 }) {
-  const exitTarget =
+  const exitTarget: TargetAndTransition =
     exitingAction === 'skip'       ? { x: '-160%', opacity: 0 } :
     exitingAction === 'save'       ? { x: '160%',  opacity: 0 } :
     exitingAction === 'super_like' ? { y: '-160%', opacity: 0 } :
@@ -144,7 +145,7 @@ function PoemCard({
 
   // On normal forward navigation: appear instantly (no entry animation).
   // On undo: slide in from the direction the previous card exited.
-  const initial: Record<string, unknown> | false =
+  const initial: TargetAndTransition | false =
     enterDir === 'left'  ? { x: '-100%', opacity: 0 } :
     enterDir === 'right' ? { x: '100%',  opacity: 0 } :
     enterDir === 'up'    ? { y: '100%',  opacity: 0 } :
