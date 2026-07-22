@@ -81,11 +81,11 @@ export default async function PoemPage({
   if (!poem) notFound()
 
   return (
-    <main className="h-dvh overflow-y-auto overscroll-contain bg-[#F4ECC8]">
+    <main className="h-dvh overflow-y-auto overscroll-contain bg-[#ECECEC]">
       <div className="min-h-full flex flex-col">
         {/* Header — back link (left), share (right). Share is wrapped in the
             same height frame as the in-modal share so visual weight matches. */}
-        <header className="flex items-center justify-between px-6 pt-8 pb-2 shrink-0">
+        <header className="flex items-center justify-between px-6 pt-8 pb-2 shrink-0 border-b border-[rgba(0,0,0,0.08)]">
           <Link
             href="/"
             className="text-[10px] leading-none font-sans tracking-[0.18em] text-neutral-400 uppercase hover:text-neutral-600 transition-colors"
@@ -102,8 +102,12 @@ export default async function PoemPage({
           <h1 className="font-serif text-[1.5rem] leading-[1.35] font-normal text-[#111] mb-10">
             {poem.title}
           </h1>
-          <div className="font-serif text-[1.05rem] leading-[1.95] text-[#111] whitespace-pre-wrap">
-            {poem.body}
+          <div className="font-serif text-[1.05rem] leading-[1.95] text-[#111]">
+            {poem.body.split('\n').map((line, i) =>
+              line
+                ? <span key={i} className="poem-line">{line}</span>
+                : <span key={i} className="block">{' '}</span>
+            )}
           </div>
           <p className="font-sans text-[0.9rem] italic text-neutral-400 mt-10 mb-2">
             {poem.author}

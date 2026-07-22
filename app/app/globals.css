@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FAF6E9;
+  --background: #ECECEC;
   --foreground: #111111;
 }
 
@@ -17,6 +17,13 @@ html,
 body {
   height: 100%;
   overflow: hidden;
+}
+
+/* Hanging indent for poem lines: wrapped continuations indent, new lines don't. */
+.poem-line {
+  display: block;
+  padding-left: 2ch;
+  text-indent: -2ch;
 }
 
 body {

@@ -113,8 +113,12 @@ export function FullPoemView(props: Props) {
           )}
         </h1>
 
-        <div className="font-serif text-[1.05rem] leading-[1.95] text-[#111] whitespace-pre-wrap">
-          {poem.body}
+        <div className="font-serif text-[1.05rem] leading-[1.95] text-[#111]">
+          {poem.body.split('\n').map((line, i) =>
+            line
+              ? <span key={i} className="poem-line">{line}</span>
+              : <span key={i} className="block">{' '}</span>
+          )}
         </div>
 
         <p className="font-sans text-[0.9rem] italic text-neutral-400 mt-10 mb-2">
@@ -124,7 +128,7 @@ export function FullPoemView(props: Props) {
 
       {/* Action buttons */}
       {isLibrary ? (
-        <div className="flex gap-2.5 px-6 py-5 border-t border-neutral-100 bg-[#F4ECC8]">
+        <div className="flex gap-2.5 px-6 py-5 border-t border-[rgba(0,0,0,0.08)] bg-[#ECECEC]">
           <button
             onClick={handleUnsave}
             className={`flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide border rounded-full transition-colors
@@ -143,7 +147,7 @@ export function FullPoemView(props: Props) {
           </button>
         </div>
       ) : isSkipped ? (
-        <div className="flex gap-2.5 px-6 py-5 border-t border-neutral-100 bg-[#F4ECC8]">
+        <div className="flex gap-2.5 px-6 py-5 border-t border-[rgba(0,0,0,0.08)] bg-[#ECECEC]">
           <button
             onClick={handleUnskip}
             className={`flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide border rounded-full transition-colors
@@ -162,7 +166,7 @@ export function FullPoemView(props: Props) {
           </button>
         </div>
       ) : (
-        <div className="flex items-center gap-2.5 px-6 py-5 border-t border-neutral-100 bg-[#F4ECC8]">
+        <div className="flex items-center gap-2.5 px-6 py-5 border-t border-[rgba(0,0,0,0.08)] bg-[#ECECEC]">
           <button
             onClick={(props as SwipeProps).onUndo}
             title="Undo"
@@ -181,7 +185,7 @@ export function FullPoemView(props: Props) {
 
   if (asCard) {
     return (
-      <div className="absolute inset-0 rounded-2xl overflow-hidden flex flex-col bg-[#F4ECC8]">
+      <div className="absolute inset-0 overflow-hidden flex flex-col">
         {inner}
       </div>
     )
@@ -193,7 +197,7 @@ export function FullPoemView(props: Props) {
       animate={{ y: 0 }}
       exit={{ y: '100%' }}
       transition={{ type: 'spring', damping: 34, stiffness: 290 }}
-      className="fixed inset-0 z-50 flex flex-col bg-[#F4ECC8]"
+      className="fixed inset-0 z-50 flex flex-col bg-[#ECECEC]"
     >
       {inner}
     </motion.div>

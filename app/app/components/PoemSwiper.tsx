@@ -449,7 +449,7 @@ export function PoemSwiper() {
   // ── Render ────────────────────────────────────────────────────────────────
   if (error) {
     return (
-      <div className="h-dvh flex items-center justify-center bg-[#FAF6E9]">
+      <div className="h-dvh flex items-center justify-center bg-[#ECECEC]">
         <p className="text-sm font-sans text-neutral-400">{error}</p>
       </div>
     )
@@ -457,7 +457,7 @@ export function PoemSwiper() {
 
   if (!ready) {
     return (
-      <div className="h-dvh flex items-center justify-center bg-[#FAF6E9]">
+      <div className="h-dvh flex items-center justify-center bg-[#ECECEC]">
         <span className="text-sm font-sans text-neutral-300 tracking-widest">·  ·  ·</span>
       </div>
     )
@@ -467,10 +467,10 @@ export function PoemSwiper() {
   const nextPoem = poems[cardIdx + 1]
 
   return (
-    <main className="relative h-dvh flex flex-col items-center overflow-hidden select-none bg-[#FAF6E9]">
+    <main className="relative h-dvh flex flex-col items-center overflow-hidden select-none bg-[#ECECEC]">
 
       {/* ── Header: sign-in (left) · wordmark (center) · library (right) ── */}
-      <div className="w-full flex items-center px-6 pt-3 pb-1 shrink-0">
+      <div className="w-full flex items-center px-6 pt-3 pb-1 shrink-0 border-b border-[rgba(0,0,0,0.08)]">
         <div className="flex-1 flex items-center h-10">
           <Link
             href="/account"
@@ -505,13 +505,7 @@ export function PoemSwiper() {
       {/* ── Card area ── */}
       <div className="flex-1 flex items-center justify-center w-full min-h-0 py-4 px-[2.5vw] sm:px-0">
         <div className="relative h-full w-full max-w-[760px]">
-          {nextPoem && (
-            <div
-              key={nextPoem.id + '-bg'}
-              className="absolute inset-0 rounded-2xl bg-[#F4ECC8] shadow-sm"
-              style={{ transform: 'scale(0.96) translateY(8px)', opacity: 0.6, zIndex: 1 }}
-            />
-          )}
+
           {topPoem && (
             <PoemCard
               key={topPoem.id}
