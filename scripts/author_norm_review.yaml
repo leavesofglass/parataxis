@@ -446,19 +446,6 @@ groups:
         count: 1
         sources: [ralp]
 
-  - canonical: Sierra Golden
-    confirmed: true
-    variants:
-      - name: Sierra Golden
-        count: 2
-        sources: [versedaily]
-      - name: Golden
-        count: 1
-        sources: [poetrydaily]
-      - name: Tasha Golden
-        count: 1
-        sources: [versedaily]
-
   - canonical: Mónica Gomery
     confirmed: true
     variants:
@@ -623,21 +610,15 @@ groups:
         count: 1
         sources: [poetrydaily]
 
-  - canonical: Luke Johnson
+  - canonical: L.A. Johnson
     confirmed: true
     variants:
-      - name: Luke Johnson
-        count: 2
-        sources: [poetrydaily, versedaily]
       - name: L. A. Johnson
         count: 1
         sources: [versedaily]
       - name: L.A. Johnson
         count: 1
         sources: [slowdown]
-      - name: Linnea Johnson
-        count: 1
-        sources: [versedaily]
 
   - canonical: I.S. Jones
     confirmed: true
@@ -1288,19 +1269,6 @@ groups:
         sources: [versedaily]
       - name: Maureen A. Sherbondy
         count: 2
-        sources: [versedaily]
-
-  - canonical: R. T. Smith
-    confirmed: true
-    variants:
-      - name: R. T. Smith
-        count: 2
-        sources: [versedaily]
-      - name: Rich Smith
-        count: 1
-        sources: [versedaily]
-      - name: Ryan Patrick Smith
-        count: 1
         sources: [versedaily]
 
   - canonical: J.R. Solonche
