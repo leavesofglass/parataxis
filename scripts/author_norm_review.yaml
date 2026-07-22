@@ -25,7 +25,7 @@ groups:
   # ────────── A ──────────
 
   - canonical: Etel Adnan
-    confirmed: false
+    confirmed: true
     variants:
       - name: Etel Adnan
         count: 2
@@ -35,7 +35,7 @@ groups:
         sources: [ralp]
 
   - canonical: Anna Akhmatova
-    confirmed: false
+    confirmed: true
     variants:
       - name: Anna Akhmatova
         count: 3
@@ -45,7 +45,7 @@ groups:
         sources: [ralp]
 
   - canonical: José A. Alcantara
-    confirmed: false
+    confirmed: true
     variants:
       - name: José A. Alcantara
         count: 1
@@ -55,7 +55,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Maya Abu Al-Hayyat
-    confirmed: false
+    confirmed: true
     variants:
       - name: Maya Abu Al-Hayyat
         count: 4
@@ -65,7 +65,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Dante Alighieri
-    confirmed: false
+    confirmed: true
     variants:
       - name: Dante Alighieri
         count: 1
@@ -75,7 +75,7 @@ groups:
         sources: [versedaily]
 
   - canonical: A. R. Ammons
-    confirmed: false
+    confirmed: true
     variants:
       - name: A. R. Ammons
         count: 6
@@ -85,7 +85,7 @@ groups:
         sources: [ralp, slowdown]
 
   - canonical: W. H. Auden
-    confirmed: false
+    confirmed: true
     variants:
       - name: W. H. Auden
         count: 5
@@ -95,7 +95,7 @@ groups:
         sources: [ralp]
 
   - canonical: A.H. Jerriod Avant
-    confirmed: false
+    confirmed: true
     variants:
       - name: A.H. Jerriod Avant
         count: 2
@@ -107,7 +107,7 @@ groups:
   # ────────── B ──────────
 
   - canonical: Matsuo Basho
-    confirmed: false
+    confirmed: true
     variants:
       - name: Matsuo Basho
         count: 1
@@ -117,7 +117,7 @@ groups:
         sources: [ralp]
 
   - canonical: J. P. Dancing Bear
-    confirmed: false
+    confirmed: true
     variants:
       - name: J. P. Dancing Bear
         count: 6
@@ -125,12 +125,9 @@ groups:
       - name: J.P. Dancing Bear
         count: 3
         sources: [versedaily]
-      - name: Jo Bear
-        count: 1
-        sources: [versedaily]
 
   - canonical: TJ Beitelman
-    confirmed: false
+    confirmed: true
     variants:
       - name: T. J. Beitelman
         count: 2
@@ -140,7 +137,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Oliver Baez Bendorf
-    confirmed: false
+    confirmed: true
     variants:
       - name: Oliver Baez Bendorf
         count: 6
@@ -150,7 +147,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Rachel Bennett
-    confirmed: false
+    confirmed: true
     variants:
       - name: Rachel Bennett
         count: 1
@@ -160,7 +157,7 @@ groups:
         sources: [poetrydaily]
 
   - canonical: Reginald Dwayne Betts
-    confirmed: false
+    confirmed: true
     variants:
       - name: Reginald Dwayne Betts
         count: 7
@@ -170,7 +167,7 @@ groups:
         sources: [poetrydaily]
 
   - canonical: Mary Biddinger
-    confirmed: false
+    confirmed: true
     variants:
       - name: Mary Biddinger
         count: 16
@@ -180,7 +177,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Julie E. Bloemeke
-    confirmed: false
+    confirmed: true
     variants:
       - name: Julie E. Bloemeke
         count: 2
@@ -190,7 +187,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Bruce Bond
-    confirmed: false
+    confirmed: true
     variants:
       - name: Bruce Bond
         count: 29
@@ -199,8 +196,18 @@ groups:
         count: 1
         sources: [poetrydaily]
 
+  - canonical: Daniel Borzutzky
+    confirmed: true
+    variants:
+      - name: Daniel Borzutzky
+        count: 3
+        sources: [poetrydaily, slowdown]
+      - name: Daniel Borzutsky
+        count: 1
+        sources: [poetrydaily]
+
   - canonical: Ronda Piszk Broatch
-    confirmed: false
+    confirmed: true
     variants:
       - name: Ronda Piszk Broatch
         count: 4
@@ -209,10 +216,17 @@ groups:
         count: 1
         sources: [versedaily]
 
+  - canonical: Lord Byron
+    confirmed: true
+    variants:
+      - name: George Gordon Byron
+        count: 5
+        sources: [live]
+
   # ────────── C ──────────
 
   - canonical: C. P. Cavafy
-    confirmed: false
+    confirmed: true
     variants:
       - name: C. P. Cavafy
         count: 2
@@ -222,7 +236,7 @@ groups:
         sources: [poetrydaily, slowdown]
 
   - canonical: Brittany Cavallaro
-    confirmed: false
+    confirmed: true
     variants:
       - name: Brittany Cavallaro
         count: 1
@@ -232,7 +246,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Nadia Colburn
-    confirmed: false
+    confirmed: true
     variants:
       - name: Nadia Colburn
         count: 1
@@ -242,7 +256,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Kevin Craft
-    confirmed: false
+    confirmed: true
     variants:
       - name: Kevin Craft
         count: 1
@@ -252,7 +266,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Jessica Cuello
-    confirmed: false
+    confirmed: true
     variants:
       - name: Jessica Cuello
         count: 5
@@ -262,7 +276,7 @@ groups:
         sources: [versedaily]
 
   - canonical: E. E. Cummings
-    confirmed: false
+    confirmed: true
     variants:
       - name: E. E. Cummings
         count: 11
@@ -275,7 +289,7 @@ groups:
         sources: [ralp, slowdown]
 
   - canonical: E. G. Cunningham
-    confirmed: false
+    confirmed: true
     variants:
       - name: E. G. Cunningham
         count: 1
@@ -287,7 +301,7 @@ groups:
   # ────────── D ──────────
 
   - canonical: Najwan Darwish
-    confirmed: false
+    confirmed: true
     variants:
       - name: Najwan Darwish
         count: 3
@@ -297,7 +311,7 @@ groups:
         sources: [ralp]
 
   - canonical: Carol Ann Davis
-    confirmed: false
+    confirmed: true
     variants:
       - name: Carol Ann Davis
         count: 3
@@ -307,7 +321,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Chelsea B. DesAutels
-    confirmed: false
+    confirmed: true
     variants:
       - name: Chelsea B. DesAutels
         count: 2
@@ -317,7 +331,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Jose Hernandez Diaz
-    confirmed: false
+    confirmed: true
     variants:
       - name: Jose Hernandez Diaz
         count: 6
@@ -326,8 +340,8 @@ groups:
         count: 1
         sources: [versedaily]
 
-  - canonical: Emily Elizabeth Dickinson
-    confirmed: false
+  - canonical: Emily Dickinson
+    confirmed: true
     variants:
       - name: Emily Elizabeth Dickinson
         count: 20
@@ -337,7 +351,7 @@ groups:
         sources: [poetrydaily, ralp, slowdown]
 
   - canonical: Stephanie Dickinson
-    confirmed: false
+    confirmed: true
     variants:
       - name: Stephanie Dickinson
         count: 1
@@ -349,7 +363,7 @@ groups:
   # ────────── E ──────────
 
   - canonical: David Ebenbach
-    confirmed: false
+    confirmed: true
     variants:
       - name: David Ebenbach
         count: 1
@@ -359,7 +373,7 @@ groups:
         sources: [versedaily]
 
   - canonical: CJ Evans
-    confirmed: false
+    confirmed: true
     variants:
       - name: CJ Evans
         count: 2
@@ -371,7 +385,7 @@ groups:
   # ────────── F ──────────
 
   - canonical: Glenn Freeman
-    confirmed: false
+    confirmed: true
     variants:
       - name: Glenn Freeman
         count: 1
@@ -380,8 +394,8 @@ groups:
         count: 1
         sources: [versedaily]
 
-  - canonical: Robert Lee Frost
-    confirmed: false
+  - canonical: Robert Frost
+    confirmed: true
     variants:
       - name: Robert Lee Frost
         count: 15
@@ -391,7 +405,7 @@ groups:
         sources: [ralp, slowdown]
 
   - canonical: Du Fu
-    confirmed: false
+    confirmed: true
     variants:
       - name: Du Fu
         count: 1
@@ -401,7 +415,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Tracy Fuad
-    confirmed: false
+    confirmed: true
     variants:
       - name: Tracy Fuad
         count: 3
@@ -413,7 +427,7 @@ groups:
   # ────────── G ──────────
 
   - canonical: Sandra Gilbert
-    confirmed: false
+    confirmed: true
     variants:
       - name: Sandra Gilbert
         count: 1
@@ -423,7 +437,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Louise Glück
-    confirmed: false
+    confirmed: true
     variants:
       - name: Louise Glück
         count: 14
@@ -433,7 +447,7 @@ groups:
         sources: [ralp]
 
   - canonical: Sierra Golden
-    confirmed: false
+    confirmed: true
     variants:
       - name: Sierra Golden
         count: 2
@@ -446,7 +460,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Mónica Gomery
-    confirmed: false
+    confirmed: true
     variants:
       - name: Mónica Gomery
         count: 2
@@ -456,7 +470,7 @@ groups:
         sources: [poetrydaily]
 
   - canonical: Rodney Gomez
-    confirmed: false
+    confirmed: true
     variants:
       - name: Rodney Gomez
         count: 2
@@ -468,7 +482,7 @@ groups:
   # ────────── H ──────────
 
   - canonical: Noël Hanlon
-    confirmed: false
+    confirmed: true
     variants:
       - name: Noël Hanlon
         count: 1
@@ -478,7 +492,7 @@ groups:
         sources: [versedaily]
 
   - canonical: francine j. harris
-    confirmed: false
+    confirmed: true
     variants:
       - name: francine j. harris
         count: 2
@@ -488,7 +502,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Lois Marie Harrod
-    confirmed: false
+    confirmed: true
     variants:
       - name: Lois Marie Harrod
         count: 6
@@ -498,7 +512,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Endi Bogue Hartigan
-    confirmed: false
+    confirmed: true
     variants:
       - name: Endi Bogue Hartigan
         count: 1
@@ -508,7 +522,7 @@ groups:
         sources: [versedaily]
 
   - canonical: K. A. Hays
-    confirmed: false
+    confirmed: true
     variants:
       - name: K. A. Hays
         count: 4
@@ -518,7 +532,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Nâzim Hikmet
-    confirmed: false
+    confirmed: true
     variants:
       - name: "Nâzim Hikmet, translated by Randy Blasing and Mutlu Konuk"
         count: 2
@@ -528,7 +542,7 @@ groups:
         sources: [ralp]
 
   - canonical: R. Nemo Hill
-    confirmed: false
+    confirmed: true
     variants:
       - name: R. Nemo Hill
         count: 1
@@ -538,7 +552,7 @@ groups:
         sources: [versedaily]
 
   - canonical: H. L. Hix
-    confirmed: false
+    confirmed: true
     variants:
       - name: H. L. Hix
         count: 1
@@ -547,8 +561,18 @@ groups:
         count: 1
         sources: [poetrydaily]
 
+  - canonical: Suzanne Marie Hopcroft
+    confirmed: true
+    variants:
+      - name: Suzanne Marie Hopcroft
+        count: 1
+        sources: [versedaily]
+      - name: Suzanne Marie Hopecroft
+        count: 1
+        sources: [versedaily]
+
   - canonical: Susan Elizabeth Howe
-    confirmed: false
+    confirmed: true
     variants:
       - name: Susan Elizabeth Howe
         count: 1
@@ -558,7 +582,7 @@ groups:
         sources: [poetrydaily]
 
   - canonical: TR Hummer
-    confirmed: false
+    confirmed: true
     variants:
       - name: T. R. Hummer
         count: 1
@@ -568,7 +592,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Tom C. Hunley
-    confirmed: false
+    confirmed: true
     variants:
       - name: Tom C. Hunley
         count: 13
@@ -580,7 +604,7 @@ groups:
   # ────────── J ──────────
 
   - canonical: Angela Jackson
-    confirmed: false
+    confirmed: true
     variants:
       - name: Angela Jackson
         count: 3
@@ -590,7 +614,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Jessica Johnson
-    confirmed: false
+    confirmed: true
     variants:
       - name: Jessica Johnson
         count: 2
@@ -600,7 +624,7 @@ groups:
         sources: [poetrydaily]
 
   - canonical: Luke Johnson
-    confirmed: false
+    confirmed: true
     variants:
       - name: Luke Johnson
         count: 2
@@ -616,7 +640,7 @@ groups:
         sources: [versedaily]
 
   - canonical: I.S. Jones
-    confirmed: false
+    confirmed: true
     variants:
       - name: I.S. Jones
         count: 3
@@ -626,7 +650,7 @@ groups:
         sources: [poetrydaily]
 
   - canonical: Andrea Jurjević
-    confirmed: false
+    confirmed: true
     variants:
       - name: Andrea Jurjević
         count: 2
@@ -636,7 +660,7 @@ groups:
         sources: [versedaily]
 
   - canonical: A. M. Juster
-    confirmed: false
+    confirmed: true
     variants:
       - name: A. M. Juster
         count: 1
@@ -648,7 +672,7 @@ groups:
   # ────────── K ──────────
 
   - canonical: Yalie Saweda Kamara
-    confirmed: false
+    confirmed: true
     variants:
       - name: Yalie Saweda Kamara
         count: 4
@@ -658,7 +682,7 @@ groups:
         sources: [poetrydaily]
 
   - canonical: Joan Naviyuk Kane
-    confirmed: false
+    confirmed: true
     variants:
       - name: Joan Naviyuk Kane
         count: 5
@@ -668,7 +692,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Julia Kasdorf
-    confirmed: false
+    confirmed: true
     variants:
       - name: Julia Kasdorf
         count: 1
@@ -678,7 +702,7 @@ groups:
         sources: [ralp]
 
   - canonical: John Keene
-    confirmed: false
+    confirmed: true
     variants:
       - name: John Keene
         count: 2
@@ -688,7 +712,7 @@ groups:
         sources: [poetrydaily]
 
   - canonical: R. D. King
-    confirmed: false
+    confirmed: true
     variants:
       - name: R. D. King
         count: 1
@@ -698,7 +722,7 @@ groups:
         sources: [poetrydaily]
 
   - canonical: Benjamin Naka-Hasebe Kingsley
-    confirmed: false
+    confirmed: true
     variants:
       - name: Benjamin Naka-Hasebe Kingsley
         count: 2
@@ -708,7 +732,7 @@ groups:
         sources: [poetrydaily]
 
   - canonical: Sophie Klahr
-    confirmed: false
+    confirmed: true
     variants:
       - name: Sophie Klahr
         count: 2
@@ -718,7 +742,7 @@ groups:
         sources: [slowdown]
 
   - canonical: L. S. Klatt
-    confirmed: false
+    confirmed: true
     variants:
       - name: L. S. Klatt
         count: 2
@@ -728,7 +752,7 @@ groups:
         sources: [versedaily]
 
   - canonical: E. J. Koh
-    confirmed: false
+    confirmed: true
     variants:
       - name: E. J. Koh
         count: 1
@@ -737,10 +761,20 @@ groups:
         count: 1
         sources: [ralp]
 
+  - canonical: Stephen Kuusisto
+    confirmed: true
+    variants:
+      - name: Stephen Kuusisto
+        count: 2
+        sources: [versedaily]
+      - name: Stephen Kuuisto
+        count: 1
+        sources: [poetrydaily]
+
   # ────────── L ──────────
 
   - canonical: Heather Kirn Lanier
-    confirmed: false
+    confirmed: true
     variants:
       - name: Heather Kirn Lanier
         count: 1
@@ -750,7 +784,7 @@ groups:
         sources: [versedaily]
 
   - canonical: A. D. Lauren-Abunassar
-    confirmed: false
+    confirmed: true
     variants:
       - name: A. D. Lauren-Abunassar
         count: 1
@@ -760,7 +794,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Karen An-Hwei Lee
-    confirmed: false
+    confirmed: true
     variants:
       - name: Karen An-Hwei Lee
         count: 4
@@ -770,7 +804,7 @@ groups:
         sources: [poetrydaily, versedaily]
 
   - canonical: dawn lonsinger
-    confirmed: false
+    confirmed: true
     variants:
       - name: dawn lonsinger
         count: 4
@@ -780,7 +814,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Federico García Lorca
-    confirmed: false
+    confirmed: true
     variants:
       - name: Federico García Lorca
         count: 2
@@ -790,7 +824,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Robert Wood Lynn
-    confirmed: false
+    confirmed: true
     variants:
       - name: Robert Wood Lynn
         count: 4
@@ -802,7 +836,7 @@ groups:
   # ────────── M ──────────
 
   - canonical: y madrone
-    confirmed: false
+    confirmed: true
     variants:
       - name: y madrone
         count: 2
@@ -812,7 +846,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Joyce Mansour
-    confirmed: false
+    confirmed: true
     variants:
       - name: Joyce Mansour
         count: 2
@@ -822,7 +856,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Francisco Márquez
-    confirmed: false
+    confirmed: true
     variants:
       - name: Francisco Márquez
         count: 1
@@ -832,7 +866,7 @@ groups:
         sources: [slowdown]
 
   - canonical: J. W. Marshall
-    confirmed: false
+    confirmed: true
     variants:
       - name: J. W. Marshall
         count: 1
@@ -842,7 +876,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Diane Kirsten Martin
-    confirmed: false
+    confirmed: true
     variants:
       - name: Diane K. Martin
         count: 1
@@ -852,7 +886,7 @@ groups:
         sources: [versedaily]
 
   - canonical: J. Michael Martinez
-    confirmed: false
+    confirmed: true
     variants:
       - name: J. Michael Martinez
         count: 2
@@ -862,7 +896,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Christopher Matthews
-    confirmed: false
+    confirmed: true
     variants:
       - name: Christopher Matthews
         count: 1
@@ -872,7 +906,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Janet Lacey McCann
-    confirmed: false
+    confirmed: true
     variants:
       - name: Janet Lacey McCann
         count: 1
@@ -882,7 +916,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Alysse Kathleen McCanna
-    confirmed: false
+    confirmed: true
     variants:
       - name: Alysse Kathleen McCanna
         count: 2
@@ -892,7 +926,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Gary McDowell
-    confirmed: false
+    confirmed: true
     variants:
       - name: Gary McDowell
         count: 4
@@ -902,7 +936,7 @@ groups:
         sources: [versedaily]
 
   - canonical: W. S. Merwin
-    confirmed: false
+    confirmed: true
     variants:
       - name: W. S. Merwin
         count: 13
@@ -914,7 +948,7 @@ groups:
   # ────────── N ──────────
 
   - canonical: Pablo Neruda
-    confirmed: false
+    confirmed: true
     variants:
       - name: Pablo Neruda
         count: 10
@@ -930,7 +964,7 @@ groups:
         sources: [versedaily]
 
   - canonical: D. Nurkse
-    confirmed: false
+    confirmed: true
     variants:
       - name: D. Nurkse
         count: 11
@@ -945,7 +979,7 @@ groups:
   # ────────── O ──────────
 
   - canonical: "Frank O'Hara"
-    confirmed: false
+    confirmed: true
     variants:
       - name: "Frank O'Hara"
         count: 6
@@ -954,21 +988,24 @@ groups:
         count: 2
         sources: [ralp, slowdown]
 
-  - canonical: "January Gill O'Neil"
-    confirmed: false
+  - canonical: "January Gill O’Neil"
+    confirmed: true
     variants:
-      - name: "January Gill O'Neil"
+      - name: "January Gill O’Neil"
         count: 5
         sources: [poetrydaily, ralp, slowdown, versedaily]
-      - name: "January G. O'Neil"
+      - name: "January G. O’Neil"
         count: 1
         sources: [versedaily]
       - name: January Gill O’Neil
         count: 1
         sources: [slowdown]
+      - name: "January Gill O’Neill"
+        count: 1
+        sources: [versedaily]
 
   - canonical: "Dion O'Reilly"
-    confirmed: false
+    confirmed: true
     variants:
       - name: "Dion O'Reilly"
         count: 2
@@ -978,7 +1015,7 @@ groups:
         sources: [slowdown]
 
   - canonical: "Meghan O'Rourke"
-    confirmed: false
+    confirmed: true
     variants:
       - name: "Meghan O'Rourke"
         count: 1
@@ -988,7 +1025,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Lisa Allen Ortiz
-    confirmed: false
+    confirmed: true
     variants:
       - name: Lisa Allen Ortiz
         count: 7
@@ -998,7 +1035,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Alicia Suskin Ostriker
-    confirmed: false
+    confirmed: true
     variants:
       - name: Alicia Suskin Ostriker
         count: 2
@@ -1010,7 +1047,7 @@ groups:
   # ────────── P ──────────
 
   - canonical: Cesare Pavese
-    confirmed: false
+    confirmed: true
     variants:
       - name: Cesare PaveseTranslated by Geoffrey Brock
         count: 2
@@ -1020,7 +1057,7 @@ groups:
         sources: [ralp]
 
   - canonical: Vincente Perez
-    confirmed: false
+    confirmed: true
     variants:
       - name: Vincente G. Perez
         count: 1
@@ -1030,7 +1067,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Jennifer Perrine
-    confirmed: false
+    confirmed: true
     variants:
       - name: Jennifer Perrine
         count: 3
@@ -1040,7 +1077,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Robert Pesich
-    confirmed: false
+    confirmed: true
     variants:
       - name: Robert Pesich
         count: 2
@@ -1050,7 +1087,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Maya C. Popa
-    confirmed: false
+    confirmed: true
     variants:
       - name: Maya C. Popa
         count: 3
@@ -1060,7 +1097,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Samodh Porawagamage
-    confirmed: false
+    confirmed: true
     variants:
       - name: Samodh Porawagamage
         count: 1
@@ -1070,7 +1107,7 @@ groups:
         sources: [poetrydaily]
 
   - canonical: Adélia Prado
-    confirmed: false
+    confirmed: true
     variants:
       - name: Adélia Prado
         count: 1
@@ -1082,7 +1119,7 @@ groups:
   # ────────── R ──────────
 
   - canonical: Stella Vinitchi Radulescu
-    confirmed: false
+    confirmed: true
     variants:
       - name: Stella Vinitchi Radulescu
         count: 3
@@ -1092,7 +1129,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Noʻu Revilla
-    confirmed: false
+    confirmed: true
     variants:
       - name: Noʻu Revilla
         count: 1
@@ -1102,7 +1139,7 @@ groups:
         sources: [poetrydaily]
 
   - canonical: Marilee Richards
-    confirmed: false
+    confirmed: true
     variants:
       - name: M. C. Richards
         count: 1
@@ -1112,7 +1149,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Yannis Ritsos
-    confirmed: false
+    confirmed: true
     variants:
       - name: Yannis Ritsos
         count: 2
@@ -1122,7 +1159,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Anna Ross
-    confirmed: false
+    confirmed: true
     variants:
       - name: Anna Ross
         count: 1
@@ -1132,7 +1169,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Christina Georgina Rossetti
-    confirmed: false
+    confirmed: true
     variants:
       - name: Christina Georgina Rossetti
         count: 10
@@ -1142,7 +1179,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Suzanne Manizza Roszak
-    confirmed: false
+    confirmed: true
     variants:
       - name: Suzanne Manizza Roszak
         count: 2
@@ -1152,7 +1189,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Tadeusz Rozewicz
-    confirmed: false
+    confirmed: true
     variants:
       - name: Tadeusz Rozewicz
         count: 1
@@ -1162,7 +1199,7 @@ groups:
         sources: [ralp]
 
   - canonical: Rumi
-    confirmed: false
+    confirmed: true
     variants:
       - name: Rumi
         count: 5
@@ -1174,7 +1211,7 @@ groups:
   # ────────── S ──────────
 
   - canonical: Jenny Sadre-Orafai
-    confirmed: false
+    confirmed: true
     variants:
       - name: Jenny Sadre-Orafai
         count: 3
@@ -1184,7 +1221,7 @@ groups:
         sources: [versedaily]
 
   - canonical: C.J. Sage
-    confirmed: false
+    confirmed: true
     variants:
       - name: C.J. Sage
         count: 8
@@ -1194,7 +1231,7 @@ groups:
         sources: [versedaily]
 
   - canonical: C. T. Salazar
-    confirmed: false
+    confirmed: true
     variants:
       - name: C. T. Salazar
         count: 1
@@ -1204,7 +1241,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Sam Sax
-    confirmed: false
+    confirmed: true
     variants:
       - name: Sam Sax
         count: 3
@@ -1214,7 +1251,7 @@ groups:
         sources: [ralp, slowdown]
 
   - canonical: Emily Elizabeth Schulten
-    confirmed: false
+    confirmed: true
     variants:
       - name: Emily Elizabeth Schulten
         count: 1
@@ -1224,7 +1261,7 @@ groups:
         sources: [versedaily]
 
   - canonical: "Chet'la Sebree"
-    confirmed: false
+    confirmed: true
     variants:
       - name: "Chet'la Sebree"
         count: 2
@@ -1234,7 +1271,7 @@ groups:
         sources: [slowdown]
 
   - canonical: B. T. Shaw
-    confirmed: false
+    confirmed: true
     variants:
       - name: B. T. Shaw
         count: 1
@@ -1244,7 +1281,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Maureen Sherbondy
-    confirmed: false
+    confirmed: true
     variants:
       - name: Maureen Sherbondy
         count: 3
@@ -1253,38 +1290,8 @@ groups:
         count: 2
         sources: [versedaily]
 
-  - canonical: Claire Sylvester Smith
-    confirmed: false
-    possible_split: "Possible two-person split: 'Claire Sylvester Smith' vs 'Clint Smith' have incompatible first names (both ≥2 poems)."
-    note: ""  # explain your decision here
-    variants:
-      - name: Claire Sylvester Smith
-        count: 3
-        sources: [versedaily]
-      - name: Clint Smith
-        count: 3
-        sources: [ralp, slowdown]
-      - name: C. Henry Smith
-        count: 1
-        sources: [versedaily]
-      - name: Carmen Giménez Smith
-        count: 1
-        sources: [slowdown]
-      - name: Casey Smith
-        count: 1
-        sources: [poetrydaily]
-      - name: Charlie Smith
-        count: 1
-        sources: [ralp]
-      - name: Cody Smith
-        count: 1
-        sources: [poetrydaily]
-      - name: Crystal Simone Smith
-        count: 1
-        sources: [poetrydaily]
-
   - canonical: R. T. Smith
-    confirmed: false
+    confirmed: true
     variants:
       - name: R. T. Smith
         count: 2
@@ -1297,7 +1304,7 @@ groups:
         sources: [versedaily]
 
   - canonical: J.R. Solonche
-    confirmed: false
+    confirmed: true
     variants:
       - name: J.R. Solonche
         count: 6
@@ -1307,7 +1314,7 @@ groups:
         sources: [versedaily]
 
   - canonical: A. E. Stallings
-    confirmed: false
+    confirmed: true
     variants:
       - name: A. E. Stallings
         count: 5
@@ -1320,7 +1327,7 @@ groups:
         sources: [versedaily]
 
   - canonical: D. Antwan Stewart
-    confirmed: false
+    confirmed: true
     variants:
       - name: D. Antwan Stewart
         count: 1
@@ -1330,7 +1337,7 @@ groups:
         sources: [versedaily]
 
   - canonical: A.E. Stringer
-    confirmed: false
+    confirmed: true
     variants:
       - name: A.E. Stringer
         count: 2
@@ -1340,7 +1347,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Wisława Szymborska
-    confirmed: false
+    confirmed: true
     variants:
       - name: Wisława Szymborska
         count: 3
@@ -1352,7 +1359,7 @@ groups:
   # ────────── T ──────────
 
   - canonical: Tomas Tranströmer
-    confirmed: false
+    confirmed: true
     variants:
       - name: Tomas Tranströmer
         count: 1
@@ -1362,7 +1369,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Pádraig Ó Tuama
-    confirmed: false
+    confirmed: true
     variants:
       - name: Pádraig Ó Tuama
         count: 4
@@ -1372,7 +1379,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Tristan Tzara
-    confirmed: false
+    confirmed: true
     variants:
       - name: Tristan Tzara
         count: 1
@@ -1384,7 +1391,7 @@ groups:
   # ────────── V ──────────
 
   - canonical: César Vallejo
-    confirmed: false
+    confirmed: true
     variants:
       - name: César Vallejo
         count: 2
@@ -1394,7 +1401,7 @@ groups:
         sources: [slowdown]
 
   - canonical: R.A. Villanueva
-    confirmed: false
+    confirmed: true
     variants:
       - name: R.A. Villanueva
         count: 4
@@ -1406,7 +1413,7 @@ groups:
   # ────────── W ──────────
 
   - canonical: G. C. Waldrep
-    confirmed: false
+    confirmed: true
     variants:
       - name: G. C. Waldrep
         count: 3
@@ -1416,7 +1423,7 @@ groups:
         sources: [poetrydaily, slowdown]
 
   - canonical: Michael Joseph Walsh
-    confirmed: false
+    confirmed: true
     variants:
       - name: Michael Joseph Walsh
         count: 1
@@ -1426,7 +1433,7 @@ groups:
         sources: [versedaily]
 
   - canonical: Afaa M. Weaver
-    confirmed: false
+    confirmed: true
     variants:
       - name: Afaa M. Weaver
         count: 3
@@ -1435,30 +1442,18 @@ groups:
         count: 2
         sources: [versedaily]
 
-  - canonical: C. McAllister Williams
-    confirmed: false
+  - canonical: C.K. Williams
+    confirmed: true
     variants:
-      - name: C. McAllister Williams
-        count: 2
-        sources: [versedaily]
       - name: C.K. Williams
         count: 2
         sources: [slowdown]
       - name: C. K. Williams
         count: 1
         sources: [ralp]
-      - name: Candace Williams
-        count: 1
-        sources: [slowdown]
-      - name: Chrissy Williams
-        count: 1
-        sources: [versedaily]
-      - name: Crystal Williams
-        count: 1
-        sources: [slowdown]
 
   - canonical: John Sibley Williams
-    confirmed: false
+    confirmed: true
     variants:
       - name: John Sibley Williams
         count: 5
@@ -1467,38 +1462,8 @@ groups:
         count: 1
         sources: [versedaily]
 
-  - canonical: Leslie Williams
-    confirmed: false
-    possible_split: "Possible two-person split: 'Leslie Williams' vs 'Lisa Williams' have incompatible first names (both ≥2 poems)."
-    note: ""  # explain your decision here
-    variants:
-      - name: Leslie Williams
-        count: 3
-        sources: [versedaily]
-      - name: Lisa Williams
-        count: 2
-        sources: [versedaily]
-      - name: L. Ash Williams
-        count: 1
-        sources: [slowdown]
-
-  - canonical: Leia Penina Wilson
-    confirmed: false
-    possible_split: "Possible two-person split: 'Leia Penina Wilson' vs 'Lindsay Wilson' have incompatible first names (both ≥2 poems)."
-    note: ""  # explain your decision here
-    variants:
-      - name: Leia Penina Wilson
-        count: 3
-        sources: [poetrydaily, versedaily]
-      - name: Lindsay Wilson
-        count: 2
-        sources: [versedaily]
-      - name: L. Lamar Wilson
-        count: 1
-        sources: [slowdown]
-
   - canonical: Cori Winrock
-    confirmed: false
+    confirmed: true
     variants:
       - name: Cori A. Winrock
         count: 2
@@ -1508,7 +1473,7 @@ groups:
         sources: [slowdown]
 
   - canonical: Uljana Wolf
-    confirmed: false
+    confirmed: true
     variants:
       - name: Uljana Wolf
         count: 2
@@ -1517,31 +1482,20 @@ groups:
         count: 1
         sources: [versedaily]
 
-  - canonical: Carolyne Wright
-    confirmed: false
-    possible_split: "Possible two-person split: 'Carolyne Wright' vs 'Charles Wright' have incompatible first names (both ≥2 poems)."
-    note: ""  # explain your decision here
+  - canonical: C.D. Wright
+    confirmed: true
     variants:
-      - name: Carolyne Wright
-        count: 6
-        sources: [versedaily]
-      - name: Charles Wright
-        count: 6
-        sources: [poetrydaily, ralp, slowdown, versedaily]
       - name: C. D. Wright
         count: 5
         sources: [poetrydaily, ralp]
       - name: C.D. Wright
         count: 5
         sources: [poetrydaily, slowdown, versedaily]
-      - name: Catriona Wright
-        count: 1
-        sources: [poetrydaily]
 
   # ────────── Z ──────────
 
   - canonical: Adam Zagajewski
-    confirmed: false
+    confirmed: true
     variants:
       - name: Adam Zagajewski
         count: 7
@@ -1553,17 +1507,4 @@ groups:
         count: 1
         sources: [ralp]
 
-# ─────────────────────────────────────────────────────────────────────────────
-# FUZZY ADVISORY: possible last-name typos / rare variants not auto-grouped.
-# These are pairs of groups whose representative names are very close (≥0.92
-# similarity) but have different normalized last names.
-# Review in author_norm_stats.txt; if they are the same person, manually add
-# both raw strings to a group above.
-# ─────────────────────────────────────────────────────────────────────────────
-
-fuzzy_advisory:
-
-  - [Daniel Borzutsky, Daniel Borzutzky]
-  - [Suzanne Marie Hopcroft, Suzanne Marie Hopecroft]
-  - [Stephen Kuuisto, Stephen Kuusisto]
-  - ["January Gill O'Neil", "January Gill O'Neill"]
+# (All fuzzy advisories resolved and moved into groups above.)
