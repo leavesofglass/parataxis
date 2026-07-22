@@ -159,52 +159,55 @@ export function FullPoemView(props: Props) {
           </button>
         </div>
       ) : (
-        <div className="flex items-center gap-3 px-5 py-4 border-t border-[rgba(0,0,0,0.08)] bg-[#ECECEC]">
-          {/* Undo — yellow circle, leftmost, hidden until there's something to undo */}
+        <div className="relative flex items-center justify-center py-4 border-t border-[rgba(0,0,0,0.08)] bg-[#ECECEC]">
+          {/* Undo — absolutely positioned so it doesn't shift the centered trio */}
           <button
             onClick={(props as SwipeProps).onUndo}
             title="Undo"
             aria-label="Undo last action"
-            className={`w-10 h-10 min-w-[40px] rounded-full bg-yellow-400 flex items-center justify-center shrink-0 transition-opacity ${(props as SwipeProps).canUndo ? 'opacity-80 hover:opacity-100' : 'opacity-0 pointer-events-none'}`}
+            className={`absolute left-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center transition-opacity ${(props as SwipeProps).canUndo ? 'opacity-80 hover:opacity-100' : 'opacity-0 pointer-events-none'}`}
           >
             <span className="text-white text-[1.1rem] leading-none select-none">↩</span>
           </button>
 
-          {/* Dislike — ghost outlined, X icon */}
-          <button
-            onClick={() => handleSwipeAction('dislike')}
-            title="Dislike"
-            aria-label="Dislike"
-            className={`flex-1 h-11 rounded-full border border-[rgba(0,0,0,0.15)] bg-transparent flex items-center justify-center transition-opacity min-h-[44px] ${tapped === 'dislike' ? 'opacity-30' : 'opacity-70 hover:opacity-100'}`}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
-              <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
+          {/* Dislike · Star · Next — centered as a group, symmetric about viewport middle */}
+          <div className="flex items-center gap-3">
+            {/* Dislike — ghost outlined, X icon */}
+            <button
+              onClick={() => handleSwipeAction('dislike')}
+              title="Dislike"
+              aria-label="Dislike"
+              className={`w-20 h-11 rounded-full border border-[rgba(0,0,0,0.15)] bg-transparent flex items-center justify-center transition-opacity min-h-[44px] ${tapped === 'dislike' ? 'opacity-30' : 'opacity-70 hover:opacity-100'}`}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
 
-          {/* Star — primary action, dark filled circle, larger and slightly lower */}
-          <button
-            onClick={() => handleSwipeAction('save')}
-            title="Star"
-            aria-label="Star"
-            className={`w-14 h-14 min-w-[56px] rounded-full bg-[#111] flex items-center justify-center shrink-0 translate-y-2 transition-opacity ${tapped === 'save' ? 'opacity-30' : 'opacity-90 hover:opacity-100'}`}
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="white" stroke="none" aria-hidden="true">
-              <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-            </svg>
-          </button>
+            {/* Star — primary action, dark filled circle, larger and slightly lower */}
+            <button
+              onClick={() => handleSwipeAction('save')}
+              title="Star"
+              aria-label="Star"
+              className={`w-14 h-14 rounded-full bg-[#111] flex items-center justify-center shrink-0 translate-y-2 transition-opacity ${tapped === 'save' ? 'opacity-30' : 'opacity-90 hover:opacity-100'}`}
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white" stroke="none" aria-hidden="true">
+                <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+              </svg>
+            </button>
 
-          {/* Next — ghost outlined, right-arrow icon */}
-          <button
-            onClick={() => handleSwipeAction('next')}
-            title="Next"
-            aria-label="Next poem"
-            className={`flex-1 h-11 rounded-full border border-[rgba(0,0,0,0.15)] bg-transparent flex items-center justify-center transition-opacity min-h-[44px] ${tapped === 'next' ? 'opacity-30' : 'opacity-70 hover:opacity-100'}`}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12,5 19,12 12,19" />
-            </svg>
-          </button>
+            {/* Next — ghost outlined, right-arrow icon */}
+            <button
+              onClick={() => handleSwipeAction('next')}
+              title="Next"
+              aria-label="Next poem"
+              className={`w-20 h-11 rounded-full border border-[rgba(0,0,0,0.15)] bg-transparent flex items-center justify-center transition-opacity min-h-[44px] ${tapped === 'next' ? 'opacity-30' : 'opacity-70 hover:opacity-100'}`}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12,5 19,12 12,19" />
+              </svg>
+            </button>
+          </div>
         </div>
       )}
     </>
