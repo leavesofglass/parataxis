@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import type { Poem } from '../types'
 import { ShareButton } from './ShareButton'
 
-type SwipeAction = 'skip' | 'save' | 'super_like'
+type SwipeAction = 'dislike' | 'save' | 'next'
 
 interface SwipeProps {
   variant?: 'swipe'
@@ -44,13 +44,6 @@ interface SkippedProps {
 
 type Props = SwipeProps | LibraryProps | SkippedProps
 
-// Shared class string — all three swipe action buttons are visually identical.
-// Using border-neutral-900 (standard scale) instead of arbitrary border-[#111]
-// to ensure Tailwind v4 reliably generates the CSS.
-function actionBtnClass(action: string, tapped: string | null) {
-  const base = 'flex-1 py-3 text-[1.5rem] leading-none border border-neutral-900 rounded-full transition-opacity min-h-[44px]'
-  return tapped === action ? `${base} opacity-30` : `${base} opacity-80 hover:opacity-100`
-}
 
 export function FullPoemView(props: Props) {
   const { poem } = props
@@ -166,7 +159,8 @@ export function FullPoemView(props: Props) {
           </button>
         </div>
       ) : (
-        <div className="flex items-center gap-2.5 px-6 py-5 border-t border-[rgba(0,0,0,0.08)] bg-[#ECECEC]">
+        <div className="flex items-center gap-3 px-5 py-4 border-t border-[rgba(0,0,0,0.08)] bg-[#ECECEC]">
+          {/* Undo — yellow circle, leftmost, hidden until there's something to undo */}
           <button
             onClick={(props as SwipeProps).onUndo}
             title="Undo"
@@ -175,9 +169,42 @@ export function FullPoemView(props: Props) {
           >
             <span className="text-white text-[1.1rem] leading-none select-none">↩</span>
           </button>
-          <button onClick={() => handleSwipeAction('skip')} title="Skip" aria-label="Skip" className={actionBtnClass('skip', tapped)}>🤷</button>
-          <button onClick={() => handleSwipeAction('save')} title="Like" aria-label="Like" className={actionBtnClass('save', tapped)}>👍</button>
-          <button onClick={() => handleSwipeAction('super_like')} title="Love" aria-label="Love" className={actionBtnClass('super_like', tapped)}>💖</button>
+
+          {/* Dislike — ghost outlined, X icon */}
+          <button
+            onClick={() => handleSwipeAction('dislike')}
+            title="Dislike"
+            aria-label="Dislike"
+            className={`flex-1 h-11 rounded-full border border-[rgba(0,0,0,0.15)] bg-transparent flex items-center justify-center transition-opacity min-h-[44px] ${tapped === 'dislike' ? 'opacity-30' : 'opacity-70 hover:opacity-100'}`}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+
+          {/* Star — primary action, dark filled circle, larger and slightly lower */}
+          <button
+            onClick={() => handleSwipeAction('save')}
+            title="Star"
+            aria-label="Star"
+            className={`w-14 h-14 min-w-[56px] rounded-full bg-[#111] flex items-center justify-center shrink-0 translate-y-2 transition-opacity ${tapped === 'save' ? 'opacity-30' : 'opacity-90 hover:opacity-100'}`}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white" stroke="none" aria-hidden="true">
+              <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+            </svg>
+          </button>
+
+          {/* Next — ghost outlined, right-arrow icon */}
+          <button
+            onClick={() => handleSwipeAction('next')}
+            title="Next"
+            aria-label="Next poem"
+            className={`flex-1 h-11 rounded-full border border-[rgba(0,0,0,0.15)] bg-transparent flex items-center justify-center transition-opacity min-h-[44px] ${tapped === 'next' ? 'opacity-30' : 'opacity-70 hover:opacity-100'}`}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12,5 19,12 12,19" />
+            </svg>
+          </button>
         </div>
       )}
     </>

@@ -104,12 +104,12 @@ export function getPreview(body: string): string {
   return text.slice(0, 240).replace(/\s+\S*$/, '') + '…'
 }
 
-type FullPoemAction = 'skip' | 'save' | 'super_like'
+type FullPoemAction = 'dislike' | 'save' | 'next'
 
 interface LastAction {
   poem: Poem
   action: FullPoemAction
-  dbAction: string
+  dbAction: string | null  // null for 'next' (writes nothing to DB)
 }
 
 // ── PoemCard ──────────────────────────────────────────────────────────────────
@@ -138,9 +138,9 @@ function PoemCard({
   onUndo: () => void
 }) {
   const exitTarget: TargetAndTransition =
-    exitingAction === 'skip'       ? { x: '-160%', opacity: 0 } :
-    exitingAction === 'save'       ? { x: '160%',  opacity: 0 } :
-    exitingAction === 'super_like' ? { y: '-160%', opacity: 0 } :
+    exitingAction === 'dislike' ? { x: '-160%', opacity: 0 } :
+    exitingAction === 'save'    ? { x: '160%',  opacity: 0 } :
+    exitingAction === 'next'    ? { x: '160%',  opacity: 0 } :
     { x: 0, y: 0, opacity: 1 }
 
   // On normal forward navigation: appear instantly (no entry animation).
@@ -376,20 +376,21 @@ export function PoemSwiper() {
   }, [])
 
   // Called by PoemCard's onAnimationComplete when the exit animation finishes.
-  // Logs the interaction, updates counts, advances the deck, stores lastAction.
+  // Logs the interaction (except for 'next'), updates counts, advances the deck.
   const handleCardExited = useCallback(() => {
     const pending = pendingRef.current
     if (!pending) return
     pendingRef.current = null
 
     const { poem, action } = pending
-    const dbAction = action === 'skip' ? 'dislike' : action
-    logInteraction(poem.id, dbAction)
+    // 'next' writes nothing; 'dislike' and 'save' write their action string directly.
+    const dbAction: string | null = action === 'next' ? null : action
+    if (dbAction !== null) logInteraction(poem.id, dbAction)
 
     setLastAction({ poem, action, dbAction })
     setExitingAction(null)
 
-    if (action === 'save' || action === 'super_like') {
+    if (action === 'save') {
       const newCount = savedCount + 1
       setSavedCount(newCount)
       if (!userEmail && nudgeThreshold === null) {
@@ -401,15 +402,15 @@ export function PoemSwiper() {
     setCardIdx((i) => i + 1)
   }, [logInteraction, savedCount, userEmail, nudgeThreshold])
 
-  // Single-level undo: deletes the most recent interaction row from Supabase
-  // (SELECT id first, then DELETE by id), reverses savedCount if needed, and
-  // returns the previous poem with a reversed entry animation.
+  // Single-level undo. If dbAction is non-null, deletes the most recent matching
+  // interaction row (SELECT id → DELETE by id). 'next' has dbAction=null — undo
+  // just navigates back with no DB write. Reverses savedCount for 'save' only.
   const handleUndo = useCallback(() => {
     if (!lastAction) return
     const { poem, action, dbAction } = lastAction
 
     const userId = userIdRef.current
-    if (userId) {
+    if (userId && dbAction !== null) {
       void getSupabase()
         .from('interactions')
         .select('id')
@@ -429,15 +430,14 @@ export function PoemSwiper() {
         })
     }
 
-    if (action === 'save' || action === 'super_like') {
+    if (action === 'save') {
       setSavedCount((c) => Math.max(0, c - 1))
     }
 
-    // Slide the returning card in from the same direction the previous card exited.
-    const reverse: 'left' | 'right' | 'up' =
-      action === 'skip' ? 'left' :
-      action === 'save' ? 'right' :
-      'up'
+    // Slide the returning card in from the direction the previous card exited.
+    // Both 'save' and 'next' exit right, so undo enters from the right.
+    const reverse: 'left' | 'right' =
+      action === 'dislike' ? 'left' : 'right'
 
     setEnterDir(reverse)
     setLastAction(null)
