@@ -17,6 +17,7 @@ html,
 body {
   height: 100%;
   overflow: hidden;
+  background: var(--background);
 }
 
 /* Hanging indent for poem lines: wrapped continuations indent, new lines don't. */
@@ -27,6 +28,5 @@ body {
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
 }
