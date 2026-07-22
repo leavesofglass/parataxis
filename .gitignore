@@ -50,6 +50,8 @@ app/supabase/.temp/
 # Pipeline runtime state (resumable batch job IDs)
 scripts/.enrich_state.json
 
-# Scrape/parse artifacts — raw HTML dumps, parsed JSON, logs
+# Scrape/parse artifacts — raw HTML dumps, parsed JSON, logs, batch inputs
 scripts/*.json
 scripts/*.log
+scripts/*.jsonl
+scripts/*.txt
