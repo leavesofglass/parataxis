@@ -20,7 +20,7 @@ export function SwipeCard({ poem, preview, onOpen }: Props) {
           onOpen()
         }
       }}
-      className="absolute inset-0 rounded-2xl bg-[#F4ECC8] shadow-md cursor-pointer flex flex-col px-8 pt-9 pb-9 overflow-hidden"
+      className="absolute inset-0 rounded-2xl bg-[#ECECEC] shadow-md cursor-pointer flex flex-col px-8 pt-9 pb-9 overflow-hidden"
       style={{ zIndex: 2 }}
     >
       {/* Title */}
