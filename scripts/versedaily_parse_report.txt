@@ -1,0 +1,173 @@
+============================================================
+Verse Daily parse report
+============================================================
+Input records:            5903
+Parsed (kept):            5837
+Dropped:                  66
+
+has_poem = true:          5837
+has_poem = false:         0
+
+source_book:              3329
+source_journal:           2503
+neither (no copyright):   5
+has source_year:          5833
+has source_publisher:     3329
+
+missing poem_title:       0
+
+DROPPED RECORDS (66):
+  [no <blockquote> found]  http://www.versedaily.org/2008/greenbrier.shtml
+  [no <blockquote> found]  http://www.versedaily.org/2008/homunculus.shtml
+  [no <blockquote> found]  http://www.versedaily.org/2008/islandremnant.shtml
+  [no <blockquote> found]  http://www.versedaily.org/2008/turningback.shtml
+  [no <blockquote> found]  http://www.versedaily.org/2008/yourthinking.shtml
+  [image-only poem]  http://www.versedaily.org/2013/3tieredstreamer.shtml
+    title: 3-Tiered Steamer
+  [image-only poem]  http://www.versedaily.org/2013/acircumference.shtml
+    title: A Circumference
+  [image-only poem]  http://www.versedaily.org/2013/asvivienasblanche.shtml
+    title: As Vivien As Blanche
+  [image-only poem]  http://www.versedaily.org/2013/frameworkofthedream.shtml
+    title: contemplation within the framework of the dream
+  [image-only poem]  http://www.versedaily.org/2013/hahaunicorns.shtml
+    title: Ha Ha Unicorns
+  [image-only poem]  http://www.versedaily.org/2013/keyofmatryoshka.shtml
+    title: Universe in the Key of Matryoshka
+  [image-only poem]  http://www.versedaily.org/2013/lulalonglegs.shtml
+    title: Lula and the Death of Daddy Longlegs
+  [image-only poem]  http://www.versedaily.org/2013/msandsuperpacman.shtml
+    title: Ms. and Super Pac-Man
+  [image-only poem]  http://www.versedaily.org/2013/newriverbreakdown.shtml
+    title: New River Breakdown
+  [image-only poem]  http://www.versedaily.org/2013/ornithology101.shtml
+    title: Ornithology 101
+  [image-only poem]  http://www.versedaily.org/2013/promenade.shtml
+    title: Promenade
+  [image-only poem]  http://www.versedaily.org/2013/saltwaterducks.shtml
+    title: Salt Water Ducks
+  [image-only poem]  http://www.versedaily.org/2013/sickrosessittingup.shtml
+    title: I dream the sick roses sitting up in their blood at your feet
+  [image-only poem]  http://www.versedaily.org/2013/stuckatthebeginning.shtml
+    title: Stuck at the Beginning
+  [image-only poem]  http://www.versedaily.org/2013/toacardinal.shtml
+    title: To a Cardinal
+  [image-only poem]  http://www.versedaily.org/2013/transfigurationgraves.shtml
+    title: Transfiguration between the Graves
+  [image-only poem]  http://www.versedaily.org/2014/epithalamium.shtml
+    title: Epithalamium
+  [image-only poem]  http://www.versedaily.org/2014/inquiline.shtml
+    title: Inquiline
+  [image-only poem]  http://www.versedaily.org/2014/ithey.shtml
+    title: I/They
+  [image-only poem]  http://www.versedaily.org/2014/polycarp.shtml
+    title: Polycarp
+  [image-only poem]  http://www.versedaily.org/2014/repent.shtml
+    title: Repent
+  [no <blockquote> found]  http://www.versedaily.org/2014/thegiraffe3.shtml
+    title: The Giraffe 3
+  [image-only poem]  http://www.versedaily.org/2014/whileibreathless.shtml
+    title: [While I—Breathless...]
+  [image-only poem]  http://www.versedaily.org:80/2013/athousandwords.shtml
+    title: A Thousand Words
+  [image-only poem]  http://www.versedaily.org:80/2013/audubonatehisbirds.shtml
+    title: Audubon Ate His Birds
+  [image-only poem]  http://www.versedaily.org:80/2013/bethanyman.shtml
+    title: Bethany Man
+  [image-only poem]  http://www.versedaily.org:80/2013/blueyodel.shtml
+    title: Beyond the Crepe Myrtles, Blue Yodel
+  [image-only poem]  http://www.versedaily.org:80/2013/coumeenolebeach.shtml
+    title: Coumeenole Beach / Cancer Journal 6
+  [image-only poem]  http://www.versedaily.org:80/2013/embletonbay.shtml
+    title: Embleton Bay
+  [image-only poem]  http://www.versedaily.org:80/2013/evictionnotice.shtml
+    title: Eviction Notice
+  [image-only poem]  http://www.versedaily.org:80/2013/itsuptoyounewyork.shtml
+    title: It's Up To You, New York
+  [image-only poem]  http://www.versedaily.org:80/2013/iwasalwaysone.shtml
+    title: [I was always one for]
+  [image-only poem]  http://www.versedaily.org:80/2013/kings.shtml
+    title: Kings
+  [image-only poem]  http://www.versedaily.org:80/2013/labwork.shtml
+    title: Labwork
+  [image-only poem]  http://www.versedaily.org:80/2013/landlines.shtml
+    title: Land Lines
+  [image-only poem]  http://www.versedaily.org:80/2013/lighthouse.shtml
+    title: Lighthouse
+  [image-only poem]  http://www.versedaily.org:80/2013/malamute.shtml
+    title: Malamute
+  [image-only poem]  http://www.versedaily.org:80/2013/moonwrapped.shtml
+    title: Moon-Wrapped Fragrant Spareribs
+  [image-only poem]  http://www.versedaily.org:80/2013/naked.shtml
+    title: Naked
+  [image-only poem]  http://www.versedaily.org:80/2013/philosophersavant.shtml
+    title: The Philosopher Savant Again Dreams of War
+  [image-only poem]  http://www.versedaily.org:80/2013/syzygy.shtml
+    title: Syzygy
+  [image-only poem]  http://www.versedaily.org:80/2013/thethundersays.shtml
+    title: What the Thunder Says
+  [image-only poem]  http://www.versedaily.org:80/2013/thousandyears.shtml
+    title: They Promised Me a Thousand Years of Peace
+  [image-only poem]  http://www.versedaily.org:80/2013/towardunbecoming.shtml
+    title: The Joy That Tends Toward Unbecoming
+  [image-only poem]  http://www.versedaily.org:80/2013/wakeupyoursaints.shtml
+    title: wake up your saints and settle down for the night
+  [image-only poem]  http://www.versedaily.org:80/2013/wateringhourdark.shtml
+    title: The Watering Hour is Dark
+  [image-only poem]  http://www.versedaily.org:80/2013/westmanisland.shtml
+    title: Westman Island
+  [image-only poem]  http://www.versedaily.org:80/2013/whatbreaksdown.shtml
+    title: Why I Love What Breaks Down
+  [image-only poem]  http://www.versedaily.org:80/2013/yourselfwesttexas.shtml
+    title: Landscape After Years With Yourself, West Texas
+  [image-only poem]  http://www.versedaily.org:80/2014/arroyo.shtml
+    title: Arroyo
+  [image-only poem]  http://www.versedaily.org:80/2015/monkeyisland.shtml
+    title: Monkey Island
+  [image-only poem]  http://www.versedaily.org:80/2015/tothinkingwords.shtml
+    title: Suddenly a Wayward to Thinking Words
+  [image-only poem]  http://www.versedaily.org:80/2016/aboxofrecords.shtml
+    title: A Box of Records
+  [no 'Today's poem' found]  http://www.versedaily.org:80/2016/thebearscomehome.shtml
+    title: The Bears Come Home
+  [no <blockquote> found]  http://www.versedaily.org:80/2017/afroseattleitfragment17.shtml
+    title: Wayback Machine
+  [no <blockquote> found]  http://www.versedaily.org:80/2017/breath.shtml
+  [no <blockquote> found]  http://www.versedaily.org:80/2017/jupiterflorida.shtml
+    title: Wayback Machine
+  [no <blockquote> found]  http://www.versedaily.org:80/2017/littlewhat.shtml
+    title: Wayback Machine
+  [image-only poem]  http://www.versedaily.org:80/2017/transmemoir8.shtml
+    title: Trans Memoir 8
+  [image-only poem]  http://www.versedaily.org:80/2018/wreathofwallflowers.shtml
+    title: as a wreath of wallflowers and nonconformity in the hair
+  [no <blockquote> found]  http://www.versedaily.org:80/2019/myfatherlongdead.shtml
+    title: This site is temporarily unavailable
+
+SAMPLE RECORDS (first 3 with has_poem=true):
+  url:    http://versedaily.org/2019/37.shtml
+  title:  37.
+  poet:   Luis Panini
+  book:   Destruction of the Lover
+  jrnl:   None
+  pub:    Pleiades Press
+  year:   2019
+  text:   'From my eyes to your eyes, the torment. From your skin to my mouth, the abyss. The silences. The walls. An uncomfortable'
+
+  url:    http://versedaily.org/2022/feastwithamouthfulofbees.shtml
+  title:  Feast with a Mouthful of Bees
+  poet:   Alison Pelegrin
+  book:   None
+  jrnl:   Bennington Review
+  pub:    None
+  year:   2022
+  text:   "I was doomsday's daughter, ignoring the hum\nof everyday ungilded twitching things.\nEcstatic, enraged, brimming with ques"
+
+  url:    http://versedaily.org/2025/aubade.shtml
+  title:  Aubade
+  poet:   Emily Hockaday
+  book:   Blood Music
+  jrnl:   None
+  pub:    Small Harbor Publishing
+  year:   2025
+  text:   "It is the mockingbird that wakes me\nthis time. I carry you with me. The fog\nis thick; I can't make out any bodies\n\non th"
