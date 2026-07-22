@@ -4,15 +4,16 @@ dedup_merge.py — Apply merge decisions from the dedup candidate report.
 
 Auto-merges:
   1. Slowdown encore re-runs            (same source, /encore-/ in URL)
-  2. Cross-source title+firstline exact  (different sources, both signals fire)
+  2. Cross-source or same-source, body ≥ BODY_THRESHOLD (includes title+firstline exact)
   3. Confirmed fuzzy matches             (Wallschlaeger, Hunley — user confirmed)
-  4. Same-source non-encore, body ≥0.90  (body-text similarity >= BODY_THRESHOLD)
 
 Keeps both:
-  - Same-source non-encore where ONLY firstline matched and body < threshold
+  - RALP bilingual A/B pairs (same post, two languages — excluded by post-ID prefix match)
+  - Same-source/cross-source where ONLY firstline matched and body < threshold
+  - Coincidental same-title different poems (body < 0.50)
 
-Reports as ambiguous:
-  - Everything else that fired a signal but body < threshold
+Special cases:
+  - Rilke "Autumn Day" RALP×2: keep newer (2025), drop 2011
 
 Output:
   dedup_merged.json      — merged corpus (one record per poem)
@@ -173,9 +174,14 @@ def detect_clusters(poems):
         for i in range(n):
             for j in range(i + 1, n):
                 p, q = group[i], group[j]
-                if (p["bilingual_id"] and q["bilingual_id"]
-                        and p["bilingual_id"] == q["bilingual_id"]):
-                    continue
+                # Exclude RALP bilingual A/B pairs (same post, two languages).
+                # bilingual_group_id is like "11337-A" / "11337-B" — they share
+                # the same base post ID, so compare on that prefix, not full string.
+                if p["bilingual_id"] and q["bilingual_id"]:
+                    base_p = p["bilingual_id"].rsplit("-", 1)[0]
+                    base_q = q["bilingual_id"].rsplit("-", 1)[0]
+                    if base_p == base_q:
+                        continue
 
                 sigs = set()
                 if p["title_norm"] and p["title_norm"] == q["title_norm"]:
@@ -252,33 +258,21 @@ def classify_cluster(cluster):
     pairs   = cluster["pairs"]
     author  = cluster["author"]
 
-    # — confirmed fuzzy (user said keep one copy each) —
+    # — confirmed fuzzy (user confirmed same poem despite different titles) —
     if is_confirmed_fuzzy(members):
         return "fuzzy_confirmed"
 
-    # Flatten pair properties
     sources = {m["source"] for m in members}
     cross = len(sources) > 1
 
     has_title_firstline = any("title_exact" in p["sigs"] and "firstline_exact" in p["sigs"]
                               for p in pairs)
-    has_title_only = any("title_exact" in p["sigs"] and "firstline_exact" not in p["sigs"]
-                         for p in pairs)
     has_firstline_only = any("firstline_exact" in p["sigs"] and "title_exact" not in p["sigs"]
                              for p in pairs)
-    has_body_fuzzy = any("body_fuzzy" in " ".join(p["sigs"]) for p in pairs)
 
-    # Max body ratio across all pairs
     max_ratio = max((p["ratio"] for p in pairs), default=0.0)
 
-    # — encore: any pair where one URL has /encore/ —
-    all_encore = len(members) >= 2 and all(
-        is_encore(members[i], members[j])
-        for i in range(len(members)) for j in range(i + 1, len(members))
-        if (i, j) in {(p["i"], p["j"]) for p in pairs}
-        or True  # check all pairs within cluster
-    )
-    # simpler: if ANY pair is an encore and no cross-source
+    # — encore: any same-source pair where one URL contains /encore/ —
     any_encore = not cross and any(
         is_encore(members[i], members[j])
         for i in range(len(members)) for j in range(i + 1, len(members))
@@ -286,16 +280,20 @@ def classify_cluster(cluster):
     if any_encore:
         return "encore"
 
-    # — cross-source title+firstline exact —
-    if cross and has_title_firstline:
-        return "cross_source_exact"
+    # — high body similarity: merge regardless of source or signal match —
+    # Covers: cross-source title+firstline, cross-source title-only with high body,
+    #         same-source body match, and the 18 "ambiguous" clusters with body ≥ 0.90.
+    if max_ratio >= BODY_THRESHOLD:
+        return "body_match"
 
-    # — same-source non-encore: body >= threshold → merge —
-    if not cross and max_ratio >= BODY_THRESHOLD:
-        return "same_source_body_match"
+    # — Rilke "Autumn Day": same source, same title, body 0.5–0.9
+    #   (two different translations 14 years apart) — keep newer date —
+    if (author == "Rainer Maria Rilke"
+            and any(m["title"] == "Autumn Day" for m in members)):
+        return "keep_newer"
 
-    # — same-source, firstline only signal, body differs → not a dupe —
-    if not cross and has_firstline_only and not has_title_only and not has_title_firstline:
+    # — firstline only, body below threshold → not a dupe —
+    if has_firstline_only and not has_title_firstline:
         return "not_dupe_firstline_only"
 
     # — everything else → ambiguous —
@@ -374,7 +372,7 @@ def main():
     log_lines = []
     ambiguous_lines = []
 
-    AUTO_MERGE_CATS = {"encore", "cross_source_exact", "fuzzy_confirmed", "same_source_body_match"}
+    AUTO_MERGE_CATS = {"encore", "body_match", "fuzzy_confirmed"}
 
     for cat, c in classified:
         members = c["members"]
@@ -385,15 +383,29 @@ def main():
             merged_records.append(winner_rec)
             for m in members:
                 absorbed.add(id(m))
-            # Log
             log_lines.append(f"MERGE [{cat}]  author={c['author']!r}")
             for m in members:
                 log_lines.append(f"  [{m['source']}] {m['date'] or '?'}  {m['title']!r}  {m['source_url']}")
             log_lines.append(f"  → KEPT: [{winner_rec['primary_source']}] {winner_rec['title']!r}")
             log_lines.append("")
 
-        elif cat == "not_dupe_firstline_only":
-            # Keep all — they're different poems sharing a first line
+        elif cat == "keep_newer":
+            # Pick the record with the latest date
+            dated = [m for m in members if m["date"]]
+            winner = max(dated, key=lambda m: m["date"]) if dated else max(members, key=richness)
+            winner_rec = merge_cluster([winner], cat)
+            # add provenance for dropped records too
+            winner_rec["provenance"] = [{"source": m["source"], "url": m["source_url"], "date": m["date"]} for m in members]
+            merged_records.append(winner_rec)
+            for m in members:
+                absorbed.add(id(m))
+            log_lines.append(f"KEEP_NEWER [{cat}]  author={c['author']!r}")
+            for m in members:
+                kept = " ← KEPT" if m is winner else " (dropped)"
+                log_lines.append(f"  [{m['source']}] {m['date'] or '?'}  {m['title']!r}  {m['source_url']}{kept}")
+            log_lines.append("")
+
+        elif cat in ("not_dupe_firstline_only", "not_dupe"):
             log_lines.append(f"KEEP_BOTH [not_dupe]  author={c['author']!r}")
             for m in members:
                 log_lines.append(f"  [{m['source']}] {m['title']!r}  {m['source_url']}")
@@ -459,15 +471,17 @@ def main():
         "=" * 72,
         f"Input poems (with text): {len(poems)}",
         f"Output records: {len(merged_records)}",
-        f"Poems merged away: {len(poems) - len(merged_records) + counts.get('encore',0) + counts.get('cross_source_exact',0) + counts.get('fuzzy_confirmed',0) + counts.get('same_source_body_match',0)}",
+        f"Poems merged away (net): {len(poems) - len(merged_records)}",
+        f"Total absorbed: {len(absorbed)}",
         "",
         "Auto-merge categories:",
         f"  encore              : {counts.get('encore', 0)} clusters",
-        f"  cross_source_exact  : {counts.get('cross_source_exact', 0)} clusters",
+        f"  body_match          : {counts.get('body_match', 0)} clusters",
         f"  fuzzy_confirmed     : {counts.get('fuzzy_confirmed', 0)} clusters",
-        f"  same_source_body    : {counts.get('same_source_body_match', 0)} clusters",
-        f"Not-dupe (kept both) : {counts.get('not_dupe_firstline_only', 0)} clusters",
-        f"Ambiguous (see file) : {counts.get('ambiguous', 0)} clusters",
+        f"  keep_newer          : {counts.get('keep_newer', 0)} clusters",
+        f"Not-dupe (kept both) : {counts.get('not_dupe_firstline_only', 0) + counts.get('ambiguous', 0)} clusters",
+        f"  - firstline_only    : {counts.get('not_dupe_firstline_only', 0)}",
+        f"  - ambiguous/low_sim : {counts.get('ambiguous', 0)}",
         "=" * 72,
         "",
     ]
