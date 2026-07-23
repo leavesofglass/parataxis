@@ -23,9 +23,9 @@ const BUCKETS_KEY = 'parataxis_length_buckets'
 type LengthBuckets = { short: boolean; medium: boolean; long: boolean }
 const DEFAULT_BUCKETS: LengthBuckets = { short: true, medium: true, long: false }
 const BUCKET_OPTIONS: { key: keyof LengthBuckets; label: string }[] = [
-  { key: 'short',  label: 'Short  (≤ 14 lines)' },
-  { key: 'medium', label: 'Medium (15 – 40 lines)' },
-  { key: 'long',   label: 'Long   (41 + lines)' },
+  { key: 'short',  label: 'Short' },
+  { key: 'medium', label: 'Medium' },
+  { key: 'long',   label: 'Long' },
 ]
 
 export default function AccountPage() {
