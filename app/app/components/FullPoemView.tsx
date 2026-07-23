@@ -170,17 +170,15 @@ export function FullPoemView(props: Props) {
           </button>
         </div>
       ) : swipe ? (
-        <div className="flex flex-col gap-2.5 px-5 py-4 border-t border-[rgba(0,0,0,0.08)] bg-[#ECECEC]">
-          {/* Row 1 — reactions: Dislike left, Like right */}
-          <div className="flex gap-2.5">
+        <div className="flex flex-col gap-2 px-5 pt-3 pb-2 border-t border-[rgba(0,0,0,0.08)] bg-[#ECECEC]">
+          {/* Row 1 — reactions: Dislike left, Like right; border static, icon darkens on active */}
+          <div className="flex gap-2.5 justify-center">
             <button
               onClick={() => swipe.onReaction('dislike')}
               title="Dislike"
               aria-label="Dislike"
-              className={`flex-1 h-11 rounded-full border flex items-center justify-center transition-colors min-h-[44px]
-                ${swipe.activeReactions.disliked
-                  ? 'border-neutral-500 text-neutral-700 bg-neutral-100'
-                  : 'border-[rgba(0,0,0,0.15)] text-neutral-400 hover:border-neutral-400 hover:text-neutral-500'}`}
+              className={`w-24 h-11 rounded-full border border-[rgba(0,0,0,0.15)] flex items-center justify-center transition-colors min-h-[44px]
+                ${swipe.activeReactions.disliked ? 'text-neutral-700' : 'text-neutral-400 hover:text-neutral-500'}`}
             >
               <svg width="17" height="17" viewBox="0 0 24 24" fill={swipe.activeReactions.disliked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M17 14V2" /><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z" />
@@ -191,10 +189,8 @@ export function FullPoemView(props: Props) {
               onClick={() => swipe.onReaction('like')}
               title="Like"
               aria-label="Like"
-              className={`flex-1 h-11 rounded-full border flex items-center justify-center transition-colors min-h-[44px]
-                ${swipe.activeReactions.liked
-                  ? 'border-neutral-500 text-neutral-700'
-                  : 'border-[rgba(0,0,0,0.15)] text-neutral-400 hover:border-neutral-400 hover:text-neutral-500'}`}
+              className={`w-24 h-11 rounded-full border border-[rgba(0,0,0,0.15)] flex items-center justify-center transition-colors min-h-[44px]
+                ${swipe.activeReactions.liked ? 'text-neutral-700' : 'text-neutral-400 hover:text-neutral-500'}`}
             >
               <svg width="17" height="17" viewBox="0 0 24 24" fill={swipe.activeReactions.liked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M7 10v12" /><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
@@ -202,14 +198,14 @@ export function FullPoemView(props: Props) {
             </button>
           </div>
 
-          {/* Row 2 — navigation: Back + Next centered, darker border */}
-          <div className="flex items-center justify-center gap-2.5">
+          {/* Row 2 — navigation: Next always centered; Back floats absolute-left, no border */}
+          <div className="relative flex items-center justify-center h-11">
             {swipe.canBack && (
               <button
                 onClick={swipe.onBack}
                 title="Back"
                 aria-label="Back"
-                className="w-11 h-11 rounded-full border border-neutral-400 bg-transparent flex items-center justify-center transition-colors min-h-[44px] text-neutral-400 hover:border-neutral-500 hover:text-neutral-500"
+                className="absolute left-0 w-11 h-11 flex items-center justify-center transition-colors min-h-[44px] text-neutral-400 hover:text-neutral-500"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <polyline points="9,14 4,9 9,4" /><path d="M20,20 v-7 a4,4 0 0,0 -4,-4 H4" />
