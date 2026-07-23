@@ -12,7 +12,7 @@ const LEGAL_LINKS = (
   </p>
 )
 import { getSupabase } from '@/lib/supabase'
-import { sendSignInLink } from '@/lib/authActions'
+import { sendSignInLink, signInWithGoogle } from '@/lib/authActions'
 import { Masthead } from '@/app/components/Masthead'
 import { LibraryBadge } from '@/app/components/LibraryBadge'
 import type { User } from '@supabase/supabase-js'
@@ -38,6 +38,8 @@ export default function AccountPage() {
   const [sending, setSending] = useState(false)
   const [sentMode, setSentMode] = useState<SentMode>(null)
   const [sendError, setSendError] = useState<string | null>(null)
+  const [googleLoading, setGoogleLoading] = useState(false)
+  const [googleError, setGoogleError] = useState<string | null>(null)
 
   const [buckets, setBuckets] = useState<LengthBuckets>(DEFAULT_BUCKETS)
 
@@ -96,6 +98,17 @@ export default function AccountPage() {
     }
   }
 
+  async function handleSignInWithGoogle() {
+    setGoogleLoading(true)
+    setGoogleError(null)
+    const { error } = await signInWithGoogle(redirectTo)
+    if (error) {
+      setGoogleError(error)
+      setGoogleLoading(false)
+    }
+    // on success the browser redirects away — no cleanup needed
+  }
+
   async function handleSignOut() {
     const supabase = getSupabase()
     await supabase.auth.signOut()
@@ -152,26 +165,46 @@ export default function AccountPage() {
             )}
 
             {!sentMode && (
-              <form onSubmit={handleSendLink} className="flex flex-col gap-3">
-                <input
-                  type="email"
-                  required
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full border border-neutral-200 rounded-xl px-4 py-3 font-sans text-[0.9rem] text-[#111] bg-white placeholder:text-neutral-300 focus:outline-none focus:border-neutral-400 transition-colors"
-                />
+              <div className="flex flex-col gap-3">
+                <form onSubmit={handleSendLink} className="flex flex-col gap-3">
+                  <input
+                    type="email"
+                    required
+                    placeholder="you@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full border border-neutral-200 rounded-xl px-4 py-3 font-sans text-[0.9rem] text-[#111] bg-white placeholder:text-neutral-300 focus:outline-none focus:border-neutral-400 transition-colors"
+                  />
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="w-full py-3 bg-[#111] text-white rounded-xl font-sans text-[0.8rem] font-medium tracking-wide disabled:opacity-40 hover:bg-neutral-700 transition-colors"
+                  >
+                    {sending ? '…' : 'Send sign-in link'}
+                  </button>
+                  {sendError && (
+                    <p className="font-sans text-[0.75rem] text-red-400">{sendError}</p>
+                  )}
+                </form>
+
+                <div className="flex items-center gap-3">
+                  <div className="flex-1 h-px bg-neutral-200" />
+                  <span className="font-sans text-[0.7rem] text-neutral-300 tracking-wide">or</span>
+                  <div className="flex-1 h-px bg-neutral-200" />
+                </div>
+
                 <button
-                  type="submit"
-                  disabled={sending}
-                  className="w-full py-3 bg-[#111] text-white rounded-xl font-sans text-[0.8rem] font-medium tracking-wide disabled:opacity-40 hover:bg-neutral-700 transition-colors"
+                  type="button"
+                  onClick={handleSignInWithGoogle}
+                  disabled={googleLoading}
+                  className="w-full py-3 border border-neutral-200 rounded-xl font-sans text-[0.8rem] text-neutral-400 hover:border-neutral-400 hover:text-neutral-600 transition-colors disabled:opacity-40"
                 >
-                  {sending ? '…' : 'Send sign-in link'}
+                  {googleLoading ? '…' : 'Sign in with Google'}
                 </button>
-                {sendError && (
-                  <p className="font-sans text-[0.75rem] text-red-400">{sendError}</p>
+                {googleError && (
+                  <p className="font-sans text-[0.75rem] text-red-400">{googleError}</p>
                 )}
-              </form>
+              </div>
             )}
             {LEGAL_LINKS}
           </>

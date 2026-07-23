@@ -6,6 +6,31 @@ export type SendResult =
 
 const MIGRATE_COOKIE_ENDPOINT = '/auth/migrate-cookie'
 
+async function setMigrateCookieIfAnon(): Promise<void> {
+  const supabase = getSupabase()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (user?.is_anonymous !== true) return
+  try {
+    await fetch(MIGRATE_COOKIE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ anon_user_id: user.id }),
+    })
+  } catch (e) {
+    console.error('[authActions] failed to set migrate cookie:', e)
+  }
+}
+
+export async function signInWithGoogle(redirectTo: string): Promise<{ error: string | null }> {
+  await setMigrateCookieIfAnon()
+  const supabase = getSupabase()
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo },
+  })
+  return { error: error?.message ?? null }
+}
+
 /**
  * Sends a sign-in / email-confirmation link to `email`.
  *
