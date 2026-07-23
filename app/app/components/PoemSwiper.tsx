@@ -560,11 +560,9 @@ export function PoemSwiper() {
                   <p className="font-sans text-[0.85rem] text-neutral-400">
                     Couldn&apos;t load poems.
                   </p>
-                  {process.env.NODE_ENV !== 'production' && (
-                    <pre className="font-mono text-[0.7rem] text-red-400 text-left bg-white rounded-xl p-3 w-full overflow-auto whitespace-pre-wrap break-all border border-red-100">
-                      {error}
-                    </pre>
-                  )}
+                  <pre className="font-mono text-[0.7rem] text-red-400 text-left bg-white rounded-xl p-3 w-full overflow-auto whitespace-pre-wrap break-all border border-red-100">
+                    {error}
+                  </pre>
                 </>
               ) : (
                 <p className="font-sans text-[0.85rem] text-neutral-400">
