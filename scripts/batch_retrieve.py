@@ -13,11 +13,12 @@ Output (when both batches complete):
 import argparse, json, os, sys
 from pathlib import Path
 
-SCRIPTS      = Path(__file__).parent
-ROOT         = SCRIPTS.parent
-CLEANED_PATH = SCRIPTS / "dedup_cleaned.json"
-IDS_PATH     = SCRIPTS / "batch_ids.json"
-OUT_PATH     = SCRIPTS / "dedup_enriched.json"
+SCRIPTS          = Path(__file__).parent
+ROOT             = SCRIPTS.parent
+CLEANED_PATH     = SCRIPTS / "dedup_cleaned.json"
+IDS_PATH         = SCRIPTS / "batch_ids.json"
+OUT_PATH         = SCRIPTS / "dedup_enriched.json"
+LIVE_SCORES_PATH = SCRIPTS / "score_live_results.jsonl"
 
 
 def load_env(path):
@@ -101,8 +102,16 @@ def main():
     for bid in scr_batch_ids:
         chunk_results = download_results(client, bid)
         scr_results.extend(chunk_results)
+
+    # Merge live scoring results if present (from score_live.py)
+    if LIVE_SCORES_PATH.exists():
+        live_lines = [l for l in LIVE_SCORES_PATH.read_text().splitlines() if l.strip()]
+        live_results = [json.loads(l) for l in live_lines]
+        scr_results.extend(live_results)
+        print(f"  {len(live_results)} live scoring results (score_live_results.jsonl)")
+
     print(f"  {len(emb_results)} embedding results")
-    print(f"  {len(scr_results)} scoring results")
+    print(f"  {len(scr_results)} scoring results total")
 
     # Index by custom_id
     emb_by_id = {r["custom_id"]: r for r in emb_results}
