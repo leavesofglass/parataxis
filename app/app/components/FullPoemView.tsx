@@ -82,6 +82,21 @@ export function FullPoemView(props: Props) {
         </div>
       )}
 
+      {/* Back arrow — library view */}
+      {isLibrary && (
+        <div className="absolute top-4 left-5 z-10">
+          <button
+            onClick={handleClose}
+            aria-label="Back"
+            className="inline-flex items-center justify-center text-neutral-400 hover:text-neutral-600 transition-colors"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+        </div>
+      )}
+
       {/* Top-right column: Share above Save ribbon — pinned above scroll */}
       <div className="absolute top-4 right-5 z-10 flex flex-col items-center gap-3">
         <ShareButton
@@ -114,6 +129,29 @@ export function FullPoemView(props: Props) {
             </svg>
           </button>
         )}
+
+        {isLibrary && (
+          <button
+            type="button"
+            onClick={() => { if (props.onUnsave) props.onUnsave() }}
+            aria-label="Unsave poem"
+            className="inline-flex items-center justify-center text-neutral-700 hover:text-neutral-400 transition-colors"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+            </svg>
+          </button>
+        )}
       </div>
 
       {/* Scrollable poem */}
@@ -139,22 +177,7 @@ export function FullPoemView(props: Props) {
       </div>
 
       {/* Action buttons */}
-      {isLibrary ? (
-        <div className="flex gap-2.5 px-6 py-5 border-t border-[rgba(0,0,0,0.08)] bg-[#ECECEC]">
-          <button
-            onClick={() => { if (props.onUnsave) props.onUnsave() }}
-            className="flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide border border-neutral-300 text-neutral-400 hover:border-neutral-500 hover:text-neutral-600 rounded-full transition-colors"
-          >
-            Unsave
-          </button>
-          <button
-            onClick={handleClose}
-            className="flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide rounded-full transition-colors bg-[#111] text-white hover:bg-neutral-700"
-          >
-            Close
-          </button>
-        </div>
-      ) : isSkipped ? (
+      {isSkipped ? (
         <div className="flex gap-2.5 px-6 py-5 border-t border-[rgba(0,0,0,0.08)] bg-[#ECECEC]">
           <button
             onClick={() => { if (props.onUnskip) props.onUnskip() }}
