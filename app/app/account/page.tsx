@@ -131,7 +131,7 @@ export default function AccountPage() {
         <div className="flex-1 flex items-center h-10">
           <Link
             href="/"
-            className="text-[10px] font-sans tracking-[0.18em] text-neutral-300 uppercase hover:text-neutral-500 transition-colors"
+            className="text-[10px] font-sans tracking-[0.18em] text-neutral-400 uppercase hover:text-neutral-600 transition-colors"
           >
             ← Back
           </Link>
@@ -242,14 +242,14 @@ export default function AccountPage() {
                 Reading preferences
               </p>
               <p className="font-sans text-[0.75rem] text-neutral-400 mb-3">Poem length</p>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-row gap-2">
                 {BUCKET_OPTIONS.map(({ key, label }) => (
                   <button
                     key={key}
                     type="button"
                     onClick={() => toggleBucket(key)}
                     aria-pressed={buckets[key]}
-                    className={`text-left py-2.5 px-5 border rounded-full font-sans text-[0.8rem] transition-colors ${
+                    className={`py-2.5 px-5 border rounded-full font-sans text-[0.8rem] transition-colors ${
                       buckets[key]
                         ? 'border-[#111] text-[#111]'
                         : 'border-neutral-200 text-neutral-400 hover:border-neutral-400 hover:text-neutral-600'
