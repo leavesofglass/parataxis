@@ -1,14 +1,16 @@
+import Link from 'next/link'
+
 interface Props {
-  // href kept in the interface for call-site compatibility; no longer used
   href?: string
 }
 
 export function Masthead({ href: _href }: Props) {
   return (
-    <span
-      className="font-masthead text-[22px] sm:text-[15px] tracking-[0.15em] text-black/35"
+    <Link
+      href="/"
+      className="font-masthead text-[22px] sm:text-[15px] tracking-[0.15em] text-black/35 hover:text-black/55 transition-colors"
     >
       sheaf
-    </span>
+    </Link>
   )
 }
