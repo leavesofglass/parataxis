@@ -1,32 +1,39 @@
 'use client'
 
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import type { Poem } from '../types'
 import { ShareButton } from './ShareButton'
 
-type SwipeAction = 'dislike' | 'save' | 'next'
+export interface Reactions {
+  liked: boolean
+  disliked: boolean
+  saved: boolean
+}
 
 interface SwipeProps {
   variant?: 'swipe'
   poem: Poem
   isSuperLiked?: never
-  onAction: (action: SwipeAction) => void
+  activeReactions: Reactions
+  onReaction: (action: 'like' | 'dislike' | 'save') => void
+  onNext: () => void
+  onShare: () => void
   onUnsave?: never
   onUnskip?: never
   onClose: () => void
-  // Renders inside the swipe deck card slot instead of as a full-screen overlay.
-  // Suppresses the slide-up animation and the × close button.
   asCard?: boolean
-  canUndo?: boolean
-  onUndo?: () => void
+  canBack?: boolean
+  onBack?: () => void
 }
 
 interface LibraryProps {
   variant: 'library'
   poem: Poem
   isSuperLiked?: boolean
-  onAction?: never
+  activeReactions?: never
+  onReaction?: never
+  onNext?: never
+  onShare?: never
   onUnsave: () => void
   onUnskip?: never
   onClose: () => void
@@ -36,7 +43,10 @@ interface SkippedProps {
   variant: 'skipped'
   poem: Poem
   isSuperLiked?: never
-  onAction?: never
+  activeReactions?: never
+  onReaction?: never
+  onNext?: never
+  onShare?: never
   onUnsave?: never
   onUnskip: () => void
   onClose: () => void
@@ -51,35 +61,15 @@ export function FullPoemView(props: Props) {
   const isSkipped = props.variant === 'skipped'
   const asCard = !isLibrary && !isSkipped && !!(props as SwipeProps).asCard
 
-  const [tapped, setTapped] = useState<string | null>(null)
-
-  function handleSwipeAction(action: SwipeAction) {
-    if (!props.onAction) return
-    setTapped(action)
-    props.onAction(action)
-  }
-
-  function handleUnsave() {
-    if (!props.onUnsave) return
-    setTapped('unsave')
-    setTimeout(() => props.onUnsave!(), 180)
-  }
-
-  function handleUnskip() {
-    if (!props.onUnskip) return
-    setTapped('unskip')
-    setTimeout(() => props.onUnskip!(), 180)
-  }
+  const swipe = (!isLibrary && !isSkipped) ? (props as SwipeProps) : null
 
   function handleClose() {
-    if (!props.onClose) return
     props.onClose()
   }
 
   const inner = (
     <>
-      {/* Back button — swipe overlay only; hidden in asCard mode (nothing to go back to)
-          and in library/skipped variants. */}
+      {/* Back button — swipe overlay only; hidden in asCard mode and library/skipped */}
       {!isLibrary && !isSkipped && !asCard && (
         <div className="absolute top-4 left-5 h-[1.4rem] inline-flex items-center z-10">
           <button
@@ -92,9 +82,38 @@ export function FullPoemView(props: Props) {
         </div>
       )}
 
-      {/* Share button — all variants; same vertical centre as the X close glyph. */}
-      <div className="absolute top-4 right-5 h-[1.4rem] inline-flex items-center z-10">
-        <ShareButton poemId={poem.id} title={poem.title} author={poem.author} />
+      {/* Top-right column: Share above Save ribbon — pinned above scroll */}
+      <div className="absolute top-4 right-5 z-10 flex flex-col items-center gap-3">
+        <ShareButton
+          poemId={poem.id}
+          title={poem.title}
+          author={poem.author}
+          onSuccess={swipe?.onShare}
+        />
+
+        {swipe && (
+          <button
+            type="button"
+            onClick={() => swipe.onReaction('save')}
+            aria-label={swipe.activeReactions.saved ? 'Unsave poem' : 'Save poem'}
+            className="inline-flex items-center justify-center text-neutral-500 hover:text-neutral-700 transition-colors"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill={swipe.activeReactions.saved ? 'currentColor' : 'none'}
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              className={swipe.activeReactions.saved ? 'text-neutral-700' : 'text-neutral-400'}
+            >
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+            </svg>
+          </button>
+        )}
       </div>
 
       {/* Scrollable poem */}
@@ -110,7 +129,7 @@ export function FullPoemView(props: Props) {
           {poem.body.split('\n').map((line, i) =>
             line
               ? <span key={i} className="poem-line">{line}</span>
-              : <span key={i} className="block">{' '}</span>
+              : <span key={i} className="block">{' '}</span>
           )}
         </div>
 
@@ -123,15 +142,11 @@ export function FullPoemView(props: Props) {
       {isLibrary ? (
         <div className="flex gap-2.5 px-6 py-5 border-t border-[rgba(0,0,0,0.08)] bg-[#ECECEC]">
           <button
-            onClick={handleUnsave}
-            className={`flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide border rounded-full transition-colors
-              ${tapped === 'unsave'
-                ? 'border-neutral-300 text-neutral-300'
-                : 'border-neutral-300 text-neutral-400 hover:border-neutral-500 hover:text-neutral-600'}`}
+            onClick={() => { if (props.onUnsave) props.onUnsave() }}
+            className="flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide border border-neutral-300 text-neutral-400 hover:border-neutral-500 hover:text-neutral-600 rounded-full transition-colors"
           >
             Unsave
           </button>
-
           <button
             onClick={handleClose}
             className="flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide rounded-full transition-colors bg-[#111] text-white hover:bg-neutral-700"
@@ -142,15 +157,11 @@ export function FullPoemView(props: Props) {
       ) : isSkipped ? (
         <div className="flex gap-2.5 px-6 py-5 border-t border-[rgba(0,0,0,0.08)] bg-[#ECECEC]">
           <button
-            onClick={handleUnskip}
-            className={`flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide border rounded-full transition-colors
-              ${tapped === 'unskip'
-                ? 'border-neutral-300 text-neutral-300'
-                : 'border-neutral-300 text-neutral-400 hover:border-neutral-500 hover:text-neutral-600'}`}
+            onClick={() => { if (props.onUnskip) props.onUnskip() }}
+            className="flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide border border-neutral-300 text-neutral-400 hover:border-neutral-500 hover:text-neutral-600 rounded-full transition-colors"
           >
             Un-skip
           </button>
-
           <button
             onClick={handleClose}
             className="flex-1 py-3 text-[0.8rem] font-sans font-medium tracking-wide rounded-full transition-colors bg-[#111] text-white hover:bg-neutral-700"
@@ -158,52 +169,58 @@ export function FullPoemView(props: Props) {
             Close
           </button>
         </div>
-      ) : (
+      ) : swipe ? (
         <div className="relative flex items-center justify-center py-4 border-t border-[rgba(0,0,0,0.08)] bg-[#ECECEC]">
-          {/* Undo — absolutely positioned so it doesn't shift the centered trio */}
+          {/* Back — absolutely positioned left so it doesn't displace the centered trio */}
           <button
-            onClick={(props as SwipeProps).onUndo}
-            title="Undo"
-            aria-label="Undo last action"
-            className={`absolute left-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-[rgba(0,0,0,0.15)] bg-transparent flex items-center justify-center transition-opacity ${(props as SwipeProps).canUndo ? 'opacity-70 hover:opacity-100' : 'opacity-0 pointer-events-none'}`}
+            onClick={swipe.onBack}
+            title="Back"
+            aria-label="Back"
+            className={`absolute left-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-[rgba(0,0,0,0.15)] bg-transparent flex items-center justify-center transition-opacity ${swipe.canBack ? 'opacity-70 hover:opacity-100' : 'opacity-0 pointer-events-none'}`}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <polyline points="9,14 4,9 9,4" /><path d="M20,20 v-7 a4,4 0 0,0 -4,-4 H4" />
             </svg>
           </button>
 
-          {/* Dislike · Star · Next — centered as a group, symmetric about viewport middle */}
+          {/* Like · Dislike · Next — centered as a group */}
           <div className="flex items-center gap-3">
-            {/* Dislike — ghost outlined, X icon */}
+            {/* Like — heart; filled + dark when active */}
             <button
-              onClick={() => handleSwipeAction('dislike')}
+              onClick={() => swipe.onReaction('like')}
+              title="Like"
+              aria-label="Like"
+              className={`w-20 h-11 rounded-full border flex items-center justify-center transition-colors min-h-[44px]
+                ${swipe.activeReactions.liked
+                  ? 'border-neutral-500 text-neutral-700'
+                  : 'border-[rgba(0,0,0,0.15)] text-neutral-400 hover:border-neutral-400 hover:text-neutral-500'}`}
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill={swipe.activeReactions.liked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+            </button>
+
+            {/* Dislike — X; darkened + slight bg when active */}
+            <button
+              onClick={() => swipe.onReaction('dislike')}
               title="Dislike"
               aria-label="Dislike"
-              className={`w-20 h-11 rounded-full border border-[rgba(0,0,0,0.15)] bg-transparent flex items-center justify-center transition-opacity min-h-[44px] ${tapped === 'dislike' ? 'opacity-30' : 'opacity-70 hover:opacity-100'}`}
+              className={`w-20 h-11 rounded-full border flex items-center justify-center transition-colors min-h-[44px]
+                ${swipe.activeReactions.disliked
+                  ? 'border-neutral-500 text-neutral-700 bg-neutral-100'
+                  : 'border-[rgba(0,0,0,0.15)] text-neutral-400 hover:border-neutral-400 hover:text-neutral-500'}`}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
                 <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </button>
 
-            {/* Star — ghost outlined, larger for visual weight, slightly lower */}
+            {/* Next — always ghost; the only advancing action */}
             <button
-              onClick={() => handleSwipeAction('save')}
-              title="Star"
-              aria-label="Star"
-              className={`w-[4.25rem] h-[4.25rem] rounded-full border border-[rgba(0,0,0,0.15)] bg-transparent flex items-center justify-center shrink-0 translate-y-2 transition-opacity ${tapped === 'save' ? 'opacity-30' : 'opacity-70 hover:opacity-100'}`}
-            >
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-              </svg>
-            </button>
-
-            {/* Next — ghost outlined, right-arrow icon */}
-            <button
-              onClick={() => handleSwipeAction('next')}
+              onClick={swipe.onNext}
               title="Next"
               aria-label="Next poem"
-              className={`w-20 h-11 rounded-full border border-[rgba(0,0,0,0.15)] bg-transparent flex items-center justify-center transition-opacity min-h-[44px] ${tapped === 'next' ? 'opacity-30' : 'opacity-70 hover:opacity-100'}`}
+              className="w-20 h-11 rounded-full border border-[rgba(0,0,0,0.15)] text-neutral-400 bg-transparent flex items-center justify-center transition-colors min-h-[44px] hover:border-neutral-400 hover:text-neutral-500"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12,5 19,12 12,19" />
@@ -211,7 +228,7 @@ export function FullPoemView(props: Props) {
             </button>
           </div>
         </div>
-      )}
+      ) : null}
     </>
   )
 

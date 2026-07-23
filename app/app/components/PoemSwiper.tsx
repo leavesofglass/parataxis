@@ -9,6 +9,7 @@ import type { AuthChangeEvent, Session } from '@supabase/supabase-js'
 import { fetchSavedCount } from '@/lib/library'
 import type { Poem } from '../types'
 import { FullPoemView } from './FullPoemView'
+import type { Reactions } from './FullPoemView'
 import { SignupNudgeModal } from './SignupNudgeModal'
 import { Masthead } from './Masthead'
 
@@ -104,52 +105,45 @@ export function getPreview(body: string): string {
   return text.slice(0, 240).replace(/\s+\S*$/, '') + '…'
 }
 
-type FullPoemAction = 'dislike' | 'save' | 'next'
-
-interface LastAction {
-  poem: Poem
-  action: FullPoemAction
-  dbAction: string | null  // null for 'next' (writes nothing to DB)
-}
+const EMPTY_REACTIONS: Reactions = { liked: false, disliked: false, saved: false }
 
 // ── PoemCard ──────────────────────────────────────────────────────────────────
 // Non-draggable card wrapper. Drives entry and exit animations via the animate
-// prop rather than drag gestures. Entry animation fires only on undo (enterDir
-// set); normal forward navigation uses initial=false (instant appear). Exit
-// animation fires when exitingAction is set by a button press in PoemSwiper.
-//
-// onExited is guarded by exitingAction so it only fires on actual exit, not on
-// the completion of an undo entry animation.
+// prop. Entry animation fires only on Back (enterDir='right'); normal forward
+// navigation uses initial=false (instant appear). Exit fires when isExiting is
+// true (Next only). onExited is guarded by isExiting so it only fires on actual
+// exit, not on completion of a Back entry animation.
 function PoemCard({
   poem,
-  onAction,
-  exitingAction,
+  activeReactions,
+  onReaction,
+  onNext,
+  onShare,
+  isExiting,
   enterDir,
   onExited,
-  canUndo,
-  onUndo,
+  canBack,
+  onBack,
 }: {
   poem: Poem
-  onAction: (a: FullPoemAction) => void
-  exitingAction: FullPoemAction | null
-  enterDir: 'left' | 'right' | 'up' | null
+  activeReactions: Reactions
+  onReaction: (action: 'like' | 'dislike' | 'save') => void
+  onNext: () => void
+  onShare: () => void
+  isExiting: boolean
+  enterDir: 'right' | null
   onExited: () => void
-  canUndo: boolean
-  onUndo: () => void
+  canBack: boolean
+  onBack: () => void
 }) {
-  const exitTarget: TargetAndTransition =
-    exitingAction === 'dislike' ? { x: '-160%', opacity: 0 } :
-    exitingAction === 'save'    ? { x: '160%',  opacity: 0 } :
-    exitingAction === 'next'    ? { x: '160%',  opacity: 0 } :
-    { x: 0, y: 0, opacity: 1 }
+  const exitTarget: TargetAndTransition = isExiting
+    ? { x: '160%', opacity: 0 }
+    : { x: 0, y: 0, opacity: 1 }
 
   // On normal forward navigation: appear instantly (no entry animation).
-  // On undo: slide in from the direction the previous card exited.
+  // On Back: slide in from the right (reversing the rightward next-exit).
   const initial: TargetAndTransition | false =
-    enterDir === 'left'  ? { x: '-100%', opacity: 0 } :
-    enterDir === 'right' ? { x: '100%',  opacity: 0 } :
-    enterDir === 'up'    ? { y: '100%',  opacity: 0 } :
-    false
+    enterDir === 'right' ? { x: '100%', opacity: 0 } : false
 
   return (
     <motion.div
@@ -158,15 +152,18 @@ function PoemCard({
       initial={initial}
       animate={exitTarget}
       transition={{ duration: 0.25, ease: 'easeOut' }}
-      onAnimationComplete={() => { if (exitingAction) onExited() }}
+      onAnimationComplete={() => { if (isExiting) onExited() }}
     >
       <FullPoemView
         poem={poem}
-        onAction={onAction}
+        activeReactions={activeReactions}
+        onReaction={onReaction}
+        onNext={onNext}
+        onShare={onShare}
         onClose={() => {}}
         asCard
-        canUndo={canUndo}
-        onUndo={onUndo}
+        canBack={canBack}
+        onBack={onBack}
       />
     </motion.div>
   )
@@ -180,9 +177,21 @@ export function PoemSwiper() {
   const isSignedInRef = useRef(false)
   const lineMaxRef = useRef<number | null>(null)
 
-  // Holds the poem+action for the card currently mid-exit-animation, so
-  // handleCardExited can read them without stale-closure risk.
-  const pendingRef = useRef<{ poem: Poem; action: FullPoemAction } | null>(null)
+  // Lock: prevents double-firing Next while a card is mid-exit.
+  const exitingRef = useRef(false)
+
+  // Reactions keyed by poem.id — survives Back navigation.
+  // useRef for synchronous reads in callbacks; useState counterpart drives renders.
+  const reactionsRef = useRef<Record<string, Reactions>>({})
+  const [, reactionsTick] = useState(0)
+
+  const getReactions = (poemId: string): Reactions =>
+    reactionsRef.current[poemId] ?? EMPTY_REACTIONS
+
+  const setReactions = useCallback((poemId: string, r: Reactions) => {
+    reactionsRef.current = { ...reactionsRef.current, [poemId]: r }
+    reactionsTick((n) => n + 1)
+  }, [])
 
   const [poems, setPoems] = useState<Poem[]>([])
   const [cardIdx, setCardIdx] = useState(0)
@@ -192,16 +201,21 @@ export function PoemSwiper() {
   const [userEmail, setUserEmail] = useState<string | null>(null)
   const [nudgeThreshold, setNudgeThreshold] = useState<NudgeThreshold | null>(null)
 
-  // exitingAction drives the card's exit animation via PoemCard's animate prop.
-  const [exitingAction, setExitingAction] = useState<FullPoemAction | null>(null)
-  // enterDir drives the entry animation for the card that appears after undo.
-  const [enterDir, setEnterDir] = useState<'left' | 'right' | 'up' | null>(null)
-  // lastAction holds the most recently completed action for single-level undo.
-  const [lastAction, setLastAction] = useState<LastAction | null>(null)
+  // isExiting drives the card's exit animation (Next only).
+  const [isExiting, setIsExiting] = useState(false)
+  // enterDir drives the entry animation for the card that appears after Back.
+  const [enterDir, setEnterDir] = useState<'right' | null>(null)
 
-  // Undo button is visible only when there's something to undo AND the deck
-  // isn't mid-animation (prevents undo during an exit).
-  const canUndo = lastAction !== null && exitingAction === null
+  // canBack: true when there are previous poems in the session and no exit in flight.
+  const canBack = cardIdx > 0 && !isExiting
+
+  // ── Nudge check on saved count ─────────────────────────────────────────────
+  useEffect(() => {
+    if (!userEmail && nudgeThreshold === null && savedCount > 0) {
+      const threshold = getNextNudgeThreshold(savedCount)
+      if (threshold !== null) setNudgeThreshold(threshold)
+    }
+  }, [savedCount, userEmail, nudgeThreshold])
 
   // ── Interaction logging ────────────────────────────────────────────────────
   const logInteraction = useCallback((poemId: string, action: string) => {
@@ -364,87 +378,68 @@ export function PoemSwiper() {
     try { localStorage.setItem(DECK_STATE_KEY, JSON.stringify(state)) } catch {}
   }, [poems, cardIdx, ready])
 
-  // ── Action handlers ───────────────────────────────────────────────────────
+  // ── Reaction handler ──────────────────────────────────────────────────────
+  // Toggles like/dislike/save in place; does NOT advance the card.
+  // Like and Dislike are mutually exclusive; Save is independent.
+  const handleReaction = useCallback((poem: Poem, action: 'like' | 'dislike' | 'save') => {
+    const current = getReactions(poem.id)
+    const next = { ...current }
 
-  // Called immediately when a button is pressed. Sets the exit animation and
-  // captures the pending poem+action in a ref for handleCardExited to read.
-  const handleButtonPress = useCallback((poem: Poem, action: FullPoemAction) => {
-    if (pendingRef.current) return
-    pendingRef.current = { poem, action }
+    if (action === 'like') {
+      next.liked = !current.liked
+      if (next.liked && current.disliked) {
+        next.disliked = false
+        logInteraction(poem.id, 'undislike')
+      }
+      logInteraction(poem.id, next.liked ? 'like' : 'unlike')
+    } else if (action === 'dislike') {
+      next.disliked = !current.disliked
+      if (next.disliked && current.liked) {
+        next.liked = false
+        logInteraction(poem.id, 'unlike')
+      }
+      logInteraction(poem.id, next.disliked ? 'dislike' : 'undislike')
+    } else if (action === 'save') {
+      next.saved = !current.saved
+      logInteraction(poem.id, next.saved ? 'save' : 'unsave')
+      setSavedCount((c) => next.saved ? c + 1 : Math.max(0, c - 1))
+    }
+
+    setReactions(poem.id, next)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [logInteraction, setReactions])
+
+  // ── Next handler ──────────────────────────────────────────────────────────
+  // The only action that advances the card. Does not log.
+  const handleNext = useCallback((poem: Poem) => {
+    if (exitingRef.current) return
+    exitingRef.current = true
+    void poem  // captured for potential future logging
     setEnterDir(null)
-    setExitingAction(action)
+    setIsExiting(true)
   }, [])
 
   // Called by PoemCard's onAnimationComplete when the exit animation finishes.
-  // Logs the interaction (except for 'next'), updates counts, advances the deck.
   const handleCardExited = useCallback(() => {
-    const pending = pendingRef.current
-    if (!pending) return
-    pendingRef.current = null
-
-    const { poem, action } = pending
-    // 'next' writes nothing; 'dislike' and 'save' write their action string directly.
-    const dbAction: string | null = action === 'next' ? null : action
-    if (dbAction !== null) logInteraction(poem.id, dbAction)
-
-    setLastAction({ poem, action, dbAction })
-    setExitingAction(null)
-
-    if (action === 'save') {
-      const newCount = savedCount + 1
-      setSavedCount(newCount)
-      if (!userEmail && nudgeThreshold === null) {
-        const threshold = getNextNudgeThreshold(newCount)
-        if (threshold !== null) setNudgeThreshold(threshold)
-      }
-    }
-
+    exitingRef.current = false
+    setIsExiting(false)
     setCardIdx((i) => i + 1)
-  }, [logInteraction, savedCount, userEmail, nudgeThreshold])
+  }, [])
 
-  // Single-level undo. If dbAction is non-null, deletes the most recent matching
-  // interaction row (SELECT id → DELETE by id). 'next' has dbAction=null — undo
-  // just navigates back with no DB write. Reverses savedCount for 'save' only.
-  const handleUndo = useCallback(() => {
-    if (!lastAction) return
-    const { poem, action, dbAction } = lastAction
-
-    const userId = userIdRef.current
-    if (userId && dbAction !== null) {
-      void getSupabase()
-        .from('interactions')
-        .select('id')
-        .eq('user_id', userId)
-        .eq('poem_id', poem.id)
-        .eq('action', dbAction)
-        .order('created_at', { ascending: false })
-        .limit(1)
-        .maybeSingle()
-        .then(({ data }: { data: { id: string } | null }) => {
-          if (data?.id) {
-            void getSupabase()
-              .from('interactions')
-              .delete()
-              .eq('id', data.id)
-          }
-        })
-    }
-
-    if (action === 'save') {
-      setSavedCount((c) => Math.max(0, c - 1))
-    }
-
-    // Slide the returning card in from the direction the previous card exited.
-    // Both 'save' and 'next' exit right, so undo enters from the right.
-    const reverse: 'left' | 'right' =
-      action === 'dislike' ? 'left' : 'right'
-
-    setEnterDir(reverse)
-    setLastAction(null)
-    pendingRef.current = null
-    setExitingAction(null)
+  // ── Back handler ─────────────────────────────────────────────────────────
+  // Pure navigation — steps back through session history. Never touches DB.
+  const handleBack = useCallback(() => {
+    if (cardIdx === 0) return
+    exitingRef.current = false
+    setIsExiting(false)
+    setEnterDir('right')
     setCardIdx((i) => i - 1)
-  }, [lastAction])
+  }, [cardIdx])
+
+  // ── Share handler ─────────────────────────────────────────────────────────
+  const handleShare = useCallback((poem: Poem) => {
+    logInteraction(poem.id, 'share')
+  }, [logInteraction])
 
   // ── Render ────────────────────────────────────────────────────────────────
   if (error) {
@@ -464,7 +459,6 @@ export function PoemSwiper() {
   }
 
   const topPoem = poems[cardIdx]
-  const nextPoem = poems[cardIdx + 1]
 
   return (
     <main className="relative h-dvh flex flex-col items-center overflow-hidden select-none bg-[#ECECEC]">
@@ -505,17 +499,19 @@ export function PoemSwiper() {
       {/* ── Card area ── */}
       <div className="flex-1 flex items-center justify-center w-full min-h-0 py-4 px-[2.5vw] sm:px-0">
         <div className="relative h-full w-full max-w-[760px]">
-
           {topPoem && (
             <PoemCard
               key={topPoem.id}
               poem={topPoem}
-              onAction={(action) => handleButtonPress(topPoem, action)}
-              exitingAction={exitingAction}
+              activeReactions={getReactions(topPoem.id)}
+              onReaction={(action) => handleReaction(topPoem, action)}
+              onNext={() => handleNext(topPoem)}
+              onShare={() => handleShare(topPoem)}
+              isExiting={isExiting}
               enterDir={enterDir}
               onExited={handleCardExited}
-              canUndo={canUndo}
-              onUndo={handleUndo}
+              canBack={canBack}
+              onBack={handleBack}
             />
           )}
         </div>

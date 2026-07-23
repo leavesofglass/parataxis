@@ -7,11 +7,12 @@ interface Props {
   title: string
   author: string
   className?: string
+  onSuccess?: () => void
 }
 
 type Status = 'idle' | 'copied' | 'shared'
 
-export function ShareButton({ poemId, title, author, className = '' }: Props) {
+export function ShareButton({ poemId, title, author, className = '', onSuccess }: Props) {
   const [status, setStatus] = useState<Status>('idle')
 
   function flash(s: Status) {
@@ -27,6 +28,7 @@ export function ShareButton({ poemId, title, author, className = '' }: Props) {
       try {
         await navigator.share({ title: shareTitle, url })
         flash('shared')
+        onSuccess?.()
         return
       } catch (err) {
         // User-cancelled share is not a failure — stay silent.
@@ -38,6 +40,7 @@ export function ShareButton({ poemId, title, author, className = '' }: Props) {
     try {
       await navigator.clipboard.writeText(url)
       flash('copied')
+      onSuccess?.()
     } catch {
       // No reliable surface for the failure here; better to no-op than to
       // show a misleading "Copied" toast.
