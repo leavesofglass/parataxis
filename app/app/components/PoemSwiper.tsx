@@ -481,7 +481,7 @@ export function PoemSwiper() {
         <div className="flex-1 flex items-center h-10">
           <Link
             href="/account"
-            className="text-[10px] leading-none font-sans tracking-[0.18em] text-neutral-300 uppercase hover:text-neutral-500 transition-colors max-w-[120px] truncate"
+            className="text-[10px] leading-none font-sans tracking-[0.18em] text-neutral-400 uppercase hover:text-neutral-600 transition-colors max-w-[120px] truncate"
           >
             {userEmail
               ? userEmail.length > 20
