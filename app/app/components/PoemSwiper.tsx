@@ -42,7 +42,7 @@ const PREFETCH_AT = 2
 
 const BUCKETS_KEY = 'parataxis_length_buckets'
 type LengthBuckets = { short: boolean; medium: boolean; long: boolean }
-const DEFAULT_BUCKETS: LengthBuckets = { short: true, medium: true, long: true }
+const DEFAULT_BUCKETS: LengthBuckets = { short: true, medium: true, long: false }
 
 function readBuckets(): LengthBuckets {
   if (typeof window === 'undefined') return DEFAULT_BUCKETS

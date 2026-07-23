@@ -6,15 +6,17 @@ export const metadata = { title: 'Terms — sheaf' }
 export default function TermsPage() {
   return (
     <main className="min-h-dvh flex flex-col bg-[#ECECEC]">
-      <div className="flex items-center justify-between px-6 pt-12 pb-4 shrink-0 border-b border-[rgba(0,0,0,0.08)]">
-        <Link
-          href="/account"
-          className="text-[10px] font-sans tracking-[0.18em] text-neutral-300 uppercase hover:text-neutral-500 transition-colors"
-        >
-          ← Back
-        </Link>
+      <div className="w-full flex items-center px-6 pt-3 pb-1 shrink-0 border-b border-[rgba(0,0,0,0.08)]">
+        <div className="flex-1 flex items-center h-10">
+          <Link
+            href="/account"
+            className="text-[10px] font-sans tracking-[0.18em] text-neutral-300 uppercase hover:text-neutral-500 transition-colors"
+          >
+            ← Back
+          </Link>
+        </div>
         <Masthead />
-        <div className="w-10" />
+        <div className="flex-1 h-10" />
       </div>
 
       <div className="flex-1 px-8 pt-10 pb-16 max-w-prose">

@@ -3,6 +3,11 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { getSupabase } from '@/lib/supabase'
+import { sendSignInLink, signInWithGoogle } from '@/lib/authActions'
+import { Masthead } from '@/app/components/Masthead'
+import { LibraryBadge } from '@/app/components/LibraryBadge'
+import type { User } from '@supabase/supabase-js'
 
 const LEGAL_LINKS = (
   <p className="font-sans text-[0.7rem] text-neutral-300 mt-8">
@@ -11,17 +16,12 @@ const LEGAL_LINKS = (
     <Link href="/terms" className="hover:text-neutral-500 transition-colors">Terms</Link>
   </p>
 )
-import { getSupabase } from '@/lib/supabase'
-import { sendSignInLink, signInWithGoogle } from '@/lib/authActions'
-import { Masthead } from '@/app/components/Masthead'
-import { LibraryBadge } from '@/app/components/LibraryBadge'
-import type { User } from '@supabase/supabase-js'
 
 type SentMode = 'confirm' | 'magic' | null
 
 const BUCKETS_KEY = 'parataxis_length_buckets'
 type LengthBuckets = { short: boolean; medium: boolean; long: boolean }
-const DEFAULT_BUCKETS: LengthBuckets = { short: true, medium: true, long: true }
+const DEFAULT_BUCKETS: LengthBuckets = { short: true, medium: true, long: false }
 const BUCKET_OPTIONS: { key: keyof LengthBuckets; label: string }[] = [
   { key: 'short',  label: 'Short  (≤ 14 lines)' },
   { key: 'medium', label: 'Medium (15 – 40 lines)' },
@@ -106,7 +106,6 @@ export default function AccountPage() {
       setGoogleError(error)
       setGoogleLoading(false)
     }
-    // on success the browser redirects away — no cleanup needed
   }
 
   async function handleSignOut() {
@@ -128,19 +127,22 @@ export default function AccountPage() {
 
   return (
     <main className="h-dvh flex flex-col bg-[#ECECEC]">
-      {/* Header */}
-      <div className="flex items-center justify-between px-6 pt-12 pb-4 shrink-0 border-b border-[rgba(0,0,0,0.08)]">
-        <Link
-          href="/"
-          className="text-[10px] font-sans tracking-[0.18em] text-neutral-300 uppercase hover:text-neutral-500 transition-colors"
-        >
-          ← Back
-        </Link>
+      <div className="w-full flex items-center px-6 pt-3 pb-1 shrink-0 border-b border-[rgba(0,0,0,0.08)]">
+        <div className="flex-1 flex items-center h-10">
+          <Link
+            href="/"
+            className="text-[10px] font-sans tracking-[0.18em] text-neutral-300 uppercase hover:text-neutral-500 transition-colors"
+          >
+            ← Back
+          </Link>
+        </div>
         <Masthead />
-        <LibraryBadge />
+        <div className="flex-1 flex items-center justify-end h-10">
+          <LibraryBadge />
+        </div>
       </div>
 
-      <div className="flex-1 flex flex-col px-8 pt-10">
+      <div className="flex-1 flex flex-col px-8 pt-10 overflow-y-auto">
         {authError && (
           <p className="font-sans text-[0.8rem] text-red-400 mb-6">{authError}</p>
         )}
@@ -234,33 +236,33 @@ export default function AccountPage() {
             >
               Sign out
             </button>
+
+            <section className="mt-12 border-t border-neutral-200 pt-8">
+              <p className="font-sans text-[0.7rem] tracking-[0.14em] text-neutral-400 uppercase mb-4">
+                Reading preferences
+              </p>
+              <p className="font-sans text-[0.75rem] text-neutral-400 mb-3">Poem length</p>
+              <div className="flex flex-col gap-2">
+                {BUCKET_OPTIONS.map(({ key, label }) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => toggleBucket(key)}
+                    aria-pressed={buckets[key]}
+                    className={`text-left py-2.5 px-5 border rounded-full font-sans text-[0.8rem] transition-colors ${
+                      buckets[key]
+                        ? 'border-[#111] text-[#111]'
+                        : 'border-neutral-200 text-neutral-400 hover:border-neutral-400 hover:text-neutral-600'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </section>
+            {LEGAL_LINKS}
           </>
         )}
-
-        <section className="mt-12 border-t border-neutral-200 pt-8">
-          <p className="font-sans text-[0.7rem] tracking-[0.14em] text-neutral-400 uppercase mb-4">
-            Reading preferences
-          </p>
-          <p className="font-sans text-[0.75rem] text-neutral-400 mb-3">Poem length</p>
-          <div className="flex flex-col gap-2">
-            {BUCKET_OPTIONS.map(({ key, label }) => (
-              <button
-                key={key}
-                type="button"
-                onClick={() => toggleBucket(key)}
-                aria-pressed={buckets[key]}
-                className={`text-left py-2.5 px-5 border rounded-full font-sans text-[0.8rem] transition-colors ${
-                  buckets[key]
-                    ? 'border-[#111] text-[#111]'
-                    : 'border-neutral-200 text-neutral-400 hover:border-neutral-400 hover:text-neutral-600'
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-          {LEGAL_LINKS}
-        </section>
       </div>
     </main>
   )
