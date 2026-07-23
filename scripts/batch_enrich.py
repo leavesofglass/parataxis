@@ -28,7 +28,7 @@ SCR_JSONL  = SCRIPTS / "batch_scoring.jsonl"
 IDS_PATH   = SCRIPTS / "batch_ids.json"
 
 EMBED_MODEL  = "text-embedding-3-small"
-SCORE_MODEL  = "gpt-4.1-nano"
+SCORE_MODEL  = "gpt-4o-mini"
 MAX_TOKENS   = 512   # rubric+summary output is compact
 
 RUBRIC_SYSTEM = """\

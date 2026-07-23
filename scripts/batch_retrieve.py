@@ -62,25 +62,45 @@ def main():
 
     ids = json.loads(IDS_PATH.read_text())
     emb_id = ids["embeddings"]
-    scr_id = ids["scoring"]
 
     emb_batch = client.batches.retrieve(emb_id)
-    scr_batch = client.batches.retrieve(scr_id)
-
     print("Batch status:")
     print(f"  embeddings  {emb_id}: {emb_batch.status}")
-    print(f"  scoring     {scr_id}: {scr_batch.status}")
+
+    # Scoring: either single batch (ids["scoring"]) or chunked (batch_score_chunks.json)
+    chunk_state_path = Path(__file__).parent / "batch_score_chunks.json"
+    scr_batch_ids = []
+    if chunk_state_path.exists():
+        chunk_state = json.loads(chunk_state_path.read_text())
+        scr_batch_ids = [c["batch_id"] for c in chunk_state["chunks"]]
+        for c in chunk_state["chunks"]:
+            b = client.batches.retrieve(c["batch_id"])
+            print(f"  scoring chunk {c['chunk']}  {c['batch_id']}: {b.status}")
+        all_scoring_done = all(
+            client.batches.retrieve(bid).status == "completed" for bid in scr_batch_ids
+        )
+    elif "scoring" in ids:
+        scr_batch_ids = [ids["scoring"]]
+        scr_batch = client.batches.retrieve(ids["scoring"])
+        print(f"  scoring     {ids['scoring']}: {scr_batch.status}")
+        all_scoring_done = scr_batch.status == "completed"
+    else:
+        print("  scoring: not started")
+        all_scoring_done = False
 
     if args.status_only:
         return
 
-    if emb_batch.status != "completed" or scr_batch.status != "completed":
-        print("\nNot ready yet — re-run when both show 'completed'.")
+    if emb_batch.status != "completed" or not all_scoring_done:
+        print("\nNot ready yet — re-run when all jobs show 'completed'.")
         return
 
     print("\nDownloading results...")
     emb_results = download_results(client, emb_id)
-    scr_results = download_results(client, scr_id)
+    scr_results = []
+    for bid in scr_batch_ids:
+        chunk_results = download_results(client, bid)
+        scr_results.extend(chunk_results)
     print(f"  {len(emb_results)} embedding results")
     print(f"  {len(scr_results)} scoring results")
 
