@@ -74,6 +74,7 @@ export default function AccountPage() {
   function toggleBucket(key: keyof LengthBuckets) {
     setBuckets((prev) => {
       const next = { ...prev, [key]: !prev[key] }
+      if (!next.short && !next.medium && !next.long) return prev
       try { localStorage.setItem(BUCKETS_KEY, JSON.stringify(next)) } catch {}
       return next
     })

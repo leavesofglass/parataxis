@@ -243,12 +243,16 @@ export function PoemSwiper() {
   }, [])
 
   // ── Poem loading ──────────────────────────────────────────────────────────
-  const loadBatch = useCallback(async () => {
-    if (fetchingRef.current) return
+  const loadBatch = useCallback(async (): Promise<{ added: number; detail: string | null }> => {
+    if (fetchingRef.current) return { added: 0, detail: null }
 
     const supabase = getSupabase()
     const uid = userIdRef.current
     const buckets = bucketsRef.current
+
+    if (!buckets.short && !buckets.medium && !buckets.long) {
+      return { added: 0, detail: 'no-length-filters' }
+    }
 
     if (isSignedInRef.current && uid) {
       fetchingRef.current = true
@@ -260,19 +264,20 @@ export function PoemSwiper() {
         show_long:   buckets.long,
       })
       fetchingRef.current = false
-      if (error || !data) {
-        console.error('recommend_poems error:', error)
-        return
+      if (error) {
+        const detail = `recommend_poems — ${error.message} (${error.code ?? 'no code'})`
+        console.error(detail, error)
+        return { added: 0, detail }
       }
+      const rows = (data ?? []) as Poem[]
       setPoems((prev) => {
         const seen = new Set(prev.map((p) => p.id))
-        const fresh = (data as Poem[]).filter((p) => !seen.has(p.id))
-        return [...prev, ...fresh]
+        return [...prev, ...rows.filter((p) => !seen.has(p.id))]
       })
-      return
+      return { added: rows.length, detail: null }
     }
 
-    if (poolRef.current.length === 0) return
+    if (poolRef.current.length === 0) return { added: 0, detail: null }
     fetchingRef.current = true
 
     if (poolPosRef.current >= poolRef.current.length) {
@@ -292,16 +297,18 @@ export function PoemSwiper() {
 
     fetchingRef.current = false
 
-    if (error || !data) {
-      console.error('Fetch error:', error)
-      return
+    if (error) {
+      const detail = `poems fetch — ${error.message} (${error.code ?? 'no code'})`
+      console.error(detail, error)
+      return { added: 0, detail }
     }
 
     const ordered = batch
-      .map((id) => data.find((p: Poem) => p.id === id))
+      .map((id) => (data ?? []).find((p: Poem) => p.id === id))
       .filter(Boolean) as Poem[]
 
     setPoems((prev) => [...prev, ...ordered])
+    return { added: ordered.length, detail: null }
   }, [])
 
   // ── Auth state subscription ───────────────────────────────────────────────
@@ -323,9 +330,14 @@ export function PoemSwiper() {
 
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) {
-        const { data, error } = await supabase.auth.signInAnonymously()
-        if (error) console.error('Auth error:', error)
-        else { userIdRef.current = data.user?.id ?? null }
+        const { data, error: anonError } = await supabase.auth.signInAnonymously()
+        if (anonError) {
+          console.error('Auth error:', anonError)
+          setError(`Sign-in failed — ${anonError.message}`)
+          setReady(true)
+          return
+        }
+        userIdRef.current = data.user?.id ?? null
       } else {
         userIdRef.current = user.id
         setUserEmail(user.email ?? null)
@@ -342,8 +354,10 @@ export function PoemSwiper() {
         const { data: idRows, error: idError } = await idQuery
 
         if (idError || !idRows) {
-          console.error('poems select failed:', JSON.stringify(idError))
-          setError(`Could not load poems. (${idError?.code ?? 'unknown'}: ${idError?.message ?? 'no data'})`)
+          const detail = `poems id-fetch — ${idError?.message ?? 'no data'} (${idError?.code ?? 'unknown'})`
+          console.error(detail, idError)
+          setError(detail)
+          setReady(true)
           return
         }
 
@@ -368,7 +382,10 @@ export function PoemSwiper() {
         }
       }
 
-      if (!restored) await loadBatch()
+      if (!restored) {
+        const result = await loadBatch()
+        if (result.detail) setError(result.detail)
+      }
       if (userIdRef.current) fetchSavedCount(userIdRef.current).then(setSavedCount)
       setReady(true)
     }
@@ -455,14 +472,6 @@ export function PoemSwiper() {
   }, [logInteraction])
 
   // ── Render ────────────────────────────────────────────────────────────────
-  if (error) {
-    return (
-      <div className="h-dvh flex items-center justify-center bg-[#ECECEC]">
-        <p className="text-sm font-sans text-neutral-400">{error}</p>
-      </div>
-    )
-  }
-
   if (!ready) {
     return (
       <div className="h-dvh flex items-center justify-center bg-[#ECECEC]">
@@ -523,7 +532,7 @@ export function PoemSwiper() {
       {/* ── Card area ── */}
       <div className="flex-1 flex items-center justify-center w-full min-h-0 py-4 px-[2.5vw] sm:px-0">
         <div className="relative h-full w-full max-w-[760px]">
-          {topPoem && (
+          {topPoem ? (
             <PoemCard
               key={topPoem.id}
               poem={topPoem}
@@ -536,6 +545,33 @@ export function PoemSwiper() {
               canBack={canBack}
               onBack={handleBack}
             />
+          ) : (
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-8 text-center gap-3">
+              {error === 'no-length-filters' ? (
+                <p className="font-sans text-[0.85rem] text-neutral-400 leading-relaxed">
+                  No poem lengths selected.{' '}
+                  <Link href="/account" className="underline underline-offset-2 hover:text-neutral-600 transition-colors">
+                    Go to settings
+                  </Link>{' '}
+                  and choose at least one.
+                </p>
+              ) : error ? (
+                <>
+                  <p className="font-sans text-[0.85rem] text-neutral-400">
+                    Couldn&apos;t load poems.
+                  </p>
+                  {process.env.NODE_ENV !== 'production' && (
+                    <pre className="font-mono text-[0.7rem] text-red-400 text-left bg-white rounded-xl p-3 w-full overflow-auto whitespace-pre-wrap break-all border border-red-100">
+                      {error}
+                    </pre>
+                  )}
+                </>
+              ) : (
+                <p className="font-sans text-[0.85rem] text-neutral-400">
+                  No poems to show right now.
+                </p>
+              )}
+            </div>
           )}
         </div>
       </div>
