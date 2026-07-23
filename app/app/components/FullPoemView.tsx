@@ -182,8 +182,8 @@ export function FullPoemView(props: Props) {
                   ? 'border-neutral-500 text-neutral-700 bg-neutral-100'
                   : 'border-[rgba(0,0,0,0.15)] text-neutral-400 hover:border-neutral-400 hover:text-neutral-500'}`}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
-                <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+              <svg width="17" height="17" viewBox="0 0 24 24" fill={swipe.activeReactions.disliked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M17 14V2" /><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z" />
               </svg>
             </button>
 
@@ -197,19 +197,19 @@ export function FullPoemView(props: Props) {
                   : 'border-[rgba(0,0,0,0.15)] text-neutral-400 hover:border-neutral-400 hover:text-neutral-500'}`}
             >
               <svg width="17" height="17" viewBox="0 0 24 24" fill={swipe.activeReactions.liked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                <path d="M7 10v12" /><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
               </svg>
             </button>
           </div>
 
-          {/* Row 2 — navigation: Back (when available) + Next full-width */}
-          <div className="flex gap-2.5">
+          {/* Row 2 — navigation: Back + Next centered, darker border */}
+          <div className="flex items-center justify-center gap-2.5">
             {swipe.canBack && (
               <button
                 onClick={swipe.onBack}
                 title="Back"
                 aria-label="Back"
-                className="w-11 h-11 rounded-full border border-[rgba(0,0,0,0.15)] bg-transparent flex items-center justify-center transition-colors min-h-[44px] text-neutral-400 hover:border-neutral-400 hover:text-neutral-500"
+                className="w-11 h-11 rounded-full border border-neutral-400 bg-transparent flex items-center justify-center transition-colors min-h-[44px] text-neutral-400 hover:border-neutral-500 hover:text-neutral-500"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <polyline points="9,14 4,9 9,4" /><path d="M20,20 v-7 a4,4 0 0,0 -4,-4 H4" />
@@ -220,7 +220,7 @@ export function FullPoemView(props: Props) {
               onClick={swipe.onNext}
               title="Next"
               aria-label="Next poem"
-              className="flex-1 h-11 rounded-full border border-[rgba(0,0,0,0.15)] text-neutral-400 bg-transparent flex items-center justify-center transition-colors min-h-[44px] hover:border-neutral-400 hover:text-neutral-500"
+              className="w-32 h-11 rounded-full border border-neutral-400 text-neutral-400 bg-transparent flex items-center justify-center transition-colors min-h-[44px] hover:border-neutral-500 hover:text-neutral-500"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12,5 19,12 12,19" />
