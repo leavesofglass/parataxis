@@ -120,7 +120,6 @@ function PoemCard({
   onNext,
   onShare,
   isExiting,
-  enterDir,
   onExited,
   canBack,
   onBack,
@@ -131,7 +130,6 @@ function PoemCard({
   onNext: () => void
   onShare: () => void
   isExiting: boolean
-  enterDir: 'right' | null
   onExited: () => void
   canBack: boolean
   onBack: () => void
@@ -140,16 +138,11 @@ function PoemCard({
     ? { x: '160%', opacity: 0 }
     : { x: 0, y: 0, opacity: 1 }
 
-  // On normal forward navigation: appear instantly (no entry animation).
-  // On Back: slide in from the right (reversing the rightward next-exit).
-  const initial: TargetAndTransition | false =
-    enterDir === 'right' ? { x: '100%', opacity: 0 } : false
-
   return (
     <motion.div
       className="absolute inset-0"
       style={{ zIndex: 2 }}
-      initial={initial}
+      initial={false}
       animate={exitTarget}
       transition={{ duration: 0.25, ease: 'easeOut' }}
       onAnimationComplete={() => { if (isExiting) onExited() }}
@@ -203,8 +196,6 @@ export function PoemSwiper() {
 
   // isExiting drives the card's exit animation (Next only).
   const [isExiting, setIsExiting] = useState(false)
-  // enterDir drives the entry animation for the card that appears after Back.
-  const [enterDir, setEnterDir] = useState<'right' | null>(null)
 
   // canBack: true when there are previous poems in the session and no exit in flight.
   const canBack = cardIdx > 0 && !isExiting
@@ -415,7 +406,6 @@ export function PoemSwiper() {
     if (exitingRef.current) return
     exitingRef.current = true
     void poem  // captured for potential future logging
-    setEnterDir(null)
     setIsExiting(true)
   }, [])
 
@@ -432,7 +422,6 @@ export function PoemSwiper() {
     if (cardIdx === 0) return
     exitingRef.current = false
     setIsExiting(false)
-    setEnterDir('right')
     setCardIdx((i) => i - 1)
   }, [cardIdx])
 
@@ -508,7 +497,6 @@ export function PoemSwiper() {
               onNext={() => handleNext(topPoem)}
               onShare={() => handleShare(topPoem)}
               isExiting={isExiting}
-              enterDir={enterDir}
               onExited={handleCardExited}
               canBack={canBack}
               onBack={handleBack}
