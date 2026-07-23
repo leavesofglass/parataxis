@@ -471,11 +471,22 @@ export function PoemSwiper() {
           <Link
             href="/library"
             aria-label="Library"
-            className="flex items-center gap-1 hover:opacity-70 transition-opacity"
+            className="flex items-center gap-1.5 text-neutral-500 hover:text-neutral-700 transition-colors"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/sheaf-logo.png" alt="sheaf" width={40} height={40}
-                 style={{ objectFit: 'contain' }} className="block" />
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+            </svg>
             {savedCount > 0 && (
               <span className="text-[10px] leading-none font-sans tracking-wide tabular-nums text-neutral-400">
                 {savedCount}

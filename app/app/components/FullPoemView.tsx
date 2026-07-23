@@ -117,7 +117,7 @@ export function FullPoemView(props: Props) {
       </div>
 
       {/* Scrollable poem */}
-      <div className="flex-1 overflow-y-auto overscroll-contain px-6 sm:px-10 pt-14 pb-6 sm:pb-12">
+      <div className="flex-1 overflow-y-auto overscroll-contain px-6 sm:px-10 pt-14 pb-3 sm:pb-6">
         <h1 className="font-serif text-[1.5rem] leading-[1.35] font-normal text-[#111] mb-10">
           {poem.title}
           {isLibrary && 'isSuperLiked' in props && props.isSuperLiked && (
@@ -133,7 +133,7 @@ export function FullPoemView(props: Props) {
           )}
         </div>
 
-        <p className="font-sans text-[0.9rem] italic text-neutral-400 mt-10 mb-2">
+        <p className="font-sans text-[0.9rem] italic text-neutral-400 mt-10 mb-0">
           {poem.author}
         </p>
       </div>
@@ -177,10 +177,10 @@ export function FullPoemView(props: Props) {
               onClick={() => swipe.onReaction('dislike')}
               title="Dislike"
               aria-label="Dislike"
-              className={`w-24 h-11 rounded-full border border-[rgba(0,0,0,0.15)] flex items-center justify-center transition-colors min-h-[44px]
+              className={`px-5 h-11 rounded-full border border-[rgba(0,0,0,0.15)] flex items-center justify-center transition-colors min-h-[44px]
                 ${swipe.activeReactions.disliked ? 'text-neutral-700' : 'text-neutral-400 hover:text-neutral-500'}`}
             >
-              <svg width="17" height="17" viewBox="0 0 24 24" fill={swipe.activeReactions.disliked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill={swipe.activeReactions.disliked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M17 14V2" /><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z" />
               </svg>
             </button>
@@ -189,10 +189,10 @@ export function FullPoemView(props: Props) {
               onClick={() => swipe.onReaction('like')}
               title="Like"
               aria-label="Like"
-              className={`w-24 h-11 rounded-full border border-[rgba(0,0,0,0.15)] flex items-center justify-center transition-colors min-h-[44px]
+              className={`px-5 h-11 rounded-full border border-[rgba(0,0,0,0.15)] flex items-center justify-center transition-colors min-h-[44px]
                 ${swipe.activeReactions.liked ? 'text-neutral-700' : 'text-neutral-400 hover:text-neutral-500'}`}
             >
-              <svg width="17" height="17" viewBox="0 0 24 24" fill={swipe.activeReactions.liked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill={swipe.activeReactions.liked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M7 10v12" /><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
               </svg>
             </button>
@@ -216,7 +216,7 @@ export function FullPoemView(props: Props) {
               onClick={swipe.onNext}
               title="Next"
               aria-label="Next poem"
-              className="w-32 h-11 rounded-full border border-neutral-400 text-neutral-400 bg-transparent flex items-center justify-center transition-colors min-h-[44px] hover:border-neutral-500 hover:text-neutral-500"
+              className="w-32 h-11 rounded-full border border-neutral-600 text-neutral-500 bg-transparent flex items-center justify-center transition-colors min-h-[44px] hover:border-neutral-700 hover:text-neutral-600"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12,5 19,12 12,19" />
