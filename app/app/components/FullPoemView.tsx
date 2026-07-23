@@ -171,8 +171,23 @@ export function FullPoemView(props: Props) {
         </div>
       ) : swipe ? (
         <div className="flex items-center px-3 pt-2 pb-2 border-t border-[rgba(0,0,0,0.08)] bg-[#ECECEC]">
-          {/* Left — reactions: thumb-down then thumb-up, borderless */}
-          <div className="flex-1 flex items-center">
+          {/* Left — Back; always rendered so right and center never shift */}
+          <div className="flex-1 flex items-center justify-start">
+            <button
+              onClick={swipe.onBack}
+              title="Back"
+              aria-label="Back"
+              className={`px-4 h-11 flex items-center justify-center transition-colors min-h-[44px] text-neutral-400 hover:text-neutral-500
+                ${swipe.canBack ? '' : 'invisible pointer-events-none'}`}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="9,14 4,9 9,4" /><path d="M20,20 v-7 a4,4 0 0,0 -4,-4 H4" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Center — reactions: thumb-down then thumb-up, borderless */}
+          <div className="flex-1 flex items-center justify-center">
             <button
               onClick={() => swipe.onReaction('dislike')}
               title="Dislike"
@@ -196,19 +211,6 @@ export function FullPoemView(props: Props) {
               </svg>
             </button>
           </div>
-
-          {/* Center — Back; always rendered so it reserves the center space */}
-          <button
-            onClick={swipe.onBack}
-            title="Back"
-            aria-label="Back"
-            className={`w-11 h-11 flex items-center justify-center transition-colors min-h-[44px] text-neutral-400 hover:text-neutral-500
-              ${swipe.canBack ? '' : 'invisible pointer-events-none'}`}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <polyline points="9,14 4,9 9,4" /><path d="M20,20 v-7 a4,4 0 0,0 -4,-4 H4" />
-            </svg>
-          </button>
 
           {/* Right — Next, the only bordered control */}
           <div className="flex-1 flex items-center justify-end">
