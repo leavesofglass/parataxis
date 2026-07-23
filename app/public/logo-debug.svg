@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <!--
+    Debug: three identical 240×140 rects, all centered at (200,200).
+    Different colors so the layering is visible.
+    No curves, no gutters, no shadows.
+
+    Rect centered at (200,200): x = 200-120 = 80, y = 200-70 = 130
+    Rotation uses rotate(angle, cx, cy) = rotate(angle, 200, 200)
+    so every rect rotates around the same shared center.
+
+    Layer order: B (45°) back → C (-45°) middle → A (0°) front
+  -->
+
+  <!-- Book B · 45° · BACK · blue -->
+  <rect x="80" y="130" width="240" height="140"
+        transform="rotate(45, 200, 200)"
+        fill="#7BAFD4" opacity="0.75"/>
+
+  <!-- Book C · -45° · MIDDLE · green -->
+  <rect x="80" y="130" width="240" height="140"
+        transform="rotate(-45, 200, 200)"
+        fill="#7DB87A" opacity="0.75"/>
+
+  <!-- Book A · 0° · FRONT · red -->
+  <rect x="80" y="130" width="240" height="140"
+        transform="rotate(0, 200, 200)"
+        fill="#D47B7B" opacity="0.75"/>
+</svg>

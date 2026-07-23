@@ -78,7 +78,8 @@ def main():
             b = client.batches.retrieve(c["batch_id"])
             print(f"  scoring chunk {c['chunk']}  {c['batch_id']}: {b.status}")
         all_scoring_done = all(
-            client.batches.retrieve(bid).status == "completed" for bid in scr_batch_ids
+            client.batches.retrieve(bid).status in ("completed", "cancelled")
+            for bid in scr_batch_ids
         )
     elif "scoring" in ids:
         scr_batch_ids = [ids["scoring"]]

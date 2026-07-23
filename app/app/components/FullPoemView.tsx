@@ -133,7 +133,7 @@ export function FullPoemView(props: Props) {
           )}
         </div>
 
-        <p className="font-sans text-[0.9rem] italic text-neutral-400 mt-10 mb-0">
+        <p className="font-sans text-[1rem] italic text-neutral-400 mt-10 mb-0">
           {poem.author}
         </p>
       </div>

@@ -64,19 +64,24 @@ def already_scored_ids() -> set[str]:
     return scored
 
 
-def already_in_output() -> set[str]:
-    """Poem IDs already written to the live results file (for --resume)."""
+def load_output_successes() -> tuple[set[str], list[str]]:
+    """Return (set of successfully-scored poem IDs, list of successful raw lines)."""
     if not OUT_PATH.exists():
-        return set()
-    ids = set()
+        return set(), []
+    ids: set[str] = set()
+    good_lines: list[str] = []
     for line in OUT_PATH.read_text().splitlines():
         line = line.strip()
-        if line:
-            try:
-                ids.add(json.loads(line)["custom_id"])
-            except Exception:
-                pass
-    return ids
+        if not line:
+            continue
+        try:
+            d = json.loads(line)
+            if d["response"]["status_code"] == 200:
+                ids.add(d["custom_id"])
+                good_lines.append(line)
+        except Exception:
+            pass
+    return ids, good_lines
 
 
 def make_result(poem_id: str, content: str) -> dict:
@@ -103,7 +108,7 @@ def make_error_result(poem_id: str, error: str) -> dict:
 
 async def score_one(client, sem: asyncio.Semaphore, poem_id: str,
                     author: str, title: str, text: str,
-                    retries: int = 3) -> dict:
+                    retries: int = 8) -> dict:
     async with sem:
         for attempt in range(retries):
             try:
@@ -119,9 +124,12 @@ async def score_one(client, sem: asyncio.Semaphore, poem_id: str,
                 )
                 return make_result(poem_id, resp.choices[0].message.content)
             except Exception as exc:
+                err = str(exc)
                 if attempt == retries - 1:
-                    return make_error_result(poem_id, str(exc))
-                await asyncio.sleep(2 ** attempt)
+                    return make_error_result(poem_id, err)
+                # 429 rate limit: back off longer
+                backoff = 30 * (attempt + 1) if "429" in err else 2 ** attempt
+                await asyncio.sleep(backoff)
 
 
 async def run(concurrency: int, resume: bool):
@@ -138,7 +146,7 @@ async def run(concurrency: int, resume: bool):
     data = json.loads(CLEANED.read_text(encoding="utf-8"))
 
     batch_done = already_scored_ids()
-    live_done  = already_in_output() if resume else set()
+    live_done, good_lines = load_output_successes() if resume else (set(), [])
     skip       = batch_done | live_done
 
     # Build work list: (poem_id, author, title, text)
@@ -155,7 +163,6 @@ async def run(concurrency: int, resume: bool):
     n_batch   = len(batch_done)
     n_resume  = len(live_done)
     n_todo    = len(work)
-    n_total   = n_batch + n_resume + n_todo
 
     print(f"\n{'='*60}")
     print(f" LIVE SCORING  ({SCORE_MODEL})")
@@ -172,8 +179,10 @@ async def run(concurrency: int, resume: bool):
         print("Nothing to do.")
         return
 
-    mode = "a" if resume and OUT_PATH.exists() else "w"
-    out_file = OUT_PATH.open(mode, encoding="utf-8")
+    # On resume, rewrite output file with only the successful lines to purge errors
+    if resume and good_lines:
+        OUT_PATH.write_text("\n".join(good_lines) + "\n", encoding="utf-8")
+    out_file = OUT_PATH.open("a", encoding="utf-8")
 
     client    = openai.AsyncOpenAI(api_key=api_key)
     sem       = asyncio.Semaphore(concurrency)
@@ -210,7 +219,7 @@ async def run(concurrency: int, resume: bool):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--concurrency", type=int, default=40)
+    parser.add_argument("--concurrency", type=int, default=6)
     parser.add_argument("--resume", action="store_true",
                         help="Skip poems already written to output file")
     args = parser.parse_args()

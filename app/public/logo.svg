@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <!--
+      Drop shadow: offset toward lower-right (dx=3, dy=3), soft spread.
+      Filter region enlarged so the shadow isn't clipped when the
+      rotated books extend near the canvas edges.
+    -->
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="3" dy="3" stdDeviation="3"
+                    flood-color="#3D3530" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <!--
+    Book shape (local space, centered at origin):
+      240 wide × 140 tall
+      Top/bottom long edges bow outward ~8px at centre (5-10% of height)
+      Straight short edges on left/right
+      Gutter line down x=0
+
+    Path:
+      M -120,-70          top-left corner
+      Q  0,-86  120,-70   top edge curves outward (control at y=-86)
+      L  120, 70          right edge (straight)
+      Q  0, 86 -120, 70   bottom edge curves outward (control at y=86)
+      Z                   close back to top-left
+  -->
+
+  <!-- ── Book B · rotation 45° · BACK layer ── -->
+  <g transform="translate(200,200) rotate(45)" filter="url(#shadow)">
+    <path d="M -120,-70 Q 0,-86 120,-70 L 120,70 Q 0,86 -120,70 Z"
+          fill="#E8DCC4" stroke="#3D3530" stroke-width="2"
+          stroke-linejoin="round"/>
+    <line x1="0" y1="-70" x2="0" y2="70"
+          stroke="#3D3530" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- ── Book C · rotation -45° · MIDDLE layer ── -->
+  <g transform="translate(200,200) rotate(-45)" filter="url(#shadow)">
+    <path d="M -120,-70 Q 0,-86 120,-70 L 120,70 Q 0,86 -120,70 Z"
+          fill="#E8DCC4" stroke="#3D3530" stroke-width="2"
+          stroke-linejoin="round"/>
+    <line x1="0" y1="-70" x2="0" y2="70"
+          stroke="#3D3530" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- ── Book A · rotation 0° · FRONT layer (on top) ── -->
+  <g transform="translate(200,200) rotate(0)" filter="url(#shadow)">
+    <path d="M -120,-70 Q 0,-86 120,-70 L 120,70 Q 0,86 -120,70 Z"
+          fill="#E8DCC4" stroke="#3D3530" stroke-width="2"
+          stroke-linejoin="round"/>
+    <line x1="0" y1="-70" x2="0" y2="70"
+          stroke="#3D3530" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+</svg>

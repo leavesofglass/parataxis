@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Lora } from 'next/font/google'
+import { Inter, Spectral } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({
@@ -8,9 +8,9 @@ const inter = Inter({
   display: 'swap',
 })
 
-const lora = Lora({
+const spectral = Spectral({
   subsets: ['latin'],
-  variable: '--font-lora',
+  variable: '--font-spectral',
   style: ['normal', 'italic'],
   weight: ['400', '500', '600'],
   display: 'swap',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${lora.variable} h-full`}>
+    <html lang="en" className={`${inter.variable} ${spectral.variable} h-full`}>
       <body className="h-full antialiased">{children}</body>
     </html>
   )

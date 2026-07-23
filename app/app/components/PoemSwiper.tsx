@@ -40,18 +40,40 @@ function markNudgeShown(threshold: NudgeThreshold) {
 const BATCH = 5
 const PREFETCH_AT = 2
 
-const LINE_MAX_KEY = 'parataxis_line_max'
+const BUCKETS_KEY = 'parataxis_length_buckets'
+type LengthBuckets = { short: boolean; medium: boolean; long: boolean }
+const DEFAULT_BUCKETS: LengthBuckets = { short: true, medium: true, long: true }
 
-function readLineMax(): number | null {
-  if (typeof window === 'undefined') return null
+function readBuckets(): LengthBuckets {
+  if (typeof window === 'undefined') return DEFAULT_BUCKETS
   try {
-    const v = localStorage.getItem(LINE_MAX_KEY)
-    if (!v) return null
-    const n = Number(v)
-    return Number.isFinite(n) && n > 0 ? n : null
-  } catch {
-    return null
-  }
+    const v = localStorage.getItem(BUCKETS_KEY)
+    if (!v) return DEFAULT_BUCKETS
+    const parsed = JSON.parse(v)
+    if (parsed && typeof parsed === 'object') {
+      return {
+        short:  parsed.short  !== false,
+        medium: parsed.medium !== false,
+        long:   parsed.long   !== false,
+      }
+    }
+  } catch {}
+  return DEFAULT_BUCKETS
+}
+
+// Returns a Supabase query builder with the bucket filter applied.
+// Handles all 8 on/off combinations without nested AND-within-OR.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function applyBucketFilter(query: any, b: LengthBuckets): any {
+  const { short, medium, long } = b
+  if (short && medium && long)   return query
+  if (!short && !medium && !long) return query.lte('line_count', 0)
+  if (short && medium)            return query.lte('line_count', 40)
+  if (medium && long)             return query.gte('line_count', 15)
+  if (short && long)              return query.or('line_count.lte.14,line_count.gte.41')
+  if (short)                      return query.lte('line_count', 14)
+  if (medium)                     return query.gte('line_count', 15).lte('line_count', 40)
+  /* long only */                 return query.gte('line_count', 41)
 }
 
 const DECK_STATE_KEY = 'parataxis_deck_state'
@@ -168,7 +190,7 @@ export function PoemSwiper() {
   const fetchingRef = useRef(false)
   const userIdRef = useRef<string | null>(null)
   const isSignedInRef = useRef(false)
-  const lineMaxRef = useRef<number | null>(null)
+  const bucketsRef = useRef<LengthBuckets>(DEFAULT_BUCKETS)
 
   // Lock: prevents double-firing Next while a card is mid-exit.
   const exitingRef = useRef(false)
@@ -226,14 +248,16 @@ export function PoemSwiper() {
 
     const supabase = getSupabase()
     const uid = userIdRef.current
-    const lineMax = lineMaxRef.current
+    const buckets = bucketsRef.current
 
     if (isSignedInRef.current && uid) {
       fetchingRef.current = true
       const { data, error } = await supabase.rpc('recommend_poems', {
-        user_id_in: uid,
-        limit_in: BATCH,
-        line_max_in: lineMax,
+        user_id_in:  uid,
+        limit_in:    BATCH,
+        show_short:  buckets.short,
+        show_medium: buckets.medium,
+        show_long:   buckets.long,
       })
       fetchingRef.current = false
       if (error || !data) {
@@ -263,7 +287,7 @@ export function PoemSwiper() {
       .from('poems')
       .select('id, title, author, body, line_count')
       .in('id', batch)
-    if (lineMax !== null) query = query.lte('line_count', lineMax)
+    query = applyBucketFilter(query, buckets)
     const { data, error } = await query
 
     fetchingRef.current = false
@@ -295,7 +319,7 @@ export function PoemSwiper() {
   useEffect(() => {
     async function init() {
       const supabase = getSupabase()
-      lineMaxRef.current = readLineMax()
+      bucketsRef.current = readBuckets()
 
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) {
@@ -314,7 +338,7 @@ export function PoemSwiper() {
 
       if (!isSignedInRef.current) {
         let idQuery = supabase.from('poems').select('id')
-        if (lineMaxRef.current !== null) idQuery = idQuery.lte('line_count', lineMaxRef.current)
+        idQuery = applyBucketFilter(idQuery, bucketsRef.current)
         const { data: idRows, error: idError } = await idQuery
 
         if (idError || !idRows) {

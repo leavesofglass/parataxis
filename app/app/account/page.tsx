@@ -3,6 +3,14 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+
+const LEGAL_LINKS = (
+  <p className="font-sans text-[0.7rem] text-neutral-300 mt-8">
+    <Link href="/privacy" className="hover:text-neutral-500 transition-colors">Privacy</Link>
+    <span className="mx-2">·</span>
+    <Link href="/terms" className="hover:text-neutral-500 transition-colors">Terms</Link>
+  </p>
+)
 import { getSupabase } from '@/lib/supabase'
 import { sendSignInLink } from '@/lib/authActions'
 import { Masthead } from '@/app/components/Masthead'
@@ -11,13 +19,13 @@ import type { User } from '@supabase/supabase-js'
 
 type SentMode = 'confirm' | 'magic' | null
 
-const LINE_MAX_KEY = 'parataxis_line_max'
-type LengthOption = { label: string; value: number | null }
-const LENGTH_OPTIONS: LengthOption[] = [
-  { label: 'No limit (any length)', value: null },
-  { label: 'Long (≤40 lines)',     value: 40 },
-  { label: 'Medium (≤20 lines)',   value: 20 },
-  { label: 'Short (≤10 lines)',    value: 10 },
+const BUCKETS_KEY = 'parataxis_length_buckets'
+type LengthBuckets = { short: boolean; medium: boolean; long: boolean }
+const DEFAULT_BUCKETS: LengthBuckets = { short: true, medium: true, long: true }
+const BUCKET_OPTIONS: { key: keyof LengthBuckets; label: string }[] = [
+  { key: 'short',  label: 'Short  (≤ 14 lines)' },
+  { key: 'medium', label: 'Medium (15 – 40 lines)' },
+  { key: 'long',   label: 'Long   (41 + lines)' },
 ]
 
 export default function AccountPage() {
@@ -31,7 +39,7 @@ export default function AccountPage() {
   const [sentMode, setSentMode] = useState<SentMode>(null)
   const [sendError, setSendError] = useState<string | null>(null)
 
-  const [lineMax, setLineMax] = useState<number | null>(null)
+  const [buckets, setBuckets] = useState<LengthBuckets>(DEFAULT_BUCKETS)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -40,10 +48,16 @@ export default function AccountPage() {
     }
 
     try {
-      const v = localStorage.getItem(LINE_MAX_KEY)
+      const v = localStorage.getItem(BUCKETS_KEY)
       if (v) {
-        const n = Number(v)
-        if (Number.isFinite(n) && n > 0) setLineMax(n)
+        const parsed = JSON.parse(v)
+        if (parsed && typeof parsed === 'object') {
+          setBuckets({
+            short:  parsed.short  !== false,
+            medium: parsed.medium !== false,
+            long:   parsed.long   !== false,
+          })
+        }
       }
     } catch {}
 
@@ -55,12 +69,12 @@ export default function AccountPage() {
       })
   }, [])
 
-  function selectLineMax(v: number | null) {
-    setLineMax(v)
-    try {
-      if (v === null) localStorage.removeItem(LINE_MAX_KEY)
-      else localStorage.setItem(LINE_MAX_KEY, String(v))
-    } catch {}
+  function toggleBucket(key: keyof LengthBuckets) {
+    setBuckets((prev) => {
+      const next = { ...prev, [key]: !prev[key] }
+      try { localStorage.setItem(BUCKETS_KEY, JSON.stringify(next)) } catch {}
+      return next
+    })
   }
 
   const redirectTo = typeof window !== 'undefined'
@@ -159,6 +173,7 @@ export default function AccountPage() {
                 )}
               </form>
             )}
+            {LEGAL_LINKS}
           </>
         ) : (
           <>
@@ -183,25 +198,23 @@ export default function AccountPage() {
           </p>
           <p className="font-sans text-[0.75rem] text-neutral-400 mb-3">Poem length</p>
           <div className="flex flex-col gap-2">
-            {LENGTH_OPTIONS.map((opt) => {
-              const selected = opt.value === lineMax
-              return (
-                <button
-                  key={String(opt.value)}
-                  type="button"
-                  onClick={() => selectLineMax(opt.value)}
-                  aria-pressed={selected}
-                  className={`text-left py-2.5 px-5 border rounded-full font-sans text-[0.8rem] transition-colors ${
-                    selected
-                      ? 'border-[#111] text-[#111]'
-                      : 'border-neutral-200 text-neutral-400 hover:border-neutral-400 hover:text-neutral-600'
-                  }`}
-                >
-                  {opt.label}
-                </button>
-              )
-            })}
+            {BUCKET_OPTIONS.map(({ key, label }) => (
+              <button
+                key={key}
+                type="button"
+                onClick={() => toggleBucket(key)}
+                aria-pressed={buckets[key]}
+                className={`text-left py-2.5 px-5 border rounded-full font-sans text-[0.8rem] transition-colors ${
+                  buckets[key]
+                    ? 'border-[#111] text-[#111]'
+                    : 'border-neutral-200 text-neutral-400 hover:border-neutral-400 hover:text-neutral-600'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
           </div>
+          {LEGAL_LINKS}
         </section>
       </div>
     </main>

@@ -19,7 +19,7 @@ The translator field in the output is normalised:
   "Translated by Jane Smith"  →  "Jane Smith"
   ""                          →  ""   (non-translations or English originals)
 
-Input:  scripts/dedup_cleaned.json  +  scripts/ralp_parsed.json
+Input:  scripts/dedup_enriched.json  +  scripts/ralp_parsed.json
 Output: scripts/dedup_filtered.json
 """
 
@@ -29,7 +29,7 @@ from collections import defaultdict
 from pathlib import Path
 
 SCRIPTS = Path(__file__).parent
-CLEANED_PATH  = SCRIPTS / "dedup_cleaned.json"
+CLEANED_PATH  = SCRIPTS / "dedup_enriched.json"
 RALP_PATH     = SCRIPTS / "ralp_parsed.json"
 OUTPUT_PATH   = SCRIPTS / "dedup_filtered.json"
 
