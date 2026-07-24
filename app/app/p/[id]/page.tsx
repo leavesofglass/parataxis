@@ -105,12 +105,12 @@ export default async function PoemPage({
             {poem.title}
           </h1>
           <div className="font-serif text-[1.05rem] leading-[1.95] text-[#111]">
-            {(poem.body_html ?? poem.body).split('\n').map((line, i) =>
-              line
+            {(poem.body_html ?? poem.body).replace(/^(?:[ \t]*\n)+/, '').split('\n').map((line, i) =>
+              line.trim()
                 ? poem.body_html != null
                   ? <span key={i} className="poem-line" dangerouslySetInnerHTML={{ __html: sanitizePoemHtml(line) }} />
                   : <span key={i} className="poem-line">{line}</span>
-                : <span key={i} className="block">{' '}</span>
+                : <span key={i} aria-hidden="true" className="block h-[0.6em]" />
             )}
           </div>
           <p className="font-sans text-[0.9rem] italic text-neutral-400 mt-10 mb-2">

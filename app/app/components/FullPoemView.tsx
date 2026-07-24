@@ -190,12 +190,12 @@ export function FullPoemView(props: Props) {
         </h1>
 
         <div className={BODY_CLASSES[fontSize]}>
-          {(poem.body_html ?? poem.body).split('\n').map((line, i) =>
-            line
+          {(poem.body_html ?? poem.body).replace(/^(?:[ \t]*\n)+/, '').split('\n').map((line, i) =>
+            line.trim()
               ? poem.body_html != null
                 ? <span key={i} className="poem-line" dangerouslySetInnerHTML={{ __html: sanitizePoemHtml(line) }} />
                 : <span key={i} className="poem-line">{line}</span>
-              : <span key={i} className="block">{' '}</span>
+              : <span key={i} aria-hidden="true" className="block h-[0.6em]" />
           )}
         </div>
 
