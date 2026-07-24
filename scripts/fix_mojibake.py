@@ -1,8 +1,24 @@
 """
-fix_mojibake.py — Replace U+00B4 (´) and U+0060 (`) with straight apostrophe (')
-in the body_html and title columns of the poems table.
+fix_mojibake.py — Fix Windows-1252 mojibake in poems table.
 
-Body is intentionally left untouched.
+The Verse Daily scraper stored raw cp1252 byte values as Unicode codepoints
+for the 0x80–0x9F range instead of decoding them first.  Examples:
+  U+0092 → ' (right single quotation mark)
+  U+0093 → " (left double quotation mark)
+  U+0094 → " (right double quotation mark)
+  U+0091 → ' (left single quotation mark)
+  U+0096 → – (en dash)
+  U+0097 → — (em dash)
+  U+0085 → … (ellipsis)
+
+Fix: for every character whose codepoint is in 0x80–0x9F, map it through
+Python's cp1252 codec.  The five bytes undefined in cp1252 (0x81, 0x8D,
+0x8F, 0x90, 0x9D) are left unchanged.
+
+Safety guard for body: skip any row where the fix would alter a character
+outside the 0x80–0x9F range (shouldn't happen, but guards against surprises).
+
+Columns: title, body, body_html.
 
 Usage:
   python scripts/fix_mojibake.py --dry-run   # show affected rows, no writes
@@ -15,10 +31,17 @@ from pathlib import Path
 
 SCRIPTS = Path(__file__).parent
 
-BAD_CHARS = ['´', '`']   # ´ acute accent, ` grave accent
-REPLACEMENT = "'"             # straight apostrophe U+0027
+# cp1252 → unicode map for the 0x80–0x9F range.
+# Bytes 0x81, 0x8D, 0x8F, 0x90, 0x9D are undefined in cp1252 and are omitted.
+CP1252_MAP: dict[int, str] = {}
+for _b in range(0x80, 0xA0):
+    try:
+        CP1252_MAP[_b] = bytes([_b]).decode('cp1252')
+    except UnicodeDecodeError:
+        pass
 
-COLUMNS = ['title', 'body_html']
+COLUMNS = ['title', 'body', 'body_html']
+EXPECTED_COUNT = 207
 
 # ── Env ──────────────────────────────────────────────────────────────────────
 
@@ -60,43 +83,52 @@ except ImportError:
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
-def needs_fix(value: str | None) -> bool:
+def has_mojibake(value: str | None) -> bool:
     if not value:
         return False
-    return any(c in value for c in BAD_CHARS)
+    return any(0x80 <= ord(ch) <= 0x9F for ch in value)
 
 
-def fix(value: str | None) -> str | None:
-    if not value:
-        return value
-    for c in BAD_CHARS:
-        value = value.replace(c, REPLACEMENT)
-    return value
+def fix_cp1252(value: str) -> str:
+    out = []
+    for ch in value:
+        cp = ord(ch)
+        if 0x80 <= cp <= 0x9F and cp in CP1252_MAP:
+            out.append(CP1252_MAP[cp])
+        else:
+            out.append(ch)
+    return ''.join(out)
 
 
-def excerpt(text: str, bad_char: str, context: int = 30) -> str:
-    """Return a short excerpt centred on the first occurrence of bad_char."""
-    idx = text.find(bad_char)
-    if idx < 0:
-        return ''
-    start = max(0, idx - context)
-    end   = min(len(text), idx + context + 1)
-    snippet = text[start:end]
-    if start > 0:
-        snippet = '…' + snippet
-    if end < len(text):
-        snippet = snippet + '…'
-    return repr(snippet)
+def only_mojibake_changed(original: str, fixed: str) -> bool:
+    """True iff every position that differs had a codepoint in 0x80–0x9F."""
+    if len(original) != len(fixed):
+        return False
+    for o, f in zip(original, fixed):
+        if o != f and not (0x80 <= ord(o) <= 0x9F):
+            return False
+    return True
+
+
+def excerpt(before: str, after: str, context: int = 35) -> tuple[str, str]:
+    """Return repr-quoted before/after snippets centred on the first difference."""
+    for i, (b, a) in enumerate(zip(before, after)):
+        if b != a:
+            lo = max(0, i - context)
+            hi = min(len(before), i + context + 1)
+            b_snip = ('…' if lo > 0 else '') + before[lo:hi] + ('…' if hi < len(before) else '')
+            a_snip = ('…' if lo > 0 else '') + after[lo:hi]  + ('…' if hi < len(after)  else '')
+            return repr(b_snip), repr(a_snip)
+    return repr(before[:80]), repr(after[:80])
 
 
 def fetch_all(client) -> list[dict]:
-    """Paginate through all poems, fetching only id, title, body_html."""
-    rows = []
+    rows: list[dict] = []
     page = 0
     while True:
         batch = (
             client.table('poems')
-            .select('id, title, body_html')
+            .select('id, title, body, body_html')
             .range(page * 1000, page * 1000 + 999)
             .execute()
         )
@@ -109,7 +141,7 @@ def fetch_all(client) -> list[dict]:
 
 # ── Main ─────────────────────────────────────────────────────────────────────
 
-def main():
+def main() -> None:
     args = sys.argv[1:]
     dry_run    = '--dry-run' in args
     write_mode = '--write'   in args
@@ -119,77 +151,96 @@ def main():
 
     client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-    print('Fetching poems (id, title, body_html) …', flush=True)
+    print('Fetching poems …', flush=True)
     rows = fetch_all(client)
     print(f'  {len(rows):,} rows fetched.\n')
 
-    # Collect all needed updates
-    updates: list[dict] = []   # {'id', 'col', 'before', 'after'}
+    # Build per-poem update plan.
+    # by_poem[poem_id][col] = {'before', 'after', 'skip', 'skip_reason'}
+    by_poem: dict[str, dict[str, dict]] = {}
 
     for row in rows:
         poem_id = row['id']
+        col_updates: dict[str, dict] = {}
+
         for col in COLUMNS:
-            val = row.get(col)
-            if needs_fix(val):
-                updates.append({
-                    'id':     poem_id,
-                    'col':    col,
-                    'before': val,
-                    'after':  fix(val),
-                })
+            val: str | None = row.get(col)
+            if not has_mojibake(val):
+                continue
+            assert val is not None
+            fixed = fix_cp1252(val)
+            if fixed == val:
+                continue
 
-    if not updates:
-        print('No affected rows found.')
-        return
+            skip = False
+            skip_reason = ''
+            if col == 'body' and not only_mojibake_changed(val, fixed):
+                skip = True
+                skip_reason = 'fix would change non-mojibake chars — skipped'
 
-    # Group by poem_id for cleaner display
-    by_poem: dict[str, list[dict]] = {}
-    for u in updates:
-        by_poem.setdefault(u['id'], []).append(u)
+            col_updates[col] = {
+                'before':      val,
+                'after':       fixed,
+                'skip':        skip,
+                'skip_reason': skip_reason,
+            }
 
-    print(f'Affected poems: {len(by_poem)}  |  Affected column×row pairs: {len(updates)}\n')
+        if col_updates:
+            by_poem[poem_id] = col_updates
 
-    for poem_id, cols in by_poem.items():
+    affected = len(by_poem)
+    pending  = sum(
+        1
+        for cols in by_poem.values()
+        for u in cols.values()
+        if not u['skip']
+    )
+
+    # Count check
+    check = '✓' if affected == EXPECTED_COUNT else '✗'
+    print(f'Affected poems : {affected}  ({check} expected {EXPECTED_COUNT})')
+    print(f'Column updates : {pending} (excluding skipped)\n')
+
+    # Show up to 10 examples
+    for poem_id, col_updates in list(by_poem.items())[:10]:
         print(f'── {poem_id} ──')
-        for u in cols:
-            col    = u['col']
-            before = u['before']
-            after  = u['after']
-            # Show one excerpt per bad character type found
-            for bad_char in BAD_CHARS:
-                if bad_char not in before:
-                    continue
-                count = before.count(bad_char)
-                char_name = 'U+00B4 ´' if bad_char == '´' else 'U+0060 `'
-                print(f'  [{col}]  {char_name}  ×{count}')
-                print(f'    BEFORE: {excerpt(before, bad_char)}')
-                fixed_excerpt = excerpt(before, bad_char, context=30)
-                # Show after by replacing just around the bad char
-                after_ex = excerpt(after, REPLACEMENT, context=30) if REPLACEMENT in after else repr(after[:60])
-                print(f'    AFTER:  {after_ex}')
+        for col, u in col_updates.items():
+            bef_ex, aft_ex = excerpt(u['before'], u['after'])
+            status = f'  [SKIP: {u["skip_reason"]}]' if u['skip'] else ''
+            print(f'  [{col}]{status}')
+            print(f'    BEFORE: {bef_ex}')
+            print(f'    AFTER:  {aft_ex}')
         print()
 
+    if affected > 10:
+        print(f'  … {affected - 10} more poems not shown …\n')
+
     if dry_run:
-        print(f'Dry run complete — {len(updates)} updates pending, nothing written.')
+        print(f'Dry run complete — {pending} updates pending, nothing written.')
         return
 
     # ── Write ────────────────────────────────────────────────────────────────
-    print(f'Writing {len(updates)} updates …')
+    print(f'Writing updates for {affected} poems …', flush=True)
     written = 0
-    errors  = []
+    nothing  = 0
+    errors: list[tuple[str, str]] = []
 
-    for u in updates:
+    for poem_id, col_updates in by_poem.items():
+        payload = {col: u['after'] for col, u in col_updates.items() if not u['skip']}
+        if not payload:
+            nothing += 1
+            continue
         try:
-            client.table('poems').update({u['col']: u['after']}).eq('id', u['id']).execute()
+            client.table('poems').update(payload).eq('id', poem_id).execute()
             written += 1
         except Exception as exc:
-            errors.append((u['id'], u['col'], str(exc)))
+            errors.append((poem_id, str(exc)))
 
-    print(f'Done. {written} updates applied.')
+    print(f'Done. {written} poems updated, {nothing} fully-skipped.')
     if errors:
         print(f'{len(errors)} errors:')
-        for poem_id, col, msg in errors:
-            print(f'  {poem_id} [{col}]: {msg}')
+        for pid, msg in errors:
+            print(f'  {pid}: {msg}')
 
 
 if __name__ == '__main__':
