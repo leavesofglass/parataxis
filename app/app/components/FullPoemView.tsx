@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import type { Poem } from '../types'
 import { ShareButton } from './ShareButton'
+import { FlagButton } from './FlagButton'
 
 export interface Reactions {
   liked: boolean
@@ -174,6 +175,7 @@ export function FullPoemView(props: Props) {
         <p className="font-sans text-[1rem] italic text-neutral-400 mt-10 mb-0">
           {poem.author}
         </p>
+        <FlagButton poemId={poem.id} />
       </div>
 
       {/* Action buttons */}

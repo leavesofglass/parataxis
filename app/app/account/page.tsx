@@ -28,6 +28,9 @@ const BUCKET_OPTIONS: { key: keyof LengthBuckets; label: string }[] = [
   { key: 'long',   label: 'Long' },
 ]
 
+const MIX_MODE_KEY = 'parataxis_mix_mode'
+const MIX_MODE_TOTAL = 30
+
 export default function AccountPage() {
   const router = useRouter()
   const [user, setUser] = useState<User | null>(null)
@@ -42,6 +45,7 @@ export default function AccountPage() {
   const [googleError, setGoogleError] = useState<string | null>(null)
 
   const [buckets, setBuckets] = useState<LengthBuckets>(DEFAULT_BUCKETS)
+  const [mixRemaining, setMixRemaining] = useState<number | null>(null)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -63,6 +67,16 @@ export default function AccountPage() {
       }
     } catch {}
 
+    try {
+      const mv = localStorage.getItem(MIX_MODE_KEY)
+      if (mv) {
+        const parsed = JSON.parse(mv)
+        if (typeof parsed?.remaining === 'number' && parsed.remaining > 0) {
+          setMixRemaining(parsed.remaining)
+        }
+      }
+    } catch {}
+
     getSupabase()
       .auth.getUser()
       .then(({ data }: { data: { user: User | null } }) => {
@@ -78,6 +92,17 @@ export default function AccountPage() {
       try { localStorage.setItem(BUCKETS_KEY, JSON.stringify(next)) } catch {}
       return next
     })
+  }
+
+  function handleStartMix() {
+    try { localStorage.setItem(MIX_MODE_KEY, JSON.stringify({ remaining: MIX_MODE_TOTAL })) } catch {}
+    setMixRemaining(MIX_MODE_TOTAL)
+    router.push('/')
+  }
+
+  function handleCancelMix() {
+    try { localStorage.removeItem(MIX_MODE_KEY) } catch {}
+    setMixRemaining(null)
   }
 
   const redirectTo = typeof window !== 'undefined'
@@ -259,6 +284,31 @@ export default function AccountPage() {
                     {label}
                   </button>
                 ))}
+              </div>
+
+              <div className="mt-6 flex items-center gap-4">
+                {mixRemaining !== null ? (
+                  <>
+                    <span className="font-sans text-[0.75rem] text-neutral-400">
+                      Shuffle mode · {mixRemaining} left
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleCancelMix}
+                      className="py-2 px-5 border border-neutral-200 rounded-full font-sans text-[0.8rem] text-neutral-400 hover:border-neutral-400 hover:text-neutral-600 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleStartMix}
+                    className="py-2.5 px-6 border border-neutral-200 rounded-full font-sans text-[0.8rem] text-neutral-400 hover:border-neutral-400 hover:text-neutral-600 transition-colors"
+                  >
+                    Mix it up
+                  </button>
+                )}
               </div>
             </section>
             {LEGAL_LINKS}

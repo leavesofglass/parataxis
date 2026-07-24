@@ -44,6 +44,19 @@ const BUCKETS_KEY = 'parataxis_length_buckets'
 type LengthBuckets = { short: boolean; medium: boolean; long: boolean }
 const DEFAULT_BUCKETS: LengthBuckets = { short: true, medium: true, long: false }
 
+const MIX_MODE_KEY = 'parataxis_mix_mode'
+
+function readMixMode(): number | null {
+  if (typeof window === 'undefined') return null
+  try {
+    const v = localStorage.getItem(MIX_MODE_KEY)
+    if (!v) return null
+    const parsed = JSON.parse(v)
+    if (typeof parsed?.remaining === 'number' && parsed.remaining > 0) return parsed.remaining
+  } catch {}
+  return null
+}
+
 function readBuckets(): LengthBuckets {
   if (typeof window === 'undefined') return DEFAULT_BUCKETS
   try {
@@ -199,6 +212,8 @@ export function PoemSwiper() {
   // Lock: prevents double-firing Next while a card is mid-exit.
   const exitingRef = useRef(false)
 
+  const mixRemainingRef = useRef<number | null>(null)
+
   // Reactions keyed by poem.id — survives Back navigation.
   // useRef for synchronous reads in callbacks; useState counterpart drives renders.
   const reactionsRef = useRef<Record<string, Reactions>>({})
@@ -219,6 +234,7 @@ export function PoemSwiper() {
   const [savedCount, setSavedCount] = useState(0)
   const [userEmail, setUserEmail] = useState<string | null>(null)
   const [nudgeThreshold, setNudgeThreshold] = useState<NudgeThreshold | null>(null)
+  const [mixRemaining, setMixRemaining] = useState<number | null>(null)
 
   // isExiting drives the card's exit animation (Next only).
   const [isExiting, setIsExiting] = useState(false)
@@ -268,6 +284,7 @@ export function PoemSwiper() {
     fetchingRef.current = true
     try {
       if (isSignedIn && uid) {
+        const forceRandom = mixRemainingRef.current !== null && mixRemainingRef.current > 0
         const { data, error } = await supabase.rpc('recommend_poems', {
           user_id_in:     uid,
           limit_in:       BATCH,
@@ -275,6 +292,7 @@ export function PoemSwiper() {
           show_medium:    buckets.medium,
           show_long:      buckets.long,
           recent_authors: recentAuthorsRef.current,
+          force_random:   forceRandom,
         })
         if (error) {
           const detail = `recommend_poems — ${error.message} (${error.code ?? 'no code'})`
@@ -349,6 +367,10 @@ export function PoemSwiper() {
     async function init() {
       const supabase = getSupabase()
       bucketsRef.current = readBuckets()
+
+      const mixR = readMixMode()
+      mixRemainingRef.current = mixR
+      setMixRemaining(mixR)
 
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) {
@@ -481,6 +503,19 @@ export function PoemSwiper() {
     exitingRef.current = false
     setIsExiting(false)
     setCardIdx((i) => i + 1)
+    if (mixRemainingRef.current !== null && mixRemainingRef.current > 0) {
+      const next = mixRemainingRef.current - 1
+      const nextOrNull = next > 0 ? next : null
+      mixRemainingRef.current = nextOrNull
+      setMixRemaining(nextOrNull)
+      try {
+        if (nextOrNull !== null) {
+          localStorage.setItem(MIX_MODE_KEY, JSON.stringify({ remaining: nextOrNull }))
+        } else {
+          localStorage.removeItem(MIX_MODE_KEY)
+        }
+      } catch {}
+    }
   }, [])
 
   // ── Back handler ─────────────────────────────────────────────────────────
@@ -556,6 +591,15 @@ export function PoemSwiper() {
           </Link>
         </div>
       </div>
+
+      {/* ── Mix mode indicator ── */}
+      {mixRemaining !== null && (
+        <div className="w-full flex justify-center py-1 shrink-0">
+          <span className="font-sans text-[0.65rem] tracking-[0.15em] text-neutral-400 uppercase">
+            shuffle · {mixRemaining} left
+          </span>
+        </div>
+      )}
 
       {/* ── Card area ── */}
       <div className="flex-1 flex items-center justify-center w-full min-h-0 py-4 px-[2.5vw] sm:px-0">
