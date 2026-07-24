@@ -1,9 +1,25 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import type { Poem } from '../types'
 import { ShareButton } from './ShareButton'
 import { FlagButton } from './FlagButton'
+
+const FONT_SIZE_KEY = 'parataxis_font_size'
+type FontSize = 'small' | 'medium' | 'large'
+
+const TITLE_CLASSES: Record<FontSize, string> = {
+  small:  'font-serif text-[1.2rem] leading-[1.3] font-normal text-[#111] mb-10',
+  medium: 'font-serif text-[1.5rem] leading-[1.35] font-normal text-[#111] mb-10',
+  large:  'font-serif text-[1.85rem] leading-[1.4] font-normal text-[#111] mb-10',
+}
+
+const BODY_CLASSES: Record<FontSize, string> = {
+  small:  'font-serif text-[0.9rem] leading-[1.85] text-[#111]',
+  medium: 'font-serif text-[1.05rem] leading-[1.95] text-[#111]',
+  large:  'font-serif text-[1.25rem] leading-[2.0] text-[#111]',
+}
 
 export interface Reactions {
   liked: boolean
@@ -59,6 +75,14 @@ type Props = SwipeProps | LibraryProps | SkippedProps
 export function FullPoemView(props: Props) {
   const { poem } = props
   const isLibrary = props.variant === 'library'
+  const [fontSize, setFontSize] = useState<FontSize>('medium')
+
+  useEffect(() => {
+    try {
+      const v = localStorage.getItem(FONT_SIZE_KEY)
+      if (v === 'small' || v === 'medium' || v === 'large') setFontSize(v)
+    } catch {}
+  }, [])
   const isSkipped = props.variant === 'skipped'
   const asCard = !isLibrary && !isSkipped && !!(props as SwipeProps).asCard
 
@@ -157,14 +181,14 @@ export function FullPoemView(props: Props) {
 
       {/* Scrollable poem */}
       <div className="flex-1 overflow-y-auto overscroll-contain px-6 sm:px-10 pt-14 pb-3 sm:pb-6">
-        <h1 className="font-serif text-[1.5rem] leading-[1.35] font-normal text-[#111] mb-10">
+        <h1 className={TITLE_CLASSES[fontSize]}>
           {poem.title}
           {isLibrary && 'isSuperLiked' in props && props.isSuperLiked && (
             <span className="ml-2 text-[1rem]" aria-label="Loved">💖</span>
           )}
         </h1>
 
-        <div className="font-serif text-[1.05rem] leading-[1.95] text-[#111]">
+        <div className={BODY_CLASSES[fontSize]}>
           {poem.body.split('\n').map((line, i) =>
             line
               ? <span key={i} className="poem-line">{line}</span>

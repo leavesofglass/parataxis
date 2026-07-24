@@ -596,6 +596,10 @@ groups:
       - name: Angela Jackson
         count: 3
         sources: [slowdown]
+
+  - canonical: A. B. Jackson
+    confirmed: true
+    variants:
       - name: A.B. Jackson
         count: 1
         sources: [versedaily]
@@ -1122,12 +1126,16 @@ groups:
   - canonical: Marilee Richards
     confirmed: true
     variants:
-      - name: M. C. Richards
-        count: 1
-        sources: [poetrydaily]
       - name: Marilee Richards
         count: 1
         sources: [versedaily]
+
+  - canonical: M. C. Richards
+    confirmed: true
+    variants:
+      - name: M. C. Richards
+        count: 1
+        sources: [poetrydaily]
 
   - canonical: Yannis Ritsos
     confirmed: true

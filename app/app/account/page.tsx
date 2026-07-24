@@ -31,6 +31,15 @@ const BUCKET_OPTIONS: { key: keyof LengthBuckets; label: string }[] = [
 const MIX_MODE_KEY = 'parataxis_mix_mode'
 const MIX_MODE_TOTAL = 30
 
+const FONT_SIZE_KEY = 'parataxis_font_size'
+type FontSize = 'small' | 'medium' | 'large'
+const DEFAULT_FONT_SIZE: FontSize = 'medium'
+const FONT_SIZE_OPTIONS: { key: FontSize; label: string }[] = [
+  { key: 'small',  label: 'Small' },
+  { key: 'medium', label: 'Medium' },
+  { key: 'large',  label: 'Large' },
+]
+
 export default function AccountPage() {
   const router = useRouter()
   const [user, setUser] = useState<User | null>(null)
@@ -45,6 +54,7 @@ export default function AccountPage() {
   const [googleError, setGoogleError] = useState<string | null>(null)
 
   const [buckets, setBuckets] = useState<LengthBuckets>(DEFAULT_BUCKETS)
+  const [fontSize, setFontSize] = useState<FontSize>(DEFAULT_FONT_SIZE)
   const [mixRemaining, setMixRemaining] = useState<number | null>(null)
 
   useEffect(() => {
@@ -64,6 +74,13 @@ export default function AccountPage() {
             long:   parsed.long   !== false,
           })
         }
+      }
+    } catch {}
+
+    try {
+      const fv = localStorage.getItem(FONT_SIZE_KEY)
+      if (fv === 'small' || fv === 'medium' || fv === 'large') {
+        setFontSize(fv)
       }
     } catch {}
 
@@ -92,6 +109,11 @@ export default function AccountPage() {
       try { localStorage.setItem(BUCKETS_KEY, JSON.stringify(next)) } catch {}
       return next
     })
+  }
+
+  function handleFontSize(size: FontSize) {
+    setFontSize(size)
+    try { localStorage.setItem(FONT_SIZE_KEY, size) } catch {}
   }
 
   function handleStartMix() {
@@ -277,6 +299,25 @@ export default function AccountPage() {
                     aria-pressed={buckets[key]}
                     className={`py-2.5 px-5 border rounded-full font-sans text-[0.8rem] transition-colors ${
                       buckets[key]
+                        ? 'border-[#111] text-[#111]'
+                        : 'border-neutral-200 text-neutral-400 hover:border-neutral-400 hover:text-neutral-600'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+
+              <p className="font-sans text-[0.75rem] text-neutral-400 mb-3 mt-6">Font size</p>
+              <div className="flex flex-row gap-2">
+                {FONT_SIZE_OPTIONS.map(({ key, label }) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => handleFontSize(key)}
+                    aria-pressed={fontSize === key}
+                    className={`py-2.5 px-5 border rounded-full font-sans text-[0.8rem] transition-colors ${
+                      fontSize === key
                         ? 'border-[#111] text-[#111]'
                         : 'border-neutral-200 text-neutral-400 hover:border-neutral-400 hover:text-neutral-600'
                     }`}
