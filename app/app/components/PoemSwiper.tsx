@@ -191,6 +191,7 @@ export function PoemSwiper() {
   const userIdRef = useRef<string | null>(null)
   const isSignedInRef = useRef(false)
   const bucketsRef = useRef<LengthBuckets>(DEFAULT_BUCKETS)
+  const mountedRef = useRef(true)
 
   // Lock: prevents double-firing Next while a card is mid-exit.
   const exitingRef = useRef(false)
@@ -249,67 +250,82 @@ export function PoemSwiper() {
     const supabase = getSupabase()
     const uid = userIdRef.current
     const buckets = bucketsRef.current
+    const isSignedIn = isSignedInRef.current
 
     if (!buckets.short && !buckets.medium && !buckets.long) {
       return { added: 0, detail: 'no-length-filters' }
     }
+    if (!isSignedIn && poolRef.current.length === 0) {
+      return { added: 0, detail: null }
+    }
 
-    if (isSignedInRef.current && uid) {
-      fetchingRef.current = true
-      const { data, error } = await supabase.rpc('recommend_poems', {
-        user_id_in:  uid,
-        limit_in:    BATCH,
-        show_short:  buckets.short,
-        show_medium: buckets.medium,
-        show_long:   buckets.long,
-      })
-      fetchingRef.current = false
+    // Single gate: cleared in finally so it always resets even if the request throws.
+    // Prevents concurrent loads; because there is never more than one in-flight request,
+    // out-of-order responses are structurally impossible.
+    fetchingRef.current = true
+    try {
+      if (isSignedIn && uid) {
+        const { data, error } = await supabase.rpc('recommend_poems', {
+          user_id_in:  uid,
+          limit_in:    BATCH,
+          show_short:  buckets.short,
+          show_medium: buckets.medium,
+          show_long:   buckets.long,
+        })
+        if (error) {
+          const detail = `recommend_poems — ${error.message} (${error.code ?? 'no code'})`
+          console.error(detail, error)
+          return { added: 0, detail }
+        }
+        const rows = (data ?? []) as Poem[]
+        if (mountedRef.current) {
+          setPoems((prev) => {
+            const seen = new Set(prev.map((p) => p.id))
+            return [...prev, ...rows.filter((p) => !seen.has(p.id))]
+          })
+        }
+        return { added: rows.length, detail: null }
+      }
+
+      // Anon pool path
+      if (poolPosRef.current >= poolRef.current.length) {
+        poolRef.current = shuffle(poolRef.current)
+        poolPosRef.current = 0
+      }
+
+      const savedPos = poolPosRef.current
+      const batch = poolRef.current.slice(savedPos, savedPos + BATCH)
+      poolPosRef.current += batch.length  // optimistic; restored below on error
+
+      let query = supabase
+        .from('poems')
+        .select('id, title, author, body, line_count')
+        .in('id', batch)
+      query = applyBucketFilter(query, buckets)
+      const { data, error } = await query
+
       if (error) {
-        const detail = `recommend_poems — ${error.message} (${error.code ?? 'no code'})`
+        poolPosRef.current = savedPos  // don't lose the IDs on a transient failure
+        const detail = `poems fetch — ${error.message} (${error.code ?? 'no code'})`
         console.error(detail, error)
         return { added: 0, detail }
       }
-      const rows = (data ?? []) as Poem[]
-      setPoems((prev) => {
-        const seen = new Set(prev.map((p) => p.id))
-        return [...prev, ...rows.filter((p) => !seen.has(p.id))]
-      })
-      return { added: rows.length, detail: null }
+
+      const ordered = batch
+        .map((id) => (data ?? []).find((p: Poem) => p.id === id))
+        .filter(Boolean) as Poem[]
+
+      if (mountedRef.current) {
+        setPoems((prev) => [...prev, ...ordered])
+      }
+      return { added: ordered.length, detail: null }
+    } finally {
+      fetchingRef.current = false
     }
-
-    if (poolRef.current.length === 0) return { added: 0, detail: null }
-    fetchingRef.current = true
-
-    if (poolPosRef.current >= poolRef.current.length) {
-      poolRef.current = shuffle(poolRef.current)
-      poolPosRef.current = 0
-    }
-
-    const batch = poolRef.current.slice(poolPosRef.current, poolPosRef.current + BATCH)
-    poolPosRef.current += batch.length
-
-    let query = supabase
-      .from('poems')
-      .select('id, title, author, body, line_count')
-      .in('id', batch)
-    query = applyBucketFilter(query, buckets)
-    const { data, error } = await query
-
-    fetchingRef.current = false
-
-    if (error) {
-      const detail = `poems fetch — ${error.message} (${error.code ?? 'no code'})`
-      console.error(detail, error)
-      return { added: 0, detail }
-    }
-
-    const ordered = batch
-      .map((id) => (data ?? []).find((p: Poem) => p.id === id))
-      .filter(Boolean) as Poem[]
-
-    setPoems((prev) => [...prev, ...ordered])
-    return { added: ordered.length, detail: null }
   }, [])
+
+  // ── Cleanup ───────────────────────────────────────────────────────────────
+  useEffect(() => () => { mountedRef.current = false }, [])
 
   // ── Auth state subscription ───────────────────────────────────────────────
   useEffect(() => {
@@ -443,12 +459,16 @@ export function PoemSwiper() {
 
   // ── Next handler ──────────────────────────────────────────────────────────
   // The only action that advances the card. Does not log.
+  // Blocked while an exit animation is in flight (exitingRef) and also while
+  // we're on the last loaded poem and a batch fetch is in flight — advancing
+  // past the end of the array would leave topPoem undefined.
   const handleNext = useCallback((poem: Poem) => {
     if (exitingRef.current) return
+    if (cardIdx >= poems.length - 1 && fetchingRef.current) return
     exitingRef.current = true
     void poem  // captured for potential future logging
     setIsExiting(true)
-  }, [])
+  }, [cardIdx, poems.length])
 
   // Called by PoemCard's onAnimationComplete when the exit animation finishes.
   const handleCardExited = useCallback(() => {
@@ -459,10 +479,12 @@ export function PoemSwiper() {
 
   // ── Back handler ─────────────────────────────────────────────────────────
   // Pure navigation — steps back through session history. Never touches DB.
+  // Refuses to fire during an in-progress exit: if it cleared exitingRef while
+  // an exit animation was running, handleCardExited would later increment cardIdx
+  // and undo the backward step.
   const handleBack = useCallback(() => {
+    if (exitingRef.current) return
     if (cardIdx === 0) return
-    exitingRef.current = false
-    setIsExiting(false)
     setCardIdx((i) => i - 1)
   }, [cardIdx])
 
