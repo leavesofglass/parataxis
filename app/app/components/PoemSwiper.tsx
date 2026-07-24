@@ -192,6 +192,9 @@ export function PoemSwiper() {
   const isSignedInRef = useRef(false)
   const bucketsRef = useRef<LengthBuckets>(DEFAULT_BUCKETS)
   const mountedRef = useRef(true)
+  // Authors of the last ~10 poems added to the deck. Passed to recommend_poems
+  // so the server excludes them from the next batch (diversity constraint).
+  const recentAuthorsRef = useRef<string[]>([])
 
   // Lock: prevents double-firing Next while a card is mid-exit.
   const exitingRef = useRef(false)
@@ -266,11 +269,12 @@ export function PoemSwiper() {
     try {
       if (isSignedIn && uid) {
         const { data, error } = await supabase.rpc('recommend_poems', {
-          user_id_in:  uid,
-          limit_in:    BATCH,
-          show_short:  buckets.short,
-          show_medium: buckets.medium,
-          show_long:   buckets.long,
+          user_id_in:     uid,
+          limit_in:       BATCH,
+          show_short:     buckets.short,
+          show_medium:    buckets.medium,
+          show_long:      buckets.long,
+          recent_authors: recentAuthorsRef.current,
         })
         if (error) {
           const detail = `recommend_poems — ${error.message} (${error.code ?? 'no code'})`
@@ -281,7 +285,9 @@ export function PoemSwiper() {
         if (mountedRef.current) {
           setPoems((prev) => {
             const seen = new Set(prev.map((p) => p.id))
-            return [...prev, ...rows.filter((p) => !seen.has(p.id))]
+            const merged = [...prev, ...rows.filter((p) => !seen.has(p.id))]
+            recentAuthorsRef.current = merged.slice(-10).map((p) => p.author)
+            return merged
           })
         }
         return { added: rows.length, detail: null }
