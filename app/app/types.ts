@@ -3,5 +3,6 @@ export interface Poem {
   title: string
   author: string
   body: string
+  body_html?: string | null
   line_count: number
 }

@@ -323,7 +323,7 @@ export function PoemSwiper() {
 
       let query = supabase
         .from('poems')
-        .select('id, title, author, body, line_count')
+        .select('id, title, author, body, body_html, line_count')
         .in('id', batch)
       query = applyBucketFilter(query, buckets)
       const { data, error } = await query
@@ -413,7 +413,7 @@ export function PoemSwiper() {
       if (saved && !isSignedInRef.current && savedIsFresh && saved.poemIds.length > 0) {
         const { data, error: fetchErr } = await supabase
           .from('poems')
-          .select('id, title, author, body, line_count')
+          .select('id, title, author, body, body_html, line_count')
           .in('id', saved.poemIds)
         if (!fetchErr && data) {
           const byId = new Map((data as Poem[]).map((p) => [p.id, p]))

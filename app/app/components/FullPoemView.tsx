@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import type { Poem } from '../types'
 import { ShareButton } from './ShareButton'
 import { FlagButton } from './FlagButton'
+import { sanitizePoemHtml } from '@/lib/sanitize'
 
 const FONT_SIZE_KEY = 'parataxis_font_size'
 type FontSize = 'small' | 'medium' | 'large'
@@ -189,9 +190,11 @@ export function FullPoemView(props: Props) {
         </h1>
 
         <div className={BODY_CLASSES[fontSize]}>
-          {poem.body.split('\n').map((line, i) =>
+          {(poem.body_html ?? poem.body).split('\n').map((line, i) =>
             line
-              ? <span key={i} className="poem-line">{line}</span>
+              ? poem.body_html != null
+                ? <span key={i} className="poem-line" dangerouslySetInnerHTML={{ __html: sanitizePoemHtml(line) }} />
+                : <span key={i} className="poem-line">{line}</span>
               : <span key={i} className="block">{' '}</span>
           )}
         </div>

@@ -20,11 +20,13 @@ body {
   background: var(--background);
 }
 
-/* Hanging indent for poem lines: wrapped continuations indent, new lines don't. */
+/* Hanging indent for poem lines: wrapped continuations indent, new lines don't.
+   white-space: pre-wrap preserves leading spaces for indented poem lines. */
 .poem-line {
   display: block;
   padding-left: 2ch;
   text-indent: -2ch;
+  white-space: pre-wrap;
 }
 
 body {

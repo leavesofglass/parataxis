@@ -3,12 +3,14 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getSupabaseServer } from '@/lib/supabaseServer'
 import { ShareButton } from '@/app/components/ShareButton'
+import { sanitizePoemHtml } from '@/lib/sanitize'
 
 interface PoemRow {
   id: string
   title: string
   author: string
   body: string
+  body_html: string | null
 }
 
 // Origin used for absolute URLs in OG/Twitter metadata. Falls back to the
@@ -22,7 +24,7 @@ async function fetchPoem(id: string): Promise<PoemRow | null> {
   const supabase = getSupabaseServer()
   const { data, error } = await supabase
     .from('poems')
-    .select('id, title, author, body')
+    .select('id, title, author, body, body_html')
     .eq('id', id)
     .maybeSingle()
   if (error || !data) return null
@@ -103,9 +105,11 @@ export default async function PoemPage({
             {poem.title}
           </h1>
           <div className="font-serif text-[1.05rem] leading-[1.95] text-[#111]">
-            {poem.body.split('\n').map((line, i) =>
+            {(poem.body_html ?? poem.body).split('\n').map((line, i) =>
               line
-                ? <span key={i} className="poem-line">{line}</span>
+                ? poem.body_html != null
+                  ? <span key={i} className="poem-line" dangerouslySetInnerHTML={{ __html: sanitizePoemHtml(line) }} />
+                  : <span key={i} className="poem-line">{line}</span>
                 : <span key={i} className="block">{' '}</span>
             )}
           </div>
