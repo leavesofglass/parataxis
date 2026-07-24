@@ -195,7 +195,7 @@ export function FullPoemView(props: Props) {
               ? poem.body_html != null
                 ? <span key={i} className="poem-line" dangerouslySetInnerHTML={{ __html: sanitizePoemHtml(line) }} />
                 : <span key={i} className="poem-line">{line}</span>
-              : <span key={i} className="block">{' '}</span>
+              : <span key={i} className="block">{' '}</span>
           )}
         </div>
 
