@@ -2,16 +2,33 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { AnimatePresence, motion } from 'framer-motion'
-import type { TargetAndTransition } from 'framer-motion'
+import dynamic from 'next/dynamic'
 import { getSupabase } from '@/lib/supabase'
 import type { AuthChangeEvent, Session } from '@supabase/supabase-js'
 import { fetchSavedCount } from '@/lib/library'
 import type { Poem } from '../types'
-import { FullPoemView } from './FullPoemView'
 import type { Reactions } from './FullPoemView'
-import { SignupNudgeModal } from './SignupNudgeModal'
 import { Masthead } from './Masthead'
+
+// Heavy chunks: framer-motion + FullPoemView (+ sanitize, ShareButton, FlagButton)
+// and the signup modal. Neither is needed for first paint — first paint is the
+// header + "· · ·" spinner while auth and the first poem batch are in flight.
+const PoemCard = dynamic(
+  () => import('./PoemCard').then((m) => m.PoemCard),
+  { ssr: false, loading: () => null },
+)
+const SignupNudgeModal = dynamic(
+  () => import('./SignupNudgeModal').then((m) => m.SignupNudgeModal),
+  { ssr: false, loading: () => null },
+)
+
+// Kick off the PoemCard chunk fetch at module parse time, in parallel with the
+// initial Supabase auth request. Without this the chunk waits until <PoemCard/>
+// mounts (after hydration + auth + first fetch), putting it on the critical
+// path and costing ~200ms of time-to-first-poem on slow connections.
+if (typeof window !== 'undefined') {
+  void import('./PoemCard')
+}
 
 // ── Nudge threshold helpers ────────────────────────────────────────────────
 const NUDGE_THRESHOLDS = [1, 5, 10] as const
@@ -117,61 +134,6 @@ export function getPreview(body: string): string {
 }
 
 const EMPTY_REACTIONS: Reactions = { liked: false, disliked: false, saved: false }
-
-// ── PoemCard ──────────────────────────────────────────────────────────────────
-// Non-draggable card wrapper. Drives entry and exit animations via the animate
-// prop. Entry animation fires only on Back (enterDir='right'); normal forward
-// navigation uses initial=false (instant appear). Exit fires when isExiting is
-// true (Next only). onExited is guarded by isExiting so it only fires on actual
-// exit, not on completion of a Back entry animation.
-function PoemCard({
-  poem,
-  activeReactions,
-  onReaction,
-  onNext,
-  onShare,
-  isExiting,
-  onExited,
-  canBack,
-  onBack,
-}: {
-  poem: Poem
-  activeReactions: Reactions
-  onReaction: (action: 'like' | 'dislike' | 'save') => void
-  onNext: () => void
-  onShare: () => void
-  isExiting: boolean
-  onExited: () => void
-  canBack: boolean
-  onBack: () => void
-}) {
-  const exitTarget: TargetAndTransition = isExiting
-    ? { x: '160%', opacity: 0 }
-    : { x: 0, y: 0, opacity: 1 }
-
-  return (
-    <motion.div
-      className="absolute inset-0"
-      style={{ zIndex: 2 }}
-      initial={false}
-      animate={exitTarget}
-      transition={{ duration: 0.25, ease: 'easeOut' }}
-      onAnimationComplete={() => { if (isExiting) onExited() }}
-    >
-      <FullPoemView
-        poem={poem}
-        activeReactions={activeReactions}
-        onReaction={onReaction}
-        onNext={onNext}
-        onShare={onShare}
-        onClose={() => {}}
-        asCard
-        canBack={canBack}
-        onBack={onBack}
-      />
-    </motion.div>
-  )
-}
 
 export function PoemSwiper() {
   const fetchingRef = useRef(false)
@@ -301,6 +263,7 @@ export function PoemSwiper() {
   // ── Init ──────────────────────────────────────────────────────────────────
   useEffect(() => {
     async function init() {
+      const t: Record<string, number> = { start: performance.now() }
       const supabase = getSupabase()
       bucketsRef.current = readBuckets()
 
@@ -308,9 +271,17 @@ export function PoemSwiper() {
       mixRemainingRef.current = mixR
       setMixRemaining(mixR)
 
-      const { data: { user } } = await supabase.auth.getUser()
+      // getSession() reads from localStorage/cookies — no network. Returning
+      // users skip the ~200ms /auth/v1/user validation round-trip that getUser()
+      // would incur. The SDK auto-refreshes the token in the background if it's
+      // near expiry, so a locally-present session is safe to trust for the
+      // initial fetch. New users (no session) fall through to signInAnonymously.
+      const { data: { session } } = await supabase.auth.getSession()
+      const user = session?.user ?? null
+      t.afterGetUser = performance.now()
       if (!user) {
         const { data, error: anonError } = await supabase.auth.signInAnonymously()
+        t.afterSignIn = performance.now()
         if (anonError) {
           console.error('Auth error:', anonError)
           setError(`Sign-in failed — ${anonError.message}`)
@@ -347,9 +318,12 @@ export function PoemSwiper() {
 
       if (!restored) {
         const result = await loadBatch()
+        t.afterLoadBatch = performance.now()
         if (result.detail) setError(result.detail)
       }
       if (userIdRef.current) fetchSavedCount(userIdRef.current).then(setSavedCount)
+      t.ready = performance.now()
+      ;(window as unknown as { __initTimings?: Record<string, number> }).__initTimings = t
       setReady(true)
     }
     init()
@@ -457,10 +431,20 @@ export function PoemSwiper() {
   }, [logInteraction])
 
   // ── Render ────────────────────────────────────────────────────────────────
+  // Loading shell — uses inline styles so it paints before the CSS <link> in
+  // <head> finishes loading. On slow connections that turns the "blank screen
+  // for several seconds" into "spinner immediately, then poem." The colour is
+  // darker than the app's chrome text so it's actually visible against #ECECEC.
   if (!ready) {
     return (
-      <div className="h-dvh flex items-center justify-center bg-[#ECECEC]">
-        <span className="text-sm font-sans text-neutral-300 tracking-widest">·  ·  ·</span>
+      <div style={{
+        height: '100dvh', display: 'flex', alignItems: 'center',
+        justifyContent: 'center', background: '#ECECEC',
+      }}>
+        <span style={{
+          fontSize: '0.875rem', color: '#9ca3af', letterSpacing: '0.1em',
+          fontFamily: 'ui-sans-serif, system-ui, sans-serif',
+        }}>·  ·  ·</span>
       </div>
     )
   }
@@ -568,18 +552,16 @@ export function PoemSwiper() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {nudgeThreshold && (
-          <SignupNudgeModal
-            key={nudgeThreshold}
-            threshold={nudgeThreshold}
-            onDismiss={() => {
-              markNudgeShown(nudgeThreshold)
-              setNudgeThreshold(null)
-            }}
-          />
-        )}
-      </AnimatePresence>
+      {nudgeThreshold && (
+        <SignupNudgeModal
+          key={nudgeThreshold}
+          threshold={nudgeThreshold}
+          onDismiss={() => {
+            markNudgeShown(nudgeThreshold)
+            setNudgeThreshold(null)
+          }}
+        />
+      )}
     </main>
   )
 }
