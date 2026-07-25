@@ -1,0 +1,42 @@
+{
+  "id": "poem_0318",
+  "title": "A Dream Within A Dream",
+  "author": "Edgar Allan Poe",
+  "stored_line_count": 24,
+  "source": "wikisource",
+  "source_ref": "The Works of the Late Edgar Allan Poe (1859)/Volume 2/A Dream within a Dream",
+  "fetched_body": "Take this kiss upon the brow!\nAnd, in parting from you now,\nThus much let me avow\u2014\nYou are not wrong, who deem\nThat my days have been a dream;\nYet if hope has flown away\nIn a night, or in a day,\nIn a vision, or in none,\nIs it therefore the less gone?\nAll that we see or seem\nIs but a dream within a dream.\n\nI stand amid the roar\nOf a surf-tormented shore,\nAnd I hold within my hand\nGrains of the golden sand\u2014\nHow few! yet how they creep\nThrough my fingers to the deep,\nWhile I weep\u2014while I weep!\nO God! can I not grasp\nThem with a tighter clasp?\nO God! can I not save\nOne from the pitiless wave?\nIs all that we see or seem\nBut a dream within a dream?",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 0.9583333333333334,
+    "stored_lines": 24,
+    "fetched_lines": 24,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "A Dream Within A Dream",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "A Dream Within A Dream (Poe)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Works of the Late Edgar Allan Poe (1859)/Volume 2/A Dream within a Dream",
+      "ratio": 0.958,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

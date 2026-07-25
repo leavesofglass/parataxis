@@ -1,0 +1,97 @@
+{
+  "id": "poem_0367",
+  "title": "Places",
+  "author": "Sara Teasdale",
+  "stored_line_count": 24,
+  "source": "wikisource",
+  "source_ref": "Flame and Shadow/Places",
+  "fetched_body": "Places I love come back to me like music,\nHush me and heal me when I am very tired;\nI see the oak woods at Saxton's flaming\nIn a flare of crimson by the frost newly fired;\nAnd I am thirsty for the spring in the valley\nAs for a kiss ungiven and long desired.\n\nI know a bright world of snowy hills at Boonton,\nA blue and white dazzling light on everything one sees,\nThe ice-covered branches of the hemlocks sparkle\nBending low and tinkling in the sharp thin breeze,\nAnd iridescent crystals fall and crackle on the snow-crust\nWith the winter sun drawing cold blue shadows from the trees.\n\nViolet now, in veil on veil of evening\nThe hills across from Cromwell grow dreamy and far;\nA wood-thrush is singing soft as a viol\nIn the heart of the hollow where the dark pools are;\nThe primrose has opened her pale yellow flowers\nAnd heaven is lighting star after star.\n\nPlaces I love come back to me like music\u2014\nMid-ocean, midnight, the waves buzz drowsily;\nIn the ship's deep churning the eerie phosphorescence\nIs like the souls of people who were drowned at sea,\nAnd I can hear a man's voice, speaking, hushed, insistent,\nAt midnight, in mid-ocean, hour on hour to me.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 1.0,
+    "stored_lines": 24,
+    "fetched_lines": 24,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Places",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 23"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Places (Teasdale)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Flame and Shadow/Faces",
+      "ratio": 0.0,
+      "fetched_lines": 16,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 8"
+    },
+    {
+      "source": "wikisource",
+      "ref": "American Poetry 1922/Wisdom",
+      "ratio": 0.0,
+      "fetched_lines": 12,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 12"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Flame and Shadow",
+      "ratio": 0.0,
+      "fetched_lines": 2,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 22"
+    },
+    {
+      "source": "wikisource",
+      "ref": "American Poetry 1922/Places",
+      "ratio": 0.0,
+      "fetched_lines": 54,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 30"
+    },
+    {
+      "source": "wikisource",
+      "ref": "American Poetry 1922/Words for an Old Air",
+      "ratio": 0.0,
+      "fetched_lines": 12,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 12"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Flame and Shadow/Places",
+      "ratio": 1.0,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

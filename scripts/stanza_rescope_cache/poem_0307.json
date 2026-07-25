@@ -1,0 +1,92 @@
+{
+  "id": "poem_0307",
+  "title": "Fiddler Jones",
+  "author": "Edgar Lee Masters",
+  "stored_line_count": 26,
+  "source": "gutenberg",
+  "source_ref": "Edgar Lee Masters",
+  "fetched_body": "The earth keeps some vibration going\nThere in your heart, and that is you.\nAnd if the people find you can fiddle,\nWhy, fiddle you must, for all your life.\nWhat do you see, a harvest of clover?\nOr a meadow to walk through to the river?\nThe wind\u2019s in the corn; you rub your hands\nFor beeves hereafter ready for market;\nOr else you hear the rustle of skirts\nLike the girls when dancing at Little Grove.\nTo Cooney Potter a pillar of dust\nOr whirling leaves meant ruinous drouth;\nThey looked to me like Red-Head Sammy\nStepping it off, to \u201cToor-a-Loor.\u201d\nHow could I till my forty acres\nNot to speak of getting more,\nWith a medley of horns, bassoons and piccolos\nStirred in my brain by crows and robins\nAnd the creak of a wind-mill\u2014only these?\nAnd I never started to plow in my life\nThat some one did not stop in the road\nAnd take me away to a dance or picnic.\nI ended up with forty acres;\nI ended up with a broken fiddle\u2014\nAnd a broken laugh, and a thousand memories,\nAnd not a single regret.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 0.9230769230769231,
+    "stored_lines": 26,
+    "fetched_lines": 26,
+    "fetched_has_breaks": false,
+    "reason": "ok"
+  },
+  "category": "FOUND_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Fiddler Jones",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Fiddler Jones (Masters)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)/The Hill",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 25"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Weird Tales/1928",
+      "ratio": 0.0,
+      "fetched_lines": 23,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 3"
+    },
+    {
+      "source": "wikisource",
+      "ref": "1977 Books and Pamphlets July-Dec/R",
+      "ratio": 0.0,
+      "fetched_lines": 24729,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 24703"
+    },
+    {
+      "source": "wikisource",
+      "ref": "1977 Books and Pamphlets Jan-June/R",
+      "ratio": 0.0,
+      "fetched_lines": 23561,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 23535"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Anthology of Magazine Verse for 1921/Index of Poets and Poems",
+      "outcome": "no-text"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Edgar Lee Masters",
+      "ratio": 0.923,
+      "fetched_lines": 26,
+      "has_breaks": false,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

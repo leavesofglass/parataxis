@@ -1,0 +1,89 @@
+{
+  "id": "poem_0279",
+  "title": "A Red, Red Rose.",
+  "author": "Robert Burns",
+  "stored_line_count": 21,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio 0.649 (line-count differs by 5)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "A Red, Red Rose",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 20"
+    },
+    {
+      "source": "wikisource",
+      "ref": "A Red, Red Rose (Burns)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Poetical Works of Robert Burns/A red, red Rose",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 20"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Book of Scottish Song/A red, red Rose",
+      "ratio": 0.649,
+      "fetched_lines": 16,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 5"
+    },
+    {
+      "source": "wikisource",
+      "ref": "A red, red Rose (Burns)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Burns' Popular Songs/A Red Red Rose",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Ellen More (1824, Edinburgh)/A red, red rose",
+      "ratio": 0.303,
+      "fetched_lines": 12,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 9"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Six Excellent Songs (Newton Stewart)/A Red, Red Rose",
+      "outcome": "no-text"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Robert Burns",
+      "ratio": 0.474,
+      "fetched_lines": 17,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 4"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

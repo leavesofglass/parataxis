@@ -1,0 +1,107 @@
+{
+  "id": "poem_0314",
+  "title": "Alone",
+  "author": "Edgar Allan Poe",
+  "stored_line_count": 22,
+  "source": "wikisource",
+  "source_ref": "Alone (Poe)",
+  "fetched_body": "From childhood's hour I have not been\nAs others were \u2014 I have not seen\nAs others saw \u2014 I could not bring\nMy passions from a common spring \u2014\nFrom the same source I have not taken\nMy sorrow \u2014 I could not awaken\nMy heart to joy at the same tone \u2014\nAnd all I lov'd \u2014 I lov'd alone \u2014\nThen \u2014 in my childhood \u2014 in the dawn\nOf a most stormy life \u2014 was drawn\nFrom ev'ry depth of good and ill\nThe mystery which binds me still \u2014\nFrom the torrent, or the fountain \u2014\nFrom the red cliff of the mountain \u2014\nFrom the sun that 'round me roll'd\nIn its autumn tint of gold \u2014\nFrom the lightning in the sky\nAs it pass'd me flying by \u2014\nFrom the thunder, and the storm \u2014\nAnd the cloud that took the form\n(When the rest of Heaven was blue)\nOf a demon in my view \u2014",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.8181818181818182,
+    "stored_lines": 22,
+    "fetched_lines": 22,
+    "fetched_has_breaks": false,
+    "reason": "near (r=0.818, lines 22=22) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Alone",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Alone (Poe)",
+      "ratio": 0.818,
+      "fetched_lines": 22,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.818, lines 22=22) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Works of the Late Edgar Allan Poe (1859)/Volume 2/The City in the Sea",
+      "ratio": 0.0,
+      "fetched_lines": 53,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 31"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Works of the Late Edgar Allan Poe (1859)/Volume 2/Eulalie",
+      "ratio": 0.0,
+      "fetched_lines": 21,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "ratio 0.000 below 0.55"
+    },
+    {
+      "source": "wikisource",
+      "ref": "1911 Encyclop\u00e6dia Britannica/Poe, Edgar Allan",
+      "ratio": 0.0,
+      "fetched_lines": 108,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 86"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Works of the Late Edgar Allan Poe (1859)/Volume 2/The Sleeper",
+      "ratio": 0.0,
+      "fetched_lines": 61,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 39"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Works of the Late Edgar Allan Poe (1859)/Volume 2/The Bells",
+      "ratio": 0.0,
+      "fetched_lines": 116,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 94"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Works of the Late Edgar Allan Poe (1850)/Volume 1/The Island of the Fay",
+      "ratio": 0.0,
+      "fetched_lines": 3,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 19"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Edgar Allan Poe",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

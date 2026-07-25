@@ -1,0 +1,52 @@
+{
+  "id": "poem_0552",
+  "title": "Dulce et Decorum est",
+  "author": "Wilfred Owen",
+  "stored_line_count": 28,
+  "source": "wikisource",
+  "source_ref": "Poems by Wilfred Owen/Dulce et Decorum est",
+  "fetched_body": "Bent double, like old beggars under sacks,\nKnock-kneed, coughing like hags, we cursed through sludge,\nTill on the haunting flares we turned our backs\nAnd towards our distant rest began to trudge.\nMen marched asleep. Many had lost their boots\nBut limped on, blood-shod. All went lame; all blind;\nDrunk with fatigue; deaf even to the hoots\nOf gas-shells dropping softly behind.\n\nGas! GAS! Quick, boys!\u2014An ecstasy of fumbling\nFitting the clumsy helmets just in time,\nBut someone still was yelling out and stumbling\nAnd flound'ring like a man in fire or lime.\u2014\nDim, through the misty panes and thick green light,\nAs under a green sea, I saw him drowning.\n\nIn all my dreams before my helpless sight\nHe plunges at me, guttering, choking, drowning.\n\nIf in some smothering dreams you too could pace\nBehind the wagon that we flung him in,\nAnd watch the white eyes writhing in his face,\nHis hanging face, like a devil's sick of sin,\nIf you could hear, at every jolt, the blood\nCome gargling from the froth-corrupted lungs,\nBitter as the cud\nOf vile, incurable sores on innocent tongues,\u2014\nMy friend, you would not tell with such high zest\nTo children ardent for some desperate glory,\nThe old Lie: Dulce et decorum est\nPro patria mori.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 1.0,
+    "stored_lines": 28,
+    "fetched_lines": 28,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Dulce et Decorum est",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Dulce et Decorum est (Owen)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Complete Poems and Fragments of Wilfred Owen/Dulce et Decorum Est",
+      "ratio": 0.75,
+      "fetched_lines": 28,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.750, lines 28=28) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems by Wilfred Owen/Dulce et Decorum est",
+      "ratio": 1.0,
+      "fetched_lines": 28,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

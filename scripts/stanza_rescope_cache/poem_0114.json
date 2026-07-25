@@ -1,0 +1,102 @@
+{
+  "id": "poem_0114",
+  "title": "The Little Black Boy",
+  "author": "William Blake",
+  "stored_line_count": 28,
+  "source": "wikisource",
+  "source_ref": "Songs of Innocence and of Experience (1826)/Songs of Innocence/The Little Black Boy",
+  "fetched_body": "My mother bore me in the southern wild,\nAnd I am black, but O! my soul is white\nWhite as an angel is the English child:\nBut I am black as if bereav'd of light.\n\nMy mother taught me underneath a tree\nAnd sitting down before the heat of day\nShe took me on her lap and kissed me,\nAnd pointing to the east began to say,\n\nLook on the rising sun: there God does live\nAnd gives his light, and gives his heat away\nAnd flowers and trees and beasts and men receiv\nComfort in morning joy in the noon day.\n\nAnd we are put on earth a little space\nThat we may learn to bear the beams of love,\nAnd these black bodies and this sun-burnt face\nIs but a cloud, and like a shady grove.\n\nFor when our souls have learn'd the heat to bear\nThe cloud will vanish we shall hear his voice,\nSaying: come out from the grove my love & care,\nAnd round my golden tent like lambs rejoice.\n\nThus did my mother say and kissed me.\nAnd thus I say to little English boy.\nWhen I from black and he from white cloud free,\nAnd round the tent of God like lambs we joy:\n\nI'll shade him from the heat till he can bear,\nTo lean in joy upon our fathers knee.\nAnd then I'll stand and stroke his silver hair,\nAnd be like him and he will then love me.",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.7142857142857143,
+    "stored_lines": 28,
+    "fetched_lines": 28,
+    "fetched_has_breaks": true,
+    "reason": "near (r=0.714, lines 28=28) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The Little Black Boy",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Little Black Boy (Blake)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Songs of Innocence and of Experience (1826)/Songs of Innocence/The Little Black Boy",
+      "ratio": 0.714,
+      "fetched_lines": 28,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.714, lines 28=28) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Songs of Innocence and of Experience (1826)/Songs of Innocence",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Life of William Blake (1880), Volume 2",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 27"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Life of William Blake (1863), Volume 2",
+      "ratio": 0.0,
+      "fetched_lines": 4,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 24"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Songs of Innocence and of Experience (1826)/Songs of Innocence/The Lamb",
+      "ratio": 0.0,
+      "fetched_lines": 20,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 8"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Facsimile of the original outlines before colouring of the Songs of Innocence and of Experience",
+      "ratio": 0.0,
+      "fetched_lines": 18,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 10"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "William Blake",
+      "ratio": 0.0,
+      "fetched_lines": 43,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 15"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "poem_0293",
+  "title": "Aaron Hatfield",
+  "author": "Edgar Lee Masters",
+  "stored_line_count": 24,
+  "source": "gutenberg",
+  "source_ref": "Edgar Lee Masters",
+  "fetched_body": "Better than granite, Spoon River,\nIs the memory-picture you keep of me\nStanding before the pioneer men and women\nThere at Concord Church on Communion day.\nSpeaking in broken voice of the peasant youth\nOf Galilee who went to the city\nAnd was killed by bankers and lawyers;\nMy voice mingling with the June wind\nThat blew over wheat fields from Atterbury;\nWhile the white stones in the burying ground\nAround the Church shimmered in the summer sun.\nAnd there, though my own memories\nWere too great to bear, were you, O pioneers,\nWith bowed heads breathing forth your sorrow\nFor the sons killed in battle and the daughters\nAnd little children who vanished in life\u2019s morning,\nOr at the intolerable hour of noon.\nBut in those moments of tragic silence,\nWhen the wine and bread were passed,\nCame the reconciliation for us\u2014\nUs the ploughmen and the hewers of wood,\nUs the peasants, brothers of the peasant of Galilee\u2014\nTo us came the Comforter\nAnd the consolation of tongues of flame!",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 0.9583333333333334,
+    "stored_lines": 24,
+    "fetched_lines": 24,
+    "fetched_has_breaks": false,
+    "reason": "ok"
+  },
+  "category": "FOUND_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Aaron Hatfield",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Aaron Hatfield (Masters)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)/Aaron Hatfield",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)/Isaiah Beethoven",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 23"
+    },
+    {
+      "source": "wikisource",
+      "ref": "One of a Thousand/Roster of the Commonwealth",
+      "ratio": 0.0,
+      "fetched_lines": 2260,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 2236"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Alumni Oxonienses: the Members of the University of Oxford, 1715-1886/P",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Federal Reporter/Third series/Volume 96",
+      "outcome": "no-text"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Edgar Lee Masters",
+      "ratio": 0.958,
+      "fetched_lines": 24,
+      "has_breaks": false,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

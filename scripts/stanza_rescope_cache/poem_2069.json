@@ -1,0 +1,102 @@
+{
+  "id": "poem_2069",
+  "title": "On the Death of a Young Gentleman",
+  "author": "Phillis Wheatley",
+  "stored_line_count": 24,
+  "source": "wikisource",
+  "source_ref": "Poems on Various Subjects, Religious and Moral/On the Death of a young Gentleman",
+  "fetched_body": "WHO taught thee conflict with the pow'rs of night,\nTo vanquish Satan in the fields of fight?\nWho strung thy feeble arms with might unknown,\nHow great thy conquest, and how bright thy crown!\nWar with each princedom, throne, and pow'r is o'er,5\nThe scene is ended to return no more.\nO could my muse thy feat on high behold,\nHow deckt with laurel, how enrich'd with gold!\nO could she hear what praise thine harp employs,\nHow sweet thine anthems, how divine thy joys!10\nWhat heav'nly grandeur should exalt her strain!\nWhat holy raptures in her numbers reign!\nTo sooth the troubles of the mind to peace,\nTo still the tumult of life's tossing seas,\n\nTo ease the anguish of the parents heart,15\nWhat shall my sympathizing verse impart?\nWhere is the balm to heal so deep a wound?\nWhere shall a sov'reign remedy be found?\nLook, gracious Spirit, from thine heav'nly bow'r,\nAnd thy full joys into their bosoms pour;20\nThe raging tempest of their grief control,\nAnd spread the dawn of glory through the soul,\nTo eye the path the saint departed trod,\nAnd trace him to the bosom of his God.",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.75,
+    "stored_lines": 24,
+    "fetched_lines": 24,
+    "fetched_has_breaks": true,
+    "reason": "near (r=0.750, lines 24=24) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "On the Death of a Young Gentleman",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "On the Death of a Young Gentleman (Wheatley)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Memoir and Poems of Phillis Wheatley/On the Death of a Young Gentleman",
+      "ratio": 0.583,
+      "fetched_lines": 24,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.583, lines 24=24) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Memoir and Poems of Phillis Wheatley",
+      "ratio": 0.0,
+      "fetched_lines": 4,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 20"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 23"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/On the Death of a young Gentleman",
+      "ratio": 0.75,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.750, lines 24=24) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/To a Lady on the Death of her Husband",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/On the Death of a young Lady of five Years of Age",
+      "ratio": 0.0,
+      "fetched_lines": 36,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 12"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Phillis Wheatley",
+      "ratio": 0.0,
+      "fetched_lines": 39,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 15"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

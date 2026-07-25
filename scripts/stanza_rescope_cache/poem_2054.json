@@ -1,0 +1,47 @@
+{
+  "id": "poem_2054",
+  "title": "The Widow's Lament in Springtime",
+  "author": "William Carlos Williams",
+  "stored_line_count": 28,
+  "source": "wikisource",
+  "source_ref": "Sour Grapes/The Widow's Lament in Springtime",
+  "fetched_body": "Sorrow is my own yard\nwhere the new grass\nflames as it has flamed\noften before but not\nwith the cold fire\nthat closes round me this year.\nThirtyfive years\nI lived with my husband.\nThe plumtree is white today\nwith masses of flowers.\nMasses of flowers\nload the cherry branches\nand color some bushes\nyellow and some red\nbut the grief in my heart\nis stronger than they\nfor though they were my joy\nformerly, today I notice them\nand turn away forgetting.\nToday my son told me\nthat in the meadows,\nat the edge of the heavy woods\nin the distance, he saw\ntrees of white flowers.\nI feel that I would like\nto go there\nand fall into those flowers\nand sink into the marsh near them.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 1.0,
+    "stored_lines": 28,
+    "fetched_lines": 28,
+    "fetched_has_breaks": false,
+    "reason": "ok"
+  },
+  "category": "FOUND_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The Widow's Lament in Springtime",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 27"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Widow's Lament in Springtime (Williams)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Sour Grapes/The Widow's Lament in Springtime",
+      "ratio": 1.0,
+      "fetched_lines": 28,
+      "has_breaks": false,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

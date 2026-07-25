@@ -1,0 +1,47 @@
+{
+  "id": "poem_0196",
+  "title": "The Song Of Wandering Aengus",
+  "author": "William Butler Yeats",
+  "stored_line_count": 24,
+  "source": "wikisource",
+  "source_ref": "The Wind Among the Reeds/The Song of Wandering Aengus",
+  "fetched_body": "I went out to the hazel wood,\nBecause a fire was in my head,\nAnd cut and peeled a hazel wand,\nAnd hooked a berry to a thread;\nAnd when white moths were on the wing,\nAnd moth-like stars were flickering out,\nI dropped the berry in a steam\nAnd caught a little silver trout.\nWhen I had laid it on the floor\nI went to blow the fire a-flame,\nBut something rustled on the floor,\nAnd someone called me by my name:\n\nIt had become a glimmering girl\nWith apple blossom in her hair\nWho called me by my name and ran\nAnd faded through the brightening air.\nThough I am old with wandering\nThrough hollow lands and hilly lands,\nI will \ufb01nd out where she has gone,\nAnd kiss her lips and take her hands;\nAnd walk among long dappled grass,\nAnd pluck till time and times are done,\nThe silver apples of the moon,\nThe golden apples of the sun.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 0.9583333333333334,
+    "stored_lines": 24,
+    "fetched_lines": 24,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The Song Of Wandering Aengus",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Song Of Wandering Aengus (Yeats)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Song of Wandering Aengus (Yeats)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Wind Among the Reeds/The Song of Wandering Aengus",
+      "ratio": 0.958,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

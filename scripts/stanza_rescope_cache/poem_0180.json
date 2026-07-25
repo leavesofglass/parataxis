@@ -1,0 +1,102 @@
+{
+  "id": "poem_0180",
+  "title": "Lines Written In Early Spring",
+  "author": "William Wordsworth",
+  "stored_line_count": 24,
+  "source": "wikisource",
+  "source_ref": "Poems (Wordsworth, 1815)/Volume 2/Lines written in early spring",
+  "fetched_body": "I heard a thousand blended notes,\nWhile in a grove I sate reclined,\nIn that sweet mood when pleasant thoughts\nBring sad thoughts to the mind.\n\nTo her fair works did Nature link\nThe human soul that through me ran;\nAnd much it grieved my heart to think\nWhat man has made of man.\n\nThrough primrose tufts, in that sweet bower,\nThe periwinkle trailed its wreaths;\nAnd 'tis my faith that every flower\nEnjoys the air it breathes.\n\nThe birds around me hopped and played:\nTheir thoughts I cannot measure:\u2014\nBut the least motion which they made,\nIt seemed a thrill of pleasure.\n\nThe budding twigs spread out their fan,\nTo catch the breezy air;\nAnd I must think, do all I can,\nThat there was pleasure there.\n\nIf I these thoughts may not prevent,\nIf such be of my creed the plan,\nHave I not reason to lament\nWhat man has made of man?",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.875,
+    "stored_lines": 24,
+    "fetched_lines": 24,
+    "fetched_has_breaks": true,
+    "reason": "near (r=0.875, lines 24=24) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Lines Written In Early Spring",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Lines Written In Early Spring (Wordsworth)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Lines (Wordsworth, \"I heard a thousand blended notes\")",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems (Wordsworth, 1815)/Volume 2/Lines written in early spring",
+      "ratio": 0.875,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.875, lines 24=24) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Lyrical Ballads (1798)/Lines written in early spring",
+      "ratio": 0.708,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.708, lines 24=24) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Hundred Best Poems (lyrical) in the English language - second series/Lines Written in Early Spring",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 23"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Lyrical Ballads (1800)/Volume 1",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 23"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems (Wordsworth, 1815)/Volume 2/To a Young Lady who had been reproached for taking long walks, &c",
+      "ratio": 0.0,
+      "fetched_lines": 18,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 6"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "William Wordsworth",
+      "ratio": 0.0,
+      "fetched_lines": 12,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 12"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

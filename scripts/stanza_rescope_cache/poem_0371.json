@@ -1,0 +1,47 @@
+{
+  "id": "poem_0371",
+  "title": "Stars",
+  "author": "Sara Teasdale",
+  "stored_line_count": 20,
+  "source": "wikisource",
+  "source_ref": "Flame and Shadow/Stars",
+  "fetched_body": "Alone in the night\nOn a dark hill\nWith pines around me\nSpicy and still,\n\nAnd a heaven full of stars\nOver my head,\nWhite and topaz\nAnd misty red;\n\nMyriads with beating\nHearts of fire\nThat aeons\nCannot vex or tire;\n\nUp the dome of heaven\nLike a great hill,\nI watch them marching\nStately and still,\n\nAnd I know that I\nAm honored to be\nWitness\nOf so much majesty.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 1.0,
+    "stored_lines": 20,
+    "fetched_lines": 20,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Stars",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Stars (Teasdale)",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 19"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Flame and Shadow/Stars",
+      "ratio": 1.0,
+      "fetched_lines": 20,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

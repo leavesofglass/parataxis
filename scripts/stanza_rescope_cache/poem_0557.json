@@ -1,0 +1,47 @@
+{
+  "id": "poem_0557",
+  "title": "Greater Love",
+  "author": "Wilfred Owen",
+  "stored_line_count": 24,
+  "source": "wikisource",
+  "source_ref": "Poems by Wilfred Owen/Greater Love",
+  "fetched_body": "Red lips are not so red\nAs the stained stones kissed by the English dead.\nKindness of wooed and wooer\nSeems shame to their love pure.\nO Love, your eyes lose lure\nWhen I behold eyes blinded in my stead!\n\nYour slender attitude\nTrembles not exquisite like limbs knife-skewed,\nRolling and rolling there\nWhere God seems not to care;\nTill the fierce love they bear\nCramps them in death's extreme decrepitude.\n\nYour voice sings not so soft,\u2014\nThough even as wind murmuring through raftered loft,\u2014\nYour dear voice is not dear,\nGentle, and evening clear,\nAs theirs whom none now hear,\nNow earth has stopped their piteous mouths that coughed.\n\nHeart, you were never hot\nNor large, nor full like hearts made great with shot;\nAnd though your hand be pale,\nPaler are all which trail\nYour cross through flame and hail:\nWeep, you may weep, for you may touch them not.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 1.0,
+    "stored_lines": 24,
+    "fetched_lines": 24,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Greater Love",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 23"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Greater Love (Owen)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems by Wilfred Owen/Greater Love",
+      "ratio": 1.0,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

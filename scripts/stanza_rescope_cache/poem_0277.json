@@ -1,0 +1,99 @@
+{
+  "id": "poem_0277",
+  "title": "Mary Morison.",
+  "author": "Robert Burns",
+  "stored_line_count": 28,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio 0.538 (line-count differs by 4)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Mary Morison",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Mary Morison (Burns)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Poetical Works of Robert Burns/Mary Morison",
+      "ratio": 0.069,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 27"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Book of Scottish Song/Mary Morison",
+      "ratio": 0.462,
+      "fetched_lines": 24,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 4"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Irish maniac/Mary Morrison",
+      "ratio": 0.538,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 4"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Poetical Works of Robert Burns/To Mary",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 27"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Book of Scottish Song/Highland Mary 1",
+      "ratio": 0.0,
+      "fetched_lines": 32,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 4"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Poetical Works of Robert Burns/A Mother's Lament for the Death of her Son",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 27"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Robert Burns",
+      "ratio": 0.0,
+      "fetched_lines": 81,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 53"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

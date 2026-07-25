@@ -1,0 +1,47 @@
+{
+  "id": "poem_0553",
+  "title": "The Send-off",
+  "author": "Wilfred Owen",
+  "stored_line_count": 20,
+  "source": "wikisource",
+  "source_ref": "Poems by Wilfred Owen/The Send-off",
+  "fetched_body": "Down the close, darkening lanes they sang their way\nTo the siding-shed,\nAnd lined the train with faces grimly gay.\n\nTheir breasts were stuck all white with wreath and spray\nAs men's are, dead.\n\nDull porters watched them, and a casual tramp\nStood staring hard,\nSorry to miss them from the upland camp.\nThen, unmoved, signals nodded, and a lamp\nWinked to the guard.\n\nSo secretly, like wrongs hushed-up, they went.\nThey were not ours:\nWe never heard to which front these were sent.\n\nNor there if they yet mock what women meant\nWho gave them flowers.\n\nShall they return to beatings of great bells\nIn wild trainloads?\nA few, a few, too few for drums and yells,\nMay creep back, silent, to still village wells,\nUp half-known roads.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 1.0,
+    "stored_lines": 20,
+    "fetched_lines": 20,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The Send-off",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 19"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Send-off (Owen)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems by Wilfred Owen/The Send-off",
+      "ratio": 1.0,
+      "fetched_lines": 20,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

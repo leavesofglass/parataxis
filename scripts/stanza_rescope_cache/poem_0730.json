@@ -1,0 +1,42 @@
+{
+  "id": "poem_0730",
+  "title": "Lines On The Mermaid Tavern",
+  "author": "John Keats",
+  "stored_line_count": 26,
+  "source": "wikisource",
+  "source_ref": "The complete poetical works and letters of John Keats/Lines on the Mermaid Tavern",
+  "fetched_body": "Souls of Poets dead and gone,\nWhat Elysium have ye known,\nHappy field or mossy cavern,\nChoicer than the Mermaid Tavern?\nHave ye tippled drink more fine\nThan mine host's Canary wine?\nOr are fruits of Paradise\nSweeter than those dainty pies\nOf venison? O generous food!\nDrest as though bold Robin Hood10\nWould, with his maid Marian,\nSup and bowse from horn and can.\n\nI have heard that on a day\nMine host's sign-board flew away,\nNobody knew whither, till\nAn astrologer's old quill\nTo a sheepskin gave the story,\nSaid he saw you in your glory,\nUnderneath a new-old sign\nSipping beverage divine,20\nAnd pledging with contented smack\nThe Mermaid in the Zodiac.\n\nSouls of Poets dead and gone,\nWhat Elysium have ye known,\nHappy field or mossy cavern,\nChoicer than the Mermaid Tavern?",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 0.9230769230769231,
+    "stored_lines": 26,
+    "fetched_lines": 26,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Lines On The Mermaid Tavern",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Lines On The Mermaid Tavern (Keats)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The complete poetical works and letters of John Keats/Lines on the Mermaid Tavern",
+      "ratio": 0.923,
+      "fetched_lines": 26,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

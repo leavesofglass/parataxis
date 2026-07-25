@@ -1,0 +1,89 @@
+{
+  "id": "poem_0273",
+  "title": "Coming Through The Rye.",
+  "author": "Robert Burns",
+  "stored_line_count": 24,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio 0.909 (line-count differs by 4)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Coming Through The Rye",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Coming Through The Rye (Burns)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Poetical Works of Robert Burns/Coming through the Rye",
+      "ratio": 0.909,
+      "fetched_lines": 20,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 4"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Comin' Thro' the Rye (attr. Burns)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Book of Scottish Song/Comin' thro' the rye 1",
+      "ratio": 0.607,
+      "fetched_lines": 32,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 8"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Comin' Thro' the Rye",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Poetical Works of Robert Burns/Peg-a-Ramsey",
+      "ratio": 0.0,
+      "fetched_lines": 12,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 12"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Poetical Works of Robert Burns/Come boat me o'er to Charlie",
+      "ratio": 0.0,
+      "fetched_lines": 20,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 4"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Robert Burns",
+      "ratio": 0.0,
+      "fetched_lines": 117,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 93"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

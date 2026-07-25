@@ -1,0 +1,89 @@
+{
+  "id": "poem_0158",
+  "title": "The Snake.",
+  "author": "Emily Elizabeth Dickinson",
+  "stored_line_count": 24,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio None (None)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The Snake",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Snake (Dickinson)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Life and Letters of Emily Dickinson/Letters of Emily Dickinson",
+      "ratio": 0.0,
+      "fetched_lines": 835,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 811"
+    },
+    {
+      "source": "wikisource",
+      "ref": "1977 Books and Pamphlets July-Dec/R",
+      "ratio": 0.0,
+      "fetched_lines": 24729,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 24705"
+    },
+    {
+      "source": "wikisource",
+      "ref": "1977 Books and Pamphlets July-Dec/BB",
+      "ratio": 0.0,
+      "fetched_lines": 9929,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 9905"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Epitaph",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Oregon Historical Quarterly/Volume 37/Index",
+      "ratio": 0.0,
+      "fetched_lines": 2652,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 2628"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Men of 1914/F",
+      "ratio": 0.0,
+      "fetched_lines": 150,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 126"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Emily Elizabeth Dickinson",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

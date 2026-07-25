@@ -1,0 +1,89 @@
+{
+  "id": "poem_0601",
+  "title": "The Road Not Taken",
+  "author": "Robert Lee Frost",
+  "stored_line_count": 20,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio None (None)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The Road Not Taken",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Road Not Taken (Frost)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "1977 Books and Pamphlets July-Dec/R",
+      "ratio": 0.0,
+      "fetched_lines": 24729,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 24709"
+    },
+    {
+      "source": "wikisource",
+      "ref": "History of Oregon (Bancroft)/Volume 1/Chapter 8",
+      "ratio": 0.0,
+      "fetched_lines": 93,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 73"
+    },
+    {
+      "source": "wikisource",
+      "ref": "History of Oregon (Bancroft)/Volume 1/Chapter 3",
+      "ratio": 0.0,
+      "fetched_lines": 42,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 22"
+    },
+    {
+      "source": "wikisource",
+      "ref": "California Historical Society Quarterly/Volume 22/The Diary of a \"Used-up\" Miner",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "History of the War between the United States and Mexico/Chapter 9",
+      "ratio": 0.0,
+      "fetched_lines": 61,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 41"
+    },
+    {
+      "source": "wikisource",
+      "ref": "History of Oregon (Bancroft)/Volume 1/Chapter 9",
+      "ratio": 0.0,
+      "fetched_lines": 2,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 18"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Robert Lee Frost",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

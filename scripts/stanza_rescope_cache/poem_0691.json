@@ -1,0 +1,84 @@
+{
+  "id": "poem_0691",
+  "title": "The Indian Serenade.",
+  "author": "Percy Bysshe Shelley",
+  "stored_line_count": 30,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio 0.704 (line-count differs by 6)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The Indian Serenade",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Indian Serenade (Shelley)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Complete Poetical Works of Percy Bysshe Shelley (ed. Hutchinson, 1914)/The Indian Serenade",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Complete Poetical Works of Percy Bysshe Shelley (ed. Hutchinson, 1914)/To Sophia (Miss Stacey)",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 29"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Complete Poetical Works of Percy Bysshe Shelley (ed. Hutchinson, 1914)/An Exhortation",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 29"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Complete Poetical Works of Percy Bysshe Shelley (ed. Hutchinson, 1914)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Oxford Book of English Verse 1250-1900/The Indian Serenade",
+      "ratio": 0.704,
+      "fetched_lines": 24,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 6"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Oxford Book of English Verse 1250-1900/Night",
+      "ratio": 0.0,
+      "fetched_lines": 35,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 5"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Percy Bysshe Shelley",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

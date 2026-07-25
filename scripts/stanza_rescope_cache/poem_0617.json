@@ -1,0 +1,87 @@
+{
+  "id": "poem_0617",
+  "title": "Cities And Thrones And Powers",
+  "author": "Rudyard Kipling",
+  "stored_line_count": 24,
+  "source": "wikisource",
+  "source_ref": "Rudyard Kipling's Verse, Inclusive Edition, 1885-1918/Cities and Thrones and Powers",
+  "fetched_body": "Stand in Time\u2019s eye,\nAlmost as long as flowers,\nWhich daily die:\nBut, as new buds put forth\nTo glad new men,\nOut of the spent and unconsidered Earth,\nThe Cities rise again.\nThis season\u2019s Daffodil,\nShe never hears,\nWhat change, what chance, what chill,\nCut down last year\u2019s;\nBut with bold countenance,\nAnd knowledge small,\nEsteems her seven days\u2019 continuance,\nTo be perpetual.\nSo Time that is o\u2019er-kind,\nTo all that be,\nOrdains us e\u2019en as blind,\nAs bold as she:\nThat in our very death,\nAnd burial sure,\nShadow to shadow, well persuaded, saith,\n\u201cSee how our works endure!\u201d",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.7659574468085106,
+    "stored_lines": 24,
+    "fetched_lines": 23,
+    "fetched_has_breaks": false,
+    "reason": "near (r=0.766, lines 24=23) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Cities And Thrones And Powers",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Cities And Thrones And Powers (Kipling)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Rudyard Kipling's Verse, Inclusive Edition, 1885-1918/Cities and Thrones and Powers",
+      "ratio": 0.766,
+      "fetched_lines": 23,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.766, lines 24=23) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Cities and Thrones and Powers",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Rudyard Kipling's Verse, Inclusive Edition, 1885-1918",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Songs From Books",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Puck of Pook's Hill (Millar)/A Centurion of the Thirtieth",
+      "ratio": 0.706,
+      "fetched_lines": 44,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 20"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Puck of Pook's Hill (Rackham)/A Centurion of the Thirtieth",
+      "ratio": 0.576,
+      "fetched_lines": 42,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 18"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Rudyard Kipling",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

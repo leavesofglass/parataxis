@@ -1,0 +1,97 @@
+{
+  "id": "poem_2065",
+  "title": "An Hymn to the Morning",
+  "author": "Phillis Wheatley",
+  "stored_line_count": 20,
+  "source": "wikisource",
+  "source_ref": "Memoir and Poems of Phillis Wheatley/Hymn to the Morning",
+  "fetched_body": "Attend my lays, ye ever honored Nine,\nAssist my labors, and my strains refine;\nIn smoothest numbers pour the notes along.\nFor bright Aurora now demands my song.\n\nAurora hail! and all the thousand dies\nWhich deck thy progress through the vaulted skies\nThe morn awakes, and wide extends her rays,\nOn ev'ry leaf the gentle zephyr plays;\nHarmonious lays the feathered race resume,\nDart the bright eye, and shake the painted plume.\n\nYe shady groves, your verdant bloom display,\nTo shield your poet from the burning day:\nCalliope, awake the sacred lyre,\nWhile thy fair sisters fan the pleasing fire.\nThe bowers, the gales, the variegated skies,\nIn all their pleasures in my bosom rise.\n\nSee in the east, the illustrious king of day!\nHis rising radiance drives the shades away\u2014\nBut oh! I feel his fervid beams too strong,\nAnd scarce begun, concludes the abortive song.",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.65,
+    "stored_lines": 20,
+    "fetched_lines": 20,
+    "fetched_has_breaks": true,
+    "reason": "near (r=0.650, lines 20=20) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "An Hymn to the Morning",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "An Hymn to the Morning (Wheatley)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 19"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/An Hymn to the Morning",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/An Hymn to the Evening",
+      "ratio": 0.0,
+      "fetched_lines": 18,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 2"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/To a Clergyman on the Death of his Lady",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Memoir and Poems of Phillis Wheatley/Hymn to the Morning",
+      "ratio": 0.65,
+      "fetched_lines": 20,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.650, lines 20=20) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Memoir and Poems of Phillis Wheatley/Hymn to the Evening",
+      "ratio": 0.0,
+      "fetched_lines": 18,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 2"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Phillis Wheatley",
+      "ratio": 0.0,
+      "fetched_lines": 33,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 13"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

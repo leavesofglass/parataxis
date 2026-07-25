@@ -1,0 +1,94 @@
+{
+  "id": "poem_0341",
+  "title": "Weathers",
+  "author": "Thomas Hardy",
+  "stored_line_count": 20,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio 0.947 (line-count differs by 2)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Weathers",
+      "ratio": 0.895,
+      "fetched_lines": 18,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 2"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Weathers (Hardy)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Late Lyrics and Earlier, With Many Other Verses/Weathers",
+      "ratio": 0.947,
+      "fetched_lines": 18,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 2"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Late Lyrics and Earlier, With Many Other Verses",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Late Lyrics and Earlier, With Many Other Verses/The Maid of Keinton Mandeville",
+      "ratio": 0.0,
+      "fetched_lines": 29,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 9"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Under the Greenwood Tree (Hardy)/Preface",
+      "ratio": 0.0,
+      "fetched_lines": 74,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 54"
+    },
+    {
+      "source": "wikisource",
+      "ref": "1911 Encyclop\u00e6dia Britannica/Horticulture",
+      "ratio": 0.0,
+      "fetched_lines": 6182,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 6162"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Mayor of Casterbridge (Hardy, 1886)/Volume 1/Chapter 21",
+      "ratio": 0.0,
+      "fetched_lines": 68,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 48"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Thomas Hardy",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

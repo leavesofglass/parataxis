@@ -1,0 +1,82 @@
+{
+  "id": "poem_0308",
+  "title": "Carl Hamblin",
+  "author": "Edgar Lee Masters",
+  "stored_line_count": 25,
+  "source": "gutenberg",
+  "source_ref": "Edgar Lee Masters",
+  "fetched_body": "The press of the Spoon River _Clarion_ was wrecked,\nAnd I was tarred and feathered,\nFor publishing this on the day the\nAnarchists were hanged in Chicago:\n\u201cI saw a beautiful woman with bandaged eyes\nStanding on the steps of a marble temple.\nGreat multitudes passed in front of her,\nLifting their faces to her imploringly.\nIn her left hand she held a sword.\nShe was brandishing the sword,\nSometimes striking a child, again a laborer,\nAgain a slinking woman, again a lunatic.\nIn her right hand she held a scale;\nInto the scale pieces of gold were tossed\nBy those who dodged the strokes of the sword.\nA man in a black gown read from a manuscript:\n\u201cShe is no respecter of persons.\u201d\nThen a youth wearing a red cap\nLeaped to her side and snatched away the bandage.\nAnd lo, the lashes had been eaten away\nFrom the oozy eye-lids;\nThe eye-balls were seared with a milky mucus;\nThe madness of a dying soul\nWas written on her face\u2014\nBut the multitude saw why she wore the bandage.\u201d",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 0.92,
+    "stored_lines": 25,
+    "fetched_lines": 25,
+    "fetched_has_breaks": false,
+    "reason": "ok"
+  },
+  "category": "FOUND_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Carl Hamblin",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Carl Hamblin (Masters)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)/Editor Whedon",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)/The Spooniad",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 24"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 24"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Federal Reporter/Second series/Volume 787",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "History of Journalism in the United States/Index",
+      "ratio": 0.0,
+      "fetched_lines": 668,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 643"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Edgar Lee Masters",
+      "ratio": 0.92,
+      "fetched_lines": 25,
+      "has_breaks": false,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

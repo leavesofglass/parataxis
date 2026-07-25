@@ -1,0 +1,92 @@
+{
+  "id": "poem_0272",
+  "title": "Ae Fond Kiss.",
+  "author": "Robert Burns",
+  "stored_line_count": 28,
+  "source": "wikisource",
+  "source_ref": "The Book of Scottish Song/Ae fond kiss",
+  "fetched_body": "Had we never loved sae kindly,\nHad we never loved sae blindly,\nNever met\u2014or never parted,\nWe had ne'er been broken-hearted.\"\n\nAe fond kiss, and then we sever;\nAe farewell, alas! for ever!\nDeep in heart-wrung tears I'll pledge thee,\nWarring sighs and groans I'll wage thee.\nWho shall say that fortune grieves him\nWhile the star of hope she leaves him?\nMe, nae cheerfu' twinkle lights me;\nDark despair around benights me.\nI'll ne'er blame my partial fancy,\nNaething could resist my Nancy;\nBut to see her, was to love her;\nLove but her, and love for ever.\nHad we never loved sae kindly,\nHad we never loved sae blindly,\nNever met\u2014or never parted,\nWe had ne'er been broken-hearted.\nFare thee weel, thou first and fairest!\nFare thee weel, thou best and dearest!\nThine be ilka joy and treasure,\nPeace, enjoyment, love, and pleasure!\nAe fond kiss, and then we sever;\nAe farewell, alas! for ever!\nDeep in heart-wrung tears I'll pledge thee,\nWarring sighs and groans I'll wage thee.",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.7142857142857143,
+    "stored_lines": 28,
+    "fetched_lines": 28,
+    "fetched_has_breaks": true,
+    "reason": "near (r=0.714, lines 28=28) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Ae Fond Kiss",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Ae Fond Kiss (Burns)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Poetical Works of Robert Burns/Farewell to Nancy",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Book of Scottish Song/Ae fond kiss",
+      "ratio": 0.714,
+      "fetched_lines": 28,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.714, lines 28=28) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Ae Fond Kiss, and Then We Sever",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Song",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Dictionary of National Biography, 1885-1900/Maclehose, Agnes",
+      "ratio": 0.0,
+      "fetched_lines": 6,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 22"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Dictionary of National Biography, 1885-1900/Burns, Robert (1759-1796)",
+      "ratio": 0.0,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 4"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Robert Burns",
+      "ratio": 0.0,
+      "fetched_lines": 4,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 24"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

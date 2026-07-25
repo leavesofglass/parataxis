@@ -1,0 +1,79 @@
+{
+  "id": "poem_0673",
+  "title": "Rocky Acres.",
+  "author": "Robert von Ranke Graves",
+  "stored_line_count": 28,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio None (None)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Rocky Acres",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Rocky Acres (Graves)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "1911 Encyclop\u00e6dia Britannica/Templars",
+      "ratio": 0.0,
+      "fetched_lines": 818,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 790"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Nuttall Encyclop\u00e6dia/S",
+      "ratio": 0.0,
+      "fetched_lines": 7578,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 7550"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Nuttall Encyclop\u00e6dia/D",
+      "ratio": 0.0,
+      "fetched_lines": 3678,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 3650"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The New Student's Reference Work/Nature-Study with the Camera",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "1911 Encyclop\u00e6dia Britannica/Italy",
+      "ratio": 0.0,
+      "fetched_lines": 12343,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 12315"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Robert von Ranke Graves",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

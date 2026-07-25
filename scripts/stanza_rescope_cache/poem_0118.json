@@ -1,0 +1,62 @@
+{
+  "id": "poem_0118",
+  "title": "The Tiger",
+  "author": "William Blake",
+  "stored_line_count": 24,
+  "source": "wikisource",
+  "source_ref": "The poetical works of William Blake, lyrical and miscellaneous/The Tiger",
+  "fetched_body": "TIGER, tiger, burning bright\nIn the forests of the night,\nWhat immortal hand or eye\nCould frame thy fearful symmetry?\n\nIn what distant deeps or skies\nBurnt the fire of thine eyes?\nOn what wings dare he aspire?\nWhat the hand dare seize the fire?\n\nAnd what shoulder and what art\nCould twist the sinews of thy heart?\nAnd, when thy heart began to beat,\nWhat dread hand and what dread feet?\n\nWhat the hammer? what the chain?\nIn what furnace was thy brain?\nWhat the anvil? what dread grasp\nDare its deadly terrors clasp?\n\nWhen the stars threw down their spears,\nAnd watered heaven with their tears,\nDid he smile his work to see?\nDid he who made the lamb make thee?\n\nTiger, tiger, burning bright\nIn the forests of the night.\nWhat immortal hand or eye\nDare frame thy fearful symmetry?",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 1.0,
+    "stored_lines": 24,
+    "fetched_lines": 24,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The Tiger",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Tiger (Blake)",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 23"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Tyger",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The poetical works of William Blake, lyrical and miscellaneous/The Tiger (second version)",
+      "ratio": 0.522,
+      "fetched_lines": 22,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 2"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The poetical works of William Blake, lyrical and miscellaneous/The Tiger",
+      "ratio": 1.0,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

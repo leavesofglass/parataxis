@@ -1,0 +1,47 @@
+{
+  "id": "poem_2049",
+  "title": "Queen-Ann's-Lace",
+  "author": "William Carlos Williams",
+  "stored_line_count": 21,
+  "source": "wikisource",
+  "source_ref": "Sour Grapes/Queen-Ann's-Lace",
+  "fetched_body": "Her body is not so white as\nanemony petals nor so smooth\u2014nor\nso remote a thing. It is a field\nof the wild carrot taking\nthe field by force; the grass\ndoes not raise above it.\nHere is no question of whiteness,\nwhite as can be, with a purple mole\nat the center of each flower.\nEach flower is a hand's span\nof her whiteness. Wherever\nhis hand has lain there is\na tiny purple blemish. Each part\nis a blossom under his touch\nto which the fibres of her being\nstem one by one, each to its end,\nuntil the whole field is a\nwhite desire, empty, a single stem,\na cluster, flower by flower,\na pious wish to whiteness gone over\u2014\nor nothing.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 0.9523809523809523,
+    "stored_lines": 21,
+    "fetched_lines": 21,
+    "fetched_has_breaks": false,
+    "reason": "ok"
+  },
+  "category": "FOUND_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Queen-Ann's-Lace",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 20"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Queen-Ann's-Lace (Williams)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Sour Grapes/Queen-Ann's-Lace",
+      "ratio": 0.952,
+      "fetched_lines": 21,
+      "has_breaks": false,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

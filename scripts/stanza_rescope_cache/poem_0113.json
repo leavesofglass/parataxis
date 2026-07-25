@@ -1,0 +1,97 @@
+{
+  "id": "poem_0113",
+  "title": "The Lamb",
+  "author": "William Blake",
+  "stored_line_count": 20,
+  "source": "wikisource",
+  "source_ref": "Songs of Innocence and of Experience (1826)/Songs of Innocence/The Lamb",
+  "fetched_body": "Little Lamb who made thee\nDost thou know who made thee\nGave thee life & bid thee feed,\nBy the stream & o'er the mead;\nGave thee clothing of delight,\nSoftest clothing wooly bright;\nGave thee such a tender voice,\nMaking all the vales rejoice:\nLittle Lamb who made thee\nDost thou know who made thee\n\nLittle Lamb I'll tell thee,\nLittle Lamb I'll tell thee:\nHe is called by thy name\nFor he calls himself a Lamb.\nHe is meek & he is mild,\nHe became a little child:\nI a child & thou a lamb,\nWe are called by his name.\nLittle Lamb God bless thee\nLittle Lamb God bless thee.",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.75,
+    "stored_lines": 20,
+    "fetched_lines": 20,
+    "fetched_has_breaks": true,
+    "reason": "near (r=0.750, lines 20=20) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The Lamb",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Lamb (Blake)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Songs of Innocence and of Experience (1826)/Songs of Innocence/The Lamb",
+      "ratio": 0.75,
+      "fetched_lines": 20,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.750, lines 20=20) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "William Blake, Painter and Poet",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Songs of Innocence and of Experience (1826)/Songs of Innocence",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Life of William Blake (1880), Volume 2",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 19"
+    },
+    {
+      "source": "wikisource",
+      "ref": "A Short Biographical Dictionary of English Literature/Blake, William",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 19"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Jerusalem. The Emanation of the Giant Albion/Plate 78",
+      "ratio": 0.0,
+      "fetched_lines": 34,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 14"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "William Blake",
+      "ratio": 0.0,
+      "fetched_lines": 44,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 24"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "id": "poem_0400",
+  "title": "Tell me not here, it needs not saying,",
+  "author": "A.E. Housman",
+  "stored_line_count": 30,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio None (None)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Tell me not here, it needs not saying,",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Tell me not here, it needs not saying, (Housman)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Last Poems (Housman)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Juvenal and Persius/The Satires of Persius/Satire 5",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Man and Maid/While it is Yet Day",
+      "ratio": 0.0,
+      "fetched_lines": 3,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 27"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Oscar Wilde, His Life and Confessions/Chapter 19",
+      "ratio": 0.0,
+      "fetched_lines": 400,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 370"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Shewing-up of Blanco Posnet/Preface",
+      "ratio": 0.0,
+      "fetched_lines": 2380,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 2350"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Recluse (Cook)/Supernatural Horror in Literature",
+      "ratio": 0.0,
+      "fetched_lines": 14,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 16"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "A.E. Housman",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

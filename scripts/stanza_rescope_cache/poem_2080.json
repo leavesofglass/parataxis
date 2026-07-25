@@ -1,0 +1,92 @@
+{
+  "id": "poem_2080",
+  "title": "Mother to Son",
+  "author": "Langston Hughes",
+  "stored_line_count": 20,
+  "source": "gutenberg",
+  "source_ref": "Langston Hughes",
+  "fetched_body": "    Well, son, I\u2019ll tell you:\n    Life for me ain\u2019t been no crystal stair.\n    It\u2019s had tacks in it,\n    And splinters,\n    And boards torn up,\n    And places with no carpet on the floor\u2014\n    Bare.\n    But all the time\n    I\u2019se been a-cimbin\u2019 on,\n    And reachin\u2019 landin\u2019s,\n    And turnin\u2019 corners,\n    And sometimes goin\u2019 in the dark\n    Where there ain\u2019t been no light.\n    So boy, don\u2019t you turn back.\n    Don\u2019t you set down on the steps\n    \u2019Cause you finds it\u2019s kinder hard.\n    Don\u2019t you fall now\u2014\n    For I\u2019se still goin\u2019, honey,\n    I\u2019se still climbin\u2019,\n    And life for me ain\u2019t been no crystal stair.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 1.0,
+    "stored_lines": 20,
+    "fetched_lines": 20,
+    "fetched_has_breaks": false,
+    "reason": "ok"
+  },
+  "category": "FOUND_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Mother to Son",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Mother to Son (Hughes)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Weary Blues (collection)/Mother to Son",
+      "ratio": 0.35,
+      "fetched_lines": 20,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "ratio 0.350 below 0.55"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Weary Blues (collection)",
+      "ratio": 0.0,
+      "fetched_lines": 3,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 17"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Weary Blues (collection)/Set 7 Untitled Poem",
+      "ratio": 0.0,
+      "fetched_lines": 8,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 12"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Weary Blues (collection)/The White Ones",
+      "ratio": 0.0,
+      "fetched_lines": 7,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 13"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Caroling Dusk/Mother to Son",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Caroling Dusk/Suicide's Note",
+      "outcome": "no-text"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Langston Hughes",
+      "ratio": 1.0,
+      "fetched_lines": 20,
+      "has_breaks": false,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

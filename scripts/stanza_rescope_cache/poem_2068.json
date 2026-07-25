@@ -1,0 +1,104 @@
+{
+  "id": "poem_2068",
+  "title": "On Virtue",
+  "author": "Phillis Wheatley",
+  "stored_line_count": 21,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio 0.524 (ratio 0.524 below 0.55)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "On Virtue",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 20"
+    },
+    {
+      "source": "wikisource",
+      "ref": "On Virtue (Wheatley)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Memoir and Poems of Phillis Wheatley",
+      "ratio": 0.0,
+      "fetched_lines": 4,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 17"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Memoir and Poems of Phillis Wheatley/On Virtue",
+      "ratio": 0.524,
+      "fetched_lines": 21,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "ratio 0.524 below 0.55"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Memoir and Poems of Phillis Wheatley/On being brought from Africa to America",
+      "ratio": 0.0,
+      "fetched_lines": 8,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 13"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Memoir and Poems of Phillis Wheatley/to M\u00e6cenus",
+      "ratio": 0.0,
+      "fetched_lines": 55,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 34"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 20"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Negro in Literature and Art in the United States (1918)/Chapter 2",
+      "ratio": 0.0,
+      "fetched_lines": 10,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 11"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Phillis Wheatley",
+      "ratio": 0.0,
+      "fetched_lines": 46,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 25"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

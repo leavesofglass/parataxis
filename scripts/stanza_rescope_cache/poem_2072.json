@@ -1,0 +1,107 @@
+{
+  "id": "poem_2072",
+  "title": "To S. M., a Young African Painter, on Seeing His Works",
+  "author": "Phillis Wheatley",
+  "stored_line_count": 34,
+  "source": "wikisource",
+  "source_ref": "Memoir and Poems of Phillis Wheatley/To S. M.",
+  "fetched_body": "To show the lab'ring bosom's deep intent,\nAnd thought in living characters to paint,\nWhen first thy pencil did those beauties give,\nAnd breathing figures learnt from thee to live,\nHow did those prospects give my soul delight,\nA new creation rushing on my sight!\nStill, wondrous youth! each noble path pursue;\nOn deathless glories fix thine ardent view:\nStill may the painter's and the poet's fire,\nTo aid thy pencil and thy verse conspire!\nAnd may the charms of each seraphic theme\nConduct thy footsteps to immortal fame!\nHigh to the blissful wonders of the skies\nElate thy soul, and raise thy wishful eyes.\nThrice happy, when exalted to survey\nThat splendid city, crowned with endless day,\nWhose twice six gates on radiant hinges ring:\nCelestial Salem blooms in endless spring.\nCalm and serene thy moments glide along,\nAnd may the muse inspire each future song!\nStill, with the sweets of contemplation blessed,\nMay peace with balmy wings your soul invest!\nBut when these shades of time are chased away,\nAnd darkness ends in everlasting day,\nOn what seraphic pinions shall we move,\nAnd view the landscapes in the realms above!\nThere shall thy tongue in heavenly murmurs flow,\nAnd there my muse with heavenly transport glow;\nNo more to tell of Damon's tender sighs.\nOr rising radiance of Aurora's eyes;\nFor nobler themes demand a nobler strain,\nAnd purer language on the etherial plain.\nCease, gentle Muse! the solemn gloom of night\nNow seals the fair creation from my sight.",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.7941176470588235,
+    "stored_lines": 34,
+    "fetched_lines": 34,
+    "fetched_has_breaks": false,
+    "reason": "near (r=0.794, lines 34=34) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "To S. M., a Young African Painter, on Seeing His Works",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "To S. M., a Young African Painter, on Seeing His Works (Wheatley)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Memoir and Poems of Phillis Wheatley/To S. M.",
+      "ratio": 0.794,
+      "fetched_lines": 34,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.794, lines 34=34) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/To S. M. a young African Painter, on seeing his Works",
+      "ratio": 0.794,
+      "fetched_lines": 34,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.794, lines 34=34) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Memoir and Poems of Phillis Wheatley",
+      "ratio": 0.0,
+      "fetched_lines": 4,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 30"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 33"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/To his Honour the Lieutenant-Governor, on the Death of his Lady",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 33"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Negro in Literature and Art in the United States (1918)/Chapter 2",
+      "ratio": 0.0,
+      "fetched_lines": 10,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 24"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Phillis Wheatley",
+      "ratio": 0.0,
+      "fetched_lines": 5,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 29"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "id": "poem_2074",
+  "title": "To the University of Cambridge, in New England",
+  "author": "Phillis Wheatley",
+  "stored_line_count": 30,
+  "source": "wikisource",
+  "source_ref": "Poems on Various Subjects, Religious and Moral/To the University of Cambridge, in New-England",
+  "fetched_body": "WHILE an intrinsic ardor prompts to write,\nThe muses promise to assist my pen;\n'Twas not long since I left my native shore\nThe land of errors, and Egyptian gloom:\nFather of mercy, 'twas thy gracious hand5\nBrought me in safety from those dark abodes.\nStudents, to you 'tis giv'n to scan the heights\nAbove, to traverse the ethereal space,\nAnd mark the systems of revolving worlds.\nStill more, ye sons of science ye receive10\nThe blissful news by messengers from heav'n,\nHow Jesus' blood for your redemption flows.\nSee him with hands out-stretcht upon the cross;\nImmense compassion in his bosom glows;\nHe hears revilers, nor resents their scorn:15\nWhat matchless mercy in the Son of God!\nWhen the whole human race by sin had fallen,\n\nHe deign'd to die that they might rise again,\nAnd share with him in the sublimest skies,\nLife without death, and glory without end.20\nImprove your privileges while they stay,\nYe pupils, and each hour redeem, that bears\nOr good or bad report of you to heav'n.\nLet sin, that baneful evil to the soul,\nBy you be shunn'd, nor once remit your guard;25\nSuppress the deadly serpent in its egg.\nYe blooming plants of human race divine,\nAn Ethiop tells you 'tis your greatest foe;\nIts transient sweetness turns to endless pain,\nAnd in immense perdition sinks the soul.30",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.7666666666666667,
+    "stored_lines": 30,
+    "fetched_lines": 30,
+    "fetched_has_breaks": true,
+    "reason": "near (r=0.767, lines 30=30) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "To the University of Cambridge, in New England",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "To the University of Cambridge, in New England (Wheatley)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Memoir and Poems of Phillis Wheatley/To the University of Cambridge",
+      "ratio": 0.644,
+      "fetched_lines": 29,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.644, lines 30=29) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Memoir and Poems of Phillis Wheatley",
+      "ratio": 0.0,
+      "fetched_lines": 4,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 26"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 29"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/To the University of Cambridge, in New-England",
+      "ratio": 0.767,
+      "fetched_lines": 30,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.767, lines 30=30) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/On Virtue",
+      "ratio": 0.0,
+      "fetched_lines": 21,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 9"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/To the King's Most Excellent Majesty",
+      "ratio": 0.0,
+      "fetched_lines": 15,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 15"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Phillis Wheatley",
+      "ratio": 0.0,
+      "fetched_lines": 45,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 15"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

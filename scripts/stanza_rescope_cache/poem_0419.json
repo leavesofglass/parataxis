@@ -1,0 +1,52 @@
+{
+  "id": "poem_0419",
+  "title": "Requiescat",
+  "author": "Oscar Wilde",
+  "stored_line_count": 20,
+  "source": "wikisource",
+  "source_ref": "The Poems of Oscar Wilde/Requiescat",
+  "fetched_body": "Tread lightly, she is near\nUnder the snow,\nSpeak gently, she can hear\nThe daisies grow.\n\nAll her bright golden hair\nTarnished with rust,\nShe that was young and fair\nFallen to dust.\n\nLily-like, white as snow,\nShe hardly knew\nShe was a woman, so\nSweetly she grew.\n\nCoffin-board, heavy stone,\nLie on her breast,\nI vex my heart alone,\nShe is at rest.\n\nPeace, Peace, she cannot hear\nLyre or sonnet,\nAll my life's buried here,\nHeap earth upon it.\n\nAvignon.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 0.975609756097561,
+    "stored_lines": 20,
+    "fetched_lines": 21,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Requiescat",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Requiescat (Wilde)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Writings of Oscar Wilde/Volume 1/Requiescat",
+      "ratio": 0.645,
+      "fetched_lines": 11,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 9"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Poems of Oscar Wilde/Requiescat",
+      "ratio": 0.976,
+      "fetched_lines": 21,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

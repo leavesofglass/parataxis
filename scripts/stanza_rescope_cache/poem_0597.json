@@ -1,0 +1,97 @@
+{
+  "id": "poem_0597",
+  "title": "October",
+  "author": "Robert Lee Frost",
+  "stored_line_count": 21,
+  "source": "wikisource",
+  "source_ref": "October (Frost)",
+  "fetched_body": "O hushed October morning mild,\nThy leaves have ripened to the fall;\nTo-morrow's wind, if it be wild,\nShould waste them all.\nThe crows above the forest call;\nTo-morrow they may form and go.\nO hushed October morning mild,\nBegin the hours of this day slow,\nMake the day seem to us less brief.\nHearts not averse to being beguiled,\nBeguile us in the way you know;\nRelease one leaf at break of day;\nAt noon release another leaf;\nOne from our trees, one far away;\nRetard the sun with gentle mist;\nEnchant the land with amethyst.\nSlow, slow!\nFor the grapes' sake, if they were all,\nWhose leaves already are burnt with frost,\nWhose clustered fruit must else be lost\u2014\nFor the grapes' sake along the wall.",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.8095238095238095,
+    "stored_lines": 21,
+    "fetched_lines": 21,
+    "fetched_has_breaks": false,
+    "reason": "near (r=0.810, lines 21=21) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "October",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "October (Frost)",
+      "ratio": 0.81,
+      "fetched_lines": 21,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.810, lines 21=21) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "A Brief History of South Dakota/Chapter 30",
+      "ratio": 0.0,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 3"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Southern Historical Society Papers/Volume 20/Living Generals of the Confederate States Army",
+      "ratio": 0.0,
+      "fetched_lines": 171,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 150"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Popular Science Monthly/Volume 45/October 1894/Publications Received",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Popular Science Monthly/Volume 45/October 1894/The American Champagne District",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "History of Oregon (Bancroft)/Volume 1/Chapter 8",
+      "ratio": 0.0,
+      "fetched_lines": 93,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 72"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Mir Hardware Heritage/Part 4 - Comparative Chronology of U.S. and Soviet/Russian Manned Spaceflight",
+      "ratio": 0.0,
+      "fetched_lines": 3,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 18"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Robert Lee Frost",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

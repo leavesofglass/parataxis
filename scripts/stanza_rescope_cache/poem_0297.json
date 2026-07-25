@@ -1,0 +1,82 @@
+{
+  "id": "poem_0297",
+  "title": "Mrs. Benjamin Pantier",
+  "author": "Edgar Lee Masters",
+  "stored_line_count": 20,
+  "source": "gutenberg",
+  "source_ref": "Edgar Lee Masters",
+  "fetched_body": "I know that he told that I snared his soul\nWith a snare which bled him to death.\nAnd all the men loved him,\nAnd most of the women pitied him.\nBut suppose you are really a lady, and have delicate tastes,\nAnd loathe the smell of whiskey and onions,\nAnd the rhythm of Wordsworth\u2019s \u201cOde\u201d runs in your ears,\nWhile he goes about from morning till night\nRepeating bits of that common thing;\n\u201cOh, why should the spirit of mortal be proud?\u201d\nAnd then, suppose;\nYou are a woman well endowed,\nAnd the only man with whom the law and morality\nPermit you to have the marital relation\nIs the very man that fills you with disgust\nEvery time you think of it while you think of it\nEvery time you see him?\nThat\u2019s why I drove him away from home\nTo live with his dog in a dingy room\nBack of his office.",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.9,
+    "stored_lines": 20,
+    "fetched_lines": 20,
+    "fetched_has_breaks": false,
+    "reason": "near (r=0.900, lines 20=20) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Mrs. Benjamin Pantier",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Mrs. Benjamin Pantier (Masters)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)/Mrs. Benjamin Pantier",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)/Benjamin Pantier",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)/Reuben Pantier",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 19"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)/The Spooniad",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 19"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Edgar Lee Masters",
+      "ratio": 0.9,
+      "fetched_lines": 20,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.900, lines 20=20) \u2014 edition drift"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "poem_0560",
+  "title": "Mental Cases",
+  "author": "Wilfred Owen",
+  "stored_line_count": 28,
+  "source": "wikisource",
+  "source_ref": "Poems by Wilfred Owen/Mental Cases",
+  "fetched_body": "Who are these? Why sit they here in twilight?\nWherefore rock they, purgatorial shadows,\nDrooping tongues from jaws that slob their relish,\nBaring teeth that leer like skulls' tongues wicked?\nStroke on stroke of pain,\u2014but what slow panic,\nGouged these chasms round their fretted sockets?\nEver from their hair and through their hand palms\nMisery swelters. Surely we have perished\nSleeping, and walk hell; but who these hellish?\n\n\u2014These are men whose minds the Dead have ravished.\nMemory fingers in their hair of murders,\nMultitudinous murders they once witnessed.\nWading sloughs of flesh these helpless wander,\nTreading blood from lungs that had loved laughter.\nAlways they must see these things and hear them,\nBatter of guns and shatter of flying muscles,\nCarnage incomparable and human squander\nRucked too thick for these men's extrication.\n\nTherefore still their eyeballs shrink tormented\nBack into their brains, because on their sense\nSunlight seems a bloodsmear; night comes blood-black;\nDawn breaks open like a wound that bleeds afresh.\n\u2014Thus their heads wear this hilarious, hideous,\nAwful falseness of set-smiling corpses.\n\u2014Thus their hands are plucking at each other;\nPicking at the rope-knouts of their scourging;\nSnatching after us who smote them, brother,\nPawing us who dealt them war and madness.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 1.0,
+    "stored_lines": 28,
+    "fetched_lines": 28,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Mental Cases",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 27"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Mental Cases (Owen)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems by Wilfred Owen/Mental Cases",
+      "ratio": 1.0,
+      "fetched_lines": 28,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

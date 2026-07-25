@@ -1,0 +1,94 @@
+{
+  "id": "poem_0157",
+  "title": "Virgil Strange I Kept On The Field",
+  "author": "Walt Whitman",
+  "stored_line_count": 26,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio None (None)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Virgil Strange I Kept On The Field",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Virgil Strange I Kept On The Field (Whitman)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "1977 Books and Pamphlets Jan-June/R",
+      "ratio": 0.0,
+      "fetched_lines": 23559,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 23533"
+    },
+    {
+      "source": "wikisource",
+      "ref": "A Study of Ben Jonson/Miscellaneous Works",
+      "ratio": 0.0,
+      "fetched_lines": 2,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 24"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Idea of Progress",
+      "ratio": 0.0,
+      "fetched_lines": 10,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 16"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Oregon Literature",
+      "ratio": 0.0,
+      "fetched_lines": 458,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 432"
+    },
+    {
+      "source": "wikisource",
+      "ref": "William Blake (Chesterton)",
+      "ratio": 0.0,
+      "fetched_lines": 110,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 84"
+    },
+    {
+      "source": "wikisource",
+      "ref": "William Blake (Symons)/William Blake",
+      "ratio": 0.0,
+      "fetched_lines": 303,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 277"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Walt Whitman",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

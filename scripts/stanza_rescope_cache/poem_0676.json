@@ -1,0 +1,97 @@
+{
+  "id": "poem_0676",
+  "title": "Prospice",
+  "author": "Robert Browning",
+  "stored_line_count": 28,
+  "source": "wikisource",
+  "source_ref": "Dramatis Person\u00e6/Prospice",
+  "fetched_body": "Fear death?\u2014to feel the fog in my throat,\nThe mist in my face,\nWhen the snows begin, and the blasts denote\nI am nearing the place,\nThe power of the night, the press of the storm,\nThe post of the foe;\nWhere he stands, the Arch Fear in a visible form,\nYet the strong man must go:\nFor the journey is done and the summit attained,\nAnd the barriers fall,\nThough a battle's to fight ere a guerdon be gained,\nThe reward of it all.\nI was ever a fighter, so\u2014one fight more,\nThe best and the last!\nI would hate that death bandaged my eyes, and forebore,\nAnd bade me creep past.\nNo! let me taste the whole of it, fare like my peers\nThe heroes of old,\nBear the brunt, in a minute pay glad life's arrears\nOf pain, darkness, and cold.\nFor sudden the worst turns the best to the brave,\nThe black minute's at end,\nAnd the elements' rage, the fiend-voices that rave,\nShall dwindle, shall blend,\nShall change, shall become first a peace, then a joy,\nThen a light, then thy breast,\nO thou soul of my soul! I shall clasp thee again,\nAnd with God be the rest!",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.8571428571428571,
+    "stored_lines": 28,
+    "fetched_lines": 28,
+    "fetched_has_breaks": false,
+    "reason": "near (r=0.857, lines 28=28) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Prospice",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Prospice (Browning)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Dramatis Person\u00e6/Prospice",
+      "ratio": 0.857,
+      "fetched_lines": 28,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.857, lines 28=28) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems That Every Child Should Know/Prospice",
+      "ratio": 0.762,
+      "fetched_lines": 35,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 7"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems That Every Child Should Know",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Dramatis Person\u00e6/May and Death",
+      "ratio": 0.0,
+      "fetched_lines": 20,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 8"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Dramatis Person\u00e6",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Dramatis Person\u00e6/Youth and Art",
+      "ratio": 0.0,
+      "fetched_lines": 68,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 40"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Robert Browning",
+      "ratio": 0.966,
+      "fetched_lines": 30,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 2"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

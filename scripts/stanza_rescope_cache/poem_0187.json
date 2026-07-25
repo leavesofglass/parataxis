@@ -1,0 +1,107 @@
+{
+  "id": "poem_0187",
+  "title": "Stepping Westward",
+  "author": "William Wordsworth",
+  "stored_line_count": 26,
+  "source": "wikisource",
+  "source_ref": "Poems (Wordsworth, 1815)/Volume 1/Stepping Westward",
+  "fetched_body": "\"What you are stepping westward?\"\u2014\"Yea.\"\n\u2014'Twould be a wildish destiny,\nIf we, who thus together roam\nIn a strange Land, and far from home,\nWere in this place the guests of Chance:\nYet who would stop, or fear to advance,\nThough home or shelter he had none,\nWith such a Sky to lead him on?\n\nThe dewy ground was dark and cold;\nBehind, all gloomy to behold;\nAnd stepping westward seem'd to be\nA kind of heavenly destiny:\nI liked the greeting; 'twas a sound\nOf something without place or bound;\nAnd seemed to give me spiritual right\nTo travel through that region bright.\n\nThe voice was soft, and she who spake\nWas walking by her native Lake:\nThe salutation had to me\nThe very sound of courtesy:\nIts power was felt; and while my eye\nWas fixed upon the glowing sky,\nThe echo of the voice enwrought\nA human sweetness with the thought\nOf travelling through the world that lay\nBefore me in my endless way.",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.8846153846153846,
+    "stored_lines": 26,
+    "fetched_lines": 26,
+    "fetched_has_breaks": true,
+    "reason": "near (r=0.885, lines 26=26) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Stepping Westward",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Stepping Westward (Wordsworth)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems (Wordsworth, 1815)/Volume 1/Stepping Westward",
+      "ratio": 0.885,
+      "fetched_lines": 26,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.885, lines 26=26) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems, in Two Volumes (Wordsworth, 1807)/Volume 2/Stepping Westward",
+      "ratio": 0.0,
+      "fetched_lines": 3,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 23"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems (Wordsworth, 1815)/Volume 1/Glen Almain",
+      "ratio": 0.0,
+      "fetched_lines": 32,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 6"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems (Wordsworth, 1815)/Volume 1",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 25"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems (Wordsworth, 1815)/Volume 1/Power of Music",
+      "ratio": 0.0,
+      "fetched_lines": 44,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 18"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems, in Two Volumes (Wordsworth, 1807)/Volume 2/The solitary Reaper",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 25"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "William Wordsworth",
+      "ratio": 0.0,
+      "fetched_lines": 18,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 8"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

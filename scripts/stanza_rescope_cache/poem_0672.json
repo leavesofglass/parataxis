@@ -1,0 +1,94 @@
+{
+  "id": "poem_0672",
+  "title": "Lost Love",
+  "author": "Robert von Ranke Graves",
+  "stored_line_count": 24,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio None (None)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Lost Love",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Lost Love (Graves)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Lectures on Modern History/Inaugural Lecture on the Study of History",
+      "ratio": 0.0,
+      "fetched_lines": 41,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 17"
+    },
+    {
+      "source": "wikisource",
+      "ref": "A Lecture on the Study of History",
+      "ratio": 0.0,
+      "fetched_lines": 3,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 21"
+    },
+    {
+      "source": "wikisource",
+      "ref": "1911 Encyclop\u00e6dia Britannica/Crusades",
+      "ratio": 0.0,
+      "fetched_lines": 310,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 286"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Nuttall Encyclop\u00e6dia/R",
+      "ratio": 0.0,
+      "fetched_lines": 3231,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 3207"
+    },
+    {
+      "source": "wikisource",
+      "ref": "1911 Encyclop\u00e6dia Britannica/Papacy",
+      "ratio": 0.0,
+      "fetched_lines": 5317,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 5293"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Nuttall Encyclop\u00e6dia/S",
+      "ratio": 0.0,
+      "fetched_lines": 7578,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 7554"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Robert von Ranke Graves",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

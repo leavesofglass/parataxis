@@ -1,0 +1,72 @@
+{
+  "id": "poem_0368",
+  "title": "Spring Night",
+  "author": "Sara Teasdale",
+  "stored_line_count": 24,
+  "source": "wikisource",
+  "source_ref": "Love Songs (1917)/Spring Night",
+  "fetched_body": "The park is filled with night and fog,\nThe veils are drawn about the world,\nThe drowsy lights along the paths\nAre dim and pearled.\n\nGold and gleaming the empty streets,\nGold and gleaming the misty lake,\nThe mirrored lights like sunken swords,\nGlimmer and shake.\n\nOh, is it not enough to be\nHere with this beauty over me?\nMy throat should ache with praise, and I\nShould kneel in joy beneath the sky.\nO, beauty, are you not enough?\nWhy am I crying after love,\nWith youth, a singing voice, and eyes\nTo take earth's wonder with surprise?\nWhy have I put off my pride,\nWhy am I unsatisfied,\u2014\nI, for whom the pensive night\nBinds her cloudy hair with light,\u2014\nI, for whom all beauty burns\nLike incense in a million urns?\nO beauty, are you not enough?\nWhy am I crying after love?",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 1.0,
+    "stored_lines": 24,
+    "fetched_lines": 24,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Spring Night",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spring Night (Teasdale)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Love Songs (1917)",
+      "ratio": 0.0,
+      "fetched_lines": 18,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 6"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Rivers to the Sea (Collection)",
+      "ratio": 0.0,
+      "fetched_lines": 3,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 21"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Rivers to the Sea (Collection)/Spring Night",
+      "ratio": 0.917,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.917, lines 24=24) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Love Songs (1917)/Spring Night",
+      "ratio": 1.0,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

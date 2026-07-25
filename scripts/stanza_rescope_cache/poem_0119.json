@@ -1,0 +1,42 @@
+{
+  "id": "poem_0119",
+  "title": "The Divine Image",
+  "author": "William Blake",
+  "stored_line_count": 20,
+  "source": "wikisource",
+  "source_ref": "Songs of Innocence and of Experience (1826)/Songs of Innocence/The Divine Image",
+  "fetched_body": "To Mercy Pity Peace and Love,\nAll pray in their distress;\nAnd to these virtues of delight\nReturn their thankfulness.\n\nFor Mercy Pity Peace and Love,\nIs God our father dear;\nAnd Mercy Pity Peace and Love,\nIs Man his child and care.\n\nFor Mercy has a human heart\nPity, a human face;\nAnd Love, the human form divine,\nAnd Peace, the human dress.\n\nThen every man of every clime,\nThat prays in his distress,\nPrays to the human form divine\nLove Mercy Pity Peace.\n\nAnd all must love the human form,\nIn heathen, turk or jew,\nWhere Mercy, Love & Pity dwell\nThere God is dwelling too.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 0.95,
+    "stored_lines": 20,
+    "fetched_lines": 20,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The Divine Image",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Divine Image (Blake)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Songs of Innocence and of Experience (1826)/Songs of Innocence/The Divine Image",
+      "ratio": 0.95,
+      "fetched_lines": 20,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

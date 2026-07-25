@@ -1,0 +1,47 @@
+{
+  "id": "poem_0584",
+  "title": "Dead Men's Love",
+  "author": "Rupert Brooke",
+  "stored_line_count": 25,
+  "source": "wikisource",
+  "source_ref": "The Collected poems of Rupert Brooke/Dead Men's Love",
+  "fetched_body": "There was a damned successful Poet;\nThere was a Woman like the Sun.\nAnd they were dead. They did not know it.\nThey did not know their time was done.\nThey did not know his hymns\nWere silence; and her limbs,\nThat had served Love so well,\nDust, and a filthy smell.\n\nAnd so one day, as ever of old,\nHands out, they hurried, knee to knee;\nOn fire to cling and kiss and hold\nAnd, in the other's eyes, to see\nEach his own tiny face,\nAnd in that long embrace\nFeel lip and breast grow warm\nTo breast and lip and arm.\n\nSo knee to knee they sped again,\nAnd laugh to laugh they ran, I'm told,\nAcross the streets of Hell . . .\nAnd then\nThey suddenly felt the wind blow cold,\nAnd knew, so closely pressed,\nChill air on lip and breast,\nAnd, with a sick surprise,\nThe emptiness of eyes.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 1.0,
+    "stored_lines": 25,
+    "fetched_lines": 25,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Dead Men's Love",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 24"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Dead Men's Love (Brooke)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Collected poems of Rupert Brooke/Dead Men's Love",
+      "ratio": 1.0,
+      "fetched_lines": 25,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

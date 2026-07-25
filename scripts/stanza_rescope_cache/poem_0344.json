@@ -1,0 +1,89 @@
+{
+  "id": "poem_0344",
+  "title": "Afterwards",
+  "author": "Thomas Hardy",
+  "stored_line_count": 20,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio None (None)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Afterwards",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Afterwards (Hardy)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Dictionary of National Biography, 1885-1900/Hardy, Thomas (1752-1832)",
+      "ratio": 0.0,
+      "fetched_lines": 4,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 16"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Dictionary of National Biography, 1885-1900/Hardy, Thomas Masterman",
+      "ratio": 0.0,
+      "fetched_lines": 3,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 17"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Dictionary of National Biography, 1885-1900/Hardy, Thomas (1666-1732)",
+      "ratio": 0.0,
+      "fetched_lines": 5,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 15"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Dictionary of National Biography, 1885-1900/Hardy, Charles (1680?-1744)",
+      "ratio": 0.0,
+      "fetched_lines": 8,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 12"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Royal Naval Biography/Hardy, Thomas Masterman",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "A Naval Biographical Dictionary/Le Hardy, Thomas Philip",
+      "outcome": "no-text"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Thomas Hardy",
+      "ratio": 0.0,
+      "fetched_lines": 151,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 131"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

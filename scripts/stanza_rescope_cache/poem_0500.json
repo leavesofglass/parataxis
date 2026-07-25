@@ -1,0 +1,94 @@
+{
+  "id": "poem_0500",
+  "title": "Ulysses",
+  "author": "Alfred Lord Tennyson",
+  "stored_line_count": 26,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio 0.521 (line-count differs by 44)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Ulysses",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Ulysses (Tennyson)",
+      "ratio": 0.521,
+      "fetched_lines": 70,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 44"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems (Tennyson, 1843)/Volume 2",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Demeter and other poems",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Demeter and other poems/Notes To Ulysses",
+      "ratio": 0.0,
+      "fetched_lines": 11,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 15"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Tennysoniana/Index",
+      "ratio": 0.0,
+      "fetched_lines": 137,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 111"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Dictionary of National Biography, 1885-1900/Tennyson, Alfred",
+      "ratio": 0.0,
+      "fetched_lines": 4,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 22"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Tennysoniana/Chapter 5",
+      "ratio": 0.034,
+      "fetched_lines": 93,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 67"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Alfred Lord Tennyson",
+      "ratio": 0.0,
+      "fetched_lines": 77,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 51"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

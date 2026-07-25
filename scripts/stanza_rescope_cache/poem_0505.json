@@ -1,0 +1,32 @@
+{
+  "id": "poem_0505",
+  "title": "Tears, Idle Tears",
+  "author": "Alfred Lord Tennyson",
+  "stored_line_count": 20,
+  "source": "wikisource",
+  "source_ref": "Tears, Idle Tears",
+  "fetched_body": "Tears, idle tears, I know not what they mean,\nTears from the depth of some divine despair\nRise in the heart, and gather to the eyes,\nIn looking on the happy Autumn-fields,\nAnd thinking of the days that are no more.\n\nFresh as the first beam glittering on a sail,\nThat brings our friends up from the underworld,\nSad as the last which reddens over one\nThat sinks with all we love below the verge;\nSo sad, so fresh, the days that are no more.\n\nAh, sad and strange as in dark summer dawns\nThe earliest pipe of half-awakened birds\nTo dying ears, when unto dying eyes\nThe casement slowly grows a glimmering square;\nSo sad, so strange, the days that are no more.\n\nDear as remembered kisses after death,\nAnd sweet as those by hopeless fancy feigned\nOn lips that are for others; deep as love,\nDeep as first love, and wild with all regret;\nO Death in Life, the days that are no more!",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 1.0,
+    "stored_lines": 20,
+    "fetched_lines": 20,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Tears, Idle Tears",
+      "ratio": 1.0,
+      "fetched_lines": 20,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "id": "poem_2086",
+  "title": "The Weary Blues",
+  "author": "Langston Hughes",
+  "stored_line_count": 35,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio None (None)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The Weary Blues",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Weary Blues (Hughes)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Weary Blues (collection)",
+      "ratio": 0.0,
+      "fetched_lines": 3,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 32"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Weary Blues (collection)/Set 7 Untitled Poem",
+      "ratio": 0.0,
+      "fetched_lines": 8,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 27"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Weary Blues (collection)/Proem",
+      "ratio": 0.0,
+      "fetched_lines": 19,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 16"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Weary Blues (collection)/The Jester",
+      "ratio": 0.0,
+      "fetched_lines": 19,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 16"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Weary Blues (collection)/Afraid",
+      "ratio": 0.0,
+      "fetched_lines": 6,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 29"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Weary Blues (collection)/Young Prostitute",
+      "ratio": 0.0,
+      "fetched_lines": 5,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 30"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Langston Hughes",
+      "ratio": 0.0,
+      "fetched_lines": 4,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 31"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

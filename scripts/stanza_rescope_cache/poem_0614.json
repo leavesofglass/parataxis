@@ -1,0 +1,42 @@
+{
+  "id": "poem_0614",
+  "title": "Good-Bye",
+  "author": "Ralph Waldo Emerson",
+  "stored_line_count": 30,
+  "source": "wikisource",
+  "source_ref": "Poems (Emerson, 1847)/Good-bye",
+  "fetched_body": "Good-bye, proud world! I'm going home:\nThou art not my friend, and I'm not thine.\nLong through thy weary crowds I roam;\nA river-ark on the ocean brine,\nLong I've been tossed like the driven foam;\nBut now, proud world! I'm going home.\n\nGood-bye to Flattery's fawning face;\nTo Grandeur with his wise grimace;\nTo upstart Wealth's averted eye;\nTo supple Office, low and high;\nTo crowded halls, to court and street;\nTo frozen hearts and hasting feet;\nTo those who go, and those who come;\nGood-bye, proud world! I'm going home.\n\nI am going to my own hearth-stone,\nBosomed in yon green hills alone,\u2014\nA secret nook in a pleasant land,\nWhose groves the frolic fairies planned;\nWhere arches green, the livelong day,\nEcho the blackbird's roundelay,\nAnd vulgar feet have never trod\nA spot that is sacred to thought and God.\n\nO, when I am safe in my sylvan home,\nI tread on the pride of Greece and Rome;\nAnd when I am stretched beneath the pines,\nWhere the evening star so holy shines,\nI laugh at the lore and the pride of man,\nAt the sophist schools, and the learned clan;\nFor what are they all, in their high conceit,\nWhen man in the bush with God may meet?",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 0.9666666666666667,
+    "stored_lines": 30,
+    "fetched_lines": 30,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Good-Bye",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Good-Bye (Emerson)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems (Emerson, 1847)/Good-bye",
+      "ratio": 0.967,
+      "fetched_lines": 30,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

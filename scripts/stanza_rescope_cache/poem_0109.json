@@ -1,0 +1,94 @@
+{
+  "id": "poem_0109",
+  "title": "The Garden Of Love",
+  "author": "William Blake",
+  "stored_line_count": 20,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio 0.75 (line-count differs by 8)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The Garden Of Love",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Garden Of Love (Blake)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Notebook",
+      "ratio": 0.0,
+      "fetched_lines": 21,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "ratio 0.000 below 0.55"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Songs of Innocence and of Experience (1826)/Songs of Experience",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Songs of Innocence and of Experience (1826)/Songs of Experience/The Garden of Love",
+      "ratio": 0.75,
+      "fetched_lines": 12,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 8"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Life of William Blake (1880), Volume 2",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 19"
+    },
+    {
+      "source": "wikisource",
+      "ref": "I went to the garden of love",
+      "ratio": 0.424,
+      "fetched_lines": 13,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 7"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Life of William Blake (1863), Volume 2",
+      "ratio": 0.0,
+      "fetched_lines": 4,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 16"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "William Blake",
+      "ratio": 0.0,
+      "fetched_lines": 12,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 8"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

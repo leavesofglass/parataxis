@@ -1,0 +1,79 @@
+{
+  "id": "poem_0402",
+  "title": "The laws of God, the laws of man,",
+  "author": "A.E. Housman",
+  "stored_line_count": 24,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio None (None)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The laws of God, the laws of man,",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The laws of God, the laws of man, (Housman)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Last Poems (Housman)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Juvenal and Persius/The Satires of Persius/Satire 5",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Armistice Day",
+      "ratio": 0.0,
+      "fetched_lines": 78,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 54"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Shewing-up of Blanco Posnet/Preface",
+      "ratio": 0.0,
+      "fetched_lines": 2380,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 2356"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Oscar Wilde, His Life and Confessions/Chapter 19",
+      "ratio": 0.0,
+      "fetched_lines": 400,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 376"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Juvenal and Persius/The Satires of Juvenal/Satire 6",
+      "outcome": "no-text"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "A.E. Housman",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

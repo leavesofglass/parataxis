@@ -1,0 +1,97 @@
+{
+  "id": "poem_0142",
+  "title": "O Captain! My Captain!",
+  "author": "Walt Whitman",
+  "stored_line_count": 24,
+  "source": "gutenberg",
+  "source_ref": "Walt Whitman",
+  "fetched_body": "  O Captain! my Captain! our fearful trip is done,\n  The ship has weather\u2019d every rack, the prize we sought is won,\n  The port is near, the bells I hear, the people all exulting,\n  While follow eyes the steady keel, the vessel grim and daring;\n      But O heart! heart! heart!\n       O the bleeding drops of red,\n         Where on the deck my Captain lies,\n           Fallen cold and dead.\n\n  O Captain! my Captain! rise up and hear the bells;\n  Rise up--for you the flag is flung--for you the bugle trills,\n  For you bouquets and ribbon\u2019d wreaths--for you the shores a-crowding,\n  For you they call, the swaying mass, their eager faces turning;\n      Here Captain! dear father!\n       This arm beneath your head!\n         It is some dream that on the deck,\n           You\u2019ve fallen cold and dead.\n\n  My Captain does not answer, his lips are pale and still,\n  My father does not feel my arm, he has no pulse nor will,\n  The ship is anchor\u2019d safe and sound, its voyage closed and done,\n  From fearful trip the victor ship comes in with object won;\n       Exult O shores, and ring O bells!\n         But I with mournful tread,\n           Walk the deck my Captain lies,\n             Fallen cold and dead.",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.8333333333333334,
+    "stored_lines": 24,
+    "fetched_lines": 24,
+    "fetched_has_breaks": true,
+    "reason": "near (r=0.833, lines 24=24) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "O Captain! My Captain!",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "O Captain! My Captain! (Whitman)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems That Every Child Should Know/O Captain! My Captain!",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 23"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Riverside song book/O Captain My Captain",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 23"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Leaves of Grass (1882)/Memories of President Lincoln/O Captain, My Captain",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Leaves of Grass (1882)/Memories of President Lincoln",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Leaves of Grass (1882)/Memories of President Lincoln/Hush'd be the Camps To-day",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 23"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Leaves of Grass (1882)",
+      "ratio": 0.0,
+      "fetched_lines": 12,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 12"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Walt Whitman",
+      "ratio": 0.833,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.833, lines 24=24) \u2014 edition drift"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "poem_0337",
+  "title": "The Man He Killed",
+  "author": "Thomas Hardy",
+  "stored_line_count": 21,
+  "source": "wikisource",
+  "source_ref": "The Man He Killed",
+  "fetched_body": "'Had he and I but met\nBy some old ancient inn,\nWe should have sat us down to wet\nRight many a nipperkin!\n\n'But ranged as infantry,\nAnd staring face to face,\nI shot at him as he at me,\nAnd killed him in his place.\n\n'I shot him dead because---\nBecause he was my foe,\nJust so: my foe of course he was;\nThat's clear enough; although\n\n'He thought he'd 'list, perhaps,\nOff-hand like---just as I---\nWas out of work---had sold his traps---\nNo other reason why.\n\n'Yes; quaint and curious war is!\nYou shoot a fellow down\nYou'd treat if met where any bar is,\nOr help to half-a-crown.'",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 0.975609756097561,
+    "stored_lines": 21,
+    "fetched_lines": 20,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The Man He Killed",
+      "ratio": 0.976,
+      "fetched_lines": 20,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

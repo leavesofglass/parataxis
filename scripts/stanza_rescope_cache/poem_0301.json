@@ -1,0 +1,97 @@
+{
+  "id": "poem_0301",
+  "title": "Russell Kincaid",
+  "author": "Edgar Lee Masters",
+  "stored_line_count": 20,
+  "source": "gutenberg",
+  "source_ref": "Edgar Lee Masters",
+  "fetched_body": "In the last spring I ever knew,\nIn those last days, I sat in the forsaken orchard\nWhere beyond fields of greenery shimmered\nThe hills at Miller\u2019s Ford;\nJust to muse on the apple tree\nWith its ruined trunk and blasted branches,\nAnd shoots of green whose delicate blossoms\nWere sprinkled over the skeleton tangle,\nNever to grow in fruit.\nAnd there was I with my spirit girded\nBy the flesh half dead, the senses numb\nYet thinking of youth and the earth in youth,\u2014\nSuch phantom blossoms palely shining\nOver the lifeless boughs of Time.\nO earth that leaves us ere heaven takes us!\nHad I been only a tree to shiver\nWith dreams of spring and a leafy youth,\nThen I had fallen in the cyclone\nWhich swept me out of the soul\u2019s suspense\nWhere it\u2019s neither earth nor heaven.",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.85,
+    "stored_lines": 20,
+    "fetched_lines": 20,
+    "fetched_has_breaks": false,
+    "reason": "near (r=0.850, lines 20=20) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Russell Kincaid",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Russell Kincaid (Masters)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)/Aaron Hatfield",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 19"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Alumni Oxonienses: the Members of the University of Oxford, 1715-1886/M",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Oregon Historical Quarterly/Volume 37/Index",
+      "ratio": 0.0,
+      "fetched_lines": 2765,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 2745"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Portland, Oregon: Its History and Builders/Volume 1/Chapter 23",
+      "ratio": 0.0,
+      "fetched_lines": 819,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 799"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Oregon Literature",
+      "ratio": 0.0,
+      "fetched_lines": 458,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 438"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Edgar Lee Masters",
+      "ratio": 0.85,
+      "fetched_lines": 20,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.850, lines 20=20) \u2014 edition drift"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

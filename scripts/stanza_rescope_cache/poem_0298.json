@@ -1,0 +1,67 @@
+{
+  "id": "poem_0298",
+  "title": "Harry Wilmans",
+  "author": "Edgar Lee Masters",
+  "stored_line_count": 28,
+  "source": "gutenberg",
+  "source_ref": "Edgar Lee Masters",
+  "fetched_body": "I was just turned twenty-one,\nAnd Henry Phipps, the Sunday-school superintendent,\nMade a speech in Bindle\u2019s Opera House.\n\u201cThe honor of the flag must be upheld,\u201d he said,\n\u201cWhether it be assailed by a barbarous tribe of Tagalogs\nOr the greatest power in Europe.\u201d\nAnd we cheered and cheered the speech and the flag he waved\nAs he spoke.\nAnd I went to the war in spite of my father,\nAnd followed the flag till I saw it raised\nBy our camp in a rice field near Manila,\nAnd all of us cheered and cheered it.\nBut there were flies and poisonous things;\nAnd there was the deadly water,\nAnd the cruel heat,\nAnd the sickening, putrid food;\nAnd the smell of the trench just back of the tents\nWhere the soldiers went to empty themselves;\nAnd there were the whores who followed us, full of syphilis;\nAnd beastly acts between ourselves or alone,\nWith bullying, hatred, degradation among us,\nAnd days of loathing and nights of fear\nTo the hour of the charge through the steaming swamp,\nFollowing the flag,\nTill I fell with a scream, shot through the guts.\nNow there\u2019s a flag over me in\nSpoon River. A flag!\nA flag!",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 0.9285714285714286,
+    "stored_lines": 28,
+    "fetched_lines": 28,
+    "fetched_has_breaks": false,
+    "reason": "ok"
+  },
+  "category": "FOUND_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Harry Wilmans",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Harry Wilmans (Masters)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)/Harry Wilmans",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)/Godwin James",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)/Henry Phipps",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 27"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Edgar Lee Masters",
+      "ratio": 0.929,
+      "fetched_lines": 28,
+      "has_breaks": false,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

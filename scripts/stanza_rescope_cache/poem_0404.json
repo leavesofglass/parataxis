@@ -1,0 +1,34 @@
+{
+  "id": "poem_0404",
+  "title": "Poems From \"A Shropshire Lad\" - IV - Reveille",
+  "author": "A.E. Housman",
+  "stored_line_count": 24,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "NOT_FOUND",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Poems From \"A Shropshire Lad\" - IV - Reveille",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems From \"A Shropshire Lad\" - IV - Reveille (Housman)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "A.E. Housman",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "poem_0309",
+  "title": "Editor Whedon",
+  "author": "Edgar Lee Masters",
+  "stored_line_count": 25,
+  "source": "gutenberg",
+  "source_ref": "Edgar Lee Masters",
+  "fetched_body": "To be able to see every side of every question;\nTo be on every side, to be everything, to be nothing long;\nTo pervert truth, to ride it for a purpose,\nTo use great feelings and passions of the human family\nFor base designs, for cunning ends,\nTo wear a mask like the Greek actors\u2014\nYour eight-page paper\u2014behind which you huddle,\nBawling through the megaphone of big type:\n\u201cThis is I, the giant.\u201d\nThereby also living the life of a sneak-thief,\nPoisoned with the anonymous words\nOf your clandestine soul.\nTo scratch dirt over scandal for money,\nAnd exhume it to the winds for revenge,\nOr to sell papers,\nCrushing reputations, or bodies, if need be,\nTo win at any cost, save your own life.\nTo glory in demoniac power, ditching civilization,\nAs a paranoiac boy puts a log on the track\nAnd derails the express train.\nTo be an editor, as I was.\nThen to lie here close by the river over the place\nWhere the sewage flows from the village,\nAnd the empty cans and garbage are dumped,\nAnd abortions are hidden.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 0.96,
+    "stored_lines": 25,
+    "fetched_lines": 25,
+    "fetched_has_breaks": false,
+    "reason": "ok"
+  },
+  "category": "FOUND_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Editor Whedon",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Editor Whedon (Masters)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)/Editor Whedon",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)/Eugene Carman",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)/The Spooniad",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 24"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 24"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The American Cyclop\u00e6dia (1879)/United States, Literature of the",
+      "ratio": 0.0,
+      "fetched_lines": 2398,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 2373"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Edgar Lee Masters",
+      "ratio": 0.96,
+      "fetched_lines": 25,
+      "has_breaks": false,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

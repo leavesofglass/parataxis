@@ -1,0 +1,107 @@
+{
+  "id": "poem_2070",
+  "title": "On the Death of a Young Lady of Five Years of Age",
+  "author": "Phillis Wheatley",
+  "stored_line_count": 36,
+  "source": "wikisource",
+  "source_ref": "Poems on Various Subjects, Religious and Moral/On the Death of a young Lady of five Years of Age",
+  "fetched_body": "FROM dark abodes to fair etherial light\nTh' enraptur'd innocent has wing'd her flight;\nOn the kind bosom of eternal love\nShe finds unknown beatitude above.\nThis know, ye parents, nor her loss deplore,5\nShe feels the iron hand of pain no more;\nThe dispensations of unerring grace,\nShould turn your sorrows into grateful praise;\nLet then no tears for her henceforward flow,\nNo more distress'd in our dark vale below.10\nHer morning sun, which rose divinely bright,\nWas quickly mantled with the gloom of night;\nBut hear in heav'n's blest bow'rs your Nancy fair,\nAnd learn to imitate her language there.\n\"Thou, Lord, whom I behold with glory crown'd,\n\"By what sweet name, and in what tuneful sound\n\n\"Wilt thou be prais'd? Seraphic pow'rs are faint\n\"Infinite love and majesty to paint.\n\"To thee let all their grateful voices raise,\n\"And saints and angels join their songs of praise.\"20\nPerfect in bliss she from her heav'nly home\nLooks down, and smiling beckons you to come;\nWhy then, fond parents, why these fruitless groans?\nRestrain your tears, and cease your plaintive moans.\nFreed from a world of sin, and snares, and pain,25\nWhy would you wish your daughter back again?\nNo\u2014bow resign'd. Let hope your grief control,\nAnd check the rising tumult of the soul.\nCalm in the prosperous, and adverse day,\nAdore the God who gives and takes away;30\nEye him in all, his holy name revere,\nUpright your actions, and your hearts sincere,\nTill having sail'd through life's tempestuous sea,\nAnd from its rocks, and boist'rous billows free,\nYourselves, safe landed on the blissful shore,35\nShall join your happy babe to part no more.",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.7777777777777778,
+    "stored_lines": 36,
+    "fetched_lines": 36,
+    "fetched_has_breaks": true,
+    "reason": "near (r=0.778, lines 36=36) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "On the Death of a Young Lady of Five Years of Age",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "On the Death of a Young Lady of Five Years of Age (Wheatley)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Memoir and Poems of Phillis Wheatley",
+      "ratio": 0.0,
+      "fetched_lines": 4,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 32"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Memoir and Poems of Phillis Wheatley/On the Death of a Young Lady",
+      "ratio": 0.639,
+      "fetched_lines": 36,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.639, lines 36=36) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/On the Death of a young Lady of five Years of Age",
+      "ratio": 0.778,
+      "fetched_lines": 36,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.778, lines 36=36) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 35"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/On the Death of a young Gentleman",
+      "ratio": 0.0,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 12"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/On the Rev. Mr. George Whitefield",
+      "ratio": 0.0,
+      "fetched_lines": 49,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 13"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Phillis Wheatley",
+      "ratio": 0.0,
+      "fetched_lines": 40,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 4"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

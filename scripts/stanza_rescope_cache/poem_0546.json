@@ -1,0 +1,84 @@
+{
+  "id": "poem_0546",
+  "title": "Written After Swimming From Sestos To Abydos",
+  "author": "George Gordon Byron",
+  "stored_line_count": 20,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio 0.588 (line-count differs by 11)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Written After Swimming From Sestos To Abydos",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Written After Swimming From Sestos To Abydos (Byron)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Works of Lord Byron (ed. Coleridge, Prothero)/Poetry/Volume 3/Written after swimming from Sestos to Abydos",
+      "ratio": 0.588,
+      "fetched_lines": 31,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 11"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Works of Lord Byron (ed. Coleridge, Prothero)/Poetry/Volume 3/The Spell is broke, the Charm is flown!",
+      "ratio": 0.0,
+      "fetched_lines": 8,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 12"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Works of Lord Byron (ed. Coleridge, Prothero)/Poetry/Volume 3/Lines in the Travellers' Book at Orchomenus",
+      "ratio": 0.0,
+      "fetched_lines": 10,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 10"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Works of Lord Byron (ed. Coleridge, Prothero)/Poetry/Volume 3",
+      "ratio": 0.0,
+      "fetched_lines": 2,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 18"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Dictionary of National Biography, 1885-1900/Byron, George Gordon",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 19"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "George Gordon Byron",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

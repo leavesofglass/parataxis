@@ -1,0 +1,102 @@
+{
+  "id": "poem_0700",
+  "title": "Ode On Solitude",
+  "author": "Alexander Pope",
+  "stored_line_count": 20,
+  "source": "wikisource",
+  "source_ref": "Poems and Extracts/Ode on Solitude",
+  "fetched_body": "Happy the man, whose wish and care,\nA few paternal acres bound,\nContent to breathe his native air\nIn his own ground.\nWhose herds with milk, whose fields with bread,\nWhose flocks supply him with attire;\nWhose trees in summer yield him shade,\nIn winter fire.\nBlest who can unconcernedly find\nHorn's, days, and years slide soft away\nIn health of body peace of mind,\nQuiet by day\n\nSound sleep by night; study and ease,\nTogether mix'd; sweet recreation,\nAnd innocence which most doth please,\nWith meditation.\nThus let me live, unseen, unknown;\nThus unlamented, let me die.\nSteal from the world, and not a stone\nTell where I lie.\n\nPope, in his 12th year.",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.6829268292682927,
+    "stored_lines": 20,
+    "fetched_lines": 21,
+    "fetched_has_breaks": true,
+    "reason": "near (r=0.683, lines 20=21) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Ode On Solitude",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Ode On Solitude (Pope)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems and Extracts/Ode on Solitude",
+      "ratio": 0.683,
+      "fetched_lines": 21,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.683, lines 20=21) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Solitude (Pope)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "1911 Encyclop\u00e6dia Britannica/Pope, Alexander",
+      "ratio": 0.0,
+      "fetched_lines": 2,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 18"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems and Extracts/Introduction",
+      "ratio": 0.0,
+      "fetched_lines": 13,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 7"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Dictionary of National Biography, 1885-1900/Dillon, Wentworth",
+      "ratio": 0.0,
+      "fetched_lines": 4,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 16"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Pindar and Anacreon/Pindar/Biographical Sketch",
+      "ratio": 0.0,
+      "fetched_lines": 2,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 18"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Alexander Pope",
+      "ratio": 0.0,
+      "fetched_lines": 11,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 9"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

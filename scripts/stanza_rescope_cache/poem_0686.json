@@ -1,0 +1,74 @@
+{
+  "id": "poem_0686",
+  "title": "Man And Wife",
+  "author": "Robert Lowell",
+  "stored_line_count": 28,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio None (None)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Man And Wife",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Man And Wife (Lowell)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Columbia River: Its History, Its Myths, Its Scenery, Its Commerce/Part 1/Chapter 7",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "History of Woman Suffrage/Volume 3/Chapter 31",
+      "ratio": 0.0,
+      "fetched_lines": 13,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 15"
+    },
+    {
+      "source": "wikisource",
+      "ref": "A Study of Victor Hugo/Catalogue",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Weir of Hermiston/Catalogue",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Astrophel and Other Poems/Advertisements",
+      "ratio": 0.0,
+      "fetched_lines": 4060,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 4032"
+    },
+    {
+      "source": "wikisource",
+      "ref": "A Midsummer Holiday and Other Poems/Catalogue",
+      "outcome": "no-text"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Robert Lowell",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

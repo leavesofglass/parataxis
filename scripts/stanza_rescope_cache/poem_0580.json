@@ -1,0 +1,42 @@
+{
+  "id": "poem_0580",
+  "title": "Menelaus And Helen",
+  "author": "Rupert Brooke",
+  "stored_line_count": 30,
+  "source": "wikisource",
+  "source_ref": "The Collected poems of Rupert Brooke/Menelaus and Helen",
+  "fetched_body": "I\n\nHot through Troy's ruin Menelaus broke\nTo Priam's palace, sword in hand, to sate\nOn that adulterous whore a ten years' hate\nAnd a king's honour. Through red death, and smoke,\nAnd cries, and then by quieter ways he strode,\nTill the still innermost chamber fronted him.\nHe swung his sword, and crashed into the dim\nLuxurious bower, flaming like a god.\n\nHigh sat white Helen, lonely and serene.\nHe had not remembered that she was so fair,\nAnd that her neck curved down in such a way;\nAnd he felt tired. He flung the sword away,\nAnd kissed her feet, and knelt before her there,\nThe perfect Knight before the perfect Queen.\n\nII\n\nSo far the poet. How should he behold\nThat journey home, the long connubial years?\nHe does not tell you how white Helen bears\nChild on legitimate child, becomes a scold,\nHaggard with virtue. Menelaus bold\nWaxed garrulous, and sacked a hundred Troys\n'Twixt noon and supper. And her golden voice\nGot shrill as he grew deafer. And both were old.\n\nOften he wonders why on earth he went\nTroyward, or why poor Paris ever came.\nOft she weeps, gummy-eyed and impotent;\nHer dry shanks twitch at Paris' mumbled name.\nSo Menelaus nagged; and Helen cried;\nAnd Paris slept on by Scamander side.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 1.0,
+    "stored_lines": 30,
+    "fetched_lines": 30,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Menelaus And Helen",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Menelaus And Helen (Brooke)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Collected poems of Rupert Brooke/Menelaus and Helen",
+      "ratio": 1.0,
+      "fetched_lines": 30,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

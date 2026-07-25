@@ -1,0 +1,84 @@
+{
+  "id": "poem_0547",
+  "title": "Stanzas Written On The Road Between Florence And Pisa",
+  "author": "George Gordon Byron",
+  "stored_line_count": 22,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio 0.816 (line-count differs by 5)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Stanzas Written On The Road Between Florence And Pisa",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Stanzas Written On The Road Between Florence And Pisa (Byron)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Works of Lord Byron (ed. Coleridge, Prothero)/Poetry/Volume 4/Stanzas written on the Road between Florence and Pisa",
+      "ratio": 0.816,
+      "fetched_lines": 27,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 5"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Works of Lord Byron (ed. Coleridge, Prothero)/Poetry/Volume 4/Stanzas to a Hindoo Air",
+      "ratio": 0.186,
+      "fetched_lines": 21,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "ratio 0.186 below 0.55"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Works of Lord Byron (ed. Coleridge, Prothero)/Poetry/Volume 4",
+      "ratio": 0.0,
+      "fetched_lines": 2,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 20"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Works of Lord Byron (ed. Coleridge, Prothero)/Poetry/Volume 4/The Irish Avatar",
+      "ratio": 0.043,
+      "fetched_lines": 164,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 142"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Book Review Digest/1905/B",
+      "ratio": 0.0,
+      "fetched_lines": 1422,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 1400"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "George Gordon Byron",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

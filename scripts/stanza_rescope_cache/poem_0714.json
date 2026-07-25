@@ -1,0 +1,72 @@
+{
+  "id": "poem_0714",
+  "title": "The Penitent",
+  "author": "Edna St. Vincent Millay",
+  "stored_line_count": 24,
+  "source": "wikisource",
+  "source_ref": "A Few Figs from Thistles (Harper & Brothers, 1922)/The Penitent",
+  "fetched_body": "I had a little Sorrow,\nBorn of a little Sin,\nI found a room all damp with gloom\nAnd shut us all within;\nAnd, \"Little Sorrow, weep,\" said I,\n\"And, Little Sin, pray God to die,\nAnd I upon the floor will lie\nAnd think how bad I've been!\"\nAlas for pious planning\u2014\nIt mattered not a whit!\nAs far as gloom went in that room,\nThe lamp might have been lit!\nMy Little Sorrow would not weep,\nMy Little Sin would go to sleep\u2014\nTo save my soul I could not keep\nMy graceless mind on it!\nSo up I got in anger,\nAnd took a book I had,\n\nAnd put a ribbon on my hair\nTo please a passing lad.\nAnd, \"One thing there's no getting by\u2014\nI've been a wicked girl,\" said I;\n\"But if I can't be sorry, why,\nI might as well be glad!\"",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 1.0,
+    "stored_lines": 24,
+    "fetched_lines": 24,
+    "fetched_has_breaks": true,
+    "reason": "ok"
+  },
+  "category": "FOUND_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The Penitent",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Penitent (Millay)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems (Millay)/The Penitent",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "A Few Figs from Thistles (Harper & Brothers, 1922)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems (Millay)/Grown-up",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems (Millay)/Daphne",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems (Millay)",
+      "ratio": 0.0,
+      "fetched_lines": 3,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 21"
+    },
+    {
+      "source": "wikisource",
+      "ref": "A Few Figs from Thistles (Harper & Brothers, 1922)/The Penitent",
+      "ratio": 1.0,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

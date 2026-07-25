@@ -1,0 +1,67 @@
+{
+  "id": "poem_2085",
+  "title": "The South",
+  "author": "Langston Hughes",
+  "stored_line_count": 28,
+  "source": "wikisource",
+  "source_ref": "The Weary Blues (collection)/The South",
+  "fetched_body": "The lazy, laughing South\nWith blood on its mouth.\nThe sunny-faced South,\nBeast-strong,\nIdiot-brained.\nThe child-minded South\nScratching in the dead fire's ashes\nFor a Negro's bones.\nCotton and the moon,\nWarmth, earth, warmth,\nThe sky, the sun, the stars,\nThe magnolia-scented South.\nBeautiful, like a woman,\nSeductive as a dark-eyed whore,\nPassionate, cruel,\nHoney-lipped, syphilitic\u2014\nThat is the South.\nAnd I, who am black, would love her\nBut she spits in my face.\nAnd I, who am black,\nWould give her many rare gifts\nBut she turns her back upon me.\nSo now I seek the North\u2014\nThe cold-faced North,\nFor she, they say,\nIs a kinder mistress,\nAnd in her house my children\nMay escape the spell of the South.",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 0.9285714285714286,
+    "stored_lines": 28,
+    "fetched_lines": 28,
+    "fetched_has_breaks": false,
+    "reason": "ok"
+  },
+  "category": "FOUND_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The South",
+      "ratio": 0.0,
+      "fetched_lines": 40,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 12"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The South (Hughes)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Weary Blues (collection)",
+      "ratio": 0.0,
+      "fetched_lines": 3,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 25"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Weary Blues (collection)/The Jester",
+      "ratio": 0.0,
+      "fetched_lines": 19,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 9"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Weary Blues (collection)/The South",
+      "ratio": 0.929,
+      "fetched_lines": 28,
+      "has_breaks": false,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

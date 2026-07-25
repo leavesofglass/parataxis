@@ -1,0 +1,92 @@
+{
+  "id": "poem_0306",
+  "title": "Davis Matlock",
+  "author": "Edgar Lee Masters",
+  "stored_line_count": 20,
+  "source": "gutenberg",
+  "source_ref": "Edgar Lee Masters",
+  "fetched_body": "Suppose it is nothing but the hive:\nThat there are drones and workers\nAnd queens, and nothing but storing honey\u2014\n(Material things as well as culture and wisdom)\u2014\nFor the next generation, this generation never living,\nExcept as it swarms in the sun-light of youth,\nStrengthening its wings on what has been gathered,\nAnd tasting, on the way to the hive\nFrom the clover field, the delicate spoil.\nSuppose all this, and suppose the truth:\nThat the nature of man is greater\nThan nature\u2019s need in the hive;\nAnd you must bear the burden of life,\nAs well as the urge from your spirit\u2019s excess\u2014\nWell, I say to live it out like a god\nSure of immortal life, though you are in doubt,\nIs the way to live it.\nIf that doesn\u2019t make God proud of you\nThen God is nothing but gravitation\nOr sleep is the golden goal.",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.85,
+    "stored_lines": 20,
+    "fetched_lines": 20,
+    "fetched_has_breaks": false,
+    "reason": "near (r=0.850, lines 20=20) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Davis Matlock",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Davis Matlock (Masters)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Spoon River Anthology (1915)",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 19"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Oregon Historical Quarterly/Volume 37/Index",
+      "ratio": 0.0,
+      "fetched_lines": 2765,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 2745"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Federal Reporter/Third series/Volume 74",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The London Gazette/Number 28314",
+      "ratio": 0.0,
+      "fetched_lines": 30,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 10"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Oregon Geographic Names (1952)/C",
+      "ratio": 0.0,
+      "fetched_lines": 422,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 402"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Edgar Lee Masters",
+      "ratio": 0.85,
+      "fetched_lines": 20,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.850, lines 20=20) \u2014 edition drift"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

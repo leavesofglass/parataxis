@@ -1,0 +1,34 @@
+{
+  "id": "poem_0709",
+  "title": "To Marguriet",
+  "author": "Matthew Arnold",
+  "stored_line_count": 24,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "NOT_FOUND",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "To Marguriet",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "To Marguriet (Arnold)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Matthew Arnold",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

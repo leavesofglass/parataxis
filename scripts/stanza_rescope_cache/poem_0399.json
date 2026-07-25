@@ -1,0 +1,39 @@
+{
+  "id": "poem_0399",
+  "title": "Poems From \"A Shropshire Lad\" - XXXI",
+  "author": "A.E. Housman",
+  "stored_line_count": 20,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "NOT_FOUND",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Poems From \"A Shropshire Lad\" - XXXI",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems From \"A Shropshire Lad\" - XXXI (Housman)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Last Poems (Housman)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "A.E. Housman",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

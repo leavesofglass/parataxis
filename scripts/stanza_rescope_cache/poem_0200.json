@@ -1,0 +1,102 @@
+{
+  "id": "poem_0200",
+  "title": "The Second Coming",
+  "author": "William Butler Yeats",
+  "stored_line_count": 22,
+  "source": "wikisource",
+  "source_ref": "The Second Coming (Yeats)",
+  "fetched_body": "Turning and turning in the widening gyre\nThe falcon cannot hear the falconer;\nThings fall apart; the centre cannot hold;\nMere anarchy is loosed upon the world,\nThe blood-dimmed tide is loosed, and everywhere\nThe ceremony of innocence is drowned;\nThe best lack all conviction, while the worst\nAre full of passionate intensity.\n\nSurely some revelation is at hand;\nSurely the Second Coming is at hand.\nThe Second Coming! Hardly are those words out\nWhen a vast image out of Spiritus Mundi\nTroubles my sight: a waste of desert sand;\nA shape with lion body and the head of a man,\nA gaze blank and pitiless as the sun,\nIs moving its slow thighs, while all about it\nWind shadows of the indignant desert birds.\nThe darkness drops again but now I know\nThat twenty centuries of stony sleep\nWere vexed to nightmare by a rocking cradle,\nAnd what rough beast, its hour come round at last,\nSlouches towards Bethlehem to be born?",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.9090909090909091,
+    "stored_lines": 22,
+    "fetched_lines": 22,
+    "fetched_has_breaks": true,
+    "reason": "near (r=0.909, lines 22=22) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "The Second Coming",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Second Coming (Yeats)",
+      "ratio": 0.909,
+      "fetched_lines": 22,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.909, lines 22=22) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Michael Robartes and the Dancer/The Second Coming",
+      "ratio": 0.909,
+      "fetched_lines": 22,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.909, lines 22=22) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Michael Robartes and the Dancer",
+      "ratio": 0.0,
+      "fetched_lines": 5,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 17"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Michael Robartes and the Dancer/Demon and Beast",
+      "ratio": 0.0,
+      "fetched_lines": 50,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 28"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Michael Robartes and the Dancer/A Prayer for my Daughter",
+      "ratio": 0.0,
+      "fetched_lines": 80,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 58"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Criterion/Volume 4/Number 2/Our Need for Religious Sincerity",
+      "ratio": 0.0,
+      "fetched_lines": 16,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 6"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Michael Robartes and the Dancer/Notes",
+      "outcome": "no-text"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "William Butler Yeats",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "id": "poem_0695",
+  "title": "Mutability.",
+  "author": "Percy Bysshe Shelley",
+  "stored_line_count": 20,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio 0.889 (line-count differs by 4)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Mutability",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Mutability (Shelley)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Complete Poetical Works of Percy Bysshe Shelley (ed. Hutchinson, 1914)/Mutability",
+      "ratio": 0.889,
+      "fetched_lines": 16,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 4"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Complete Poetical Works of Percy Bysshe Shelley (ed. Hutchinson, 1914)/Mutability (2)",
+      "ratio": 0.0,
+      "fetched_lines": 21,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "ratio 0.000 below 0.55"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Complete Poetical Works of Percy Bysshe Shelley (ed. Hutchinson, 1914)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Complete Poetical Works of Percy Bysshe Shelley (ed. Hutchinson, 1914)/Lines Written on Hearing the News of the Death of Napoleon",
+      "ratio": 0.0,
+      "fetched_lines": 40,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 20"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Complete Poetical Works of Percy Bysshe Shelley (ed. Hutchinson, 1914)/Song: 'Rarely, rarely, comest thou'",
+      "ratio": 0.0,
+      "fetched_lines": 48,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 28"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Complete Poetical Works of Percy Bysshe Shelley (ed. Hutchinson, 1914)/On Death",
+      "ratio": 0.0,
+      "fetched_lines": 30,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 10"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Percy Bysshe Shelley",
+      "ratio": 0.0,
+      "fetched_lines": 223,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 203"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "id": "poem_2073",
+  "title": "To a Lady on the Death of Her Husband",
+  "author": "Phillis Wheatley",
+  "stored_line_count": 34,
+  "source": "wikisource",
+  "source_ref": "Memoir and Poems of Phillis Wheatley/To a Lady, on the Death of her Husband",
+  "fetched_body": "Grim monarch! see, deprived of vital breath,\nA young physician in the dust of death:\nDost thou go on incessant to destroy,\nOur griefs to double and lay waste our joy?\nEnough, thou never yet wast known to say,\nThough millions die the vassals of thy sway:\nNor youth, nor science, nor the ties of love,\nNor aught on earth thy flinty heart can move.\nThe friend, the spouse, from his dire dart to save,\nIn vain we ask the sovereign of the grave.\nFair mourner, there see thy loved Leonard laid,\nAnd o'er him spread the deep, impervious shade.\nClosed are his eves, and heavy fetters keep\nHis senses bound in never-waking sleep,\nTill time shall cease, till many a starry world\nShall fall from heaven, in dire confusion hurled;\nTill nature in her final wreck shall lie,\nAnd her last groan shall rend the azure sky;\nNot, not till then, his active soul shall claim\nHis body, a divine, immortal frame.\n\nBut see the softly-stealing tears apace\nPursue each other down the mourner's face:\nBut cease thy tears, bid every sigh depart,\nAnd cast the load of anguish from thine heart:\nFrom the cold shell of his great soul arise,\nAnd look beyond, thou native of the skies;\nThere fix thy view, where, fleeter than the wind.\nThy Leonard mounts, and leaves the earth behind.\nThyself prepare to pass the vale of night,\nTo join forever on the hills of light.\nTo thine embrace his joyful spirit moves,\nTo thee, the partner of his earthly loves;\nHe welcomes thee to pleasures more refined,\nAnd better suited to the immortal mind.",
+  "match": {
+    "matched": false,
+    "near_match": true,
+    "ratio": 0.6764705882352942,
+    "stored_lines": 34,
+    "fetched_lines": 34,
+    "fetched_has_breaks": true,
+    "reason": "near (r=0.676, lines 34=34) \u2014 edition drift"
+  },
+  "category": "FOUND_NEAR_WITH_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "To a Lady on the Death of Her Husband",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 33"
+    },
+    {
+      "source": "wikisource",
+      "ref": "To a Lady on the Death of Her Husband (Wheatley)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Memoir and Poems of Phillis Wheatley/To a Lady, on the Death of her Husband",
+      "ratio": 0.676,
+      "fetched_lines": 34,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": true,
+      "reason": "near (r=0.676, lines 34=34) \u2014 edition drift"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Memoir and Poems of Phillis Wheatley",
+      "ratio": 0.0,
+      "fetched_lines": 4,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 30"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 33"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/To a Lady on the Death of her Husband",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/On the Death of a young Gentleman",
+      "ratio": 0.0,
+      "fetched_lines": 24,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 10"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Poems on Various Subjects, Religious and Moral/Goliath of Gath",
+      "ratio": 0.0,
+      "fetched_lines": 1,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 33"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Phillis Wheatley",
+      "ratio": 0.0,
+      "fetched_lines": 38,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 4"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}

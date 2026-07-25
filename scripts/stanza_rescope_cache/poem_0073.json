@@ -1,0 +1,42 @@
+{
+  "id": "poem_0073",
+  "title": "Sympathy",
+  "author": "Paul Laurence Dunbar",
+  "stored_line_count": 21,
+  "source": "wikisource",
+  "source_ref": "The Complete Poems of Paul Laurence Dunbar/Sympathy",
+  "fetched_body": "I know what the caged bird feels, alas!\nWhen the sun is bright on the upland slopes;\nWhen the wind stirs soft through the springing grass,\nAnd the river flows like a stream of glass;\nWhen the first bird sings and the first bud opes,\nAnd the faint perfume from its chalice steals--\nI know what the caged bird feels!\nI know why the caged bird beats his wing\nTill its blood is red on the cruel bars;\nFor he must fly back to his perch and cling\nWhen he fain would be on the bough a-swing;\nAnd a pain still throbs in the old, old scars\nAnd they pulse again with a keener sting--\nI know why he beats his wing!\nI know why the caged bird sings, ah me,\nWhen his wing is bruised and his bosom sore,--\nWhen he beats his bars and he would be free;\nIt is not a carol of joy or glee,\nBut a prayer that he sends from his heart's deep core,\nBut a plea, that upward to Heaven he flings--\nI know why the caged bird sings!",
+  "match": {
+    "matched": true,
+    "near_match": false,
+    "ratio": 1.0,
+    "stored_lines": 21,
+    "fetched_lines": 21,
+    "fetched_has_breaks": false,
+    "reason": "ok"
+  },
+  "category": "FOUND_NO_STANZAS",
+  "note": "",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Sympathy",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Sympathy (Dunbar)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "The Complete Poems of Paul Laurence Dunbar/Sympathy",
+      "ratio": 1.0,
+      "fetched_lines": 21,
+      "has_breaks": false,
+      "matched": true,
+      "near_match": false,
+      "reason": "ok"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "id": "poem_0141",
+  "title": "Beat! Beat! Drums!",
+  "author": "Walt Whitman",
+  "stored_line_count": 21,
+  "source": null,
+  "source_ref": null,
+  "fetched_body": null,
+  "match": null,
+  "category": "FOUND_MISMATCH",
+  "note": "best wikisource ratio 0.524 (ratio 0.524 below 0.55)",
+  "all_attempts": [
+    {
+      "source": "wikisource",
+      "ref": "Beat! Beat! Drums!",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Beat! Beat! Drums! (Whitman)",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Leaves of Grass (1882)/Drum-Taps/Beat! Beat! Drums!",
+      "ratio": 0.524,
+      "fetched_lines": 21,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "ratio 0.524 below 0.55"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Leaves of Grass (1882)/Drum-Taps",
+      "outcome": "no-text"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Leaves of Grass (1882)/Drum-Taps/Eighteen Sixty-One",
+      "ratio": 0.0,
+      "fetched_lines": 16,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 5"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Leaves of Grass (1882)/Drum-Taps/From Paumanok Starting I Fly like a Bird",
+      "ratio": 0.0,
+      "fetched_lines": 10,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 11"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Leaves of Grass (1882)",
+      "ratio": 0.0,
+      "fetched_lines": 11,
+      "has_breaks": true,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 10"
+    },
+    {
+      "source": "wikisource",
+      "ref": "Lyra Heroica",
+      "ratio": 0.0,
+      "fetched_lines": 5,
+      "has_breaks": false,
+      "matched": false,
+      "near_match": false,
+      "reason": "line-count differs by 16"
+    },
+    {
+      "source": "gutenberg",
+      "ref": "Walt Whitman",
+      "outcome": "no-text"
+    },
+    {
+      "source": "poets.org",
+      "ref": "search",
+      "outcome": "no-text"
+    }
+  ]
+}
