@@ -104,7 +104,7 @@ export default async function PoemPage({
           <h1 className="font-serif text-[1.5rem] leading-[1.35] font-normal text-[#111] mb-10">
             {poem.title}
           </h1>
-          <div className="font-serif text-[1.05rem] leading-[1.95] text-[#111]">
+          <div className="font-serif text-[1.05rem] leading-[1.5] text-[#111]">
             {(poem.body_html ?? poem.body).replace(/^(?:[ \t]*\n)+/, '').split('\n').map((line, i) =>
               line.trim()
                 ? poem.body_html != null

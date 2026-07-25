@@ -17,9 +17,9 @@ const TITLE_CLASSES: Record<FontSize, string> = {
 }
 
 const BODY_CLASSES: Record<FontSize, string> = {
-  small:  'font-serif text-[0.9rem] leading-[1.85] text-[#111]',
-  medium: 'font-serif text-[1.05rem] leading-[1.95] text-[#111]',
-  large:  'font-serif text-[1.25rem] leading-[2.0] text-[#111]',
+  small:  'font-serif text-[0.9rem] leading-[1.45] text-[#111]',
+  medium: 'font-serif text-[1.05rem] leading-[1.5] text-[#111]',
+  large:  'font-serif text-[1.25rem] leading-[1.55] text-[#111]',
 }
 
 export interface Reactions {
