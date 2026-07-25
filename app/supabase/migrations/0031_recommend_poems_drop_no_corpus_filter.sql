@@ -1,0 +1,21 @@
+-- =============================================================================
+-- 0031 — Drop pre-corpus_filter recommend_poems overload
+-- =============================================================================
+-- ⚠️  DO NOT APPLY until the 0030 client rollout is verified in production:
+--     both PoemSwiper and app/api/warmup must be confirmed to be sending
+--     corpus_filter in the request body. Applying this while any client is
+--     still omitting corpus_filter will make that client's request fall
+--     through to a "function not found" error (there will be no matching
+--     overload once this drop lands).
+--
+-- After application:
+--   - There is only one recommend_poems overload: the 0030 one that requires
+--     corpus_filter. PostgREST has exactly one candidate to dispatch to, so
+--     the empty-array "no restriction" semantics from 0030 kick in cleanly
+--     for anon users and warmup.
+--   - Service-role callers (ingest scripts, admin) are unaffected — none of
+--     them call recommend_poems, but if any did they'd need the corpus_filter
+--     param too.
+-- =============================================================================
+
+drop function if exists recommend_poems(int, boolean, boolean, boolean, text[], boolean);

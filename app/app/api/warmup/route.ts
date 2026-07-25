@@ -42,7 +42,7 @@ export async function GET(request: Request) {
     fetch(`${supabaseUrl}/rest/v1/rpc/recommend_poems`, {
       method: 'POST',
       headers,
-      body: JSON.stringify({ limit_in: 1 }),
+      body: JSON.stringify({ limit_in: 1, corpus_filter: [] }),
     }),
     fetch(`${supabaseUrl}/rest/v1/rpc/get_poems_by_ids`, {
       method: 'POST',

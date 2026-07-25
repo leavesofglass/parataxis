@@ -40,6 +40,13 @@ const FONT_SIZE_OPTIONS: { key: FontSize; label: string }[] = [
   { key: 'large',  label: 'Large' },
 ]
 
+// Dev-only corpus filter. The checkboxes render for this user id and no other,
+// and PoemSwiper reads the same localStorage key to pass the whitelist to
+// recommend_poems. Sentinel represents poems with corpus IS NULL (originals).
+const DEV_USER_ID = '24e8d0cf-cf8a-4c5f-b12f-92ca544056b1'
+const CORPUS_FILTER_KEY = 'parataxis_corpus_filter'
+const NULL_CORPUS_SENTINEL = '__null__'
+
 export default function AccountPage() {
   const router = useRouter()
   const [user, setUser] = useState<User | null>(null)
@@ -56,6 +63,8 @@ export default function AccountPage() {
   const [buckets, setBuckets] = useState<LengthBuckets>(DEFAULT_BUCKETS)
   const [fontSize, setFontSize] = useState<FontSize>(DEFAULT_FONT_SIZE)
   const [mixRemaining, setMixRemaining] = useState<number | null>(null)
+  const [availableCorpora, setAvailableCorpora] = useState<string[]>([])
+  const [corpusChecked, setCorpusChecked] = useState<Set<string>>(new Set())
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -94,11 +103,35 @@ export default function AccountPage() {
       }
     } catch {}
 
+    try {
+      const cv = localStorage.getItem(CORPUS_FILTER_KEY)
+      if (cv) {
+        const parsed = JSON.parse(cv)
+        if (Array.isArray(parsed)) {
+          setCorpusChecked(new Set(parsed.filter((x): x is string => typeof x === 'string')))
+        }
+      }
+    } catch {}
+
     getSupabase()
       .auth.getUser()
       .then(({ data }: { data: { user: User | null } }) => {
         setUser(data.user)
         setReady(true)
+        if (data.user?.id === DEV_USER_ID) {
+          getSupabase().rpc('list_corpora').then(({ data: corpora, error }: { data: string[] | null; error: unknown }) => {
+            if (error || !Array.isArray(corpora)) return
+            // list_corpora includes '__null__' itself when null-corpus rows
+            // exist — no client-side append. Single source of truth for the
+            // sentinel is the SQL function.
+            setAvailableCorpora(corpora)
+            // No persisted selection → seed all-checked so the UI matches the
+            // wire semantics (empty array = no restriction = all corpora).
+            let hasPersisted = false
+            try { hasPersisted = localStorage.getItem(CORPUS_FILTER_KEY) !== null } catch {}
+            if (!hasPersisted) setCorpusChecked(new Set(corpora))
+          })
+        }
       })
   }, [])
 
@@ -114,6 +147,23 @@ export default function AccountPage() {
   function handleFontSize(size: FontSize) {
     setFontSize(size)
     try { localStorage.setItem(FONT_SIZE_KEY, size) } catch {}
+  }
+
+  function toggleCorpus(name: string) {
+    setCorpusChecked((prev) => {
+      const next = new Set(prev)
+      if (next.has(name)) next.delete(name); else next.add(name)
+      try {
+        // All boxes checked = no restriction. Remove the key so PoemSwiper
+        // reads an empty filter and any future corpus is auto-included.
+        if (availableCorpora.length > 0 && availableCorpora.every((c) => next.has(c))) {
+          localStorage.removeItem(CORPUS_FILTER_KEY)
+        } else {
+          localStorage.setItem(CORPUS_FILTER_KEY, JSON.stringify(Array.from(next)))
+        }
+      } catch {}
+      return next
+    })
   }
 
   function handleStartMix() {
@@ -307,6 +357,33 @@ export default function AccountPage() {
                   </button>
                 ))}
               </div>
+
+              {user?.id === DEV_USER_ID && availableCorpora.length > 0 && (
+                <>
+                  <p className="font-sans text-[0.75rem] text-neutral-400 mb-3 mt-6">Corpus (dev)</p>
+                  <div className="flex flex-row flex-wrap gap-2">
+                    {availableCorpora.map((name) => {
+                      const label = name === NULL_CORPUS_SENTINEL ? 'originals' : name
+                      const active = corpusChecked.has(name)
+                      return (
+                        <button
+                          key={name}
+                          type="button"
+                          onClick={() => toggleCorpus(name)}
+                          aria-pressed={active}
+                          className={`py-2.5 px-5 border rounded-full font-sans text-[0.8rem] transition-colors ${
+                            active
+                              ? 'border-[#111] text-[#111]'
+                              : 'border-neutral-200 text-neutral-400 hover:border-neutral-400 hover:text-neutral-600'
+                          }`}
+                        >
+                          {label}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </>
+              )}
 
               <p className="font-sans text-[0.75rem] text-neutral-400 mb-3 mt-6">Font size</p>
               <div className="flex flex-row gap-2">

@@ -63,6 +63,11 @@ const DEFAULT_BUCKETS: LengthBuckets = { short: true, medium: true, long: false 
 
 const MIX_MODE_KEY = 'parataxis_mix_mode'
 
+// Dev-only corpus filter, written by the account page. Non-dev users never
+// have this key, so readCorpusFilter returns [] and recommend_poems treats it
+// as "no restriction".
+const CORPUS_FILTER_KEY = 'parataxis_corpus_filter'
+
 function readMixMode(): number | null {
   if (typeof window === 'undefined') return null
   try {
@@ -89,6 +94,17 @@ function readBuckets(): LengthBuckets {
     }
   } catch {}
   return DEFAULT_BUCKETS
+}
+
+function readCorpusFilter(): string[] {
+  if (typeof window === 'undefined') return []
+  try {
+    const v = localStorage.getItem(CORPUS_FILTER_KEY)
+    if (!v) return []
+    const parsed = JSON.parse(v)
+    if (Array.isArray(parsed)) return parsed.filter((x): x is string => typeof x === 'string')
+  } catch {}
+  return []
 }
 
 const DECK_STATE_KEY = 'parataxis_deck_state'
@@ -140,6 +156,7 @@ export function PoemSwiper() {
   const userIdRef = useRef<string | null>(null)
   const isSignedInRef = useRef(false)
   const bucketsRef = useRef<LengthBuckets>(DEFAULT_BUCKETS)
+  const corpusFilterRef = useRef<string[]>([])
   const mountedRef = useRef(true)
   // Authors of the last ~10 poems added to the deck. Passed to recommend_poems
   // so the server excludes them from the next batch (diversity constraint).
@@ -225,6 +242,7 @@ export function PoemSwiper() {
         show_long:      buckets.long,
         recent_authors: recentAuthorsRef.current,
         force_random:   forceRandom,
+        corpus_filter:  corpusFilterRef.current,
       })
       if (error) {
         const detail = `recommend_poems — ${error.message} (${error.code ?? 'no code'})`
@@ -266,6 +284,7 @@ export function PoemSwiper() {
       const t: Record<string, number> = { start: performance.now() }
       const supabase = getSupabase()
       bucketsRef.current = readBuckets()
+      corpusFilterRef.current = readCorpusFilter()
 
       const mixR = readMixMode()
       mixRemainingRef.current = mixR
