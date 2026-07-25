@@ -47,9 +47,7 @@ export async function fetchLibrary(userId: string): Promise<LibraryPoem[]> {
   if (savedIds.length === 0) return []
 
   const { data: poems, error: poemError } = await supabase
-    .from('poems')
-    .select('id, title, author, body, line_count')
-    .in('id', savedIds)
+    .rpc('get_poems_by_ids', { poem_ids: savedIds })
 
   if (poemError || !poems) {
     console.error('fetchLibrary poems error:', poemError)
@@ -99,9 +97,7 @@ export async function fetchSkipped(userId: string): Promise<SkippedPoem[]> {
     new Set((interactions as { poem_id: string; created_at: string }[]).map((i) => i.poem_id)),
   )
   const { data: poems, error: poemError } = await supabase
-    .from('poems')
-    .select('id, title, author, body, line_count')
-    .in('id', poemIds)
+    .rpc('get_poems_by_ids', { poem_ids: poemIds })
 
   if (poemError || !poems) {
     console.error('fetchSkipped poems error:', poemError)

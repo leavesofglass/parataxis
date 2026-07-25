@@ -23,9 +23,7 @@ const SITE_URL =
 async function fetchPoem(id: string): Promise<PoemRow | null> {
   const supabase = getSupabaseServer()
   const { data, error } = await supabase
-    .from('poems')
-    .select('id, title, author, body, body_html')
-    .eq('id', id)
+    .rpc('get_poem', { poem_id: id })
     .maybeSingle()
   if (error || !data) return null
   return data as PoemRow

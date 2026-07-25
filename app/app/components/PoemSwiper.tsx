@@ -74,21 +74,6 @@ function readBuckets(): LengthBuckets {
   return DEFAULT_BUCKETS
 }
 
-// Returns a Supabase query builder with the bucket filter applied.
-// Handles all 8 on/off combinations without nested AND-within-OR.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function applyBucketFilter(query: any, b: LengthBuckets): any {
-  const { short, medium, long } = b
-  if (short && medium && long)   return query
-  if (!short && !medium && !long) return query.lte('line_count', 0)
-  if (short && medium)            return query.lte('line_count', 40)
-  if (medium && long)             return query.gte('line_count', 15)
-  if (short && long)              return query.or('line_count.lte.14,line_count.gte.41')
-  if (short)                      return query.lte('line_count', 14)
-  if (medium)                     return query.gte('line_count', 15).lte('line_count', 40)
-  /* long only */                 return query.gte('line_count', 41)
-}
-
 const DECK_STATE_KEY = 'parataxis_deck_state'
 const DECK_STATE_TTL_MS = 60 * 60 * 1000
 
@@ -122,15 +107,6 @@ function clearSavedDeckState() {
   try {
     localStorage.removeItem(DECK_STATE_KEY)
   } catch {}
-}
-
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr]
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
-  }
-  return a
 }
 
 export function getPreview(body: string): string {
@@ -198,8 +174,6 @@ function PoemCard({
 }
 
 export function PoemSwiper() {
-  const poolRef = useRef<string[]>([])
-  const poolPosRef = useRef(0)
   const fetchingRef = useRef(false)
   const userIdRef = useRef<string | null>(null)
   const isSignedInRef = useRef(false)
@@ -263,19 +237,17 @@ export function PoemSwiper() {
   }, [])
 
   // ── Poem loading ──────────────────────────────────────────────────────────
+  // One path for both anon-auth and signed-in users: the server-side
+  // recommend_poems RPC (which routes cold-start callers to its random branch
+  // via MIN_SIGNALS). No id list is ever downloaded to the client.
   const loadBatch = useCallback(async (): Promise<{ added: number; detail: string | null }> => {
     if (fetchingRef.current) return { added: 0, detail: null }
 
     const supabase = getSupabase()
-    const uid = userIdRef.current
     const buckets = bucketsRef.current
-    const isSignedIn = isSignedInRef.current
 
     if (!buckets.short && !buckets.medium && !buckets.long) {
       return { added: 0, detail: 'no-length-filters' }
-    }
-    if (!isSignedIn && poolRef.current.length === 0) {
-      return { added: 0, detail: null }
     }
 
     // Single gate: cleared in finally so it always resets even if the request throws.
@@ -283,66 +255,30 @@ export function PoemSwiper() {
     // out-of-order responses are structurally impossible.
     fetchingRef.current = true
     try {
-      if (isSignedIn && uid) {
-        const forceRandom = mixRemainingRef.current !== null && mixRemainingRef.current > 0
-        const { data, error } = await supabase.rpc('recommend_poems', {
-          user_id_in:     uid,
-          limit_in:       BATCH,
-          show_short:     buckets.short,
-          show_medium:    buckets.medium,
-          show_long:      buckets.long,
-          recent_authors: recentAuthorsRef.current,
-          force_random:   forceRandom,
-        })
-        if (error) {
-          const detail = `recommend_poems — ${error.message} (${error.code ?? 'no code'})`
-          console.error(detail, error)
-          return { added: 0, detail }
-        }
-        const rows = (data ?? []) as Poem[]
-        if (mountedRef.current) {
-          setPoems((prev) => {
-            const seen = new Set(prev.map((p) => p.id))
-            const merged = [...prev, ...rows.filter((p) => !seen.has(p.id))]
-            recentAuthorsRef.current = merged.slice(-10).map((p) => p.author)
-            return merged
-          })
-        }
-        return { added: rows.length, detail: null }
-      }
-
-      // Anon pool path
-      if (poolPosRef.current >= poolRef.current.length) {
-        poolRef.current = shuffle(poolRef.current)
-        poolPosRef.current = 0
-      }
-
-      const savedPos = poolPosRef.current
-      const batch = poolRef.current.slice(savedPos, savedPos + BATCH)
-      poolPosRef.current += batch.length  // optimistic; restored below on error
-
-      let query = supabase
-        .from('poems')
-        .select('id, title, author, body, body_html, line_count')
-        .in('id', batch)
-      query = applyBucketFilter(query, buckets)
-      const { data, error } = await query
-
+      const forceRandom = mixRemainingRef.current !== null && mixRemainingRef.current > 0
+      const { data, error } = await supabase.rpc('recommend_poems', {
+        limit_in:       BATCH,
+        show_short:     buckets.short,
+        show_medium:    buckets.medium,
+        show_long:      buckets.long,
+        recent_authors: recentAuthorsRef.current,
+        force_random:   forceRandom,
+      })
       if (error) {
-        poolPosRef.current = savedPos  // don't lose the IDs on a transient failure
-        const detail = `poems fetch — ${error.message} (${error.code ?? 'no code'})`
+        const detail = `recommend_poems — ${error.message} (${error.code ?? 'no code'})`
         console.error(detail, error)
         return { added: 0, detail }
       }
-
-      const ordered = batch
-        .map((id) => (data ?? []).find((p: Poem) => p.id === id))
-        .filter(Boolean) as Poem[]
-
+      const rows = (data ?? []) as Poem[]
       if (mountedRef.current) {
-        setPoems((prev) => [...prev, ...ordered])
+        setPoems((prev) => {
+          const seen = new Set(prev.map((p) => p.id))
+          const merged = [...prev, ...rows.filter((p) => !seen.has(p.id))]
+          recentAuthorsRef.current = merged.slice(-10).map((p) => p.author)
+          return merged
+        })
       }
-      return { added: ordered.length, detail: null }
+      return { added: rows.length, detail: null }
     } finally {
       fetchingRef.current = false
     }
@@ -390,31 +326,14 @@ export function PoemSwiper() {
 
       const saved = readSavedDeckState()
       const savedIsFresh = saved !== null && Date.now() - saved.timestamp <= DECK_STATE_TTL_MS
+      // Signed-in users get a fresh personalised batch on cold load rather
+      // than the anon deck they may have been on before signing in.
       if (saved && isSignedInRef.current) clearSavedDeckState()
-
-      if (!isSignedInRef.current) {
-        let idQuery = supabase.from('poems').select('id')
-        idQuery = applyBucketFilter(idQuery, bucketsRef.current)
-        const { data: idRows, error: idError } = await idQuery
-
-        if (idError || !idRows) {
-          const detail = `poems id-fetch — ${idError?.message ?? 'no data'} (${idError?.code ?? 'unknown'})`
-          console.error(detail, idError)
-          setError(detail)
-          setReady(true)
-          return
-        }
-
-        poolRef.current = shuffle(idRows.map((r: { id: string }) => r.id))
-        poolPosRef.current = 0
-      }
 
       let restored = false
       if (saved && !isSignedInRef.current && savedIsFresh && saved.poemIds.length > 0) {
         const { data, error: fetchErr } = await supabase
-          .from('poems')
-          .select('id, title, author, body, body_html, line_count')
-          .in('id', saved.poemIds)
+          .rpc('get_poems_by_ids', { poem_ids: saved.poemIds })
         if (!fetchErr && data) {
           const byId = new Map((data as Poem[]).map((p) => [p.id, p]))
           const ordered = saved.poemIds.map((id) => byId.get(id)).filter(Boolean) as Poem[]
@@ -494,9 +413,12 @@ export function PoemSwiper() {
     if (exitingRef.current) return
     if (cardIdx >= poems.length - 1 && fetchingRef.current) return
     exitingRef.current = true
-    void poem  // captured for potential future logging
+    // preview_skip is weight-zero in recommend_poems' taste vector — it exists
+    // only so the RPC's not-exists dedup excludes swiped-past poems from
+    // future batches.
+    logInteraction(poem.id, 'preview_skip')
     setIsExiting(true)
-  }, [cardIdx, poems.length])
+  }, [cardIdx, poems.length, logInteraction])
 
   // Called by PoemCard's onAnimationComplete when the exit animation finishes.
   const handleCardExited = useCallback(() => {
